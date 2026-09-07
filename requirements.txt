@@ -1,0 +1,9 @@
+# Analysis and figure generation.
+numpy>=1.26
+matplotlib>=3.8
+
+# Optional: only needed to run the reference routing agent against a cloud
+# provider. The agent runs against a local Ollama runtime without any of these.
+# openai>=1.0
+# anthropic>=0.40
+# google-generativeai>=0.8

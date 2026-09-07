@@ -1,0 +1,726 @@
+{
+  "harness": "measure/bench.py",
+  "protocol": {
+    "prompt": "You are summarising a technical document for an engineer. Explain, in plain prose and without lists, why moving a small language model from a data centre to a personal computer changes the energy arithmetic of a single query. Cover the cooling water, the idle overhead of shared infrastructure, and the fact that the personal computer was already powered on for other reasons. Be concrete and avoid slogans.",
+    "requested_tokens": 192,
+    "reps": 5,
+    "temperature": 0,
+    "seed": 20260905,
+    "num_ctx": 4096,
+    "warmup_discarded": true,
+    "statistic": "median over reps",
+    "prefill_sweep": "prompt length varied over four values by repeating a neutral filler paragraph; prefill time regressed on server-reported prompt_eval_count to separate the fixed per-request cost from the marginal cost per prompt token",
+    "raw_mode": true,
+    "cache_defeat": "two traps, both closed: a unique marker per repetition defeats whole-prompt caching, and raw mode bypasses the chat template whose identical system prefix is otherwise always cached while still being counted in prompt_eval_count"
+  },
+  "system": {
+    "measured_at": "2026-09-05T21:10:41+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "python": "3.12.10",
+    "ollama_host": "http://127.0.0.1:11434",
+    "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+    "gpu": "AMD Radeon(TM) 8060S Graphics",
+    "ram_gb": 68.5,
+    "ollama_version": "0.33.2"
+  },
+  "power_sensor": {
+    "available": false,
+    "tool": null,
+    "reason": "no power sensor reachable from this interpreter: nvidia-smi, amd-smi and rocm-smi are all absent. On this platform the board/package rail is only readable through a kernel-mode helper (AMD uProf, LibreHardwareMonitor), which this harness deliberately does not install. Energy figures derived from these timings therefore carry a modelled P and say so."
+  },
+  "idle_power": {
+    "measured": false,
+    "reason": "no power sensor"
+  },
+  "models": [
+    {
+      "model": "ministral-3:3b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 5,
+      "requested_tokens": 192,
+      "load_s_cold": 4.06,
+      "median_gen_tok_s": 78.38,
+      "gen_tok_s_spread": {
+        "min": 78.21411112921622,
+        "max": 78.42714363441186,
+        "stdev": 0.08962618903577414
+      },
+      "median_prefill_tok_s": 2168.3,
+      "median_beta_prefill_overhead": 0.0162,
+      "median_eval_tokens": 192,
+      "median_prompt_tokens": 86,
+      "runs": [
+        {
+          "rep": 1,
+          "wall_s": 2.518,
+          "eval_tokens": 192,
+          "eval_s": 2.4548,
+          "gen_tok_s": 78.21411112921622,
+          "prompt_tokens": 86,
+          "prefill_s": 0.03974,
+          "prefill_tok_s": 2164.066431806744,
+          "beta_prefill_overhead": 0.016188691543099234,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 2,
+          "wall_s": 2.532,
+          "eval_tokens": 192,
+          "eval_s": 2.449341,
+          "gen_tok_s": 78.38843182717311,
+          "prompt_tokens": 86,
+          "prefill_s": 0.039654,
+          "prefill_tok_s": 2168.7597720280423,
+          "beta_prefill_overhead": 0.016189660810805844,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 3,
+          "wall_s": 2.5242,
+          "eval_tokens": 192,
+          "eval_s": 2.448132,
+          "gen_tok_s": 78.42714363441186,
+          "prompt_tokens": 86,
+          "prefill_s": 0.039837,
+          "prefill_tok_s": 2158.7970981750636,
+          "beta_prefill_overhead": 0.016272406880021174,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 4,
+          "wall_s": 2.5113,
+          "eval_tokens": 192,
+          "eval_s": 2.449583,
+          "gen_tok_s": 78.380687651735,
+          "prompt_tokens": 86,
+          "prefill_s": 0.039663,
+          "prefill_tok_s": 2168.267654993319,
+          "beta_prefill_overhead": 0.01619173549130607,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 5,
+          "wall_s": 2.5308,
+          "eval_tokens": 192,
+          "eval_s": 2.453015,
+          "gen_tok_s": 78.27102565618229,
+          "prompt_tokens": 86,
+          "prefill_s": 0.039265,
+          "prefill_tok_s": 2190.245765949319,
+          "beta_prefill_overhead": 0.016006832408281237,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        }
+      ],
+      "prefill_scaling": {
+        "available": true,
+        "points": [
+          {
+            "fillers": 0,
+            "prompt_tokens": 87,
+            "prefill_s_median": 0.04035,
+            "apparent_tok_s": 2156.0,
+            "reps": 3
+          },
+          {
+            "fillers": 4,
+            "prompt_tokens": 323,
+            "prefill_s_median": 0.1219,
+            "apparent_tok_s": 2649.8,
+            "reps": 3
+          },
+          {
+            "fillers": 12,
+            "prompt_tokens": 795,
+            "prefill_s_median": 0.29903,
+            "apparent_tok_s": 2658.6,
+            "reps": 3
+          },
+          {
+            "fillers": 24,
+            "prompt_tokens": 1503,
+            "prefill_s_median": 0.56072,
+            "apparent_tok_s": 2680.5,
+            "reps": 3
+          }
+        ],
+        "fit": {
+          "model": "prefill_s = a + b * prompt_tokens (OLS over medians)",
+          "fixed_overhead_ms": 5.75,
+          "marginal_prefill_tok_s": 2710.7,
+          "r2": 0.9999,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ]
+        },
+        "beta_at_study_typical_query": {
+          "prompt_tokens": 500.0,
+          "generated_tokens": 300.0,
+          "beta": 0.0497,
+          "note": "beta = prefill_s(500 prompt tokens) / decode_s(300 generated tokens), from the fitted line and the measured generation throughput. This is the ratio the paper's E_edge equation needs, quoted at the paper's own typical query rather than at the ladder's prompt length."
+        },
+        "template_cache_probe": {
+          "available": true,
+          "points": [
+            {
+              "fillers": 0,
+              "prompt_tokens": 639,
+              "prefill_s_median": 0.0479,
+              "apparent_tok_s": 13339.7,
+              "reps": 3
+            },
+            {
+              "fillers": 4,
+              "prompt_tokens": 875,
+              "prefill_s_median": 0.12893,
+              "apparent_tok_s": 6786.7,
+              "reps": 3
+            },
+            {
+              "fillers": 12,
+              "prompt_tokens": 1347,
+              "prefill_s_median": 0.30969,
+              "apparent_tok_s": 4349.5,
+              "reps": 3
+            },
+            {
+              "fillers": 24,
+              "prompt_tokens": 2055,
+              "prefill_s_median": 0.59589,
+              "apparent_tok_s": 3448.6,
+              "reps": 3
+            }
+          ],
+          "fit": {
+            "fixed_overhead_ms": -207.34,
+            "marginal_prefill_tok_s": 2571.4,
+            "r2": 0.9993
+          },
+          "shortest_prompt": {
+            "raw_prompt_tokens": 87,
+            "templated_prompt_tokens": 639,
+            "template_tokens_added": 552,
+            "raw_apparent_tok_s": 2156.0,
+            "templated_apparent_tok_s": 13339.7,
+            "inflation_factor": 6.19,
+            "prefill_s_raw": 0.04035,
+            "prefill_s_templated": 0.0479
+          },
+          "verdict": "CONTAMINATED",
+          "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+        }
+      },
+      "repeat_cache_probe": {
+        "available": true,
+        "reps": 3,
+        "prompt_tokens_reported": 640,
+        "apparent_prefill_tok_s": 45105.0,
+        "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+      },
+      "measured_energy": {
+        "measured": false,
+        "reason": "no power sensor on this machine; energy not measured"
+      }
+    },
+    {
+      "model": "ministral-3:8b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 5,
+      "requested_tokens": 192,
+      "load_s_cold": 5.11,
+      "median_gen_tok_s": 37.79,
+      "gen_tok_s_spread": {
+        "min": 37.59282932444315,
+        "max": 37.823367631116575,
+        "stdev": 0.09585575418327384
+      },
+      "median_prefill_tok_s": 1102.1,
+      "median_beta_prefill_overhead": 0.0154,
+      "median_eval_tokens": 192,
+      "median_prompt_tokens": 86,
+      "runs": [
+        {
+          "rep": 1,
+          "wall_s": 5.1948,
+          "eval_tokens": 192,
+          "eval_s": 5.076227,
+          "gen_tok_s": 37.823367631116575,
+          "prompt_tokens": 86,
+          "prefill_s": 0.078034,
+          "prefill_tok_s": 1102.0837071020323,
+          "beta_prefill_overhead": 0.015372440988159118,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 2,
+          "wall_s": 5.1977,
+          "eval_tokens": 192,
+          "eval_s": 5.079682,
+          "gen_tok_s": 37.79764166339547,
+          "prompt_tokens": 86,
+          "prefill_s": 0.079306,
+          "prefill_tok_s": 1084.4072327440547,
+          "beta_prefill_overhead": 0.015612394634152295,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 3,
+          "wall_s": 5.2213,
+          "eval_tokens": 192,
+          "eval_s": 5.093384,
+          "gen_tok_s": 37.69596009254358,
+          "prompt_tokens": 86,
+          "prefill_s": 0.076306,
+          "prefill_tok_s": 1127.041123895893,
+          "beta_prefill_overhead": 0.014981395473029326,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 4,
+          "wall_s": 5.2065,
+          "eval_tokens": 192,
+          "eval_s": 5.080211,
+          "gen_tok_s": 37.7937058126129,
+          "prompt_tokens": 86,
+          "prefill_s": 0.076099,
+          "prefill_tok_s": 1130.1068345181934,
+          "beta_prefill_overhead": 0.014979495930385568,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 5,
+          "wall_s": 5.2138,
+          "eval_tokens": 192,
+          "eval_s": 5.107357,
+          "gen_tok_s": 37.59282932444315,
+          "prompt_tokens": 86,
+          "prefill_s": 0.080092,
+          "prefill_tok_s": 1073.7651700544375,
+          "beta_prefill_overhead": 0.015681692115902608,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        }
+      ],
+      "prefill_scaling": {
+        "available": true,
+        "points": [
+          {
+            "fillers": 0,
+            "prompt_tokens": 87,
+            "prefill_s_median": 0.07866,
+            "apparent_tok_s": 1106.0,
+            "reps": 3
+          },
+          {
+            "fillers": 4,
+            "prompt_tokens": 323,
+            "prefill_s_median": 0.29136,
+            "apparent_tok_s": 1108.6,
+            "reps": 3
+          },
+          {
+            "fillers": 12,
+            "prompt_tokens": 795,
+            "prefill_s_median": 0.69033,
+            "apparent_tok_s": 1151.6,
+            "reps": 3
+          },
+          {
+            "fillers": 24,
+            "prompt_tokens": 1503,
+            "prefill_s_median": 1.30241,
+            "apparent_tok_s": 1154.0,
+            "reps": 3
+          }
+        ],
+        "fit": {
+          "model": "prefill_s = a + b * prompt_tokens (OLS over medians)",
+          "fixed_overhead_ms": 7.41,
+          "marginal_prefill_tok_s": 1160.7,
+          "r2": 0.9999,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ]
+        },
+        "beta_at_study_typical_query": {
+          "prompt_tokens": 500.0,
+          "generated_tokens": 300.0,
+          "beta": 0.0552,
+          "note": "beta = prefill_s(500 prompt tokens) / decode_s(300 generated tokens), from the fitted line and the measured generation throughput. This is the ratio the paper's E_edge equation needs, quoted at the paper's own typical query rather than at the ladder's prompt length."
+        },
+        "template_cache_probe": {
+          "available": true,
+          "points": [
+            {
+              "fillers": 0,
+              "prompt_tokens": 639,
+              "prefill_s_median": 0.08913,
+              "apparent_tok_s": 7169.3,
+              "reps": 3
+            },
+            {
+              "fillers": 4,
+              "prompt_tokens": 875,
+              "prefill_s_median": 0.2874,
+              "apparent_tok_s": 3044.5,
+              "reps": 3
+            },
+            {
+              "fillers": 12,
+              "prompt_tokens": 1347,
+              "prefill_s_median": 0.69671,
+              "apparent_tok_s": 1933.4,
+              "reps": 3
+            },
+            {
+              "fillers": 24,
+              "prompt_tokens": 2055,
+              "prefill_s_median": 1.33747,
+              "apparent_tok_s": 1536.5,
+              "reps": 3
+            }
+          ],
+          "fit": {
+            "fixed_overhead_ms": -482.39,
+            "marginal_prefill_tok_s": 1132.7,
+            "r2": 0.9998
+          },
+          "shortest_prompt": {
+            "raw_prompt_tokens": 87,
+            "templated_prompt_tokens": 639,
+            "template_tokens_added": 552,
+            "raw_apparent_tok_s": 1106.0,
+            "templated_apparent_tok_s": 7169.3,
+            "inflation_factor": 6.48,
+            "prefill_s_raw": 0.07866,
+            "prefill_s_templated": 0.08913
+          },
+          "verdict": "CONTAMINATED",
+          "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+        }
+      },
+      "repeat_cache_probe": {
+        "available": true,
+        "reps": 3,
+        "prompt_tokens_reported": 640,
+        "apparent_prefill_tok_s": 22979.0,
+        "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+      },
+      "measured_energy": {
+        "measured": false,
+        "reason": "no power sensor on this machine; energy not measured"
+      }
+    },
+    {
+      "model": "qwen3.8:27b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "reps": 5,
+      "requested_tokens": 192,
+      "load_s_cold": 7.89,
+      "median_gen_tok_s": 13.79,
+      "gen_tok_s_spread": {
+        "min": 12.776876409074857,
+        "max": 24.45777619708076,
+        "stdev": 4.920404036953525
+      },
+      "median_prefill_tok_s": 186.5,
+      "median_beta_prefill_overhead": 0.032,
+      "median_eval_tokens": 192,
+      "median_prompt_tokens": 84,
+      "runs": [
+        {
+          "rep": 1,
+          "wall_s": 12.932,
+          "eval_tokens": 192,
+          "eval_s": 12.387155,
+          "gen_tok_s": 15.499927142269552,
+          "prompt_tokens": 84,
+          "prefill_s": 0.452643,
+          "prefill_tok_s": 185.5767127736428,
+          "beta_prefill_overhead": 0.036541320424262065,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 2,
+          "wall_s": 8.3861,
+          "eval_tokens": 192,
+          "eval_s": 7.850264,
+          "gen_tok_s": 24.45777619708076,
+          "prompt_tokens": 84,
+          "prefill_s": 0.446449,
+          "prefill_tok_s": 188.1513901923848,
+          "beta_prefill_overhead": 0.05687057148651307,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 3,
+          "wall_s": 15.487,
+          "eval_tokens": 192,
+          "eval_s": 14.932852,
+          "gen_tok_s": 12.85755728376602,
+          "prompt_tokens": 84,
+          "prefill_s": 0.45166,
+          "prefill_tok_s": 185.98060487977682,
+          "beta_prefill_overhead": 0.03024606418117584,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 4,
+          "wall_s": 14.4651,
+          "eval_tokens": 192,
+          "eval_s": 13.9198,
+          "gen_tok_s": 13.793301627896952,
+          "prompt_tokens": 84,
+          "prefill_s": 0.444867,
+          "prefill_tok_s": 188.8204789296576,
+          "beta_prefill_overhead": 0.03195929539217517,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        },
+        {
+          "rep": 5,
+          "wall_s": 15.5856,
+          "eval_tokens": 192,
+          "eval_s": 15.027147,
+          "gen_tok_s": 12.776876409074857,
+          "prompt_tokens": 84,
+          "prefill_s": 0.450316,
+          "prefill_tok_s": 186.53567716892138,
+          "beta_prefill_overhead": 0.02996683269285913,
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          }
+        }
+      ],
+      "prefill_scaling": {
+        "available": true,
+        "points": [
+          {
+            "fillers": 0,
+            "prompt_tokens": 85,
+            "prefill_s_median": 0.48154,
+            "apparent_tok_s": 176.5,
+            "reps": 3
+          },
+          {
+            "fillers": 4,
+            "prompt_tokens": 317,
+            "prefill_s_median": 1.14563,
+            "apparent_tok_s": 276.7,
+            "reps": 3
+          },
+          {
+            "fillers": 12,
+            "prompt_tokens": 781,
+            "prefill_s_median": 2.55851,
+            "apparent_tok_s": 305.3,
+            "reps": 3
+          },
+          {
+            "fillers": 24,
+            "prompt_tokens": 1477,
+            "prefill_s_median": 4.55593,
+            "apparent_tok_s": 324.2,
+            "reps": 3
+          }
+        ],
+        "fit": {
+          "model": "prefill_s = a + b * prompt_tokens (OLS over medians)",
+          "fixed_overhead_ms": 233.16,
+          "marginal_prefill_tok_s": 340.6,
+          "r2": 0.9998,
+          "lengths_tested": [
+            85,
+            317,
+            781,
+            1477
+          ]
+        },
+        "beta_at_study_typical_query": {
+          "prompt_tokens": 500.0,
+          "generated_tokens": 300.0,
+          "beta": 0.0782,
+          "note": "beta = prefill_s(500 prompt tokens) / decode_s(300 generated tokens), from the fitted line and the measured generation throughput. This is the ratio the paper's E_edge equation needs, quoted at the paper's own typical query rather than at the ladder's prompt length."
+        },
+        "template_cache_probe": {
+          "available": true,
+          "points": [
+            {
+              "fillers": 0,
+              "prompt_tokens": 95,
+              "prefill_s_median": 0.4973,
+              "apparent_tok_s": 191.0,
+              "reps": 3
+            },
+            {
+              "fillers": 4,
+              "prompt_tokens": 327,
+              "prefill_s_median": 1.1489,
+              "apparent_tok_s": 284.6,
+              "reps": 3
+            },
+            {
+              "fillers": 12,
+              "prompt_tokens": 791,
+              "prefill_s_median": 2.5491,
+              "apparent_tok_s": 310.3,
+              "reps": 3
+            },
+            {
+              "fillers": 24,
+              "prompt_tokens": 1487,
+              "prefill_s_median": 4.55123,
+              "apparent_tok_s": 326.7,
+              "reps": 3
+            }
+          ],
+          "fit": {
+            "fixed_overhead_ms": 214.11,
+            "marginal_prefill_tok_s": 342.2,
+            "r2": 0.9999
+          },
+          "shortest_prompt": {
+            "raw_prompt_tokens": 85,
+            "templated_prompt_tokens": 95,
+            "template_tokens_added": 10,
+            "raw_apparent_tok_s": 176.5,
+            "templated_apparent_tok_s": 191.0,
+            "inflation_factor": 1.08,
+            "prefill_s_raw": 0.48154,
+            "prefill_s_templated": 0.4973
+          },
+          "verdict": "no artefact seen",
+          "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+        }
+      },
+      "repeat_cache_probe": {
+        "available": true,
+        "reps": 3,
+        "prompt_tokens_reported": 96,
+        "apparent_prefill_tok_s": 517.0,
+        "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+      },
+      "measured_energy": {
+        "measured": false,
+        "reason": "no power sensor on this machine; energy not measured"
+      }
+    }
+  ]
+}

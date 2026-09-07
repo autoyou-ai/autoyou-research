@@ -1,0 +1,399 @@
+{
+  "harness": "measure/bench.py --ladder",
+  "experiment": "generation throughput vs weight size, one machine",
+  "protocol": {
+    "prompt": "You are summarising a technical document for an engineer. Explain, in plain prose and without lists, why moving a small language model from a data centre to a personal computer changes the energy arithmetic of a single query. Cover the cooling water, the idle overhead of shared infrastructure, and the fact that the personal computer was already powered on for other reasons. Be concrete and avoid slogans.",
+    "requested_tokens": 128,
+    "reps": 7,
+    "temperature": 0,
+    "seed": 20260905,
+    "num_ctx": 4096,
+    "warmup_discarded": true,
+    "statistic": "median over reps",
+    "raw_mode": true,
+    "unload_between_models": true,
+    "size_cap_gib": 24.0,
+    "models_over_cap_not_attempted": [
+      "gpt-oss:120b",
+      "laguna-s-2.1:latest"
+    ],
+    "peak_bandwidth_gb_s": 256.0,
+    "peak_bandwidth_source": "part specification, not measured here; used only to express each result as a percentage of a ceiling"
+  },
+  "system": {
+    "measured_at": "2026-09-05T21:02:39+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "python": "3.12.10",
+    "ollama_host": "http://127.0.0.1:11434",
+    "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+    "gpu": "AMD Radeon(TM) 8060S Graphics",
+    "ram_gb": 68.5,
+    "ollama_version": "0.33.2"
+  },
+  "power_sensor": {
+    "available": false,
+    "tool": null,
+    "reason": "no power sensor reachable from this interpreter: nvidia-smi, amd-smi and rocm-smi are all absent. On this platform the board/package rail is only readable through a kernel-mode helper (AMD uProf, LibreHardwareMonitor), which this harness deliberately does not install. Energy figures derived from these timings therefore carry a modelled P and say so."
+  },
+  "models": [
+    {
+      "model": "private-3.1b-q8:latest",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen2",
+        "parameter_size": "3.1B",
+        "quantization": "Q8_0",
+        "context_length": 32768,
+        "families": [
+          "qwen2"
+        ],
+        "block_count": 36,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": false,
+        "capabilities": [
+          "tools",
+          "completion"
+        ]
+      },
+      "weights_gib": 3.06,
+      "weights_gb": 3.285,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 59.77,
+      "gen_tok_s_spread": {
+        "min": 59.48723859308963,
+        "max": 60.087210953523005,
+        "stdev": 0.21497118653805072
+      },
+      "effective_read_gb_s": 196.4,
+      "bandwidth_utilisation": 0.767,
+      "model_original_label_withheld": true
+    },
+    {
+      "model": "private-7.6b-vlm-q8:latest",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen2vl",
+        "parameter_size": "7.6B",
+        "quantization": "Q8_0",
+        "context_length": 128000,
+        "families": [
+          "qwen2vl"
+        ],
+        "block_count": 28,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision"
+        ]
+      },
+      "weights_gib": 8.804,
+      "weights_gb": 9.453,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 28.62,
+      "gen_tok_s_spread": {
+        "min": 28.48799943024001,
+        "max": 28.668119483346736,
+        "stdev": 0.06057472162102263
+      },
+      "effective_read_gb_s": 270.5,
+      "bandwidth_utilisation": 1.057,
+      "model_original_label_withheld": true
+    },
+    {
+      "model": "gemma4:26b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "gemma4",
+        "parameter_size": "25.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "gemma4"
+        ],
+        "block_count": 30,
+        "expert_count": 128,
+        "expert_used_count": 8,
+        "mixture_of_experts": true,
+        "expert_active_fraction": 0.0625,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": 0,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "weights_gib": 16.752,
+      "weights_gb": 17.988,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 58.34,
+      "gen_tok_s_spread": {
+        "min": 58.06605558191714,
+        "max": 58.76063716729658,
+        "stdev": 0.23500615371943087
+      },
+      "effective_read_gb_s": 1049.4,
+      "bandwidth_utilisation": 4.099
+    },
+    {
+      "model": "gemma4:e4b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "gemma4",
+        "parameter_size": "8.0B",
+        "quantization": "Q4_K_M",
+        "context_length": 131072,
+        "families": [
+          "gemma4"
+        ],
+        "block_count": 12,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": 256,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "audio",
+          "tools",
+          "thinking"
+        ]
+      },
+      "weights_gib": 8.948,
+      "weights_gb": 9.608,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 56.42,
+      "gen_tok_s_spread": {
+        "min": 56.37033194198436,
+        "max": 56.74138650237671,
+        "stdev": 0.1344604060554124
+      },
+      "effective_read_gb_s": 542.1,
+      "bandwidth_utilisation": 2.117
+    },
+    {
+      "model": "ministral-3:3b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "weights_gib": 2.751,
+      "weights_gb": 2.954,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 78.62,
+      "gen_tok_s_spread": {
+        "min": 77.8916672954796,
+        "max": 78.89979171687796,
+        "stdev": 0.3646163743549435
+      },
+      "effective_read_gb_s": 232.2,
+      "bandwidth_utilisation": 0.907
+    },
+    {
+      "model": "ministral-3:8b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "weights_gib": 5.609,
+      "weights_gb": 6.022,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 37.81,
+      "gen_tok_s_spread": {
+        "min": 37.76715838720071,
+        "max": 37.94257569025104,
+        "stdev": 0.06117491352964028
+      },
+      "effective_read_gb_s": 227.7,
+      "bandwidth_utilisation": 0.89
+    },
+    {
+      "model": "muse-glimmer:30b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "muse-glimmer",
+        "parameter_size": "27.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 131072,
+        "families": [
+          "muse-glimmer"
+        ],
+        "block_count": 52,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "weights_gib": 16.91,
+      "weights_gb": 18.157,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 12.46,
+      "gen_tok_s_spread": {
+        "min": 12.38170633842763,
+        "max": 12.512491719027697,
+        "stdev": 0.042817802649486335
+      },
+      "effective_read_gb_s": 226.3,
+      "bandwidth_utilisation": 0.884
+    },
+    {
+      "model": "qwen3.6:latest",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35moe",
+        "parameter_size": "36.0B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35moe"
+        ],
+        "block_count": 40,
+        "expert_count": 256,
+        "expert_used_count": 8,
+        "mixture_of_experts": true,
+        "expert_active_fraction": 0.0312,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "weights_gib": 22.294,
+      "weights_gb": 23.938,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 62.2,
+      "gen_tok_s_spread": {
+        "min": 62.10559312399168,
+        "max": 62.38649800216988,
+        "stdev": 0.10727785769198343
+      },
+      "effective_read_gb_s": 1488.9,
+      "bandwidth_utilisation": 5.816
+    },
+    {
+      "model": "qwen3.8:27b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "weights_gib": 16.523,
+      "weights_gb": 17.742,
+      "reps": 7,
+      "requested_tokens": 128,
+      "median_gen_tok_s": 19.63,
+      "gen_tok_s_spread": {
+        "min": 19.256181836125077,
+        "max": 21.668160584769485,
+        "stdev": 0.8616767743934776
+      },
+      "effective_read_gb_s": 348.3,
+      "bandwidth_utilisation": 1.36
+    }
+  ],
+  "pseudonymisation_note": "Two rows carry a substituted model label. Their weights are not redistributable, so the original deployment-internal tag identifies a private build and carries no meaning for a reader. Only the LABEL is substituted: every measured quantity - throughput, weight size, effective bandwidth, utilisation - is exactly as recorded, and both rows remain in the published ladder. One of them is the dense build that measures above the bandwidth ceiling and thereby bounds the error in the file-size proxy."
+}

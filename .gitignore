@@ -1,0 +1,43 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- LaTeX build artefacts ---
+# The compiled PDFs are committed deliberately: they are the deliverable.
+# Everything a TeX run regenerates is not.
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# --- Not redistributable -------------------------------------------------
+# Adapter evaluation artefacts from a deployed assistant. Aggregate scores
+# only were ever read, and even those are not published: the findings that
+# depend on them report NO DATA on a public checkout by design. Point
+# ADAPTER_EVAL_ROOT at a deployment's own artefacts to reproduce them.
+adapter-eval/

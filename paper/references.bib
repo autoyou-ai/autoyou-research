@@ -1,0 +1,757 @@
+% ===================================================================== %
+%  References for:
+%    main.tex        Right-Sized AI at the Edge
+%    adaptation.tex  Teaching at the Edge
+%
+%  Every entry below has been resolved against its primary source: the
+%  arXiv abstract page, the DOI landing page, the RFC, or the publishing
+%  organisation's own page. Author lists are copied from that source, not
+%  reconstructed. Every entry describing third-party work carries a resolvable
+%  URL or DOI. So does every entry describing this study's own artifacts,
+%  except autoyou_support2026: that material is genuinely not redistributable,
+%  and a citation should not promise a locator that does not resolve.
+%
+%  Four entries in an earlier version of this file were wrong in ways a
+%  reader could not have detected, and are recorded here so the correction
+%  is auditable rather than silent:
+%
+%    * schneider2025 (was `faiz2025`) carried the correct arXiv ID and
+%      title but an invented author list. The paper is by Schneider et
+%      al. (Google), not Faiz et al.
+%    * devriesgao2025 (was `devriesgao2026`) had the wrong title, the
+%      wrong article ID, and split the single author Alex de Vries-Gao
+%      into two people by inventing a co-author.
+%    * ni2025benchmarks (was `mmlu_survey2025`) had the author field
+%      literally set to {Anonymous}, and was cited by no manuscript while
+%      supplying the benchmark figures behind the hard-reasoning ratio.
+%    * uptime2025 stated a title that does not appear at the URL given.
+%
+%    * nvidia_rtx4090 (was `promptquorum2026`) cited a third-party blog
+%      whose own title stated 575 W for the RTX 4090 -- that is the RTX
+%      5090's board power. Replaced with the vendor specification (450 W).
+%    * qwen38_2026 was attributed to the Qwen team but pointed at a
+%      third-party SEO article; repointed at the distribution page.
+%    * autoyou2026edge named a manuscript that does not exist.
+%
+%  Three of the four entries describing this study's own artifacts point at
+%  the public repository that holds them. The fourth, autoyou_support2026,
+%  carries no URL because that material is genuinely not redistributable, and
+%  every finding depending on it is marked not independently validated.
+%
+%  Two further entries had placeholder author fields of the form
+%  {LoRP-TTS authors}. Both concerned text-to-speech adaptation, neither
+%  was cited by either manuscript, and both have been removed rather than
+%  repaired: they concern a line of work outside the scope of these papers.
+% ===================================================================== %
+
+
+% --------------------------------------------------------------------- %
+%  Data-centre footprint: energy, water, carbon
+% --------------------------------------------------------------------- %
+
+@techreport{iea2025,
+  author = {{International Energy Agency}},
+  title  = {Energy and {AI}},
+  institution = {IEA, Paris},
+  year   = {2025},
+  note   = {Data-centre electricity demand projected to $\sim$945 TWh by 2030; accessed 2026-09-05},
+  url    = {https://www.iea.org/reports/energy-and-ai}
+}
+
+@misc{uptime2025,
+  author = {{Uptime Institute}},
+  title  = {Uptime Institute Global Data Center Survey 2025},
+  year   = {2025},
+  note   = {Weighted-average annual {PUE} of 1.54, the sixth consecutive year
+            the headline figure has been effectively flat. Regional averages:
+            China 1.40, Europe 1.50, North America 1.49, {APAC} ex-China 1.52,
+            Latin America 1.65, {MEA} 1.68. Accessed 2026-09-05},
+  url    = {https://intelligence.uptimeinstitute.com/resource/uptime-institute-global-data-center-survey-2025}
+}
+
+@misc{eu_eed2026,
+  author = {{European Commission}},
+  title  = {Energy performance of data centres: reporting, rating scheme, and minimum performance standards},
+  year   = {2026},
+  note   = {Accessed 2026-09-05},
+  url    = {https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive/energy-performance-data-centres_en}
+}
+
+@misc{aws_water2025,
+  author = {{Amazon Web Services}},
+  title  = {Water Stewardship: {AWS} data centre water use effectiveness},
+  year   = {2025},
+  note   = {Global data-centre {WUE} of 0.15 L/kWh withdrawn per kWh of {IT}
+            load in 2024, improving to 0.12 L/kWh in 2025; industry average
+            withdrawal-{WUE} benchmark of 0.84 L/kWh. This study models
+            hyperscale on-site {WUE} at 0.20 L/kWh with a range of
+            [0.12, 0.30], i.e. best-in-class at the low end rather than as the
+            central case. Accessed 2026-09-05},
+  url    = {https://sustainability.aboutamazon.com/natural-resources/water}
+}
+
+@article{devriesgao2025,
+  author  = {de Vries-Gao, Alex},
+  title   = {The carbon and water footprints of data centers and what this could mean for artificial intelligence},
+  journal = {Patterns},
+  year    = {2025},
+  doi     = {10.1016/j.patter.2025.101430},
+  note    = {Single author; the surname is hyphenated. Estimates a 2025 {AI}
+            carbon footprint of 32.6--79.7 MtCO$_2$e and a water footprint of
+            312.5--764.6 billion L},
+  url     = {https://www.cell.com/patterns/fulltext/S2666-3899(25)00278-8}
+}
+
+@misc{ucriverside2023,
+  author = {Li, Pengfei and Yang, Jianyi and Islam, Mohammad A. and Ren, Shaolei},
+  title  = {Making {AI} Less Thirsty: Uncovering and Addressing the Secret Water Footprint of {AI} Models},
+  year   = {2023},
+  note   = {arXiv:2304.03271},
+  url    = {https://arxiv.org/abs/2304.03271}
+}
+
+@misc{ember2026,
+  author = {{Ember}},
+  title  = {Global Electricity Review 2026},
+  year   = {2026},
+  note   = {Global average grid carbon intensity; regional spread from
+            $\sim$140 gCO$_2$e/kWh (EU) to $\sim$708 (India). Accessed 2026-09-05},
+  url    = {https://ember-energy.org/latest-insights/global-electricity-review-2026/}
+}
+
+
+% --------------------------------------------------------------------- %
+%  Per-query inference energy: the three measurement corpora
+% --------------------------------------------------------------------- %
+
+@article{elsworth2025,
+  author  = {Elsworth, Cooper and Huang, Keguo and Patterson, David and
+             Schneider, Ian and Sedivy, Robert and Goodman, Savannah and
+             Townsend, Ben and Ranganathan, Parthasarathy and Dean, Jeff and
+             Vahdat, Amin and Gomes, Ben and Manyika, James},
+  title   = {Measuring the environmental impact of delivering {AI} at {Google} scale},
+  journal = {arXiv preprint arXiv:2508.15734},
+  year    = {2025},
+  note    = {Median Gemini Apps text prompt: 0.24 Wh, 0.26 mL water. Reports
+            that 42\% of the per-prompt footprint is non-compute
+            ({CPU}/{DRAM} 24\%, idle/redundancy/overhead 18\%)},
+  url     = {https://arxiv.org/abs/2508.15734}
+}
+
+@article{jegham2025,
+  author  = {Jegham, Nidhal and Abdelatti, Marwan and Elmoubarki, Lassad and
+             Hendawi, Abdeltawab},
+  title   = {How Hungry is {AI}? Benchmarking Energy, Water, and Carbon Footprint of {LLM} Inference},
+  journal = {arXiv preprint arXiv:2505.09598},
+  year    = {2025},
+  note    = {An inference-side estimation framework over assumed
+            {H100}/{H200} server deployments at batch 8, not a direct
+            wall-power measurement; cited as such throughout},
+  url     = {https://arxiv.org/abs/2505.09598}
+}
+
+@article{caravaca2025,
+  author  = {Caravaca, Francisco and Cuevas, {\'A}ngel and Cuevas, Rub{\'e}n},
+  title   = {From Prompts to Power: Measuring the Energy Footprint of {LLM} Inference},
+  journal = {arXiv preprint arXiv:2511.05597},
+  year    = {2025},
+  note    = {Over 32,500 measurements across GPU configurations and 155 model
+            designs under vLLM, with a predictive per-query model},
+  url     = {https://arxiv.org/abs/2511.05597}
+}
+
+@article{schneider2025,
+  author  = {Schneider, Ian and Xu, Hui and Benecke, Stephan and
+             Patterson, David and Huang, Keguo and
+             Ranganathan, Parthasarathy and Elsworth, Cooper},
+  title   = {Life-Cycle Emissions of {AI} Hardware: A Cradle-to-Grave Approach and Generational Trends},
+  journal = {arXiv preprint arXiv:2502.01671},
+  year    = {2025},
+  note    = {First comprehensive life-cycle assessment of {AI} accelerator
+            greenhouse-gas emissions, over five {TPU} generations},
+  url     = {https://arxiv.org/abs/2502.01671}
+}
+
+@inproceedings{reddi2020mlperf,
+  author    = {Reddi, Vijay Janapa and Cheng, Christine and Kanter, David and
+               Mattson, Peter and Schmuelling, Guenther and Wu, Carole-Jean and others},
+  title     = {{MLPerf} Inference Benchmark},
+  booktitle = {Proc. ACM/IEEE 47th Annual International Symposium on Computer Architecture (ISCA)},
+  pages     = {446--459},
+  year      = {2020},
+  doi       = {10.1109/ISCA45697.2020.00045},
+  url       = {https://doi.org/10.1109/ISCA45697.2020.00045}
+}
+
+@article{williams2009roofline,
+  author  = {Williams, Samuel and Waterman, Andrew and Patterson, David},
+  title   = {Roofline: An Insightful Visual Performance Model for Multicore Architectures},
+  journal = {Communications of the ACM},
+  volume  = {52},
+  number  = {4},
+  pages   = {65--76},
+  year    = {2009},
+  doi     = {10.1145/1498765.1498785},
+  url     = {https://doi.org/10.1145/1498765.1498785}
+}
+
+
+% --------------------------------------------------------------------- %
+%  Small models, capability, and agentic right-sizing
+% --------------------------------------------------------------------- %
+
+@article{belcak2025,
+  author  = {Belcak, Peter and Heinrich, Greg and Diao, Shizhe and Fu, Yonggan and
+             Dong, Xin and Muralidharan, Saurav and Lin, Yingyan Celine and
+             Molchanov, Pavlo},
+  title   = {Small Language Models are the Future of Agentic {AI}},
+  journal = {arXiv preprint arXiv:2506.02153},
+  year    = {2025},
+  note    = {NVIDIA Research. Measures 40--70\% of {LLM} calls in MetaGPT,
+            Open Operator and Cradle as {SLM}-replaceable},
+  url     = {https://arxiv.org/abs/2506.02153}
+}
+
+@article{wang2024slm,
+  author  = {Wang, Fali and Zhang, Zhiwei and Zhang, Xianren and Wu, Zongyu and
+             Mo, Tzuhao and Lu, Qiuhao and Wang, Wanjing and Li, Rui and
+             Xu, Junjie and Tang, Xianfeng and He, Qi and Ma, Yao and
+             Huang, Ming and Wang, Suhang},
+  title   = {A Comprehensive Survey of Small Language Models in the Era of Large
+             Language Models: Techniques, Enhancements, Applications,
+             Collaboration with {LLMs}, and Trustworthiness},
+  journal = {arXiv preprint arXiv:2411.03350},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2411.03350}
+}
+
+@article{ni2025benchmarks,
+  author  = {Ni, Shiwen and Chen, Guhong and Li, Shuaimin and Chen, Xuanang and
+             Li, Siyi and Wang, Bingli and Wang, Qiyao and Wang, Xingjian and
+             Zhang, Yifan and Fan, Liyang and Li, Chengming and Xu, Ruifeng and
+             Sun, Le and Yang, Min},
+  title   = {A Survey on Large Language Model Benchmarks},
+  journal = {arXiv preprint arXiv:2508.15361},
+  year    = {2025},
+  note    = {283 benchmarks surveyed; documents contamination-inflated scores,
+            which is why this study carries an MMLU range for frontier models
+            rather than a vendor point estimate},
+  url     = {https://arxiv.org/abs/2508.15361}
+}
+
+@misc{mistral2024,
+  author = {{Mistral AI}},
+  title  = {Un {Ministral}, des {Ministraux}: introducing the world's best edge models},
+  year   = {2024},
+  note   = {Ministral 3B and 8B. Benchmark figures quoted from this release are
+            the vendor's own comparison chart and carry the vendor's evaluation
+            protocol, which differs from the protocol behind commonly quoted
+            {Llama-3.1-8B} scores. Accessed 2026-09-05},
+  url    = {https://mistral.ai/news/ministraux}
+}
+
+
+% --------------------------------------------------------------------- %
+%  Rebound, transport, and network intensity
+% --------------------------------------------------------------------- %
+
+@inproceedings{luccioni2025,
+  author    = {Luccioni, Alexandra Sasha and Strubell, Emma and Crawford, Kate},
+  title     = {From Efficiency Gains to Rebound Effects: The Problem of {Jevons'}
+               Paradox in {AI}'s Polarized Environmental Debate},
+  booktitle = {Proc. ACM Conf. on Fairness, Accountability, and Transparency (FAccT)},
+  year      = {2025},
+  note      = {arXiv:2501.16548},
+  url       = {https://arxiv.org/abs/2501.16548}
+}
+
+@article{aslan2018,
+  author  = {Aslan, Joshua and Mayers, Kieren and Koomey, Jonathan G. and France, Chris},
+  title   = {Electricity Intensity of Internet Data Transmission: Untangling the Estimates},
+  journal = {Journal of Industrial Ecology},
+  volume  = {22},
+  number  = {4},
+  pages   = {785--798},
+  year    = {2018},
+  doi     = {10.1111/jiec.12630},
+  url     = {https://onlinelibrary.wiley.com/doi/10.1111/jiec.12630}
+}
+
+@misc{rfc8831,
+  author = {Jesup, R. and Loreto, S. and Tuexen, M.},
+  title  = {{RFC} 8831: {WebRTC} Data Channels},
+  year   = {2021},
+  doi    = {10.17487/RFC8831},
+  url    = {https://www.rfc-editor.org/rfc/rfc8831}
+}
+
+@misc{rfc8827,
+  author = {Rescorla, E.},
+  title  = {{RFC} 8827: {WebRTC} Security Architecture},
+  year   = {2021},
+  doi    = {10.17487/RFC8827},
+  url    = {https://www.rfc-editor.org/rfc/rfc8827}
+}
+
+@misc{antmedia2026,
+  author = {{Ant Media}},
+  title  = {{WebRTC} Peer-to-Peer Communication: How {P2P} Works},
+  year   = {2026},
+  note   = {Vendor engineering note, not a measurement study. The
+            STUN-direct / TURN-relay split it reports is widely repeated
+            industry folklore; this study carries it with a wide range and
+            no result depends on its central value. Accessed 2026-09-05},
+  url    = {https://antmedia.io/how-to-create-webrtc-peer-to-peer-communication/}
+}
+
+@misc{techtarget2025,
+  author = {{TechTarget}},
+  title  = {Can Edge Computing Make {AI} More Sustainable?},
+  year   = {2025},
+  note   = {Trade press, cited only for the directional claim that
+            lower-power edge silicon shifts the per-token comparison; no
+            quantitative result in this study rests on it. Accessed 2026-09-05},
+  url    = {https://www.techtarget.com/sustainability/feature/Can-edge-computing-make-AI-more-sustainable}
+}
+
+
+% --------------------------------------------------------------------- %
+%  Consumer hardware: specifications and runtimes
+% --------------------------------------------------------------------- %
+
+@misc{nvidia_rtx4090,
+  author = {{NVIDIA Corporation}},
+  title  = {{GeForce RTX} 4090 Graphics Card Specifications},
+  year   = {2026},
+  note   = {Total graphics power 450 W; 850 W recommended system supply.
+            Vendor specification, used in preference to third-party figures
+            for this part. Accessed 2026-09-05},
+  url    = {https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/}
+}
+
+@misc{rtx5070spec,
+  author = {{NVIDIA Corporation}},
+  title  = {{GeForce RTX} 5070 Graphics Card Specifications},
+  year   = {2026},
+  note   = {12 GB GDDR7 on a 192-bit bus, 672 GB/s specified memory bandwidth,
+            250 W board power. Accessed 2026-09-05},
+  url    = {https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5070/}
+}
+
+@misc{amd_strix2025,
+  author = {{Advanced Micro Devices}},
+  title  = {{AMD} {Ryzen} {AI} {MAX+} 395: a leap forward in generative {AI} performance with consumer {PC}},
+  year   = {2025},
+  note   = {16 Zen 5 cores, 40 {RDNA} 3.5 compute units, 50+ peak {AI} {TOPS}
+            {XDNA} 2 {NPU}, unified {LPDDR5X} pool of up to 128 GB addressed by
+            {CPU}, {GPU} and {NPU}; 256 GB/s specified memory bandwidth on the
+            Radeon 8060S. Accessed 2026-09-05},
+  url    = {https://www.amd.com/en/developer/resources/technical-articles/2025/amd-ryzen-ai-max-395--a-leap-forward-in-generative-ai-performanc.html}
+}
+
+@misc{databasemart2026,
+  author = {{Database Mart}},
+  title  = {{RTX} 4090 {vLLM} Benchmark: {GPU} throughput for {LLMs} below 8{B}},
+  year   = {2026},
+  note   = {Third-party hosting-vendor benchmark, not peer-reviewed. Supplied
+            the throughput term the measurement campaign of this study
+            replaces; retained so the superseded assumption remains
+            attributable. Accessed 2026-09-05},
+  url    = {https://www.databasemart.com/blog/vllm-gpu-benchmark-rtx4090}
+}
+
+@misc{solartech2025,
+  author = {{SolarTech}},
+  title  = {How Much Electricity Does a Computer Use?},
+  year   = {2025},
+  note   = {Consumer-guide source for desktop idle draw, carried with a wide
+            range (30--150 W) rather than a point estimate. Accessed 2026-09-05},
+  url    = {https://solartechonline.com/blog/how-much-electricity-does-computer-use/}
+}
+
+@misc{nvidiasmi2026,
+  author = {{NVIDIA Corporation}},
+  title  = {{NVIDIA} System Management Interface (\texttt{nvidia-smi}) documentation},
+  year   = {2026},
+  note   = {Source of the \texttt{power.draw.instant} board-power field used in
+            this study. The driver refreshes this counter less often than the
+            harness polls it; see \S\ref{sec:measured}. Accessed 2026-09-05},
+  url    = {https://developer.nvidia.com/system-management-interface}
+}
+
+@misc{ollamaapi2026,
+  author = {{Ollama}},
+  title  = {Ollama {API} documentation: \texttt{/api/generate} and raw mode},
+  year   = {2026},
+  note   = {\texttt{raw: true} bypasses the chat template, which is the control
+            this study uses to defeat template-prefix cache reuse. Accessed 2026-09-05},
+  url    = {https://github.com/ollama/ollama/blob/main/docs/api.md}
+}
+
+@misc{ministral32026,
+  author = {{Mistral AI}},
+  title  = {{Ministral 3} model family},
+  year   = {2026},
+  note   = {The 3B and 8B builds benchmarked in this study, served as
+            \texttt{Q4\_K\_M} through Ollama; reported parameter counts 3.8B and
+            8.9B, on-disk 2.95 GB and 6.02 GB. Accessed 2026-09-05},
+  url    = {https://ollama.com/library/ministral-3}
+}
+
+@misc{museglimmer2026,
+  author = {{Meta Models}},
+  title  = {{Muse-Glimmer-30B}},
+  year   = {2026},
+  note   = {27.9B dense build, \texttt{Q4\_K\_M}, 18.16 GB on disk; the largest
+            dense row on the AMD bandwidth ladder. Weights are publicly
+            downloadable, so the file size the ladder statistic divides by can
+            be independently checked. Accessed 2026-09-06},
+  url    = {https://huggingface.co/meta-models/Muse-Glimmer-30B}
+}
+
+@misc{qwen25vl2025,
+  author = {{Qwen Team, Alibaba}},
+  title  = {{Qwen2.5-VL} model family},
+  year   = {2025},
+  note   = {The vision-language bases behind the deployed adapter evaluation.
+            Apache-2.0 at every size except the 3B and 72B, which carry the
+            Qwen Research License. Accessed 2026-09-05},
+  url    = {https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct}
+}
+
+@misc{qwen38_2026,
+  author = {{Qwen Team, Alibaba}},
+  title  = {{Qwen3.8-27B}},
+  year   = {2026},
+  note   = {Released 2026-08-14. 27.78B dense parameters, Apache-2.0,
+            262,144-token context, approximately 17 GB as a 4-bit build. This
+            entry points at the distribution page for the weights actually
+            benchmarked. Accessed 2026-09-05},
+  url    = {https://ollama.com/library/qwen3.8}
+}
+
+@misc{qwen35_2026,
+  author = {{Qwen Team, Alibaba}},
+  title  = {The {Qwen3.5} model family},
+  year   = {2026},
+  note   = {February 2026. Dense sizes 0.8B--27B plus 35B-A3B, 122B-A10B and
+            397B-A17B sparse-MoE variants, all Apache-2.0. The 27B dense build
+            is the subject of the published {LoRA} run this study's memory
+            model is validated against. Accessed 2026-09-05},
+  url    = {https://huggingface.co/collections/Qwen/qwen35}
+}
+
+
+% --------------------------------------------------------------------- %
+%  Parameter-efficient fine-tuning
+% --------------------------------------------------------------------- %
+
+@article{hu2021lora,
+  author  = {Hu, Edward J. and Shen, Yelong and Wallis, Phillip and
+             Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and
+             Chen, Weizhu},
+  title   = {{LoRA}: Low-Rank Adaptation of Large Language Models},
+  journal = {arXiv preprint arXiv:2106.09685},
+  year    = {2021},
+  url     = {https://arxiv.org/abs/2106.09685}
+}
+
+@inproceedings{dettmers2023qlora,
+  author    = {Dettmers, Tim and Pagnoni, Artidoro and Holtzman, Ari and Zettlemoyer, Luke},
+  title     = {{QLoRA}: Efficient Finetuning of Quantized {LLMs}},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023},
+  note      = {arXiv:2305.14314; {NF4}, double quantization, paged optimizers},
+  url       = {https://arxiv.org/abs/2305.14314}
+}
+
+@inproceedings{liu2024dora,
+  author    = {Liu, Shih-Yang and Wang, Chien-Yi and Yin, Hongxu and
+               Molchanov, Pavlo and Wang, Yu-Chiang Frank and Cheng, Kwang-Ting and
+               Chen, Min-Hung},
+  title     = {{DoRA}: Weight-Decomposed Low-Rank Adaptation},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2024},
+  note      = {arXiv:2402.09353},
+  url       = {https://arxiv.org/abs/2402.09353}
+}
+
+@article{kalajdzievski2023rslora,
+  author  = {Kalajdzievski, Damjan},
+  title   = {A Rank Stabilization Scaling Factor for Fine-Tuning with {LoRA}},
+  journal = {arXiv preprint arXiv:2312.03732},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2312.03732}
+}
+
+@article{meng2024pissa,
+  author  = {Meng, Fanxu and Wang, Zhaohui and Zhang, Muhan},
+  title   = {{PiSSA}: Principal Singular Values and Singular Vectors Adaptation of Large Language Models},
+  journal = {arXiv preprint arXiv:2404.02948},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2404.02948}
+}
+
+@article{li2023loftq,
+  author  = {Li, Yixiao and Yu, Yifan and Liang, Chen and He, Pengcheng and
+             Karampatziakis, Nikos and Chen, Weizhu and Zhao, Tuo},
+  title   = {{LoftQ}: {LoRA}-Fine-Tuning-Aware Quantization for Large Language Models},
+  journal = {arXiv preprint arXiv:2310.08659},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2310.08659}
+}
+
+@article{buyukakyuz2024olora,
+  author  = {B{\"u}y{\"u}kaky{\"u}z, Kerim},
+  title   = {{OLoRA}: Orthonormal Low-Rank Adaptation of Large Language Models},
+  journal = {arXiv preprint arXiv:2406.01775},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2406.01775}
+}
+
+@article{paischer2024eva,
+  author  = {Paischer, Fabian and Hauzenberger, Lukas and Schmied, Thomas and
+             Alkin, Benedikt and Deisenroth, Marc Peter and Hochreiter, Sepp},
+  title   = {One Initialization to Rule them All: Fine-tuning via Explained Variance Adaptation},
+  journal = {arXiv preprint arXiv:2410.07170},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2410.07170}
+}
+
+@article{yang2024corda,
+  author  = {Yang, Yibo and Li, Xiaojie and Zhou, Zhongzhu and Song, Shuaiwen Leon and
+             Wu, Jianlong and Nie, Liqiang and Ghanem, Bernard},
+  title   = {{CorDA}: Context-Oriented Decomposition Adaptation of Large Language Models},
+  journal = {arXiv preprint arXiv:2406.05223},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2406.05223}
+}
+
+@article{hayou2024loraplus,
+  author  = {Hayou, Soufiane and Ghosh, Nikhil and Yu, Bin},
+  title   = {{LoRA+}: Efficient Low Rank Adaptation of Large Models},
+  journal = {arXiv preprint arXiv:2402.12354},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2402.12354}
+}
+
+@inproceedings{zhang2023adalora,
+  author    = {Zhang, Qingru and Chen, Minshuo and Bukharin, Alexander and
+               He, Pengcheng and Cheng, Yu and Chen, Weizhu and Zhao, Tuo},
+  title     = {{AdaLoRA}: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2023},
+  note      = {arXiv:2303.10512},
+  url       = {https://arxiv.org/abs/2303.10512}
+}
+
+@article{kopiczko2023vera,
+  author  = {Kopiczko, Dawid J. and Blankevoort, Tijmen and Asano, Yuki M.},
+  title   = {{VeRA}: Vector-based Random Matrix Adaptation},
+  journal = {arXiv preprint arXiv:2310.11454},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2310.11454}
+}
+
+@article{balazy2024loraxs,
+  author  = {Ba{\l}azy, Klaudia and Banaei, Mohammadreza and Aberer, Karl and Tabor, Jacek},
+  title   = {{LoRA-XS}: Low-Rank Adaptation with Extremely Small Number of Parameters},
+  journal = {arXiv preprint arXiv:2405.17604},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2405.17604}
+}
+
+@inproceedings{zhao2024galore,
+  author    = {Zhao, Jiawei and Zhang, Zhenyu and Chen, Beidi and Wang, Zhangyang and
+               Anandkumar, Anima and Tian, Yuandong},
+  title     = {{GaLore}: Memory-Efficient {LLM} Training by Gradient Low-Rank Projection},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2024},
+  note      = {arXiv:2403.03507},
+  url       = {https://arxiv.org/abs/2403.03507}
+}
+
+@article{jain2023neftune,
+  author  = {Jain, Neel and Chiang, Ping-yeh and Wen, Yuxin and Kirchenbauer, John and
+             Chu, Hong-Min and Somepalli, Gowthami and Bartoldson, Brian R. and
+             Kailkhura, Bhavya and Schwarzschild, Avi and Saha, Aniruddha and
+             Goldblum, Micah and Geiping, Jonas and Goldstein, Tom},
+  title   = {{NEFTune}: Noisy Embeddings Improve Instruction Finetuning},
+  journal = {arXiv preprint arXiv:2310.05914},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2310.05914}
+}
+
+@article{biderman2024lora,
+  author  = {Biderman, Dan and Portes, Jacob and Ortiz, Jose Javier Gonzalez and
+             Paul, Mansheej and Greengard, Philip and Jennings, Connor and
+             King, Daniel and Havens, Sam and Chiley, Vitaliy and
+             Frankle, Jonathan and Blakeney, Cody and Cunningham, John P.},
+  title   = {{LoRA} Learns Less and Forgets Less},
+  journal = {Transactions on Machine Learning Research (TMLR)},
+  year    = {2024},
+  note    = {arXiv:2405.09673},
+  url     = {https://arxiv.org/abs/2405.09673}
+}
+
+@inproceedings{qi2023finetuning,
+  author    = {Qi, Xiangyu and Zeng, Yi and Xie, Tinghao and Chen, Pin-Yu and
+               Jia, Ruoxi and Mittal, Prateek and Henderson, Peter},
+  title     = {Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2310.03693},
+  url       = {https://arxiv.org/abs/2310.03693}
+}
+
+@article{lorasurvey2024,
+  author  = {Mao, Yuren and Ge, Yuhang and Fan, Yijiang and Xu, Wenyi and Mi, Yu and
+             Hu, Zhonghao and Gao, Yunjun},
+  title   = {A Survey on {LoRA} of Large Language Models},
+  journal = {arXiv preprint arXiv:2407.11046},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2407.11046}
+}
+
+@misc{peft_library2026,
+  author = {{Hugging Face}},
+  title  = {{PEFT} documentation: {LoRA} developer guide},
+  year   = {2026},
+  note   = {\texttt{LoraConfig} exposes \texttt{use\_dora},
+            \texttt{use\_rslora} and \texttt{init\_lora\_weights} in
+            \texttt{gaussian}, \texttt{eva}, \texttt{olora}, \texttt{pissa},
+            \texttt{corda} and \texttt{loftq}. Accessed 2026-09-05},
+  url    = {https://huggingface.co/docs/peft/developer_guides/lora}
+}
+
+@misc{strixhalo2026,
+  author = {{Strix Halo fine-tuning guide contributors}},
+  title  = {Fine-tuning 27B+ {LLMs} on {AMD} Strix Halo (gfx1151, Ryzen {AI} {MAX+} 395)},
+  year   = {2026},
+  note   = {Community guide, not peer-reviewed, and the SINGLE validation
+            point for this study's training-memory model: {Qwen3.5-27B}
+            {LoRA} r=128, alpha=256, bf16, paged {AdamW} 8-bit, sequence 8192,
+            gradient accumulation 4, 448 steps at approximately 11 min/step,
+            approximately 80 GB peak of a 128 GB unified pool. A single
+            unrefereed anchor is a real limitation and is recorded as one in
+            the threats section. Accessed 2026-09-05},
+  url    = {https://github.com/h34v3nzc0dex/strix-halo-llm-finetune-guide}
+}
+
+@misc{tuning_pricing2026,
+  author = {{Price Per Token}},
+  title  = {Hosted fine-tuning price index},
+  year   = {2026},
+  note   = {Third-party aggregator of vendor list prices, September 2026:
+            Together {AI} {LoRA} training at \$0.48/Mtok; {OpenAI} {GPT-4.1}
+            nano \$1.50/Mtok and {GPT-4o} \$25/Mtok; {OpenAI} o4-mini at \$100
+            per training hour. Tuned endpoints predict at 1.5$\times$ the base
+            rate on {OpenAI} {GPT-4o}/{4.1} and on {Google} from {Gemini} 3
+            onward. Accessed 2026-09-05},
+  url    = {https://pricepertoken.com/fine-tuning}
+}
+
+
+% --------------------------------------------------------------------- %
+%  The 2026 frontier roster, used for pricing and architecture only
+% --------------------------------------------------------------------- %
+
+@misc{frontier2026,
+  author = {{OpenAI}},
+  title  = {{GPT-5.6} model family and {API} pricing},
+  year   = {2026},
+  note   = {Sol, Terra and Luna tiers; list price per million tokens. No
+            public per-query energy measurement covers any model of this
+            generation, which therefore enters the analysis through list
+            pricing and published architecture only. Accessed 2026-06-17},
+  url    = {https://openai.com/api/pricing/}
+}
+
+@misc{anthropic_pricing2026,
+  author = {{Anthropic}},
+  title  = {{Claude} model pricing},
+  year   = {2026},
+  note   = {Claude Sonnet 5 and the Fable 5 frontier tier; list price per
+            million tokens. Accessed 2026-06-17},
+  url    = {https://www.anthropic.com/pricing}
+}
+
+@misc{google_pricing2026,
+  author = {{Google}},
+  title  = {{Gemini} {API} pricing},
+  year   = {2026},
+  note   = {Gemini 3.6 Flash and 3.5 Flash-Lite; list price per million
+            tokens. Accessed 2026-06-17},
+  url    = {https://ai.google.dev/pricing}
+}
+
+@misc{openweights2026,
+  author = {{Moonshot AI} and {Zhipu AI}},
+  title  = {Open-weights sparse mixture-of-experts flagships: {Kimi} {K3} and {GLM-5.2}},
+  year   = {2026},
+  note   = {Sparse expert activation decouples per-token compute from total
+            capacity, which is right-sizing applied inside the cloud model.
+            Cited for that architectural point and for list pricing.
+            Accessed 2026-06-17},
+  url    = {https://openrouter.ai/models}
+}
+
+
+% --------------------------------------------------------------------- %
+%  This study's own artifacts
+% --------------------------------------------------------------------- %
+
+@misc{autoyou2026measure,
+  author = {{AutoYou Research}},
+  title  = {Primary measurement harness and raw per-run records for single-stream local inference},
+  year   = {2026},
+  note   = {Measured 2026-09-05 on two consumer machines under Windows 11 with
+            Ollama 0.33: an AMD Ryzen AI MAX+ 395 ``Strix Halo'' (Radeon 8060S,
+            64 GB unified LPDDR5X-8000, 256 GB/s specified) and an NVIDIA
+            GeForce RTX 5070 (12 GB GDDR7, 672 GB/s specified, driver 610.47).
+            Protocol: temperature 0, seed 20260905, context 4096, warm-up
+            discarded, median over repetitions with the full spread retained,
+            chat template bypassed and a per-repetition salt at position zero
+            to defeat both prompt-cache paths, prompt length swept over four
+            values per model with prefill time regressed on prompt tokens.
+            Board power is sampled on the NVIDIA part only; the AMD part
+            exposes no rail readable without a kernel-mode helper the harness
+            declines to install. The harness and the raw per-run records,
+            including every power trace, are released with this study under an
+            MIT licence. Accessed 2026-09-06},
+  url    = {https://github.com/autoyou-ai/autoyou-research}
+}
+
+@misc{autoyou2026adaptation,
+  author = {{AutoYou Research}},
+  title  = {Teaching at the Edge: On-Device Parameter-Efficient Adaptation and What It Actually Buys},
+  year   = {2026},
+  note   = {Companion study, September 2026. Released with this study.
+            Accessed 2026-09-06},
+  url    = {https://github.com/autoyou-ai/autoyou-research}
+}
+
+@misc{autoyou2026edge,
+  author = {{AutoYou Research}},
+  title  = {Right-Sized {AI} at the Edge: Quantifying Carbon, Water, Cost, and
+            Capability in Peer-to-Peer Inference},
+  year   = {2026},
+  note   = {Companion study, September 2026. Released with this study.
+            Accessed 2026-09-06},
+  url    = {https://github.com/autoyou-ai/autoyou-research}
+}
+
+@misc{autoyou_support2026,
+  author = {{AutoYou Research}},
+  title  = {Task-specific adapter evaluation artifacts from a deployed assistant},
+  year   = {2026},
+  note   = {Five evaluation runs over {Qwen2.5-VL} 3B and 7B bases, 12--14
+            screen probes and 8 code probes each, plus dataset statistics
+            (1,750 train / 72 eval samples across 13 families). Aggregate
+            scores only; no prompts, answers, screenshots or user content are
+            released or used. Unlike every other artifact behind this study,
+            these are not redistributable and are not part of the public
+            release, so the findings that depend on them cannot be
+            independently reproduced and every hypothesis they inform is
+            recorded as not independently validated}
+}

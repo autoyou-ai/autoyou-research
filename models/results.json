@@ -1,0 +1,4617 @@
+{
+  "verdicts": [
+    {
+      "hid": "H1",
+      "statement": "STUN-first P2P (TURN only on NAT necessity) lowers network transmission energy vs routing every byte through a cloud.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "p2p_wh": 0.48000000000000004,
+        "centralized_wh": 0.75,
+        "savings_frac": 0.35999999999999993,
+        "caveat": "Absolute magnitude is small vs inference energy; the network term matters most for media/browsing, not text chat."
+      },
+      "model_result": "VALIDATED"
+    },
+    {
+      "hid": "H2",
+      "statement": "For a capability-sufficient task, an 8B SLM uses far less inference energy than a frontier/reasoning model.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "energy_ratio_vs_8B": {
+          "gpt4o_long": 2.965174129353234,
+          "claude37": 9.150912106135987,
+          "llama405b": 34.42288557213931,
+          "deepseek_r1": 55.77777777777778,
+          "o3": 65.0464344941957
+        },
+        "range": "3.0x - 65.0x"
+      },
+      "model_result": "VALIDATED"
+    },
+    {
+      "hid": "H3",
+      "statement": "An 8B SLM reaches >=70% of frontier capability on a defined task class (the '~70%-capable' claim).",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "alpha": 0.7,
+        "f_s": 0.82,
+        "sufficient_classes": [
+          "extraction",
+          "rag_qa",
+          "summary",
+          "simple_code"
+        ],
+        "insufficient_classes": [
+          "hard_reason"
+        ],
+        "mmlu_ratio_8B_over_frontier": 0.7674418604651163,
+        "hardmath_ratio_8B_over_frontier": 0.5128205128205129,
+        "disproof": "The BLANKET claim is REFUTED: on hard multi-step math the 8B/frontier ratio is ~0.51 (<0.70). The claim only holds for extraction/RAG-QA/summary/simple-code, which is 82% of the modelled workload."
+      },
+      "model_result": "PARTIAL"
+    },
+    {
+      "hid": "H4",
+      "statement": "Moving a sufficient query from cloud to an already-powered edge device cuts on-site cooling water and PUE/idle overhead.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "cloud8b": {
+          "energy_wh": 0.603,
+          "water_ml": 0.7729363636363636,
+          "carbon_g": 0.27617400000000003
+        },
+        "edge8b": {
+          "energy_wh": 0.29117021276595745,
+          "water_ml": 0.3202872340425532,
+          "carbon_g": 0.1403559574468085
+        },
+        "water_savings_frac": 0.5856227639029339,
+        "carbon_can_reverse_on_dirty_grid": true,
+        "edge_india_carbon_g": 0.2131485106382979,
+        "cloud_eu_carbon_g": 0.08442000000000001,
+        "disproof": "Carbon savings are NOT unconditional: an edge device on a coal-heavy grid (India ~708 g/kWh) can emit MORE than a cloud region on a clean grid (EU ~140 g/kWh). Water savings, however, are robust (no evaporative cooling at the edge)."
+      },
+      "model_result": "PARTIAL"
+    },
+    {
+      "hid": "H5",
+      "statement": "The integrated system (P2P + edge SLM + cloud fallback) yields net positive energy/water/carbon savings after rebound & embodied carbon, for the modelled workload.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "f_s": 0.82,
+        "rebound": 0.2,
+        "per_baseline": {
+          "gemini_median": {
+            "savings_energy": -0.17483156028368804,
+            "savings_water": -0.03372070066898045,
+            "savings_carbon": -0.22705135649911745
+          },
+          "gpt4o_short": {
+            "savings_energy": 0.2023000960226411,
+            "savings_water": 0.2666546923314863,
+            "savings_carbon": 0.17848489204790846
+          },
+          "gpt4o_long": {
+            "savings_energy": 0.5491724499024228,
+            "savings_water": 0.5643252938878947,
+            "savings_carbon": 0.5435649550068061
+          },
+          "claude37_long": {
+            "savings_energy": 0.6213846213166966,
+            "savings_water": 0.6262946041086545,
+            "savings_carbon": 0.6195676222457719
+          },
+          "o3_reasoning": {
+            "savings_energy": 0.6511302128961458,
+            "savings_water": 0.6518209628399549,
+            "savings_carbon": 0.6508745924470888
+          }
+        }
+      },
+      "model_result": "PARTIAL"
+    },
+    {
+      "hid": "H6",
+      "statement": "Relayed WebRTC transport preserves payload confidentiality against STUN/TURN relays: the datachannel is SCTP-over-DTLS with SDP fingerprint pinning, so a relay is a blind ciphertext forwarder (cannot read or alter payloads).",
+      "result": "STRUCTURAL (authenticated endpoints required)",
+      "evidence": {
+        "basis": "Public WebRTC standard (RFC 8831 SCTP/DTLS, RFC 8827 DTLS mandatory). A relay lacks either peer's DTLS private key, so it cannot terminate the session without failing fingerprint validation. This is cryptographic, not policy-based.",
+        "trade_off": "This is not a complete application-layer privacy proof: an authenticated peer is still a trusted endpoint. Residual relay exposure is connection METADATA (peer IP, timing, volume), mitigated by short-lived per-relay creds, geo-spread selection, and preferring direct P2P (iceTransportPolicy=all)."
+      },
+      "model_result": "VALIDATED"
+    },
+    {
+      "hid": "C1",
+      "statement": "COUNTER-CLAIM: rebound (induced extra usage) cancels savings.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "literature_takeback_fraction": 0.2,
+        "literature_induced_usage_equivalent": 0.42393968033599566,
+        "parity_takeback_fraction": 1.0,
+        "parity_induced_usage_multiplier": 2.1196984016799783,
+        "reading": "One rebound model, two units. The literature take-back of 20% of gross savings is the same statement as 42% induced extra usage. Parity arrives when the whole gross saving is taken back (take-back 100%), which is 212% induced usage. Rebound at observed rates erodes but does not erase savings; it becomes decisive only under very large induced demand. Earlier drafts printed 20% and 212% with no conversion between them, which read as two incompatible models.",
+        "one_model_note": "F_eff = F_dec + r*(F_cloud - F_dec) and F_eff = (1+g)*F_dec are identical under g = r*(F_cloud - F_dec)/F_dec."
+      },
+      "model_result": "REFUTED (bounded)"
+    },
+    {
+      "hid": "C2",
+      "statement": "COUNTER-CLAIM: a single-user consumer GPU is LESS energy efficient per token than a batched data-centre accelerator.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "edge_wh_per_token_full": 0.0009515366430260047,
+        "edge_wh_per_token_marginal": 0.0008156028368794326,
+        "cloud_wh_per_token_batched": 0.000402,
+        "consequence": "TRUE and important: edge does NOT win on raw per-token efficiency. Its advantage comes ONLY from (a) right-sizing to a smaller sufficient model, (b) eliminating evaporative cooling water, (c) removing PUE/idle/redundancy overhead, and (d) marginal energy on already-on hardware. Running a LARGE model at the edge is a net loss."
+      },
+      "model_result": "SUPPORTED (acknowledged)"
+    },
+    {
+      "hid": "C3",
+      "statement": "COUNTER-CLAIM: embodied carbon of the edge device dominates and wipes out operational savings.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "operational_carbon_g_per_query": 0.1403559574468085,
+        "embodied_g_per_query_marginal_use": 0.007,
+        "embodied_g_per_query_dedicated_lightuse": 7.0,
+        "condition": "TRUE only for a device bought SOLELY for inference and lightly used. On an ALREADY-OWNED device (marginal attribution, high lifetime utilisation) embodied carbon is a small fraction of operational. The thesis therefore requires riding existing household hardware, not provisioning new devices."
+      },
+      "model_result": "SUPPORTED (conditional)"
+    }
+  ],
+  "monte_carlo": {
+    "gemini_median": {
+      "baseline": "gemini_median",
+      "n": 50000,
+      "savings_energy": {
+        "mean": -0.08775651061486602,
+        "p5": -0.21269682265353881,
+        "p50": -0.08706930647696376,
+        "p95": 0.033754200922247804,
+        "p_positive": 0.14116
+      },
+      "savings_water": {
+        "mean": 0.018317768375648,
+        "p5": -0.09872738623858472,
+        "p50": 0.022109189098573644,
+        "p95": 0.12512938958455777,
+        "p_positive": 0.63232
+      },
+      "savings_carbon": {
+        "mean": -0.16097246101136806,
+        "p5": -0.29793542319773436,
+        "p50": -0.16104663398288283,
+        "p95": -0.022116894289757487,
+        "p_positive": 0.02562
+      }
+    },
+    "gpt4o_short": {
+      "baseline": "gpt4o_short",
+      "n": 50000,
+      "savings_energy": {
+        "mean": 0.2373609117294693,
+        "p5": 0.1766135673346859,
+        "p50": 0.23650070754989394,
+        "p95": 0.3006257344369127,
+        "p_positive": 1.0
+      },
+      "savings_water": {
+        "mean": 0.2895628262793698,
+        "p5": 0.22606760796285902,
+        "p50": 0.28937359312358624,
+        "p95": 0.3537329925961909,
+        "p_positive": 1.0
+      },
+      "savings_carbon": {
+        "mean": 0.20355708831043354,
+        "p5": 0.13957232693079197,
+        "p50": 0.20289699523773758,
+        "p95": 0.2700537215471606,
+        "p_positive": 1.0
+      }
+    },
+    "gpt4o_long": {
+      "baseline": "gpt4o_long",
+      "n": 50000,
+      "savings_energy": {
+        "mean": 0.5483364075861465,
+        "p5": 0.47261713392825294,
+        "p50": 0.5552181613235003,
+        "p95": 0.5850997923786694,
+        "p_positive": 1.0
+      },
+      "savings_water": {
+        "mean": 0.5606277979807259,
+        "p5": 0.48338039488297263,
+        "p50": 0.5677484733962419,
+        "p95": 0.5980313797127009,
+        "p_positive": 1.0
+      },
+      "savings_carbon": {
+        "mean": 0.5403770062106353,
+        "p5": 0.46596479040307176,
+        "p50": 0.5471255308460702,
+        "p95": 0.5773114023134042,
+        "p_positive": 1.0
+      }
+    },
+    "claude37_long": {
+      "baseline": "claude37_long",
+      "n": 50000,
+      "savings_energy": {
+        "mean": 0.6130755416257074,
+        "p5": 0.5293235202987677,
+        "p50": 0.6213925036122929,
+        "p95": 0.6504684161079022,
+        "p_positive": 1.0
+      },
+      "savings_water": {
+        "mean": 0.6170583263349332,
+        "p5": 0.5329106186125783,
+        "p50": 0.6254771327408382,
+        "p95": 0.6547552689874013,
+        "p_positive": 1.0
+      },
+      "savings_carbon": {
+        "mean": 0.6104964532495902,
+        "p5": 0.5271516701282899,
+        "p50": 0.6188188515213686,
+        "p95": 0.647790632713586,
+        "p_positive": 1.0
+      }
+    },
+    "o3_reasoning": {
+      "baseline": "o3_reasoning",
+      "n": 50000,
+      "savings_energy": {
+        "mean": 0.6397428444173717,
+        "p5": 0.5525600201752032,
+        "p50": 0.6485426788557955,
+        "p95": 0.6785337072579788,
+        "p_positive": 1.0
+      },
+      "savings_water": {
+        "mean": 0.6403031535733645,
+        "p5": 0.5530083447728407,
+        "p50": 0.6491013274979466,
+        "p95": 0.6791380693685675,
+        "p_positive": 1.0
+      },
+      "savings_carbon": {
+        "mean": 0.6393800111394629,
+        "p5": 0.5522388357925608,
+        "p50": 0.6481629465265053,
+        "p95": 0.6781218609658853,
+        "p_positive": 1.0
+      }
+    }
+  },
+  "key_numbers": {
+    "f_s_sufficient_fraction": 0.82,
+    "per_class_sufficiency": {
+      "extraction": true,
+      "rag_qa": true,
+      "summary": true,
+      "simple_code": true,
+      "hard_reason": false
+    },
+    "right_sizing_ratio_o3_over_8B": 65.0464344941957,
+    "right_sizing_ratio_gpt4o_over_8B": 2.965174129353234,
+    "system_vs_gpt4o_long": {
+      "energy": 0.5491724499024228,
+      "water": 0.5643252938878947,
+      "carbon": 0.5435649550068061
+    },
+    "edge_query_footprint": {
+      "energy_wh": 0.29117021276595745,
+      "water_ml": 0.3202872340425532,
+      "carbon_g": 0.1403559574468085
+    },
+    "cloud_gpt4o_footprint": {
+      "energy_wh": 1.788,
+      "water_ml": 2.291890909090909,
+      "carbon_g": 0.8189040000000001
+    },
+    "google_overhead_noncompute_fraction": 0.42,
+    "water_per_100w_prompt_uc_riverside_ml": 519.0,
+    "tco": {
+      "edge_owned_usd": 3.993191489361702e-05,
+      "edge_dedicated_amortised_usd": 0.0004465872340425532,
+      "cloud_frontier_usd": 0.006
+    },
+    "fleet_2030_inference_twh": 276.4125,
+    "fleet_savings_25pct_adoption": {
+      "inference_twh": 276.4125,
+      "energy_saved_twh": 37.94953245216336,
+      "carbon_saved_MtCO2e": 17.380885863090818,
+      "water_saved_GL": 31.87760725981722,
+      "us_homes_equiv": 3513845.597422533
+    },
+    "agentic_replaceable_nvidia": {
+      "range": [
+        0.4,
+        0.7
+      ],
+      "our_f_s": 0.82
+    }
+  },
+  "pass2_refresh": {
+    "accessed": "2026-07-24",
+    "frontier_2026_tco": {
+      "accessed": "2026-07-24",
+      "query_shape": {
+        "tokens_in": 500.0,
+        "tokens_out": 300.0
+      },
+      "edge_owned_usd_per_query": 3.993191489361702e-05,
+      "models": {
+        "gpt-5.6-sol": {
+          "vendor": "OpenAI",
+          "released": "2026-07-09",
+          "price_in_mtok": 5.0,
+          "price_out_mtok": 30.0,
+          "usd_per_query": 0.0115,
+          "ratio_vs_edge_owned": 287.9901960784314,
+          "note": "flagship reasoning/agentic tier"
+        },
+        "gpt-5.6-terra": {
+          "vendor": "OpenAI",
+          "released": "2026-07-09",
+          "price_in_mtok": 2.5,
+          "price_out_mtok": 15.0,
+          "usd_per_query": 0.00575,
+          "ratio_vs_edge_owned": 143.9950980392157,
+          "note": "balanced everyday tier"
+        },
+        "gpt-5.6-luna": {
+          "vendor": "OpenAI",
+          "released": "2026-07-09",
+          "price_in_mtok": 1.0,
+          "price_out_mtok": 6.0,
+          "usd_per_query": 0.0023,
+          "ratio_vs_edge_owned": 57.59803921568627,
+          "note": "fastest/cheapest tier"
+        },
+        "claude-fable-5": {
+          "vendor": "Anthropic",
+          "released": "2026-07",
+          "price_in_mtok": 10.0,
+          "price_out_mtok": 50.0,
+          "usd_per_query": 0.02,
+          "ratio_vs_edge_owned": 500.85251491901107,
+          "note": "frontier tier above Opus"
+        },
+        "claude-sonnet-5": {
+          "vendor": "Anthropic",
+          "released": "2026-06-30",
+          "price_in_mtok": 3.0,
+          "price_out_mtok": 15.0,
+          "usd_per_query": 0.006,
+          "ratio_vs_edge_owned": 150.25575447570333,
+          "note": "1M-token context; intro price $2/$10 to 2026-08-31"
+        },
+        "gemini-3.6-flash": {
+          "vendor": "Google",
+          "released": "2026-07-21",
+          "price_in_mtok": 1.5,
+          "price_out_mtok": 7.5,
+          "usd_per_query": 0.003,
+          "ratio_vs_edge_owned": 75.12787723785166,
+          "note": "17% fewer output tokens vs 3.5 Flash"
+        },
+        "gemini-3.5-flash-lite": {
+          "vendor": "Google",
+          "released": "2026-07-21",
+          "price_in_mtok": 0.3,
+          "price_out_mtok": 2.5,
+          "usd_per_query": 0.0009,
+          "ratio_vs_edge_owned": 22.538363171355495,
+          "note": "budget tier"
+        },
+        "kimi-k3": {
+          "vendor": "Moonshot AI",
+          "released": "2026-07-16",
+          "price_in_mtok": 3.0,
+          "price_out_mtok": 15.0,
+          "usd_per_query": 0.006,
+          "ratio_vs_edge_owned": 150.25575447570333,
+          "note": "sparse MoE 2.8T total, 16 of 896 experts active (~1.8%); $0.30 cached input; open weights announced"
+        },
+        "glm-5.2": {
+          "vendor": "Zhipu AI",
+          "released": "2026-06-13",
+          "price_in_mtok": 0.85,
+          "price_out_mtok": 2.5,
+          "usd_per_query": 0.001175,
+          "ratio_vs_edge_owned": 29.4250852514919,
+          "note": "sparse MoE 744B total / ~40B active; MIT weights; OpenRouter price (first-party ~$1.40 in)"
+        }
+      },
+      "summary": {
+        "mid_tier_ratio_range": [
+          143.9950980392157,
+          150.25575447570333
+        ],
+        "premium_tier_ratio_range": [
+          287.9901960784314,
+          500.85251491901107
+        ],
+        "budget_tier_ratio_range": [
+          22.538363171355495,
+          75.12787723785166
+        ],
+        "reading": "The first-pass ~150x claim is set by the $15/Mtok output price, which remains the modal mid-tier price in July 2026 (GPT-5.6 Terra, Claude Sonnet 5, Kimi K3). Premium tiers (Sol, Fable 5) widen the gap; budget tiers (Luna, Gemini 3.6 Flash, GLM-5.2) compress it, mirroring the efficient-cloud counter-case of H5."
+      },
+      "energy_note": "No public per-query energy measurement exists for any July-2026 frontier model as of 2026-07-24; energy/water/carbon results remain pinned to the measured 2025 corpus (jegham2025, elsworth2025, caravaca2025).",
+      "moe_trend_note": "Kimi K3 activates ~1.8% of 2.8T parameters per token; GLM-5.2 ~40B of 744B (~5%). Sparse activation is right-sizing applied INSIDE the cloud model: per-token compute is decoupled from total capacity. This supports H2's finding that the dominant lever is which size runs, and it strengthens the efficient-cloud caveat of H5 rather than weakening it."
+    },
+    "live_log_validation": {
+      "available": false,
+      "verdict": "NO DATA: local evidence is opt-in",
+      "scope_note": "No runtime logs read; set AUTOYOU_RESEARCH_LOCAL_EVIDENCE=1 for an explicitly authorized local audit."
+    },
+    "router_placement": {
+      "local": {
+        "energy_wh": 0.008319148936170213,
+        "carbon_g": 0.0038101702127659575,
+        "share_of_edge_query_energy": 0.02857142857142857
+      },
+      "remote": {
+        "energy_wh": 0.10312288,
+        "carbon_g": 0.04723027904,
+        "inference_wh": 0.103,
+        "network_wh": 0.00012288,
+        "share_of_edge_query_energy": 0.3541669974424552
+      },
+      "carbon_savings_vs_gpt4o_long": {
+        "router_free_idealization": 0.5435649550068061,
+        "on_device_router": 0.539842740717692,
+        "remote_router": 0.4974249639553521
+      },
+      "savings_retained_fraction": {
+        "on_device_router": 0.9931522180471191,
+        "remote_router": 0.9151159569312626
+      },
+      "reading": "An on-device classifier is a rounding error: it consumes under 1% of the modelled savings, because a 10-token decision on an already-powered device is negligible next to the query it routes. A geographically remote router is not: its own inference pass is charged to every query, including the majority that never needed a cloud model, and it additionally forfeits on-device confidentiality because the query must leave the device to be classified. Router placement is therefore a design constraint of the architecture, not a deployment detail: the classifier must be co-located with the edge node for the reported savings and privacy properties to hold.",
+      "privacy_note": "The remote-router variant breaks the transport claim's premise. H6 establishes that relays cannot read payloads; a remote classifier is not a relay but an endpoint, and it reads the query by construction."
+    }
+  },
+  "verdicts_adaptation": [
+    {
+      "hid": "H7",
+      "statement": "A 27B-class open-weights model can be parameter-efficiently adapted on consumer hardware a household already owns, without renting a GPU.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "configurations": {
+          "unified_apu/qwen3.8-27b": {
+            "feasible": true,
+            "method": "dora",
+            "rank": 128,
+            "seq_len": 8192,
+            "peak_gb": 81.4,
+            "ceiling_gb": 102.4
+          },
+          "unified_apu/ministral-3-8b": {
+            "feasible": true,
+            "method": "dora",
+            "rank": 128,
+            "seq_len": 8192,
+            "peak_gb": 30.1,
+            "ceiling_gb": 102.4
+          },
+          "discrete_gpu/qwen3.8-27b": {
+            "feasible": true,
+            "method": "qdora",
+            "rank": 32,
+            "seq_len": 1024,
+            "peak_gb": 19.1,
+            "ceiling_gb": 19.2
+          },
+          "discrete_gpu/ministral-3-8b": {
+            "feasible": true,
+            "method": "qdora",
+            "rank": 128,
+            "seq_len": 8192,
+            "peak_gb": 17.2,
+            "ceiling_gb": 19.2
+          }
+        },
+        "memory_model_validation": {
+          "reported_peak_gb": 80.0,
+          "predicted_peak_gb": 79.54,
+          "residual_gb": -0.46,
+          "relative_error": -0.0058,
+          "breakdown": {
+            "weights_gb": 54.0,
+            "adapter_gb": 2.147,
+            "gradients_gb": 2.147,
+            "optimizer_gb": 2.147,
+            "activations_gb": 8.221,
+            "logits_gb": 4.981,
+            "overhead_gb": 5.892,
+            "total_gb": 79.536
+          }
+        },
+        "binding_constraint": "addressable accelerator memory, not FLOPs",
+        "note": "The verdict is a property of the DEVICE CLASS, not of consumer hardware in general. A 128 GB unified-memory APU runs a 27B job at rank 128 and sequence 8192 using 81.4 GB. A 24 GB discrete GPU of far higher raw throughput is driven down to rank 32 at sequence 1024 before it fits. The Pass-1 study modelled only the second class and would have concluded this was impossible."
+      },
+      "model_result": "VALIDATED (device-class dependent)"
+    },
+    {
+      "hid": "H8",
+      "statement": "The one-time energy cost of a local adaptation run is repaid by the inference it makes possible, within the device's service life.",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "displacement_cases": {
+          "persona_8b_apu": {
+            "training_kwh": 0.43,
+            "training_hours": 3.3,
+            "training_carbon_kg": 0.2,
+            "saving_wh_per_query": 1.4968,
+            "queries_to_repay_energy": 288,
+            "queries_to_repay_carbon": 291,
+            "days_to_repay_energy": 5.8,
+            "queries_per_day": 50.0,
+            "repaid_within_device_life": true,
+            "retrain_penalty_at_2x_per_year": 0.0316
+          },
+          "support_7b_apu": {
+            "training_kwh": 1.61,
+            "training_hours": 12.4,
+            "training_carbon_kg": 0.74,
+            "saving_wh_per_query": 1.4968,
+            "queries_to_repay_energy": 1073,
+            "queries_to_repay_carbon": 1084,
+            "days_to_repay_energy": 21.5,
+            "queries_per_day": 50.0,
+            "repaid_within_device_life": true,
+            "retrain_penalty_at_2x_per_year": 0.1176
+          },
+          "capability_27b_apu": {
+            "training_kwh": 10.67,
+            "training_hours": 82.1,
+            "training_carbon_kg": 4.89,
+            "saving_wh_per_query": 1.4968,
+            "queries_to_repay_energy": 7127,
+            "queries_to_repay_carbon": 7201,
+            "days_to_repay_energy": 142.5,
+            "queries_per_day": 50.0,
+            "repaid_within_device_life": true,
+            "retrain_penalty_at_2x_per_year": 0.7811
+          },
+          "persona_8b_gpu": {
+            "training_kwh": 0.21,
+            "training_hours": 0.5,
+            "training_carbon_kg": 0.1,
+            "saving_wh_per_query": 1.4968,
+            "queries_to_repay_energy": 140,
+            "queries_to_repay_carbon": 141,
+            "days_to_repay_energy": 2.8,
+            "queries_per_day": 50.0,
+            "repaid_within_device_life": true,
+            "retrain_penalty_at_2x_per_year": 0.0153
+          }
+        },
+        "queries_per_day_assumed": 50.0,
+        "longest_payback_days_displacement": 142.5,
+        "regimes": {
+          "displacement_accounting": {
+            "training_kwh": 10.67,
+            "training_hours": 82.1,
+            "training_carbon_kg": 4.89,
+            "saving_wh_per_query": 1.4968,
+            "queries_to_repay_energy": 7127,
+            "queries_to_repay_carbon": 7201,
+            "days_to_repay_energy": 142.5,
+            "queries_per_day": 50.0,
+            "repaid_within_device_life": true
+          },
+          "incremental_accounting": {
+            "0.60": {
+              "alpha": 0.6,
+              "coverage_gain": 0.0,
+              "training_kwh": 10.67,
+              "saving_wh_per_query": 1.4968,
+              "effective_saving_wh_per_query": 0.0,
+              "queries_to_repay": null,
+              "days_to_repay": null,
+              "years_to_repay": null,
+              "repays": false,
+              "note": "The adapter moves no query across the routing boundary at this threshold, so it displaces no cloud inference and has no energy payback. Its training cost is a net addition, bought for quality rather than for footprint."
+            },
+            "0.70": {
+              "alpha": 0.7,
+              "coverage_gain": 0.0,
+              "training_kwh": 10.67,
+              "saving_wh_per_query": 1.4968,
+              "effective_saving_wh_per_query": 0.0,
+              "queries_to_repay": null,
+              "days_to_repay": null,
+              "years_to_repay": null,
+              "repays": false,
+              "note": "The adapter moves no query across the routing boundary at this threshold, so it displaces no cloud inference and has no energy payback. Its training cost is a net addition, bought for quality rather than for footprint."
+            },
+            "0.80": {
+              "alpha": 0.8,
+              "coverage_gain": 0.12,
+              "training_kwh": 10.67,
+              "saving_wh_per_query": 1.4968,
+              "effective_saving_wh_per_query": 0.17962,
+              "queries_to_repay": 59393.0,
+              "days_to_repay": 1188.0,
+              "years_to_repay": 3.3,
+              "repays": true,
+              "note": "The adapter moves 12% of the workload from cloud to device at alpha=0.80, so only that share of the per-query saving is attributable to it."
+            },
+            "0.90": {
+              "alpha": 0.9,
+              "coverage_gain": 0.22,
+              "training_kwh": 10.67,
+              "saving_wh_per_query": 1.4968,
+              "effective_saving_wh_per_query": 0.3293,
+              "queries_to_repay": 32396.0,
+              "days_to_repay": 648.0,
+              "years_to_repay": 1.8,
+              "repays": true,
+              "note": "The adapter moves 22% of the workload from cloud to device at alpha=0.90, so only that share of the per-query saving is attributable to it."
+            }
+          },
+          "reconciliation": "These two are not alternative arithmetics for the same quantity; they answer different questions. Displacement accounting asks what the local model saves against a cloud baseline, and its answer does not depend on whether an adapter is installed. Incremental accounting asks what the ADAPTER saves, and at an acceptance threshold where adaptation moves no coverage the answer is nothing. Quoting the first as the payback period of the second overstates the case, and the earlier draft of this study did exactly that."
+        },
+        "accounting": "Training charged at FULL device power; inference savings measured against a HYPERSCALE cloud query, which is the cloud's best case. Both choices are against the hypothesis.",
+        "correction": "The phrase 'the inference it makes possible' is doing load-bearing work that the displacement figures do not support. At the study's default acceptance threshold (alpha=0.70) the adapter makes NO additional local inference possible - H9 establishes that coverage is unchanged - so it displaces no cloud query and has no energy payback at all. Its cost is a net addition bought for quality. Payback appears only where adaptation actually moves the routing boundary: at alpha=0.80 the 27B run repays in 3.3 years and at alpha=0.90 in 1.8 years, against 143 days under the displacement reading.",
+        "what_the_displacement_figures_do_mean": "They remain the correct answer to a different question: how long a LOCAL DEPLOYMENT takes to repay an adaptation run against an all-cloud counterfactual. That is the right frame for a user whose revealed acceptance threshold is above the coverage knee - someone who would have abandoned the local model and gone to the cloud had its answers not improved. It is a behavioural assumption, and it is now stated as one rather than assumed silently.",
+        "caveat": "Payback also scales with the cloud baseline being displaced. Against a hyper-efficient 0.24 Wh cloud prompt rather than a 1.8 Wh one, every figure here lengthens by roughly an order of magnitude - the same conditionality that qualifies H5."
+      },
+      "model_result": "PARTIAL (accounting-dependent)"
+    },
+    {
+      "hid": "H9",
+      "statement": "Parameter-efficient adaptation raises the fraction of a real workload a local small model can serve (f_s).",
+      "result": "MODELLED (conditional)",
+      "evidence": {
+        "alpha": 0.7,
+        "coverage": {
+          "base": 0.82,
+          "adapted_mid": 0.82,
+          "gain_pp": 0.0
+        },
+        "quality": {
+          "base": 0.8837,
+          "adapted": 0.9393,
+          "gain_pp": 5.56,
+          "gap_to_frontier_closed": 0.478
+        },
+        "alpha_sweep": {
+          "0.60": {
+            "base": 0.82,
+            "adapted_lo": 0.82,
+            "adapted_mid": 0.82,
+            "adapted_hi": 0.82
+          },
+          "0.65": {
+            "base": 0.82,
+            "adapted_lo": 0.82,
+            "adapted_mid": 0.82,
+            "adapted_hi": 0.82
+          },
+          "0.70": {
+            "base": 0.82,
+            "adapted_lo": 0.82,
+            "adapted_mid": 0.82,
+            "adapted_hi": 0.82
+          },
+          "0.75": {
+            "base": 0.82,
+            "adapted_lo": 0.82,
+            "adapted_mid": 0.82,
+            "adapted_hi": 0.82
+          },
+          "0.80": {
+            "base": 0.7,
+            "adapted_lo": 0.7,
+            "adapted_mid": 0.82,
+            "adapted_hi": 0.82
+          },
+          "0.85": {
+            "base": 0.7,
+            "adapted_lo": 0.7,
+            "adapted_mid": 0.7,
+            "adapted_hi": 0.82
+          },
+          "0.90": {
+            "base": 0.48,
+            "adapted_lo": 0.7,
+            "adapted_mid": 0.7,
+            "adapted_hi": 0.7
+          }
+        },
+        "coverage_knee_alpha": 0.8,
+        "f_s_range": {
+          "lo": 0.82,
+          "mid": 0.82,
+          "hi": 0.82
+        },
+        "disproof": "The hypothesis AS STATED is not what the evidence supports. At the study's acceptance threshold alpha=0.70, adaptation moves coverage by +0.0 points - that is, not at all - because every adaptable class already cleared the bar without it. What moves is quality: 88.4% -> 93.9% mean capability on the served workload, closing 48% of the remaining gap to the frontier. Coverage only responds above alpha=0.8, where the unadapted model starts failing classes the adapted one still passes. The correct claim is therefore: adaptation buys better answers at an ordinary quality bar, and buys more answers only at a demanding one."
+      },
+      "model_result": "PARTIAL (quality, not coverage)"
+    },
+    {
+      "hid": "H10",
+      "statement": "Training the adapter where the data already lives removes an exfiltration step that no cloud fine-tuning arrangement can remove.",
+      "result": "STRUCTURAL (local execution required)",
+      "evidence": {
+        "argument": "Cloud fine-tuning requires the training corpus to reach the trainer. For a persona adapter that corpus IS the user's message history, so the privacy question is settled before any policy is written: either the messages were uploaded or they were not. Local adaptation makes 'we never received it' a property of the topology rather than a promise in a document. This is the same class of argument as H6 (relays cannot read DTLS payloads), and it is verified the same way - by what the system is unable to do, not by what it undertakes not to do.",
+        "adapter_transport_8b_r32": {
+          "lora": {
+            "params": 87293952,
+            "megabytes": 174.59,
+            "seconds_at_link": 69.8,
+            "feels_like": "a download"
+          },
+          "dora": {
+            "params": 88694784,
+            "megabytes": 177.39,
+            "seconds_at_link": 71.0,
+            "feels_like": "a download"
+          },
+          "lora_xs": {
+            "params": 258048,
+            "megabytes": 0.52,
+            "seconds_at_link": 0.2,
+            "feels_like": "a message"
+          },
+          "vera": {
+            "params": 1408896,
+            "megabytes": 2.82,
+            "seconds_at_link": 1.1,
+            "feels_like": "a message"
+          }
+        },
+        "consequence": "A conventional rank-32 LoRA adapter is 175 MB - a file transfer. The low-parameter methods produce 0.5 MB, which crosses an existing datachannel in about a second. Personal adapters can therefore sync between a person's OWN devices as ordinary messages, with no server-side copy at any point.",
+        "limits": "This is a claim about the training corpus and the adapter, not about the base model, which is downloaded from a public repository, and not about inference-time prompts, which H6 covers separately."
+      },
+      "model_result": "VALIDATED (structural)"
+    },
+    {
+      "hid": "H11",
+      "statement": "A narrow LoRA adapter measurably lifts a task class the base model fails, on this deployment's own evaluation artifacts.",
+      "result": "NOT INDEPENDENTLY VALIDATED",
+      "evidence": {
+        "reason": "adapter evaluation artifacts are not present in a public checkout; set ADAPTER_EVAL_ROOT to a deployment's own artifacts to reproduce.",
+        "found": 0
+      },
+      "model_result": "NO DATA"
+    },
+    {
+      "hid": "C4",
+      "statement": "COUNTER-CLAIM: narrowing a small model onto a personal corpus destroys its general ability, so the specialised model is worse overall.",
+      "result": "LITERATURE-BOUNDED; deployment untested",
+      "evidence": {
+        "why_the_objection_is_weaker_than_it_looks": "Biderman et al. measure exactly this and find the opposite of the intuition: LoRA learns LESS in-domain than full fine-tuning, and correspondingly FORGETS LESS out-of-domain - better than weight decay or dropout as a regulariser. The low-rank constraint that limits the gain is the same constraint that limits the damage. Full fine-tuning learns perturbations of 10-100x higher rank, and pays for it.",
+        "structural_defences_available_today": {
+          "adapter_is_detachable": "The base weights are never modified. An adapter that misbehaves is unloaded, not un-trained - a property no full fine-tune has.",
+          "corda_knowledge_preserved": "CorDA's knowledge-preserved mode builds the update in directions the base model does not use for general knowledge, which addresses this objection at initialisation rather than by hoping.",
+          "routing_survives": "hard_reason is not adapted (see ADAPTABLE_CLASSES) and continues to route out. Forgetting on a class the system never serves locally has no effect on the user."
+        },
+        "residual_risk": "Real, and not modelled away: a personal corpus is small, unbalanced and self-similar, which is the regime where over-fitting is most likely. The honest mitigation is the boring one - a held-out split and a regression probe on general ability before an adapter is installed. AutoYou's support pipeline already does this (72 eval samples, a code-refusal probe set); the Fine Tuning agent's per-user path does not yet, and that gap is recorded in the integration specification rather than hidden.",
+        "cite": [
+          "biderman2024lora",
+          "yang2024corda"
+        ]
+      },
+      "model_result": "REFUTED (bounded, with conditions)"
+    },
+    {
+      "hid": "C5",
+      "statement": "COUNTER-CLAIM: putting fine-tuning in end users' hands strips safety alignment, because fine-tuning degrades it even on benign data.",
+      "result": "RISK SUPPORTED; mitigation unvalidated",
+      "evidence": {
+        "the_objection_is_correct_as_stated": "Qi et al. removed GPT-3.5 Turbo's guardrails with ten adversarial examples for under $0.20, and showed that even benign, ordinary datasets degrade safety measurably. Any product that hands users a trainer inherits this. We do not dispute it and we do not model it away.",
+        "what_the_deployment_evidence_adds": {
+          "available": false,
+          "reason": "evaluation artifacts absent"
+        },
+        "the_delimitation": "Qi et al. describe adapters that are SILENT about safety: the gradient has no reason to preserve a behaviour nothing in the corpus rewards, so it decays. The AutoYou support adapter is EXPLICIT about it - 6.9% of its corpus is refusal behaviour - and the measured direction reverses: refusal 0% -> 100%, source-code leakage 25% -> 0%. The correct generalisation is not 'fine-tuning is safe' but 'fine-tuning moves whatever the corpus specifies, including the safety behaviour, in whichever direction the corpus specifies'.",
+        "product_consequence": "Safety for a user-trained adapter cannot be inherited; it has to be a shipped, non-optional part of every training corpus the product assembles, plus a probe that runs before an adapter is installed. That is a build requirement, not a research finding, and it is written into the integration specification as one.",
+        "cite": [
+          "qi2023finetuning",
+          "autoyou_support2026"
+        ]
+      },
+      "model_result": "SUPPORTED (and specifically delimited)"
+    },
+    {
+      "hid": "C6",
+      "statement": "COUNTER-CLAIM: training one adapter per person repeats work that a single central fine-tune would do once, so decentralized adaptation must lose at scale.",
+      "result": "MODELLED; central-sharing comparison unresolved",
+      "evidence": {
+        "fleet": {
+          "1e+05": {
+            "users": 100000.0,
+            "per_user_training_kwh": 0.43172,
+            "total_training_twh": 9e-05,
+            "centralized_equivalent_twh": 0.001,
+            "annual_inference_saved_twh": 0.00273,
+            "net_saved_twh": 0.00265,
+            "payback_years": 0.03161,
+            "verdict": "decentralized adaptation is net-positive; the training overhead is repaid in under a quarter of a year"
+          },
+          "1e+06": {
+            "users": 1000000.0,
+            "per_user_training_kwh": 0.43172,
+            "total_training_twh": 0.00086,
+            "centralized_equivalent_twh": 0.001,
+            "annual_inference_saved_twh": 0.02732,
+            "net_saved_twh": 0.02645,
+            "payback_years": 0.03161,
+            "verdict": "decentralized adaptation is net-positive; the training overhead is repaid in under a quarter of a year"
+          },
+          "1e+07": {
+            "users": 10000000.0,
+            "per_user_training_kwh": 0.43172,
+            "total_training_twh": 0.00863,
+            "centralized_equivalent_twh": 0.001,
+            "annual_inference_saved_twh": 0.27317,
+            "net_saved_twh": 0.26454,
+            "payback_years": 0.03161,
+            "verdict": "decentralized adaptation is net-positive; the training overhead is repaid in under a quarter of a year"
+          },
+          "1e+08": {
+            "users": 100000000.0,
+            "per_user_training_kwh": 0.43172,
+            "total_training_twh": 0.08634,
+            "centralized_equivalent_twh": 0.001,
+            "annual_inference_saved_twh": 2.73171,
+            "net_saved_twh": 2.64537,
+            "payback_years": 0.03161,
+            "verdict": "decentralized adaptation is net-positive; the training overhead is repaid in under a quarter of a year"
+          }
+        },
+        "payback_days": 11.5,
+        "why": "The objection assumes the training term grows with users while the benefit does not. Both grow linearly, so their ratio is constant: the payback period is identical at 100 thousand users and at 100 million. Repetition does not lose at scale because there is no scale at which it behaves differently.",
+        "what_would_actually_refute_this": "A central fine-tune serving everyone is only comparable if one adapter suits everyone. It does not - the entire point of a persona adapter is that it encodes one person. The honest comparison is not 'one run versus N runs' but 'N runs versus N personalised runs plus the transfer of N private corpora to a trainer', and the second term is what H10 removes.",
+        "residual": "This analysis charges training energy only. It does not model the embodied carbon of devices bought FOR adaptation, which C3 already establishes would dominate. The result holds for already-owned hardware and is not a case for buying an APU."
+      },
+      "model_result": "REFUTED (scale-invariant)"
+    }
+  ],
+  "adaptation_numbers": {
+    "alpha": 0.7,
+    "coverage_gain_pp": 0.0,
+    "quality_gain_pp": 5.56,
+    "gap_to_frontier_closed": 0.478,
+    "mean_quality_base": 0.8837,
+    "mean_quality_adapted": 0.9393,
+    "f_s_base": 0.82,
+    "f_s_adapted_range": {
+      "lo": 0.82,
+      "mid": 0.82,
+      "hi": 0.82
+    },
+    "coverage_knee_alpha": 0.8,
+    "alpha_sweep": {
+      "0.60": {
+        "base": 0.82,
+        "adapted_lo": 0.82,
+        "adapted_mid": 0.82,
+        "adapted_hi": 0.82
+      },
+      "0.65": {
+        "base": 0.82,
+        "adapted_lo": 0.82,
+        "adapted_mid": 0.82,
+        "adapted_hi": 0.82
+      },
+      "0.70": {
+        "base": 0.82,
+        "adapted_lo": 0.82,
+        "adapted_mid": 0.82,
+        "adapted_hi": 0.82
+      },
+      "0.75": {
+        "base": 0.82,
+        "adapted_lo": 0.82,
+        "adapted_mid": 0.82,
+        "adapted_hi": 0.82
+      },
+      "0.80": {
+        "base": 0.7,
+        "adapted_lo": 0.7,
+        "adapted_mid": 0.82,
+        "adapted_hi": 0.82
+      },
+      "0.85": {
+        "base": 0.7,
+        "adapted_lo": 0.7,
+        "adapted_mid": 0.7,
+        "adapted_hi": 0.82
+      },
+      "0.90": {
+        "base": 0.48,
+        "adapted_lo": 0.7,
+        "adapted_mid": 0.7,
+        "adapted_hi": 0.7
+      }
+    },
+    "breakeven": {
+      "persona_8b_apu": {
+        "training_kwh": 0.43,
+        "training_hours": 3.3,
+        "training_carbon_kg": 0.2,
+        "saving_wh_per_query": 1.4968,
+        "queries_to_repay_energy": 288,
+        "queries_to_repay_carbon": 291,
+        "days_to_repay_energy": 5.8,
+        "queries_per_day": 50.0,
+        "repaid_within_device_life": true
+      },
+      "support_7b_apu": {
+        "training_kwh": 1.61,
+        "training_hours": 12.4,
+        "training_carbon_kg": 0.74,
+        "saving_wh_per_query": 1.4968,
+        "queries_to_repay_energy": 1073,
+        "queries_to_repay_carbon": 1084,
+        "days_to_repay_energy": 21.5,
+        "queries_per_day": 50.0,
+        "repaid_within_device_life": true
+      },
+      "capability_27b_apu": {
+        "training_kwh": 10.67,
+        "training_hours": 82.1,
+        "training_carbon_kg": 4.89,
+        "saving_wh_per_query": 1.4968,
+        "queries_to_repay_energy": 7127,
+        "queries_to_repay_carbon": 7201,
+        "days_to_repay_energy": 142.5,
+        "queries_per_day": 50.0,
+        "repaid_within_device_life": true
+      }
+    },
+    "memory_model_validation": {
+      "reported_peak_gb": 80.0,
+      "predicted_peak_gb": 79.54,
+      "residual_gb": -0.46,
+      "relative_error": -0.0058,
+      "breakdown": {
+        "weights_gb": 54.0,
+        "adapter_gb": 2.147,
+        "gradients_gb": 2.147,
+        "optimizer_gb": 2.147,
+        "activations_gb": 8.221,
+        "logits_gb": 4.981,
+        "overhead_gb": 5.892,
+        "total_gb": 79.536
+      }
+    },
+    "throughput_calibration": {
+      "total_tokens": 14680064,
+      "wall_clock_hours": 82.1,
+      "achieved_tflops": 8.04,
+      "model_flops_utilization": 0.136,
+      "tokens_per_second": 49.6
+    },
+    "adapter_transport_8b_r32": {
+      "lora": {
+        "params": 87293952,
+        "megabytes": 174.59,
+        "seconds_at_link": 69.8,
+        "feels_like": "a download"
+      },
+      "dora": {
+        "params": 88694784,
+        "megabytes": 177.39,
+        "seconds_at_link": 71.0,
+        "feels_like": "a download"
+      },
+      "lora_xs": {
+        "params": 258048,
+        "megabytes": 0.52,
+        "seconds_at_link": 0.2,
+        "feels_like": "a message"
+      },
+      "vera": {
+        "params": 1408896,
+        "megabytes": 2.82,
+        "seconds_at_link": 1.1,
+        "feels_like": "a message"
+      }
+    },
+    "system_with_adaptation": {
+      "baseline_model": "GPT-4o, long",
+      "base": {
+        "f_s": 0.82,
+        "energy": 0.5492,
+        "water": 0.5643,
+        "carbon": 0.5436
+      },
+      "adapted_lo": {
+        "f_s": 0.82,
+        "energy": 0.5492,
+        "water": 0.5643,
+        "carbon": 0.5436
+      },
+      "adapted_mid": {
+        "f_s": 0.82,
+        "energy": 0.5492,
+        "water": 0.5643,
+        "carbon": 0.5436
+      },
+      "adapted_hi": {
+        "f_s": 0.82,
+        "energy": 0.5492,
+        "water": 0.5643,
+        "carbon": 0.5436
+      },
+      "cloud_queries_avoided_per_100": 0.0
+    },
+    "measured_evidence": {
+      "E1_capability_lift": {
+        "available": false,
+        "reason": "support_eval_v1.json or support_eval_v3.json absent"
+      },
+      "E2_safety_direction": {
+        "available": false,
+        "reason": "evaluation artifacts absent"
+      },
+      "E3_base_size_vs_data": {
+        "available": false,
+        "reason": "evaluation artifacts absent"
+      }
+    }
+  },
+  "pass3_refresh": {
+    "as_of": "2026-09-05",
+    "energy_corpus_unchanged": "No peer-reviewed per-query energy measurement covers the 2026 frontier or the 2026 open-weights tier. Energy, water and carbon results remain pinned to the measured 2025 corpus (jegham2025, elsworth2025, caravaca2025).",
+    "open_weights": {
+      "as_of": "2026-09-05",
+      "models": {
+        "qwen3.8-27b": {
+          "vendor": "Alibaba",
+          "release": "2026-08-14",
+          "params_b": 27.78,
+          "active_b": 27.78,
+          "licence": "Apache-2.0",
+          "note": "dense, natively multimodal, 262K ctx, ~17 GB at 4-bit; AA Intelligence Index 52",
+          "gb_4bit": 14.3,
+          "gb_bf16": 55.6,
+          "fits_apu_bf16_training": true,
+          "fits_dgpu_training": true
+        },
+        "qwen3.5-27b": {
+          "vendor": "Alibaba",
+          "release": "2026-02",
+          "params_b": 27.0,
+          "active_b": 27.0,
+          "licence": "Apache-2.0",
+          "note": "hybrid attention with GatedDeltaNet layers",
+          "gb_4bit": 13.9,
+          "gb_bf16": 54.0,
+          "fits_apu_bf16_training": true,
+          "fits_dgpu_training": true
+        },
+        "qwen3.5-35b-a3b": {
+          "vendor": "Alibaba",
+          "release": "2026-02",
+          "params_b": 35.0,
+          "active_b": 3.0,
+          "licence": "Apache-2.0",
+          "note": "sparse MoE; ~50 tok/s on a consumer APU at 4-bit",
+          "gb_4bit": 18.1,
+          "gb_bf16": 70.0,
+          "fits_apu_bf16_training": true,
+          "fits_dgpu_training": false
+        },
+        "qwen3.5-122b-a10b": {
+          "vendor": "Alibaba",
+          "release": "2026-02",
+          "params_b": 122.0,
+          "active_b": 10.0,
+          "licence": "Apache-2.0",
+          "note": "sparse MoE; fits a 128 GB unified pool at 4-bit",
+          "gb_4bit": 62.9,
+          "gb_bf16": 244.0
+        },
+        "qwen2.5-vl-7b": {
+          "vendor": "Alibaba",
+          "release": "2025",
+          "params_b": 8.29,
+          "active_b": 8.29,
+          "licence": "Apache-2.0",
+          "note": "the shipped AutoYou Support base",
+          "gb_4bit": 4.3,
+          "gb_bf16": 16.6,
+          "fits_apu_bf16_training": true,
+          "fits_dgpu_training": true
+        },
+        "ministral-3-8b": {
+          "vendor": "Mistral",
+          "release": "2024-10",
+          "params_b": 8.02,
+          "active_b": 8.02,
+          "licence": "Apache-2.0",
+          "note": "the Fine Tuning agent's default base",
+          "gb_4bit": 4.1,
+          "gb_bf16": 16.0,
+          "fits_apu_bf16_training": true,
+          "fits_dgpu_training": true
+        }
+      },
+      "qwen38_reported_gains_vs_qwen36": {
+        "terminal-bench-2.1": [
+          63.4,
+          73.0
+        ],
+        "deepswe-1.1": [
+          13.3,
+          42.2
+        ],
+        "osworld-verified": [
+          63.9,
+          84.3
+        ],
+        "swe-mm": [
+          25.7,
+          38.6
+        ],
+        "aa-intelligence-index": [
+          38.0,
+          52.0
+        ]
+      },
+      "finding": "The open-weights tier a household can hold moved from 8B to 27B between the first pass and this one, and it did so on an unchanged architecture: Qwen3.8-27B reports Terminal-Bench 2.1 63.4 -> 73.0 and OSWorld-Verified 63.9 -> 84.3 over Qwen3.6-27B at the same published decoder size. That is the same mechanism this pass tests at household scale - capability from data and post-training rather than from parameters - operating at vendor scale. It is the single most important input change to the study since Pass 1, because every capability ratio in Section VI was estimated for an 8B model."
+    },
+    "memory_model_validation": {
+      "reported_peak_gb": 80.0,
+      "predicted_peak_gb": 79.54,
+      "residual_gb": -0.46,
+      "relative_error": -0.0058,
+      "breakdown": {
+        "weights_gb": 54.0,
+        "adapter_gb": 2.147,
+        "gradients_gb": 2.147,
+        "optimizer_gb": 2.147,
+        "activations_gb": 8.221,
+        "logits_gb": 4.981,
+        "overhead_gb": 5.892,
+        "total_gb": 79.536
+      }
+    },
+    "throughput_calibration": {
+      "total_tokens": 14680064,
+      "wall_clock_hours": 82.1,
+      "achieved_tflops": 8.04,
+      "model_flops_utilization": 0.136,
+      "tokens_per_second": 49.6
+    },
+    "tuning_tco": {
+      "persona_8b": {
+        "model": "ministral-3-8b",
+        "corpus_tokens": 2000000.0,
+        "queries_per_day": 50.0,
+        "horizon_days": 365.0,
+        "rows": {
+          "local": {
+            "training_usd": 0.07,
+            "inference_usd_year_1": 0.73,
+            "total_usd_year_1": 0.8,
+            "detail": {
+              "device": "AMD Ryzen AI MAX+ 395 'Strix Halo' (128 GB unified)",
+              "hours": 3.3,
+              "kwh": 0.43,
+              "electricity_usd": 0.07,
+              "tuned_inference_multiplier": 1.0,
+              "note": "electricity only; the device is already owned (C3 applies)"
+            }
+          },
+          "together-lora": {
+            "vendor": "Together AI",
+            "training_usd": 0.96,
+            "inference_usd_year_1": 109.5,
+            "total_usd_year_1": 110.46,
+            "ratio_vs_local": 138.3,
+            "tuned_inference_multiplier": 1.0
+          },
+          "gpt-4.1-nano": {
+            "vendor": "OpenAI",
+            "training_usd": 3.0,
+            "inference_usd_year_1": 164.25,
+            "total_usd_year_1": 167.25,
+            "ratio_vs_local": 209.4,
+            "tuned_inference_multiplier": 1.5
+          },
+          "gemini-flash": {
+            "vendor": "Google Vertex",
+            "training_usd": 6.0,
+            "inference_usd_year_1": 164.25,
+            "total_usd_year_1": 170.25,
+            "ratio_vs_local": 213.1,
+            "tuned_inference_multiplier": 1.5
+          },
+          "gpt-4o": {
+            "vendor": "OpenAI",
+            "training_usd": 50.0,
+            "inference_usd_year_1": 164.25,
+            "total_usd_year_1": 214.25,
+            "ratio_vs_local": 268.2,
+            "tuned_inference_multiplier": 1.5
+          }
+        },
+        "cheapest_hosted": "together-lora",
+        "ratio_vs_cheapest_hosted": 138.3,
+        "platforms_priced": 4,
+        "platforms_with_surcharge": 3,
+        "finding": "The training bill is the smaller half of the story. Even the cheapest published hosted LoRA rate charges $0.96 to train where electricity charges $0.07, but the gap that compounds is the tuned-endpoint surcharge: three of the four platforms priced bill a personalised model at 1.5x the base rate for every subsequent query, permanently. A local adapter leaves the per-query cost exactly where it was."
+      },
+      "capability_27b": {
+        "model": "qwen3.5-27b",
+        "corpus_tokens": 14680000.0,
+        "queries_per_day": 50.0,
+        "horizon_days": 365.0,
+        "rows": {
+          "local": {
+            "training_usd": 1.71,
+            "inference_usd_year_1": 0.73,
+            "total_usd_year_1": 2.44,
+            "detail": {
+              "device": "AMD Ryzen AI MAX+ 395 'Strix Halo' (128 GB unified)",
+              "hours": 82.1,
+              "kwh": 10.67,
+              "electricity_usd": 1.71,
+              "tuned_inference_multiplier": 1.0,
+              "note": "electricity only; the device is already owned (C3 applies)"
+            }
+          },
+          "together-lora": {
+            "vendor": "Together AI",
+            "training_usd": 7.05,
+            "inference_usd_year_1": 109.5,
+            "total_usd_year_1": 116.55,
+            "ratio_vs_local": 47.8,
+            "tuned_inference_multiplier": 1.0
+          },
+          "gpt-4.1-nano": {
+            "vendor": "OpenAI",
+            "training_usd": 22.02,
+            "inference_usd_year_1": 164.25,
+            "total_usd_year_1": 186.27,
+            "ratio_vs_local": 76.4,
+            "tuned_inference_multiplier": 1.5
+          },
+          "gemini-flash": {
+            "vendor": "Google Vertex",
+            "training_usd": 44.04,
+            "inference_usd_year_1": 164.25,
+            "total_usd_year_1": 208.29,
+            "ratio_vs_local": 85.4,
+            "tuned_inference_multiplier": 1.5
+          },
+          "gpt-4o": {
+            "vendor": "OpenAI",
+            "training_usd": 367.0,
+            "inference_usd_year_1": 164.25,
+            "total_usd_year_1": 531.25,
+            "ratio_vs_local": 217.8,
+            "tuned_inference_multiplier": 1.5
+          }
+        },
+        "cheapest_hosted": "together-lora",
+        "ratio_vs_cheapest_hosted": 47.8,
+        "platforms_priced": 4,
+        "platforms_with_surcharge": 3,
+        "finding": "The training bill is the smaller half of the story. Even the cheapest published hosted LoRA rate charges $7.05 to train where electricity charges $1.71, but the gap that compounds is the tuned-endpoint surcharge: three of the four platforms priced bill a personalised model at 1.5x the base rate for every subsequent query, permanently. A local adapter leaves the per-query cost exactly where it was."
+      }
+    },
+    "recipes": {
+      "unified_apu/qwen3.8-27b/capability": {
+        "model": "qwen3.8-27b",
+        "device": "unified_apu",
+        "base_method": "dora",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "pissa"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "bf16",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 74.3,
+        "memory_ceiling_gb": 102.4,
+        "adapter_params": 1078394880,
+        "adapter_mb": 2156.8,
+        "feasible": true,
+        "rationale": "bf16 weights (56 GB in bf16 vs 102 GB usable); rank 128 at seq 4096 is the largest that fits (74 GB peak); free stack: rslora, lora_plus, pissa"
+      },
+      "unified_apu/ministral-3-8b/persona": {
+        "model": "ministral-3-8b",
+        "device": "unified_apu",
+        "base_method": "lora",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "neftune"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "bf16",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 24.8,
+        "memory_ceiling_gb": 102.4,
+        "adapter_params": 349175808,
+        "adapter_mb": 698.4,
+        "feasible": true,
+        "rationale": "bf16 weights (16 GB in bf16 vs 102 GB usable); rank 128 at seq 4096 is the largest that fits (25 GB peak); free stack: rslora, lora_plus, neftune"
+      },
+      "unified_apu/qwen2.5-vl-7b/domain": {
+        "model": "qwen2.5-vl-7b",
+        "device": "unified_apu",
+        "base_method": "lora",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "pissa",
+          "corda"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "bf16",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 24.7,
+        "memory_ceiling_gb": 102.4,
+        "adapter_params": 322961408,
+        "adapter_mb": 645.9,
+        "feasible": true,
+        "rationale": "bf16 weights (17 GB in bf16 vs 102 GB usable); rank 128 at seq 4096 is the largest that fits (25 GB peak); free stack: rslora, lora_plus, pissa, corda"
+      },
+      "unified_apu/ministral-3-8b/portable": {
+        "model": "ministral-3-8b",
+        "device": "unified_apu",
+        "base_method": "vera",
+        "stack": [
+          "rslora",
+          "lora_plus"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "bf16",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 22.6,
+        "memory_ceiling_gb": 102.4,
+        "adapter_params": 1433088,
+        "adapter_mb": 2.9,
+        "feasible": true,
+        "rationale": "bf16 weights (16 GB in bf16 vs 102 GB usable); rank 128 at seq 4096 is the largest that fits (23 GB peak); free stack: rslora, lora_plus"
+      },
+      "discrete_gpu/qwen3.8-27b/capability": {
+        "model": "qwen3.8-27b",
+        "device": "discrete_gpu",
+        "base_method": "qdora",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "loftq",
+          "eva"
+        ],
+        "rank": 32,
+        "alpha": 64,
+        "weight_dtype": "nf4_dq",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 1024,
+        "batch_size": 1,
+        "grad_accum": 32,
+        "gradient_checkpointing": true,
+        "memory_gb": 19.1,
+        "memory_ceiling_gb": 19.2,
+        "adapter_params": 273088512,
+        "adapter_mb": 546.2,
+        "feasible": true,
+        "rationale": "nf4_dq weights (56 GB in bf16 vs 19 GB usable); rank 32 at seq 1024 is the largest that fits (19 GB peak); free stack: rslora, lora_plus, loftq, eva"
+      },
+      "discrete_gpu/ministral-3-8b/persona": {
+        "model": "ministral-3-8b",
+        "device": "discrete_gpu",
+        "base_method": "qlora",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "loftq",
+          "neftune"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "nf4_dq",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 12.0,
+        "memory_ceiling_gb": 19.2,
+        "adapter_params": 349175808,
+        "adapter_mb": 698.4,
+        "feasible": true,
+        "rationale": "nf4_dq weights (16 GB in bf16 vs 19 GB usable); rank 128 at seq 4096 is the largest that fits (12 GB peak); free stack: rslora, lora_plus, loftq, neftune"
+      },
+      "discrete_gpu/qwen2.5-vl-7b/domain": {
+        "model": "qwen2.5-vl-7b",
+        "device": "discrete_gpu",
+        "base_method": "qlora",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "loftq",
+          "eva",
+          "corda"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "nf4_dq",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 11.4,
+        "memory_ceiling_gb": 19.2,
+        "adapter_params": 322961408,
+        "adapter_mb": 645.9,
+        "feasible": true,
+        "rationale": "nf4_dq weights (17 GB in bf16 vs 19 GB usable); rank 128 at seq 4096 is the largest that fits (11 GB peak); free stack: rslora, lora_plus, loftq, eva, corda"
+      },
+      "discrete_gpu/ministral-3-8b/portable": {
+        "model": "ministral-3-8b",
+        "device": "discrete_gpu",
+        "base_method": "vera",
+        "stack": [
+          "rslora",
+          "lora_plus",
+          "loftq"
+        ],
+        "rank": 128,
+        "alpha": 256,
+        "weight_dtype": "nf4_dq",
+        "optimizer": "paged_adamw_8bit",
+        "seq_len": 4096,
+        "batch_size": 1,
+        "grad_accum": 8,
+        "gradient_checkpointing": true,
+        "memory_gb": 9.7,
+        "memory_ceiling_gb": 19.2,
+        "adapter_params": 1433088,
+        "adapter_mb": 2.9,
+        "feasible": true,
+        "rationale": "nf4_dq weights (16 GB in bf16 vs 19 GB usable); rank 128 at seq 4096 is the largest that fits (10 GB peak); free stack: rslora, lora_plus, loftq"
+      }
+    },
+    "deployment_validation": {
+      "status": "NO DATA",
+      "reason": "adapter evaluation artifacts are not present in a public checkout; set ADAPTER_EVAL_ROOT to a deployment's own artifacts to reproduce"
+    }
+  },
+  "measured": {
+    "available": true,
+    "machines": [
+      {
+        "file": "amd-8060s-strixhalo.json",
+        "gpu": "AMD Radeon(TM) 8060S Graphics",
+        "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+        "ram_gb": 68.5,
+        "device_class": "unified_apu",
+        "ollama_version": "0.33.2",
+        "measured_at": "2026-09-05T21:10:41+00:00",
+        "power_sensor": false,
+        "power_sensor_tool": null,
+        "models_measured": 3,
+        "measurement_files": [
+          "amd-8060s-strixhalo.json"
+        ]
+      },
+      {
+        "file": "rtx5070-replication.json",
+        "gpu": "NVIDIA GeForce RTX 5070",
+        "cpu": "13th Gen Intel(R) Core(TM) i9-13900",
+        "ram_gb": 68.4,
+        "device_class": "discrete_gpu",
+        "ollama_version": "0.33.3",
+        "measured_at": "2026-09-05T23:03:16+00:00",
+        "power_sensor": true,
+        "power_sensor_tool": "nvidia-smi",
+        "models_measured": 2,
+        "measurement_files": [
+          "rtx5070-replication.json",
+          "rtx5070-study.json",
+          "rtx5070.json"
+        ]
+      }
+    ],
+    "throughput": [
+      {
+        "file": "amd-8060s-strixhalo.json",
+        "machine": "AMD Radeon(TM) 8060S Graphics",
+        "model": "ministral-3:3b",
+        "architecture": "mistral3",
+        "parameters": "3.8B",
+        "parameters_b": 3.8,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 78.38,
+        "gen_tok_s_stdev": 0.08962618903577414,
+        "gen_tok_s_min": 78.21411112921622,
+        "gen_tok_s_max": 78.42714363441186,
+        "gen_tok_s_rel_stdev": 0.00114,
+        "prefill_tok_s": 2168.3,
+        "beta": 0.0162,
+        "prompt_tokens": 86,
+        "generated_tokens": 192,
+        "reps": 5,
+        "cold_load_s": 4.06
+      },
+      {
+        "file": "amd-8060s-strixhalo.json",
+        "machine": "AMD Radeon(TM) 8060S Graphics",
+        "model": "ministral-3:8b",
+        "architecture": "mistral3",
+        "parameters": "8.9B",
+        "parameters_b": 8.9,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 37.79,
+        "gen_tok_s_stdev": 0.09585575418327384,
+        "gen_tok_s_min": 37.59282932444315,
+        "gen_tok_s_max": 37.823367631116575,
+        "gen_tok_s_rel_stdev": 0.00254,
+        "prefill_tok_s": 1102.1,
+        "beta": 0.0154,
+        "prompt_tokens": 86,
+        "generated_tokens": 192,
+        "reps": 5,
+        "cold_load_s": 5.11
+      },
+      {
+        "file": "amd-8060s-strixhalo.json",
+        "machine": "AMD Radeon(TM) 8060S Graphics",
+        "model": "qwen3.8:27b",
+        "architecture": "qwen35",
+        "parameters": "27.3B",
+        "parameters_b": 27.3,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 13.79,
+        "gen_tok_s_stdev": 4.920404036953525,
+        "gen_tok_s_min": 12.776876409074857,
+        "gen_tok_s_max": 24.45777619708076,
+        "gen_tok_s_rel_stdev": 0.35681,
+        "prefill_tok_s": 186.5,
+        "beta": 0.032,
+        "prompt_tokens": 84,
+        "generated_tokens": 192,
+        "reps": 5,
+        "cold_load_s": 7.89
+      },
+      {
+        "file": "rtx5070-replication.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:3b",
+        "architecture": "mistral3",
+        "parameters": "3.8B",
+        "parameters_b": 3.8,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 196.43,
+        "gen_tok_s_stdev": 1.7525665622568911,
+        "gen_tok_s_min": 194.56489452637067,
+        "gen_tok_s_max": 199.44951932665842,
+        "gen_tok_s_rel_stdev": 0.00892,
+        "prefill_tok_s": 9039.0,
+        "beta": 0.0361,
+        "prompt_tokens": 499,
+        "generated_tokens": 300,
+        "reps": 7,
+        "cold_load_s": 2.48
+      },
+      {
+        "file": "rtx5070-replication.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:8b",
+        "architecture": "mistral3",
+        "parameters": "8.9B",
+        "parameters_b": 8.9,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 102.49,
+        "gen_tok_s_stdev": 0.37420649684322044,
+        "gen_tok_s_min": 101.8522510875274,
+        "gen_tok_s_max": 102.94904399801926,
+        "gen_tok_s_rel_stdev": 0.00365,
+        "prefill_tok_s": 3962.0,
+        "beta": 0.043,
+        "prompt_tokens": 499,
+        "generated_tokens": 300,
+        "reps": 7,
+        "cold_load_s": 3.0
+      },
+      {
+        "file": "rtx5070-study.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:3b",
+        "architecture": "mistral3",
+        "parameters": "3.8B",
+        "parameters_b": 3.8,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 195.55,
+        "gen_tok_s_stdev": 2.3913605475825648,
+        "gen_tok_s_min": 194.39192262683102,
+        "gen_tok_s_max": 200.07763012048676,
+        "gen_tok_s_rel_stdev": 0.01223,
+        "prefill_tok_s": 9041.8,
+        "beta": 0.0358,
+        "prompt_tokens": 499,
+        "generated_tokens": 300,
+        "reps": 7,
+        "cold_load_s": 2.44
+      },
+      {
+        "file": "rtx5070-study.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:8b",
+        "architecture": "mistral3",
+        "parameters": "8.9B",
+        "parameters_b": 8.9,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 101.78,
+        "gen_tok_s_stdev": 0.27412115121294434,
+        "gen_tok_s_min": 101.5213653405382,
+        "gen_tok_s_max": 102.26172251690642,
+        "gen_tok_s_rel_stdev": 0.00269,
+        "prefill_tok_s": 3963.4,
+        "beta": 0.0428,
+        "prompt_tokens": 499,
+        "generated_tokens": 300,
+        "reps": 7,
+        "cold_load_s": 3.02
+      },
+      {
+        "file": "rtx5070.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:3b",
+        "architecture": "mistral3",
+        "parameters": "3.8B",
+        "parameters_b": 3.8,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 200.37,
+        "gen_tok_s_stdev": 2.655781381410811,
+        "gen_tok_s_min": 195.1939587469768,
+        "gen_tok_s_max": 201.9772733488884,
+        "gen_tok_s_rel_stdev": 0.01325,
+        "prefill_tok_s": 5419.0,
+        "beta": 0.0165,
+        "prompt_tokens": 86,
+        "generated_tokens": 192,
+        "reps": 5,
+        "cold_load_s": 13.33
+      },
+      {
+        "file": "rtx5070.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:8b",
+        "architecture": "mistral3",
+        "parameters": "8.9B",
+        "parameters_b": 8.9,
+        "quantization": "Q4_K_M",
+        "gen_tok_s": 104.31,
+        "gen_tok_s_stdev": 1.4100017881476916,
+        "gen_tok_s_min": 101.28526784678071,
+        "gen_tok_s_max": 104.80091919139541,
+        "gen_tok_s_rel_stdev": 0.01352,
+        "prefill_tok_s": 2957.1,
+        "beta": 0.0154,
+        "prompt_tokens": 86,
+        "generated_tokens": 192,
+        "reps": 5,
+        "cold_load_s": 2.61
+      }
+    ],
+    "beta": {
+      "available": true,
+      "n": 9,
+      "median": 0.032,
+      "min": 0.0154,
+      "max": 0.043,
+      "assumed_in_study": 0.15,
+      "per_model": {
+        "amd-8060s-strixhalo.json:ministral-3:3b": {
+          "beta": 0.0162,
+          "prompt_tokens": 86,
+          "generated_tokens": 192
+        },
+        "amd-8060s-strixhalo.json:ministral-3:8b": {
+          "beta": 0.0154,
+          "prompt_tokens": 86,
+          "generated_tokens": 192
+        },
+        "amd-8060s-strixhalo.json:qwen3.8:27b": {
+          "beta": 0.032,
+          "prompt_tokens": 84,
+          "generated_tokens": 192
+        },
+        "rtx5070-replication.json:ministral-3:3b": {
+          "beta": 0.0361,
+          "prompt_tokens": 499,
+          "generated_tokens": 300
+        },
+        "rtx5070-replication.json:ministral-3:8b": {
+          "beta": 0.043,
+          "prompt_tokens": 499,
+          "generated_tokens": 300
+        },
+        "rtx5070-study.json:ministral-3:3b": {
+          "beta": 0.0358,
+          "prompt_tokens": 499,
+          "generated_tokens": 300
+        },
+        "rtx5070-study.json:ministral-3:8b": {
+          "beta": 0.0428,
+          "prompt_tokens": 499,
+          "generated_tokens": 300
+        },
+        "rtx5070.json:ministral-3:3b": {
+          "beta": 0.0165,
+          "prompt_tokens": 86,
+          "generated_tokens": 192
+        },
+        "rtx5070.json:ministral-3:8b": {
+          "beta": 0.0154,
+          "prompt_tokens": 86,
+          "generated_tokens": 192
+        }
+      },
+      "note": "Measured across the prompt and generation lengths in the harness protocol. Every measured value is far below the 0.15 the study assumed, which means the study OVERSTATED edge energy: a smaller beta makes an edge query cheaper, not dearer. Correcting it strengthens the thesis rather than weakening it, which is exactly why it is worth stating that the original figure was a guess. beta rises with the prompt-to-generation ratio, so a retrieval-heavy workload with long contexts would sit higher than these numbers; they are not a universal constant."
+    },
+    "prefill_scaling": {
+      "available": true,
+      "rows": [
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "model": "ministral-3:3b",
+          "marginal_prefill_tok_s": 2710.7,
+          "fixed_overhead_ms": 5.75,
+          "r2": 0.9999,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ],
+          "beta_at_500_in_300_out": 0.0497,
+          "template_cache_probe": {
+            "available": true,
+            "points": [
+              {
+                "fillers": 0,
+                "prompt_tokens": 639,
+                "prefill_s_median": 0.0479,
+                "apparent_tok_s": 13339.7,
+                "reps": 3
+              },
+              {
+                "fillers": 4,
+                "prompt_tokens": 875,
+                "prefill_s_median": 0.12893,
+                "apparent_tok_s": 6786.7,
+                "reps": 3
+              },
+              {
+                "fillers": 12,
+                "prompt_tokens": 1347,
+                "prefill_s_median": 0.30969,
+                "apparent_tok_s": 4349.5,
+                "reps": 3
+              },
+              {
+                "fillers": 24,
+                "prompt_tokens": 2055,
+                "prefill_s_median": 0.59589,
+                "apparent_tok_s": 3448.6,
+                "reps": 3
+              }
+            ],
+            "fit": {
+              "fixed_overhead_ms": -207.34,
+              "marginal_prefill_tok_s": 2571.4,
+              "r2": 0.9993
+            },
+            "shortest_prompt": {
+              "raw_prompt_tokens": 87,
+              "templated_prompt_tokens": 639,
+              "template_tokens_added": 552,
+              "raw_apparent_tok_s": 2156.0,
+              "templated_apparent_tok_s": 13339.7,
+              "inflation_factor": 6.19,
+              "prefill_s_raw": 0.04035,
+              "prefill_s_templated": 0.0479
+            },
+            "verdict": "CONTAMINATED",
+            "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+          },
+          "repeat_cache_probe": {
+            "available": true,
+            "reps": 3,
+            "prompt_tokens_reported": 640,
+            "apparent_prefill_tok_s": 45105.0,
+            "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+          }
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "model": "ministral-3:8b",
+          "marginal_prefill_tok_s": 1160.7,
+          "fixed_overhead_ms": 7.41,
+          "r2": 0.9999,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ],
+          "beta_at_500_in_300_out": 0.0552,
+          "template_cache_probe": {
+            "available": true,
+            "points": [
+              {
+                "fillers": 0,
+                "prompt_tokens": 639,
+                "prefill_s_median": 0.08913,
+                "apparent_tok_s": 7169.3,
+                "reps": 3
+              },
+              {
+                "fillers": 4,
+                "prompt_tokens": 875,
+                "prefill_s_median": 0.2874,
+                "apparent_tok_s": 3044.5,
+                "reps": 3
+              },
+              {
+                "fillers": 12,
+                "prompt_tokens": 1347,
+                "prefill_s_median": 0.69671,
+                "apparent_tok_s": 1933.4,
+                "reps": 3
+              },
+              {
+                "fillers": 24,
+                "prompt_tokens": 2055,
+                "prefill_s_median": 1.33747,
+                "apparent_tok_s": 1536.5,
+                "reps": 3
+              }
+            ],
+            "fit": {
+              "fixed_overhead_ms": -482.39,
+              "marginal_prefill_tok_s": 1132.7,
+              "r2": 0.9998
+            },
+            "shortest_prompt": {
+              "raw_prompt_tokens": 87,
+              "templated_prompt_tokens": 639,
+              "template_tokens_added": 552,
+              "raw_apparent_tok_s": 1106.0,
+              "templated_apparent_tok_s": 7169.3,
+              "inflation_factor": 6.48,
+              "prefill_s_raw": 0.07866,
+              "prefill_s_templated": 0.08913
+            },
+            "verdict": "CONTAMINATED",
+            "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+          },
+          "repeat_cache_probe": {
+            "available": true,
+            "reps": 3,
+            "prompt_tokens_reported": 640,
+            "apparent_prefill_tok_s": 22979.0,
+            "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+          }
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "model": "qwen3.8:27b",
+          "marginal_prefill_tok_s": 340.6,
+          "fixed_overhead_ms": 233.16,
+          "r2": 0.9998,
+          "lengths_tested": [
+            85,
+            317,
+            781,
+            1477
+          ],
+          "beta_at_500_in_300_out": 0.0782,
+          "template_cache_probe": {
+            "available": true,
+            "points": [
+              {
+                "fillers": 0,
+                "prompt_tokens": 95,
+                "prefill_s_median": 0.4973,
+                "apparent_tok_s": 191.0,
+                "reps": 3
+              },
+              {
+                "fillers": 4,
+                "prompt_tokens": 327,
+                "prefill_s_median": 1.1489,
+                "apparent_tok_s": 284.6,
+                "reps": 3
+              },
+              {
+                "fillers": 12,
+                "prompt_tokens": 791,
+                "prefill_s_median": 2.5491,
+                "apparent_tok_s": 310.3,
+                "reps": 3
+              },
+              {
+                "fillers": 24,
+                "prompt_tokens": 1487,
+                "prefill_s_median": 4.55123,
+                "apparent_tok_s": 326.7,
+                "reps": 3
+              }
+            ],
+            "fit": {
+              "fixed_overhead_ms": 214.11,
+              "marginal_prefill_tok_s": 342.2,
+              "r2": 0.9999
+            },
+            "shortest_prompt": {
+              "raw_prompt_tokens": 85,
+              "templated_prompt_tokens": 95,
+              "template_tokens_added": 10,
+              "raw_apparent_tok_s": 176.5,
+              "templated_apparent_tok_s": 191.0,
+              "inflation_factor": 1.08,
+              "prefill_s_raw": 0.48154,
+              "prefill_s_templated": 0.4973
+            },
+            "verdict": "no artefact seen",
+            "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+          },
+          "repeat_cache_probe": {
+            "available": true,
+            "reps": 3,
+            "prompt_tokens_reported": 96,
+            "apparent_prefill_tok_s": 517.0,
+            "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+          }
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:3b",
+          "marginal_prefill_tok_s": 9138.8,
+          "fixed_overhead_ms": 5.83,
+          "r2": 0.9998,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ],
+          "beta_at_500_in_300_out": 0.0404,
+          "template_cache_probe": {
+            "available": true,
+            "points": [
+              {
+                "fillers": 0,
+                "prompt_tokens": 639,
+                "prefill_s_median": 0.01671,
+                "apparent_tok_s": 38247.4,
+                "reps": 3
+              },
+              {
+                "fillers": 4,
+                "prompt_tokens": 875,
+                "prefill_s_median": 0.04133,
+                "apparent_tok_s": 21170.5,
+                "reps": 3
+              },
+              {
+                "fillers": 12,
+                "prompt_tokens": 1347,
+                "prefill_s_median": 0.09387,
+                "apparent_tok_s": 14349.5,
+                "reps": 3
+              },
+              {
+                "fillers": 24,
+                "prompt_tokens": 2055,
+                "prefill_s_median": 0.17354,
+                "apparent_tok_s": 11841.4,
+                "reps": 3
+              }
+            ],
+            "fit": {
+              "fixed_overhead_ms": -55.17,
+              "marginal_prefill_tok_s": 9001.5,
+              "r2": 0.9999
+            },
+            "shortest_prompt": {
+              "raw_prompt_tokens": 87,
+              "templated_prompt_tokens": 639,
+              "template_tokens_added": 552,
+              "raw_apparent_tok_s": 5560.2,
+              "templated_apparent_tok_s": 38247.4,
+              "inflation_factor": 6.88,
+              "prefill_s_raw": 0.01565,
+              "prefill_s_templated": 0.01671
+            },
+            "verdict": "CONTAMINATED",
+            "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+          },
+          "repeat_cache_probe": {
+            "available": true,
+            "reps": 3,
+            "prompt_tokens_reported": 640,
+            "apparent_prefill_tok_s": 119492.0,
+            "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+          }
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:8b",
+          "marginal_prefill_tok_s": 4088.2,
+          "fixed_overhead_ms": 7.92,
+          "r2": 0.9998,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ],
+          "beta_at_500_in_300_out": 0.0453,
+          "template_cache_probe": {
+            "available": true,
+            "points": [
+              {
+                "fillers": 0,
+                "prompt_tokens": 639,
+                "prefill_s_median": 0.03177,
+                "apparent_tok_s": 20113.3,
+                "reps": 3
+              },
+              {
+                "fillers": 4,
+                "prompt_tokens": 875,
+                "prefill_s_median": 0.08739,
+                "apparent_tok_s": 10012.7,
+                "reps": 3
+              },
+              {
+                "fillers": 12,
+                "prompt_tokens": 1347,
+                "prefill_s_median": 0.20633,
+                "apparent_tok_s": 6528.4,
+                "reps": 3
+              },
+              {
+                "fillers": 24,
+                "prompt_tokens": 2055,
+                "prefill_s_median": 0.38828,
+                "apparent_tok_s": 5292.6,
+                "reps": 3
+              }
+            ],
+            "fit": {
+              "fixed_overhead_ms": -131.94,
+              "marginal_prefill_tok_s": 3959.7,
+              "r2": 0.9998
+            },
+            "shortest_prompt": {
+              "raw_prompt_tokens": 87,
+              "templated_prompt_tokens": 639,
+              "template_tokens_added": 552,
+              "raw_apparent_tok_s": 2776.4,
+              "templated_apparent_tok_s": 20113.3,
+              "inflation_factor": 7.24,
+              "prefill_s_raw": 0.03134,
+              "prefill_s_templated": 0.03177
+            },
+            "verdict": "CONTAMINATED",
+            "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+          },
+          "repeat_cache_probe": {
+            "available": true,
+            "reps": 3,
+            "prompt_tokens_reported": 640,
+            "apparent_prefill_tok_s": 63891.0,
+            "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+          }
+        }
+      ],
+      "fit_model": "prefill_s = a + b * prompt_tokens, OLS over medians",
+      "min_r2": 0.9998,
+      "beta_at_study_typical_query": {
+        "n": 5,
+        "min": 0.0404,
+        "max": 0.0782,
+        "median": 0.0497,
+        "prompt_tokens": 500,
+        "generated_tokens": 300
+      },
+      "note": "Every fit has a small POSITIVE fixed cost, which is what a per-request overhead should look like. An earlier version of the harness, which used the chat-template endpoint, produced large negative intercepts (-485 ms on the 8B). That is not a physical quantity, and it is how the template-prefix caching artefact was found: the template system prefix is counted in prompt_eval_count but is cached and never recomputed, so the fitted line has to dive below zero to reach the shortest point. The regression is therefore both the measurement and its own sanity check."
+    },
+    "bandwidth_bound_check": {
+      "available": false
+    },
+    "bandwidth_law": {
+      "available": true,
+      "rows": [
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "private-3.1b-q8:latest",
+          "architecture": "qwen2",
+          "parameters": "3.1B",
+          "parameters_b": 3.1,
+          "quantization": "Q8_0",
+          "weights_gb": 3.285,
+          "gen_tok_s": 59.77,
+          "effective_read_gb_s": 196.4,
+          "utilisation": 0.767,
+          "utilisation_pct": 76.7,
+          "decode_class": "dense",
+          "multimodal_tower": false,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": false,
+          "weights_url": null
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "private-7.6b-vlm-q8:latest",
+          "architecture": "qwen2vl",
+          "parameters": "7.6B",
+          "parameters_b": 7.6,
+          "quantization": "Q8_0",
+          "weights_gb": 9.453,
+          "gen_tok_s": 28.62,
+          "effective_read_gb_s": 270.5,
+          "utilisation": 1.057,
+          "utilisation_pct": 105.7,
+          "decode_class": "dense",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": false,
+          "weights_url": null
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "gemma4:26b",
+          "architecture": "gemma4",
+          "parameters": "25.8B",
+          "parameters_b": 25.8,
+          "quantization": "Q4_K_M",
+          "weights_gb": 17.988,
+          "gen_tok_s": 58.34,
+          "effective_read_gb_s": 1049.4,
+          "utilisation": 4.099,
+          "utilisation_pct": 409.9,
+          "decode_class": "sparse",
+          "multimodal_tower": true,
+          "expert_active_fraction": 0.0625,
+          "sparse": true,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/gemma4"
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "gemma4:e4b",
+          "architecture": "gemma4",
+          "parameters": "8.0B",
+          "parameters_b": 8.0,
+          "quantization": "Q4_K_M",
+          "weights_gb": 9.608,
+          "gen_tok_s": 56.42,
+          "effective_read_gb_s": 542.1,
+          "utilisation": 2.117,
+          "utilisation_pct": 211.7,
+          "decode_class": "elastic",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": true,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/gemma4"
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "ministral-3:3b",
+          "architecture": "mistral3",
+          "parameters": "3.8B",
+          "parameters_b": 3.8,
+          "quantization": "Q4_K_M",
+          "weights_gb": 2.954,
+          "gen_tok_s": 78.62,
+          "effective_read_gb_s": 232.2,
+          "utilisation": 0.907,
+          "utilisation_pct": 90.7,
+          "decode_class": "dense",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/ministral-3"
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "ministral-3:8b",
+          "architecture": "mistral3",
+          "parameters": "8.9B",
+          "parameters_b": 8.9,
+          "quantization": "Q4_K_M",
+          "weights_gb": 6.022,
+          "gen_tok_s": 37.81,
+          "effective_read_gb_s": 227.7,
+          "utilisation": 0.89,
+          "utilisation_pct": 89.0,
+          "decode_class": "dense",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/ministral-3"
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "muse-glimmer:30b",
+          "architecture": "muse-glimmer",
+          "parameters": "27.9B",
+          "parameters_b": 27.9,
+          "quantization": "Q4_K_M",
+          "weights_gb": 18.157,
+          "gen_tok_s": 12.46,
+          "effective_read_gb_s": 226.3,
+          "utilisation": 0.884,
+          "utilisation_pct": 88.4,
+          "decode_class": "dense",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": true,
+          "weights_url": "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "qwen3.6:latest",
+          "architecture": "qwen35moe",
+          "parameters": "36.0B",
+          "parameters_b": 36.0,
+          "quantization": "Q4_K_M",
+          "weights_gb": 23.938,
+          "gen_tok_s": 62.2,
+          "effective_read_gb_s": 1488.9,
+          "utilisation": 5.816,
+          "utilisation_pct": 581.6,
+          "decode_class": "sparse",
+          "multimodal_tower": true,
+          "expert_active_fraction": 0.0312,
+          "sparse": true,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/qwen3.6"
+        },
+        {
+          "machine": "AMD Radeon(TM) 8060S Graphics",
+          "peak_bandwidth_gb_s": 256.0,
+          "model": "qwen3.8:27b",
+          "architecture": "qwen35",
+          "parameters": "27.3B",
+          "parameters_b": 27.3,
+          "quantization": "Q4_K_M",
+          "weights_gb": 17.742,
+          "gen_tok_s": 19.63,
+          "effective_read_gb_s": 348.3,
+          "utilisation": 1.36,
+          "utilisation_pct": 136.0,
+          "decode_class": "mtp",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": true,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/qwen3.8"
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "peak_bandwidth_gb_s": 672.0,
+          "model": "ministral-3:3b",
+          "architecture": "mistral3",
+          "parameters": "3.8B",
+          "parameters_b": 3.8,
+          "quantization": "Q4_K_M",
+          "weights_gb": 2.954,
+          "gen_tok_s": 199.28,
+          "effective_read_gb_s": 588.6,
+          "utilisation": 0.876,
+          "utilisation_pct": 87.6,
+          "decode_class": "dense",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/ministral-3"
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "peak_bandwidth_gb_s": 672.0,
+          "model": "ministral-3:8b",
+          "architecture": "mistral3",
+          "parameters": "8.9B",
+          "parameters_b": 8.9,
+          "quantization": "Q4_K_M",
+          "weights_gb": 6.022,
+          "gen_tok_s": 103.96,
+          "effective_read_gb_s": 626.1,
+          "utilisation": 0.932,
+          "utilisation_pct": 93.2,
+          "decode_class": "dense",
+          "multimodal_tower": true,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/ministral-3"
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "peak_bandwidth_gb_s": 672.0,
+          "model": "qwen3:4b",
+          "architecture": "qwen3",
+          "parameters": "4.0B",
+          "parameters_b": 4.0,
+          "quantization": "Q4_K_M",
+          "weights_gb": 2.497,
+          "gen_tok_s": 169.92,
+          "effective_read_gb_s": 424.3,
+          "utilisation": 0.631,
+          "utilisation_pct": 63.1,
+          "decode_class": "dense",
+          "multimodal_tower": false,
+          "expert_active_fraction": null,
+          "sparse": false,
+          "redistributable": true,
+          "weights_url": "https://ollama.com/library/qwen3"
+        }
+      ],
+      "n_whole_weight_set": 8,
+      "n_partial_reader": 4,
+      "n_sparse": 2,
+      "n_mtp": 1,
+      "n_elastic": 1,
+      "n_rows": 12,
+      "n_redistributable": 10,
+      "n_not_redistributable": 2,
+      "by_machine": {
+        "AMD Radeon(TM) 8060S Graphics": {
+          "available": true,
+          "rows": [
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "private-3.1b-q8:latest",
+              "architecture": "qwen2",
+              "parameters": "3.1B",
+              "parameters_b": 3.1,
+              "quantization": "Q8_0",
+              "weights_gb": 3.285,
+              "gen_tok_s": 59.77,
+              "effective_read_gb_s": 196.4,
+              "utilisation": 0.767,
+              "utilisation_pct": 76.7,
+              "decode_class": "dense",
+              "multimodal_tower": false,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": false,
+              "weights_url": null
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "private-7.6b-vlm-q8:latest",
+              "architecture": "qwen2vl",
+              "parameters": "7.6B",
+              "parameters_b": 7.6,
+              "quantization": "Q8_0",
+              "weights_gb": 9.453,
+              "gen_tok_s": 28.62,
+              "effective_read_gb_s": 270.5,
+              "utilisation": 1.057,
+              "utilisation_pct": 105.7,
+              "decode_class": "dense",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": false,
+              "weights_url": null
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "gemma4:26b",
+              "architecture": "gemma4",
+              "parameters": "25.8B",
+              "parameters_b": 25.8,
+              "quantization": "Q4_K_M",
+              "weights_gb": 17.988,
+              "gen_tok_s": 58.34,
+              "effective_read_gb_s": 1049.4,
+              "utilisation": 4.099,
+              "utilisation_pct": 409.9,
+              "decode_class": "sparse",
+              "multimodal_tower": true,
+              "expert_active_fraction": 0.0625,
+              "sparse": true,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/gemma4"
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "gemma4:e4b",
+              "architecture": "gemma4",
+              "parameters": "8.0B",
+              "parameters_b": 8.0,
+              "quantization": "Q4_K_M",
+              "weights_gb": 9.608,
+              "gen_tok_s": 56.42,
+              "effective_read_gb_s": 542.1,
+              "utilisation": 2.117,
+              "utilisation_pct": 211.7,
+              "decode_class": "elastic",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": true,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/gemma4"
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "ministral-3:3b",
+              "architecture": "mistral3",
+              "parameters": "3.8B",
+              "parameters_b": 3.8,
+              "quantization": "Q4_K_M",
+              "weights_gb": 2.954,
+              "gen_tok_s": 78.62,
+              "effective_read_gb_s": 232.2,
+              "utilisation": 0.907,
+              "utilisation_pct": 90.7,
+              "decode_class": "dense",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/ministral-3"
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "ministral-3:8b",
+              "architecture": "mistral3",
+              "parameters": "8.9B",
+              "parameters_b": 8.9,
+              "quantization": "Q4_K_M",
+              "weights_gb": 6.022,
+              "gen_tok_s": 37.81,
+              "effective_read_gb_s": 227.7,
+              "utilisation": 0.89,
+              "utilisation_pct": 89.0,
+              "decode_class": "dense",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/ministral-3"
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "muse-glimmer:30b",
+              "architecture": "muse-glimmer",
+              "parameters": "27.9B",
+              "parameters_b": 27.9,
+              "quantization": "Q4_K_M",
+              "weights_gb": 18.157,
+              "gen_tok_s": 12.46,
+              "effective_read_gb_s": 226.3,
+              "utilisation": 0.884,
+              "utilisation_pct": 88.4,
+              "decode_class": "dense",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": true,
+              "weights_url": "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "qwen3.6:latest",
+              "architecture": "qwen35moe",
+              "parameters": "36.0B",
+              "parameters_b": 36.0,
+              "quantization": "Q4_K_M",
+              "weights_gb": 23.938,
+              "gen_tok_s": 62.2,
+              "effective_read_gb_s": 1488.9,
+              "utilisation": 5.816,
+              "utilisation_pct": 581.6,
+              "decode_class": "sparse",
+              "multimodal_tower": true,
+              "expert_active_fraction": 0.0312,
+              "sparse": true,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/qwen3.6"
+            },
+            {
+              "machine": "AMD Radeon(TM) 8060S Graphics",
+              "peak_bandwidth_gb_s": 256.0,
+              "model": "qwen3.8:27b",
+              "architecture": "qwen35",
+              "parameters": "27.3B",
+              "parameters_b": 27.3,
+              "quantization": "Q4_K_M",
+              "weights_gb": 17.742,
+              "gen_tok_s": 19.63,
+              "effective_read_gb_s": 348.3,
+              "utilisation": 1.36,
+              "utilisation_pct": 136.0,
+              "decode_class": "mtp",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": true,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/qwen3.8"
+            }
+          ],
+          "n_whole_weight_set": 5,
+          "n_partial_reader": 4,
+          "n_sparse": 2,
+          "n_mtp": 1,
+          "n_elastic": 1,
+          "n_rows": 9,
+          "n_redistributable": 7,
+          "n_not_redistributable": 2,
+          "dense": {
+            "models": 5,
+            "with_vision_projector": 4,
+            "weight_range_gb": [
+              2.95,
+              18.16
+            ],
+            "weight_span": 6.1,
+            "effective_gb_s_range": [
+              196.4,
+              270.5
+            ],
+            "utilisation_range": [
+              0.767,
+              1.057
+            ],
+            "utilisation_pct_range": [
+              76.7,
+              105.7
+            ],
+            "utilisation_median": 0.89,
+            "utilisation_pct_median": 89.0,
+            "spread_ratio": 1.38
+          },
+          "proxy_overcount": {
+            "dense_rows_above_ceiling": 1,
+            "models": [
+              {
+                "model": "private-7.6b-vlm-q8:latest",
+                "architecture": "qwen2vl",
+                "utilisation_pct": 105.7,
+                "multimodal_tower": true,
+                "redistributable": false
+              }
+            ],
+            "max_overcount_pct": 5.7,
+            "note": "tau * on-disk-bytes counts every byte the file holds, not the bytes decode streams. A vision tower, an embedding table and quantisation metadata are all in the file and none is read once per token, so the statistic runs high by a build-dependent margin. Where a dense row exceeds 100% that margin is directly visible, which is why these rows are reported rather than dropped: they are the only calibration this proxy has."
+          },
+          "separation": {
+            "highest_whole_weight_set": 1.057,
+            "lowest_partial_reader": 1.36,
+            "highest_whole_weight_set_pct": 105.7,
+            "lowest_partial_reader_pct": 136.0,
+            "separated": true,
+            "gap_pp": 30.3,
+            "note": "The gap is measured from the HIGHEST dense row, including the one that exceeds the ceiling. Quoting it from the highest redistributable dense row instead would widen it to 45 pp and would be selection on the outcome."
+          },
+          "verdict": "ORDERING HOLDS; MAGNITUDE PROXY-LIMITED",
+          "sparse": {
+            "models": 2,
+            "utilisation_range": [
+              4.099,
+              5.816
+            ],
+            "utilisation_pct_range": [
+              409.9,
+              581.6
+            ],
+            "all_above_peak": true,
+            "note": "A mixture of experts reads only its active experts per token, so weight-size-based effective bandwidth overstates the traffic and must land far above the ceiling. That is the predicted signature, and it is what makes the statistic a test rather than a tautology."
+          },
+          "elastic": {
+            "models": 1,
+            "utilisation_range": [
+              2.117,
+              2.117
+            ],
+            "utilisation_pct_range": [
+              211.7,
+              211.7
+            ],
+            "all_above_peak": true,
+            "note": "A per-layer-embedding build declares more parameters than it reads per token, because only the embedding rows for the current token are fetched. It is grouped with the other partial readers on the evidence, which is that it exceeds a ceiling a whole-file reader cannot."
+          },
+          "mtp": {
+            "models": 1,
+            "utilisation_range": [
+              1.36,
+              1.36
+            ],
+            "utilisation_pct_range": [
+              136.0,
+              136.0
+            ],
+            "all_above_peak": true,
+            "note": "A multi-token-prediction head emits more than one token per forward pass when its draft is accepted, so tokens per second is no longer passes per second and the product may exceed the ceiling. Reported separately for the same reason as the sparse rows."
+          },
+          "note": "File-size times token rate is a proxy, not a memory-traffic measurement, and this ladder now bounds its own error rather than asserting the error is small. Peak bandwidth is a part specification used only as a ceiling to express utilisation against; it is not measured here. Weight bytes are the on-disk quantised file, which OVERSTATES the bytes decode streams by a build-dependent margin: vision towers, embedding and output tables and quantisation metadata all sit in the file and none is read once per token. The margin is at least 5.7 percentage points, because a dense build measures above a ceiling it cannot exceed, and it is plausibly larger on small models with large vocabularies - qwen3:4b reads 63.1% on this statistic. KV traffic biases the other way and is not modelled. An MTP head in metadata does not establish that speculative decoding ran on any particular request. Every measured row is reported, including the two whose weights are not redistributable; those rows are labelled, not dropped. Evaluate each machine separately; a machine with no partial-reader control cannot test separation at all."
+        },
+        "NVIDIA GeForce RTX 5070": {
+          "available": true,
+          "rows": [
+            {
+              "machine": "NVIDIA GeForce RTX 5070",
+              "peak_bandwidth_gb_s": 672.0,
+              "model": "ministral-3:3b",
+              "architecture": "mistral3",
+              "parameters": "3.8B",
+              "parameters_b": 3.8,
+              "quantization": "Q4_K_M",
+              "weights_gb": 2.954,
+              "gen_tok_s": 199.28,
+              "effective_read_gb_s": 588.6,
+              "utilisation": 0.876,
+              "utilisation_pct": 87.6,
+              "decode_class": "dense",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/ministral-3"
+            },
+            {
+              "machine": "NVIDIA GeForce RTX 5070",
+              "peak_bandwidth_gb_s": 672.0,
+              "model": "ministral-3:8b",
+              "architecture": "mistral3",
+              "parameters": "8.9B",
+              "parameters_b": 8.9,
+              "quantization": "Q4_K_M",
+              "weights_gb": 6.022,
+              "gen_tok_s": 103.96,
+              "effective_read_gb_s": 626.1,
+              "utilisation": 0.932,
+              "utilisation_pct": 93.2,
+              "decode_class": "dense",
+              "multimodal_tower": true,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/ministral-3"
+            },
+            {
+              "machine": "NVIDIA GeForce RTX 5070",
+              "peak_bandwidth_gb_s": 672.0,
+              "model": "qwen3:4b",
+              "architecture": "qwen3",
+              "parameters": "4.0B",
+              "parameters_b": 4.0,
+              "quantization": "Q4_K_M",
+              "weights_gb": 2.497,
+              "gen_tok_s": 169.92,
+              "effective_read_gb_s": 424.3,
+              "utilisation": 0.631,
+              "utilisation_pct": 63.1,
+              "decode_class": "dense",
+              "multimodal_tower": false,
+              "expert_active_fraction": null,
+              "sparse": false,
+              "redistributable": true,
+              "weights_url": "https://ollama.com/library/qwen3"
+            }
+          ],
+          "n_whole_weight_set": 3,
+          "n_partial_reader": 0,
+          "n_sparse": 0,
+          "n_mtp": 0,
+          "n_elastic": 0,
+          "n_rows": 3,
+          "n_redistributable": 3,
+          "n_not_redistributable": 0,
+          "dense": {
+            "models": 3,
+            "with_vision_projector": 2,
+            "weight_range_gb": [
+              2.5,
+              6.02
+            ],
+            "weight_span": 2.4,
+            "effective_gb_s_range": [
+              424.3,
+              626.1
+            ],
+            "utilisation_range": [
+              0.631,
+              0.932
+            ],
+            "utilisation_pct_range": [
+              63.1,
+              93.2
+            ],
+            "utilisation_median": 0.876,
+            "utilisation_pct_median": 87.6,
+            "spread_ratio": 1.48
+          },
+          "proxy_overcount": {
+            "dense_rows_above_ceiling": 0,
+            "models": [],
+            "max_overcount_pct": 0.0,
+            "note": "tau * on-disk-bytes counts every byte the file holds, not the bytes decode streams. A vision tower, an embedding table and quantisation metadata are all in the file and none is read once per token, so the statistic runs high by a build-dependent margin. Where a dense row exceeds 100% that margin is directly visible, which is why these rows are reported rather than dropped: they are the only calibration this proxy has."
+          },
+          "note": "File-size times token rate is a proxy, not a memory-traffic measurement, and this ladder now bounds its own error rather than asserting the error is small. Peak bandwidth is a part specification used only as a ceiling to express utilisation against; it is not measured here. Weight bytes are the on-disk quantised file, which OVERSTATES the bytes decode streams by a build-dependent margin: vision towers, embedding and output tables and quantisation metadata all sit in the file and none is read once per token. The margin is at least 5.7 percentage points, because a dense build measures above a ceiling it cannot exceed, and it is plausibly larger on small models with large vocabularies - qwen3:4b reads 63.1% on this statistic. KV traffic biases the other way and is not modelled. An MTP head in metadata does not establish that speculative decoding ran on any particular request. Every measured row is reported, including the two whose weights are not redistributable; those rows are labelled, not dropped. Evaluate each machine separately; a machine with no partial-reader control cannot test separation at all.",
+          "verdict": "DESCRIPTIVE ONLY (no partial-reader control)"
+        }
+      },
+      "dense": {
+        "models": 8,
+        "with_vision_projector": 6,
+        "weight_range_gb": [
+          2.5,
+          18.16
+        ],
+        "weight_span": 7.3,
+        "effective_gb_s_range": [
+          196.4,
+          626.1
+        ],
+        "utilisation_range": [
+          0.631,
+          1.057
+        ],
+        "utilisation_pct_range": [
+          63.1,
+          105.7
+        ],
+        "utilisation_median": 0.887,
+        "utilisation_pct_median": 88.7,
+        "spread_ratio": 3.19
+      },
+      "proxy_overcount": {
+        "dense_rows_above_ceiling": 1,
+        "models": [
+          {
+            "model": "private-7.6b-vlm-q8:latest",
+            "architecture": "qwen2vl",
+            "utilisation_pct": 105.7,
+            "multimodal_tower": true,
+            "redistributable": false
+          }
+        ],
+        "max_overcount_pct": 5.7,
+        "note": "tau * on-disk-bytes counts every byte the file holds, not the bytes decode streams. A vision tower, an embedding table and quantisation metadata are all in the file and none is read once per token, so the statistic runs high by a build-dependent margin. Where a dense row exceeds 100% that margin is directly visible, which is why these rows are reported rather than dropped: they are the only calibration this proxy has."
+      },
+      "separation": {
+        "highest_whole_weight_set": 1.057,
+        "lowest_partial_reader": 1.36,
+        "highest_whole_weight_set_pct": 105.7,
+        "lowest_partial_reader_pct": 136.0,
+        "separated": true,
+        "gap_pp": 30.3,
+        "note": "The gap is measured from the HIGHEST dense row, including the one that exceeds the ceiling. Quoting it from the highest redistributable dense row instead would widen it to 45 pp and would be selection on the outcome."
+      },
+      "verdict": "SEE PER-MACHINE RESULTS",
+      "sparse": {
+        "models": 2,
+        "utilisation_range": [
+          4.099,
+          5.816
+        ],
+        "utilisation_pct_range": [
+          409.9,
+          581.6
+        ],
+        "all_above_peak": true,
+        "note": "A mixture of experts reads only its active experts per token, so weight-size-based effective bandwidth overstates the traffic and must land far above the ceiling. That is the predicted signature, and it is what makes the statistic a test rather than a tautology."
+      },
+      "elastic": {
+        "models": 1,
+        "utilisation_range": [
+          2.117,
+          2.117
+        ],
+        "utilisation_pct_range": [
+          211.7,
+          211.7
+        ],
+        "all_above_peak": true,
+        "note": "A per-layer-embedding build declares more parameters than it reads per token, because only the embedding rows for the current token are fetched. It is grouped with the other partial readers on the evidence, which is that it exceeds a ceiling a whole-file reader cannot."
+      },
+      "mtp": {
+        "models": 1,
+        "utilisation_range": [
+          1.36,
+          1.36
+        ],
+        "utilisation_pct_range": [
+          136.0,
+          136.0
+        ],
+        "all_above_peak": true,
+        "note": "A multi-token-prediction head emits more than one token per forward pass when its draft is accepted, so tokens per second is no longer passes per second and the product may exceed the ceiling. Reported separately for the same reason as the sparse rows."
+      },
+      "note": "File-size times token rate is a proxy, not a memory-traffic measurement, and this ladder now bounds its own error rather than asserting the error is small. Peak bandwidth is a part specification used only as a ceiling to express utilisation against; it is not measured here. Weight bytes are the on-disk quantised file, which OVERSTATES the bytes decode streams by a build-dependent margin: vision towers, embedding and output tables and quantisation metadata all sit in the file and none is read once per token. The margin is at least 5.7 percentage points, because a dense build measures above a ceiling it cannot exceed, and it is plausibly larger on small models with large vocabularies - qwen3:4b reads 63.1% on this statistic. KV traffic biases the other way and is not modelled. An MTP head in metadata does not establish that speculative decoding ran on any particular request. Every measured row is reported, including the two whose weights are not redistributable; those rows are labelled, not dropped. Evaluate each machine separately; a machine with no partial-reader control cannot test separation at all."
+    },
+    "model_form_check": {
+      "available": true,
+      "equation": "E = P * (n_o / tau) * (1 + beta) / 3600",
+      "rows": [
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:3b",
+          "file": "rtx5070-replication.json",
+          "measured_power_w": 204.57,
+          "measured_gen_tok_s": 196.43,
+          "prompt_tokens": 499,
+          "beta_at_this_shape": 0.0396,
+          "output_tokens": 300,
+          "predicted_wh": 0.09022,
+          "measured_wh": 0.09146,
+          "relative_error": -0.0135,
+          "relative_error_pct": -1.35
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:8b",
+          "file": "rtx5070-replication.json",
+          "measured_power_w": 222.25,
+          "measured_gen_tok_s": 102.49,
+          "prompt_tokens": 499,
+          "beta_at_this_shape": 0.0444,
+          "output_tokens": 300,
+          "predicted_wh": 0.18873,
+          "measured_wh": 0.18941,
+          "relative_error": -0.0036,
+          "relative_error_pct": -0.36
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:3b",
+          "file": "rtx5070-study.json",
+          "measured_power_w": 203.39,
+          "measured_gen_tok_s": 195.55,
+          "prompt_tokens": 499,
+          "beta_at_this_shape": 0.0394,
+          "output_tokens": 300,
+          "predicted_wh": 0.09009,
+          "measured_wh": 0.09121,
+          "relative_error": -0.0123,
+          "relative_error_pct": -1.23
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:8b",
+          "file": "rtx5070-study.json",
+          "measured_power_w": 224.13,
+          "measured_gen_tok_s": 101.78,
+          "prompt_tokens": 499,
+          "beta_at_this_shape": 0.0441,
+          "output_tokens": 300,
+          "predicted_wh": 0.1916,
+          "measured_wh": 0.19389,
+          "relative_error": -0.0118,
+          "relative_error_pct": -1.18
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:3b",
+          "file": "rtx5070.json",
+          "measured_power_w": 200.71,
+          "measured_gen_tok_s": 200.37,
+          "prompt_tokens": 86,
+          "beta_at_this_shape": 0.0159,
+          "output_tokens": 192,
+          "predicted_wh": 0.05427,
+          "measured_wh": 0.05508,
+          "relative_error": -0.0146,
+          "relative_error_pct": -1.46
+        },
+        {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:8b",
+          "file": "rtx5070.json",
+          "measured_power_w": 225.79,
+          "measured_gen_tok_s": 104.31,
+          "prompt_tokens": 86,
+          "beta_at_this_shape": 0.0157,
+          "output_tokens": 192,
+          "predicted_wh": 0.11726,
+          "measured_wh": 0.12004,
+          "relative_error": -0.0232,
+          "relative_error_pct": -2.32
+        }
+      ],
+      "n": 6,
+      "max_abs_relative_error": 0.0232,
+      "max_abs_relative_error_pct": 2.32,
+      "all_predictions_low": true,
+      "verdict": "TERMS CONSISTENT",
+      "what_this_tests": "Bookkeeping consistency, NOT model validity. Because P_bar, tau and beta are each defined in terms of the same measured request, substituting them reduces this comparison to the identity t_prefill + t_decode == T. The residual is the fixed per-request overhead the equation omits, so the check cannot fail by more than that term and passing it says nothing about whether the functional form is correct. The form remains an assumption.",
+      "note": "Every term on the right-hand side is measured on the same request as the energy on the left. The residual is negative on every row, which is the direction the omitted fixed per-request cost predicts.",
+      "assumed_vs_measured": {
+        "reference_row": {
+          "machine": "NVIDIA GeForce RTX 5070",
+          "model": "ministral-3:8b"
+        },
+        "terms": [
+          {
+            "term": "board power P (W)",
+            "assumed": 420.0,
+            "measured": 222.25,
+            "assumed_over_measured": 1.89,
+            "direction_on_E": "raises"
+          },
+          {
+            "term": "throughput tau (tok/s)",
+            "assumed": 141.0,
+            "measured": 102.49,
+            "assumed_over_measured": 1.38,
+            "direction_on_E": "lowers"
+          },
+          {
+            "term": "prefill factor beta",
+            "assumed": 0.15,
+            "measured": 0.0444,
+            "assumed_over_measured": 3.38,
+            "direction_on_E": "raises"
+          }
+        ],
+        "note": "The assumed inputs were wrong in compensating directions: an overstated board power and an overstated prefill factor both inflate the modelled energy, while an overstated throughput deflates it. Their product is closer to the measurement than any single term is, which is why an unvalidated model can look accurate for the wrong reasons."
+      }
+    },
+    "scaling": {
+      "available": true,
+      "machines": {
+        "AMD Radeon(TM) 8060S Graphics / amd-8060s-strixhalo.json": {
+          "points": [
+            {
+              "model": "ministral-3:3b",
+              "params_b": 3.8,
+              "gen_tok_s": 78.38,
+              "quantization": "Q4_K_M"
+            },
+            {
+              "model": "ministral-3:8b",
+              "params_b": 8.9,
+              "gen_tok_s": 37.79,
+              "quantization": "Q4_K_M"
+            },
+            {
+              "model": "qwen3.8:27b",
+              "params_b": 27.3,
+              "gen_tok_s": 13.79,
+              "quantization": "Q4_K_M"
+            }
+          ],
+          "steps": [
+            {
+              "from": "ministral-3:3b",
+              "to": "ministral-3:8b",
+              "param_ratio": 2.34,
+              "throughput_ratio": 2.07,
+              "same_quantisation": true
+            },
+            {
+              "from": "ministral-3:8b",
+              "to": "qwen3.8:27b",
+              "param_ratio": 3.07,
+              "throughput_ratio": 2.74,
+              "same_quantisation": true
+            }
+          ]
+        },
+        "NVIDIA GeForce RTX 5070 / rtx5070-replication.json": {
+          "points": [
+            {
+              "model": "ministral-3:3b",
+              "params_b": 3.8,
+              "gen_tok_s": 196.43,
+              "quantization": "Q4_K_M"
+            },
+            {
+              "model": "ministral-3:8b",
+              "params_b": 8.9,
+              "gen_tok_s": 102.49,
+              "quantization": "Q4_K_M"
+            }
+          ],
+          "steps": [
+            {
+              "from": "ministral-3:3b",
+              "to": "ministral-3:8b",
+              "param_ratio": 2.34,
+              "throughput_ratio": 1.92,
+              "same_quantisation": true
+            }
+          ]
+        },
+        "NVIDIA GeForce RTX 5070 / rtx5070-study.json": {
+          "points": [
+            {
+              "model": "ministral-3:3b",
+              "params_b": 3.8,
+              "gen_tok_s": 195.55,
+              "quantization": "Q4_K_M"
+            },
+            {
+              "model": "ministral-3:8b",
+              "params_b": 8.9,
+              "gen_tok_s": 101.78,
+              "quantization": "Q4_K_M"
+            }
+          ],
+          "steps": [
+            {
+              "from": "ministral-3:3b",
+              "to": "ministral-3:8b",
+              "param_ratio": 2.34,
+              "throughput_ratio": 1.92,
+              "same_quantisation": true
+            }
+          ]
+        },
+        "NVIDIA GeForce RTX 5070 / rtx5070.json": {
+          "points": [
+            {
+              "model": "ministral-3:3b",
+              "params_b": 3.8,
+              "gen_tok_s": 200.37,
+              "quantization": "Q4_K_M"
+            },
+            {
+              "model": "ministral-3:8b",
+              "params_b": 8.9,
+              "gen_tok_s": 104.31,
+              "quantization": "Q4_K_M"
+            }
+          ],
+          "steps": [
+            {
+              "from": "ministral-3:3b",
+              "to": "ministral-3:8b",
+              "param_ratio": 2.34,
+              "throughput_ratio": 1.92,
+              "same_quantisation": true
+            }
+          ]
+        }
+      }
+    },
+    "energy": [
+      {
+        "file": "rtx5070-replication.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:3b",
+        "reps": 7,
+        "prompt_tokens": 499,
+        "output_tokens": 300,
+        "gen_tok_s": 196.43,
+        "energy_wh": 0.091457,
+        "energy_wh_min": 0.078402,
+        "energy_wh_max": 0.09406,
+        "window_s": 1.6094239999656565,
+        "mean_w": 204.57,
+        "mwh_per_output_token": 0.30485666666666666,
+        "idle_board_w": 17.28,
+        "psu_efficiency": 0.9,
+        "host_power_scenarios_wh": {
+          "0": 0.091457,
+          "30": 0.11652096296264497,
+          "60": 0.13142303703640104,
+          "100": 0.15129246913474248
+        },
+        "telemetry_resolution": {
+          "available": true,
+          "samples_per_run_median": 13,
+          "distinct_readings_per_run_median": 4,
+          "distinct_readings_range": [
+            4,
+            5
+          ],
+          "implied_counter_refresh_s": 0.402,
+          "note": "Distinct readings, not sample count, bound the precision of the integral. Two significant figures is what these traces support; the paper reports two."
+        },
+        "scope": "sampled GPU board energy during request. The 0 W row is the board rail alone: host CPU/DRAM, cold load and the post-request idle tail are outside it. Host scenarios add host draw and charge PSU conversion loss at eta=0.9; the idle tail remains excluded because it is a duty-cycle property, not a per-query one",
+        "idle_subtracted_board_wh": 0.08373176480016484
+      },
+      {
+        "file": "rtx5070-replication.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:8b",
+        "reps": 7,
+        "prompt_tokens": 499,
+        "output_tokens": 300,
+        "gen_tok_s": 102.49,
+        "energy_wh": 0.189411,
+        "energy_wh_min": 0.174683,
+        "energy_wh_max": 0.196251,
+        "window_s": 3.088433199969586,
+        "mean_w": 222.25,
+        "mwh_per_output_token": 0.63137,
+        "idle_board_w": 17.28,
+        "psu_efficiency": 0.9,
+        "host_power_scenarios_wh": {
+          "0": 0.189411,
+          "30": 0.23886426388898035,
+          "60": 0.2672718611112941,
+          "100": 0.3051486574077123
+        },
+        "telemetry_resolution": {
+          "available": true,
+          "samples_per_run_median": 22,
+          "distinct_readings_per_run_median": 7,
+          "distinct_readings_range": [
+            7,
+            8
+          ],
+          "implied_counter_refresh_s": 0.441,
+          "note": "Distinct readings, not sample count, bound the precision of the integral. Two significant figures is what these traces support; the paper reports two."
+        },
+        "scope": "sampled GPU board energy during request. The 0 W row is the board rail alone: host CPU/DRAM, cold load and the post-request idle tail are outside it. Host scenarios add host draw and charge PSU conversion loss at eta=0.9; the idle tail remains excluded because it is a duty-cycle property, not a per-query one",
+        "idle_subtracted_board_wh": 0.17468450159995258
+      },
+      {
+        "file": "rtx5070-study.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:3b",
+        "reps": 7,
+        "prompt_tokens": 499,
+        "output_tokens": 300,
+        "gen_tok_s": 195.55,
+        "energy_wh": 0.091209,
+        "energy_wh_min": 0.078024,
+        "energy_wh_max": 0.092573,
+        "window_s": 1.6177246000152081,
+        "mean_w": 203.39,
+        "mwh_per_output_token": 0.30403,
+        "idle_board_w": 17.41,
+        "psu_efficiency": 0.9,
+        "host_power_scenarios_wh": {
+          "0": 0.091209,
+          "30": 0.11594900555545136,
+          "60": 0.13071889999999836,
+          "100": 0.1507189074074047
+        },
+        "telemetry_resolution": {
+          "available": true,
+          "samples_per_run_median": 13,
+          "distinct_readings_per_run_median": 4,
+          "distinct_readings_range": [
+            4,
+            5
+          ],
+          "implied_counter_refresh_s": 0.404,
+          "note": "Distinct readings, not sample count, bound the precision of the integral. Two significant figures is what these traces support; the paper reports two."
+        },
+        "scope": "sampled GPU board energy during request. The 0 W row is the board rail alone: host CPU/DRAM, cold load and the post-request idle tail are outside it. Host scenarios add host draw and charge PSU conversion loss at eta=0.9; the idle tail remains excluded because it is a duty-cycle property, not a per-query one",
+        "idle_subtracted_board_wh": 0.08358045739838775
+      },
+      {
+        "file": "rtx5070-study.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:8b",
+        "reps": 7,
+        "prompt_tokens": 499,
+        "output_tokens": 300,
+        "gen_tok_s": 101.78,
+        "energy_wh": 0.193886,
+        "energy_wh_min": 0.180801,
+        "energy_wh_max": 0.194748,
+        "window_s": 3.1129030999727547,
+        "mean_w": 224.13,
+        "mwh_per_output_token": 0.6462866666666667,
+        "idle_board_w": 17.41,
+        "psu_efficiency": 0.9,
+        "host_power_scenarios_wh": {
+          "0": 0.193886,
+          "30": 0.24426470740748019,
+          "60": 0.2731005259260715,
+          "100": 0.31145710802365334
+        },
+        "telemetry_resolution": {
+          "available": true,
+          "samples_per_run_median": 22,
+          "distinct_readings_per_run_median": 7,
+          "distinct_readings_range": [
+            6,
+            8
+          ],
+          "implied_counter_refresh_s": 0.445,
+          "note": "Distinct readings, not sample count, bound the precision of the integral. Two significant figures is what these traces support; the paper reports two."
+        },
+        "scope": "sampled GPU board energy during request. The 0 W row is the board rail alone: host CPU/DRAM, cold load and the post-request idle tail are outside it. Host scenarios add host draw and charge PSU conversion loss at eta=0.9; the idle tail remains excluded because it is a duty-cycle property, not a per-query one",
+        "idle_subtracted_board_wh": 0.17882505198773976
+      },
+      {
+        "file": "rtx5070.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:3b",
+        "reps": 5,
+        "prompt_tokens": 86,
+        "output_tokens": 192,
+        "gen_tok_s": 200.37,
+        "energy_wh": 0.05508,
+        "energy_wh_min": 0.04499,
+        "energy_wh_max": 0.056509,
+        "window_s": 0.9860639999969862,
+        "mean_w": 200.71,
+        "mwh_per_output_token": 0.286875,
+        "idle_board_w": 18.53,
+        "psu_efficiency": 0.9,
+        "host_power_scenarios_wh": {
+          "0": 0.05508,
+          "30": 0.07034736111115887,
+          "60": 0.07949472222231777,
+          "100": 0.09169120370386295
+        },
+        "telemetry_resolution": {
+          "available": true,
+          "samples_per_run_median": 6,
+          "distinct_readings_per_run_median": 3,
+          "distinct_readings_range": [
+            3,
+            4
+          ],
+          "implied_counter_refresh_s": 0.329,
+          "note": "Distinct readings, not sample count, bound the precision of the integral. Two significant figures is what these traces support; the paper reports two."
+        },
+        "scope": "sampled GPU board energy during request. The 0 W row is the board rail alone: host CPU/DRAM, cold load and the post-request idle tail are outside it. Host scenarios add host draw and charge PSU conversion loss at eta=0.9; the idle tail remains excluded because it is a duty-cycle property, not a per-query one",
+        "idle_subtracted_board_wh": 0.049994981958306775
+      },
+      {
+        "file": "rtx5070.json",
+        "machine": "NVIDIA GeForce RTX 5070",
+        "model": "ministral-3:8b",
+        "reps": 5,
+        "prompt_tokens": 86,
+        "output_tokens": 192,
+        "gen_tok_s": 104.31,
+        "energy_wh": 0.120043,
+        "energy_wh_min": 0.117034,
+        "energy_wh_max": 0.122463,
+        "window_s": 1.8921559000154957,
+        "mean_w": 225.79,
+        "mwh_per_output_token": 0.6252239583333333,
+        "idle_board_w": 18.53,
+        "psu_efficiency": 0.9,
+        "host_power_scenarios_wh": {
+          "0": 0.120043,
+          "30": 0.1508606388886618,
+          "60": 0.16830127777732357,
+          "100": 0.19155546296220596
+        },
+        "telemetry_resolution": {
+          "available": true,
+          "samples_per_run_median": 9,
+          "distinct_readings_per_run_median": 5,
+          "distinct_readings_range": [
+            4,
+            5
+          ],
+          "implied_counter_refresh_s": 0.378,
+          "note": "Distinct readings, not sample count, bound the precision of the integral. Two significant figures is what these traces support; the paper reports two."
+        },
+        "scope": "sampled GPU board energy during request. The 0 W row is the board rail alone: host CPU/DRAM, cold load and the post-request idle tail are outside it. Host scenarios add host draw and charge PSU conversion loss at eta=0.9; the idle tail remains excluded because it is a duty-cycle property, not a per-query one",
+        "idle_subtracted_board_wh": 0.11005470358296965
+      }
+    ],
+    "power_measured_anywhere": true,
+    "scope": "One serving stack (Ollama) in its default configuration, single-stream, on the authors' own machines. Not a controlled comparison of accelerator architectures; quantisation, context length and driver version are recorded with every figure because they move it."
+  },
+  "analysis_scope": {
+    "revision": "RTX 5070 measurement and source audit, 2026-09-05",
+    "primary_result": "measured.energy; GPU board request-window energy only",
+    "legacy_scenarios": "key_numbers, monte_carlo, pass2_refresh and pass3_refresh are illustrative models, not empirical savings or audited current pricing",
+    "capability": "workload weights and capability ratios are assumptions; 82% is not measured or calibrated to a 40-70% range",
+    "cloud_energy": "Jegham values are estimates from API timing and inferred hardware; Gemini is a fleet-median measurement with a different workload",
+    "training": "no training experiment rerun; memory agreement uses the calibration source, not an independent validation set",
+    "fleet": "routing share is included once, inside the system savings fraction"
+  },
+  "peft_methods": {
+    "lora": {
+      "name": "LoRA",
+      "year": 2021,
+      "family": "reparam",
+      "cite": "hu2021lora",
+      "peft_flag": "LoraConfig(r=..., lora_alpha=...)",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.0,
+      "note": "The baseline every other row is measured against. Freezes W and learns BA with rank r << d. Merges back into W at export, so inference costs nothing extra - which is why an adapter can ship to a phone."
+    },
+    "qlora": {
+      "name": "QLoRA (NF4 + double-quant + paged optimizer)",
+      "year": 2023,
+      "family": "quantization",
+      "cite": "dettmers2023qlora",
+      "peft_flag": "BitsAndBytesConfig(load_in_4bit, nf4, use_double_quant) + LoRA",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        -1.0,
+        -0.2,
+        0.3
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.35,
+      "note": "Three separable ideas: NF4 (information-theoretically optimal for normally distributed weights), double quantization of the block constants (~0.37 bits/param saved), and paged optimizer states that survive backward-pass memory spikes. Reported to preserve 16-bit finetuning quality; the small negative tail here is the honest acknowledgement that 'preserves' is a benchmark-average claim. Costs wall-clock because every forward pass dequantizes."
+    },
+    "loftq": {
+      "name": "LoftQ",
+      "year": 2023,
+      "family": "init",
+      "cite": "li2023loftq",
+      "peft_flag": "init_lora_weights=\"loftq\"",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        1.0,
+        3.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.02,
+      "note": "Initializes the adapter to absorb the quantization error rather than to zero, so training does not start by first repairing the damage quantization did. Matters most at low rank and at 3 bits or below; at 4-bit with r>=32 the gap to plain QLoRA narrows."
+    },
+    "dora": {
+      "name": "DoRA (weight-decomposed)",
+      "year": 2024,
+      "family": "reparam",
+      "cite": "liu2024dora",
+      "peft_flag": "LoraConfig(use_dora=True)",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.5,
+        2.0,
+        3.7
+      ],
+      "memory_multiplier": 1.02,
+      "extra_train_time": 1.2,
+      "note": "Splits the update into magnitude and direction: direction is ordinary LoRA, magnitude is a separate learned vector. The reported gain is largest exactly where the edge cares - low rank - because it recovers some of what a rank-4 or rank-8 update cannot express. Pays ~20% wall-clock for the extra normalization."
+    },
+    "qdora": {
+      "name": "QDoRA (DoRA over 4-bit weights)",
+      "year": 2024,
+      "family": "reparam",
+      "cite": "liu2024dora",
+      "peft_flag": "LoraConfig(use_dora=True) over a 4-bit base",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.3,
+        1.8,
+        3.5
+      ],
+      "memory_multiplier": 1.02,
+      "extra_train_time": 1.55,
+      "note": "Supported natively in PEFT since 0.10. The combination the edge actually wants: 4-bit weights so a 27B fits, decomposed updates so a low rank still expresses enough. The wall-clock multiplier compounds QLoRA's dequantization with DoRA's normalization."
+    },
+    "vera": {
+      "name": "VeRA (vector-based random adaptation)",
+      "year": 2023,
+      "family": "reparam",
+      "cite": "kopiczko2023vera",
+      "peft_flag": "VeraConfig(r=...)",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        -3.0,
+        -1.0,
+        0.5
+      ],
+      "memory_multiplier": 0.02,
+      "extra_train_time": 0.95,
+      "note": "Freezes a single pair of random matrices shared across all layers and trains only two scaling vectors per layer. Trainable parameters fall by roughly 50x against LoRA. Interesting for AutoYou not because it trains better but because an adapter becomes small enough to sync over a datachannel as a routine message rather than a file transfer."
+    },
+    "lora_xs": {
+      "name": "LoRA-XS",
+      "year": 2024,
+      "family": "reparam",
+      "cite": "balazy2024loraxs",
+      "peft_flag": "LoraXSConfig / PEFT 0.18+",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        -2.5,
+        -0.8,
+        0.5
+      ],
+      "memory_multiplier": 0.05,
+      "extra_train_time": 0.98,
+      "note": "Frozen SVD-derived projections with a trained r x r core. Same motivation as VeRA - adapter size, not adapter quality - with a principled initialization instead of a random one."
+    },
+    "pissa": {
+      "name": "PiSSA (principal singular adaptation)",
+      "year": 2024,
+      "family": "init",
+      "cite": "meng2024pissa",
+      "peft_flag": "init_lora_weights=\"pissa_niter_16\"",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.5,
+        2.5,
+        6.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.01,
+      "note": "Initializes A and B from the principal singular vectors of W instead of from noise-and-zero, so the adapter starts in the subspace that already carries most of the layer's energy. Converges faster, which on a device that trains overnight is the difference between one night and three. One-time SVD cost at load."
+    },
+    "olora": {
+      "name": "OLoRA (orthonormal init)",
+      "year": 2024,
+      "family": "init",
+      "cite": "buyukakyuz2024olora",
+      "peft_flag": "init_lora_weights=\"olora\"",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        1.2,
+        3.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.01,
+      "note": "QR-based orthonormal initialization; cheaper than PiSSA's SVD."
+    },
+    "eva": {
+      "name": "EVA (explained-variance adaptation)",
+      "year": 2024,
+      "family": "init",
+      "cite": "paischer2024eva",
+      "peft_flag": "init_lora_weights=\"eva\"",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        1.5,
+        3.5
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.05,
+      "note": "Data-driven: runs a few batches of the *actual* dataset, does an incremental SVD of the activations, and allocates rank where that dataset needs it. Directly relevant to a personal adapter, where the dataset is one person's own conversation and nobody knows in advance which layers matter for them."
+    },
+    "corda": {
+      "name": "CorDA (context-oriented decomposition)",
+      "year": 2024,
+      "family": "init",
+      "cite": "yang2024corda",
+      "peft_flag": "init_lora_weights=\"corda\"",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        1.5,
+        4.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.06,
+      "note": "Two modes: knowledge-preserved (build the adapter in the directions the base model does NOT use for general knowledge) and instruction-previewed (build it in the directions the target task does use). The knowledge-preserved mode is a direct, principled answer to the forgetting counter-claim C4."
+    },
+    "rslora": {
+      "name": "rsLoRA (rank-stabilized scaling)",
+      "year": 2023,
+      "family": "scaling",
+      "cite": "kalajdzievski2023rslora",
+      "peft_flag": "LoraConfig(use_rslora=True)",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        1.5,
+        4.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.0,
+      "note": "One-line change with an outsized effect: scale by alpha/sqrt(r) rather than alpha/r. Under the original scaling, raising the rank shrinks the effective update and higher ranks stop helping - which is why so much practice settled on r=8/16 and concluded rank does not matter. It does; the scaling was hiding it. Free."
+    },
+    "lora_plus": {
+      "name": "LoRA+ (asymmetric learning rates)",
+      "year": 2024,
+      "family": "optimizer",
+      "cite": "hayou2024loraplus",
+      "peft_flag": "loraplus_lr_ratio (PEFT optimizer helper)",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.0,
+      "note": "B needs a larger learning rate than A; using one rate for both is provably suboptimal in the infinite-width limit. Reported ~1-2 points and up to 2x faster convergence for a scalar ratio. Also free."
+    },
+    "adalora": {
+      "name": "AdaLoRA (adaptive rank allocation)",
+      "year": 2023,
+      "family": "reparam",
+      "cite": "zhang2023adalora",
+      "peft_flag": "AdaLoraConfig(target_r=..., init_r=...)",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        -0.5,
+        1.0,
+        2.5
+      ],
+      "memory_multiplier": 1.5,
+      "extra_train_time": 1.25,
+      "note": "Prunes singular values during training to move rank budget to the layers that earn it. Starts at a higher rank than it ends at, so peak memory is worse than the final adapter suggests - a poor fit for a device chosen precisely because it is at its memory ceiling."
+    },
+    "galore": {
+      "name": "GaLore (gradient low-rank projection)",
+      "year": 2024,
+      "family": "optimizer",
+      "cite": "zhao2024galore",
+      "peft_flag": "GaLore optimizer (not a LoraConfig)",
+      "composes_with_4bit": false,
+      "quality_delta_pp": [
+        -1.0,
+        0.5,
+        2.0
+      ],
+      "memory_multiplier": 6.0,
+      "extra_train_time": 1.3,
+      "note": "Not an adapter method: it trains ALL weights but projects the optimizer state to low rank. Better ceiling than LoRA on continued pretraining, at the cost of updating full weights - so it produces a new model, not a mergeable adapter. Wrong shape for a product that ships a 40 MB personal delta rather than a 54 GB model."
+    },
+    "neftune": {
+      "name": "NEFTune (embedding noise)",
+      "year": 2023,
+      "family": "regularizer",
+      "cite": "jain2023neftune",
+      "peft_flag": "neftune_noise_alpha in TrainingArguments",
+      "composes_with_4bit": true,
+      "quality_delta_pp": [
+        0.0,
+        1.0,
+        5.0
+      ],
+      "memory_multiplier": 1.0,
+      "extra_train_time": 1.0,
+      "note": "Adds uniform noise to embeddings during training. Large reported gains on conversational quality specifically, which is the AutoYou Fine Tuning agent's exact use case, and near-zero on factual benchmarks. Free, and trivially reversible - it changes training only."
+    }
+  },
+  "devices": {
+    "discrete_gpu": {
+      "name": "Desktop + RTX 4090 (24 GB)",
+      "kind": "discrete_gpu",
+      "accel_memory_gb": 24.0,
+      "memory_bandwidth_gb_s": 1008.0,
+      "train_power_w": 430.0,
+      "trainable_ceiling_gb": 19.200000000000003,
+      "throughput": {
+        "8b_q4": 141.0,
+        "8b_bf16": 95.0
+      },
+      "cite": "databasemart2026"
+    },
+    "unified_apu": {
+      "name": "AMD Ryzen AI MAX+ 395 'Strix Halo' (128 GB unified)",
+      "kind": "unified_apu",
+      "accel_memory_gb": 128.0,
+      "memory_bandwidth_gb_s": 256.0,
+      "train_power_w": 130.0,
+      "trainable_ceiling_gb": 102.4,
+      "throughput": {
+        "27b_q8": 7.5,
+        "27b_mtp_spec": 19.0,
+        "35b_a3b_q4": 50.0,
+        "27b_q4": 13.0,
+        "8b_q4": 42.0,
+        "3b_q4_measured": 78.7,
+        "8b_q4_measured": 37.8,
+        "27b_dense_q4_measured": 12.5
+      },
+      "cite": "strixhalo2026"
+    },
+    "laptop_npu": {
+      "name": "Copilot+ class laptop NPU (40-50 TOPS)",
+      "kind": "laptop_npu",
+      "accel_memory_gb": 16.0,
+      "memory_bandwidth_gb_s": 120.0,
+      "train_power_w": 30.0,
+      "trainable_ceiling_gb": 12.8,
+      "throughput": {
+        "8b_q4": 18.0
+      },
+      "cite": "assumption"
+    }
+  },
+  "parameters": {
+    "PUE_GLOBAL": {
+      "value": 1.54,
+      "lo": 1.54,
+      "hi": 1.56,
+      "unit": "ratio",
+      "cite": "uptime2025",
+      "note": "Uptime Institute global avg PUE, stagnant ~1.54 for 6 yrs"
+    },
+    "PUE_HYPERSCALE": {
+      "value": 1.1,
+      "lo": 1.09,
+      "hi": 1.15,
+      "unit": "ratio",
+      "cite": "uptime2025",
+      "note": "Google fleet 1.09; hyperscalers 1.10-1.15"
+    },
+    "EU_DC_POLICY_MARKER": {
+      "value": 1.0,
+      "lo": 1.0,
+      "hi": 1.0,
+      "unit": "flag",
+      "cite": "eu_eed2026",
+      "note": "EU EED data-centre reporting/rating framework; not an EU-wide PUE cap"
+    },
+    "WUE_INDUSTRY": {
+      "value": 0.84,
+      "lo": 0.56,
+      "hi": 1.85,
+      "unit": "L/kWh",
+      "cite": "aws_water2025",
+      "note": "Industry withdrawal-WUE benchmark; high-water facilities can be materially higher"
+    },
+    "WUE_HYPERSCALE": {
+      "value": 0.2,
+      "lo": 0.12,
+      "hi": 0.3,
+      "unit": "L/kWh",
+      "cite": "aws_water2025",
+      "note": "Best-in-class 0.12; hyperscaler operating range used for sensitivity"
+    },
+    "GOOGLE_COMPUTE_FRACTION": {
+      "value": 0.58,
+      "lo": 0.58,
+      "hi": 0.58,
+      "unit": "frac",
+      "cite": "elsworth2025",
+      "note": "Share of per-prompt energy in TPU/GPU"
+    },
+    "GOOGLE_NONCOMPUTE_FRACTION": {
+      "value": 0.42,
+      "lo": 0.42,
+      "hi": 0.42,
+      "unit": "frac",
+      "cite": "elsworth2025",
+      "note": "CPU/DRAM(24%) + idle/overhead(18%)"
+    },
+    "CI_GLOBAL": {
+      "value": 458.0,
+      "lo": 400.0,
+      "hi": 473.0,
+      "unit": "gCO2e/kWh",
+      "cite": "ember2026",
+      "note": "Global avg 2025 (458); IEA 2027 forecast ~400"
+    },
+    "CI_US": {
+      "value": 384.0,
+      "lo": 384.0,
+      "hi": 384.0,
+      "unit": "gCO2e/kWh",
+      "cite": "ember2026",
+      "note": "United States 2024/25"
+    },
+    "CI_CHINA": {
+      "value": 560.0,
+      "lo": 560.0,
+      "hi": 560.0,
+      "unit": "gCO2e/kWh",
+      "cite": "ember2026",
+      "note": "China 2024/25"
+    },
+    "CI_INDIA": {
+      "value": 708.0,
+      "lo": 708.0,
+      "hi": 708.0,
+      "unit": "gCO2e/kWh",
+      "cite": "ember2026",
+      "note": "India 2024"
+    },
+    "CI_EU": {
+      "value": 140.0,
+      "lo": 140.0,
+      "hi": 175.0,
+      "unit": "gCO2e/kWh",
+      "cite": "ember2026",
+      "note": "EU, steepest decarbonisation"
+    },
+    "EWIF": {
+      "value": 1.1,
+      "lo": 0.5,
+      "hi": 2.5,
+      "unit": "L/kWh",
+      "cite": "assumption",
+      "note": "Off-site grid-water scenario; not measured or inferred from Google"
+    },
+    "E_LLAMA32_1B": {
+      "value": 0.342,
+      "lo": 0.342,
+      "hi": 0.342,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "Llama-3.2 1B, long"
+    },
+    "E_LLAMA32_3B": {
+      "value": 0.573,
+      "lo": 0.573,
+      "hi": 0.573,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "Llama-3.2 3B, long"
+    },
+    "E_LLAMA31_8B": {
+      "value": 0.603,
+      "lo": 0.603,
+      "hi": 0.603,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "Llama-3.1 8B, long"
+    },
+    "E_GPT4O_MINI": {
+      "value": 2.106,
+      "lo": 2.106,
+      "hi": 2.106,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "GPT-4o mini, long"
+    },
+    "E_GPT4O": {
+      "value": 1.788,
+      "lo": 1.788,
+      "hi": 1.788,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "GPT-4o, long"
+    },
+    "E_CLAUDE37_SONNET": {
+      "value": 5.518,
+      "lo": 5.518,
+      "hi": 5.518,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "Claude-3.7 Sonnet, long"
+    },
+    "E_LLAMA31_70B": {
+      "value": 11.628,
+      "lo": 11.628,
+      "hi": 11.628,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "Llama-3.1 70B, long"
+    },
+    "E_LLAMA31_405B": {
+      "value": 20.757,
+      "lo": 20.757,
+      "hi": 20.757,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "Llama-3.1 405B, long"
+    },
+    "E_GPT45": {
+      "value": 30.495,
+      "lo": 30.495,
+      "hi": 30.495,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "GPT-4.5, long"
+    },
+    "E_DEEPSEEK_R1": {
+      "value": 33.634,
+      "lo": 33.634,
+      "hi": 33.634,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "DeepSeek-R1, long (reasoning)"
+    },
+    "E_O3": {
+      "value": 39.223,
+      "lo": 39.223,
+      "hi": 39.223,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "o3, long (reasoning) - 70x nano"
+    },
+    "E_GPT41_NANO_SHORT": {
+      "value": 0.103,
+      "lo": 0.103,
+      "hi": 0.103,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "GPT-4.1 nano, short"
+    },
+    "E_GPT4O_SHORT": {
+      "value": 0.421,
+      "lo": 0.421,
+      "hi": 0.421,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "GPT-4o, short (~Google search 0.30)"
+    },
+    "E_DEEPSEEK_R1_SHORT": {
+      "value": 23.815,
+      "lo": 23.815,
+      "hi": 23.815,
+      "unit": "Wh",
+      "cite": "jegham2025",
+      "note": "DeepSeek-R1, short"
+    },
+    "E_GEMINI_MEDIAN": {
+      "value": 0.24,
+      "lo": 0.24,
+      "hi": 0.24,
+      "unit": "Wh",
+      "cite": "elsworth2025",
+      "note": "Comprehensive median Gemini prompt"
+    },
+    "E_GEMINI_ACTIVE_ONLY": {
+      "value": 0.1,
+      "lo": 0.1,
+      "hi": 0.1,
+      "unit": "Wh",
+      "cite": "elsworth2025",
+      "note": "Active TPU/GPU only"
+    },
+    "W_GEMINI_MEDIAN": {
+      "value": 0.26,
+      "lo": 0.26,
+      "hi": 0.26,
+      "unit": "mL",
+      "cite": "elsworth2025",
+      "note": "Water per median Gemini prompt"
+    },
+    "C_GEMINI_MEDIAN": {
+      "value": 0.03,
+      "lo": 0.03,
+      "hi": 0.03,
+      "unit": "gCO2e",
+      "cite": "elsworth2025",
+      "note": "Carbon per median Gemini prompt"
+    },
+    "W_SLM_TINY_MAX": {
+      "value": 2.0,
+      "lo": 2.0,
+      "hi": 2.0,
+      "unit": "mL",
+      "cite": "jegham2025",
+      "note": "<3B models: <2 mL water/query"
+    },
+    "C_SLM_TINY_MAX": {
+      "value": 0.3,
+      "lo": 0.3,
+      "hi": 0.3,
+      "unit": "gCO2e",
+      "cite": "jegham2025",
+      "note": "<3B models: <0.3 gCO2/query"
+    },
+    "W_DEEPSEEK_R1": {
+      "value": 150.0,
+      "lo": 150.0,
+      "hi": 150.0,
+      "unit": "mL",
+      "cite": "jegham2025",
+      "note": "DeepSeek-R1: >150 mL/query"
+    },
+    "C_DEEPSEEK_R1": {
+      "value": 14.0,
+      "lo": 14.0,
+      "hi": 14.0,
+      "unit": "gCO2e",
+      "cite": "jegham2025",
+      "note": "DeepSeek-R1: >14 gCO2/query"
+    },
+    "RTX4090_TPS_8B": {
+      "value": 141.0,
+      "lo": 130.0,
+      "hi": 180.0,
+      "unit": "tok/s",
+      "cite": "databasemart2026",
+      "note": "RTX 4090, Llama-3 8B single-stream throughput"
+    },
+    "RTX4090_GEN_POWER": {
+      "value": 420.0,
+      "lo": 350.0,
+      "hi": 450.0,
+      "unit": "W",
+      "cite": "nvidia_rtx4090",
+      "note": "RTX 4090 board power during generation. Bounded above by the 450 W total graphics power in NVIDIA's own specification. An earlier version put the high end at 575 W on the authority of a third-party blog whose title asserted that figure for this part; 575 W is the RTX 5090's board power. Superseded in practice by the measured 222 W in measured.py, which this study reports rather than substitutes -- see the form-check table"
+    },
+    "PC_IDLE_W": {
+      "value": 60.0,
+      "lo": 30.0,
+      "hi": 150.0,
+      "unit": "W",
+      "cite": "solartech2025",
+      "note": "Always-on desktop idle draw (30-100 typical; 70-150 workstation)"
+    },
+    "PC_SLEEP_W": {
+      "value": 4.0,
+      "lo": 3.0,
+      "hi": 5.0,
+      "unit": "W",
+      "cite": "solartech2025",
+      "note": "Sleep-mode draw"
+    },
+    "PUE_EDGE": {
+      "value": 1.02,
+      "lo": 1.0,
+      "hi": 1.05,
+      "unit": "ratio",
+      "cite": "assumption",
+      "note": "Household 'PUE': ambient cooling, no facility overhead"
+    },
+    "WUE_EDGE": {
+      "value": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "unit": "L/kWh",
+      "cite": "assumption",
+      "note": "Household direct cooling water for compute ~ 0 (air-cooled)"
+    },
+    "EDGE_SAVINGS_RANGE": {
+      "value": 0.72,
+      "lo": 0.65,
+      "hi": 0.9,
+      "unit": "frac",
+      "cite": "techtarget2025",
+      "note": "Reported edge-vs-cloud energy savings (65-80%; S24 NPU >90%)"
+    },
+    "P_DIRECT": {
+      "value": 0.8,
+      "lo": 0.7,
+      "hi": 0.85,
+      "unit": "frac",
+      "cite": "antmedia2026",
+      "note": "Fraction of WebRTC sessions that succeed P2P via STUN"
+    },
+    "P_RELAY": {
+      "value": 0.15,
+      "lo": 0.1,
+      "hi": 0.2,
+      "unit": "frac",
+      "cite": "antmedia2026",
+      "note": "Fraction needing TURN relay (symmetric NAT / firewalls)"
+    },
+    "TURN_OVERHEAD": {
+      "value": 0.2,
+      "lo": 0.1,
+      "hi": 0.2,
+      "unit": "frac",
+      "cite": "antmedia2026",
+      "note": "Extra path cost when relayed vs direct (up to 20%)"
+    },
+    "NET_INTENSITY": {
+      "value": 0.015,
+      "lo": 0.0064,
+      "hi": 0.06,
+      "unit": "kWh/GB",
+      "cite": "aslan2018",
+      "note": "Fixed-line transmission energy intensity (declining; 0.06 in 2015, <0.01 modern est.)"
+    },
+    "MMLU_FRONTIER": {
+      "value": 0.86,
+      "lo": 0.734,
+      "hi": 0.887,
+      "unit": "acc",
+      "cite": "ni2025benchmarks",
+      "note": "GPT-4o-class frontier"
+    },
+    "MMLU_8B": {
+      "value": 0.66,
+      "lo": 0.63,
+      "hi": 0.685,
+      "unit": "acc",
+      "cite": "ni2025benchmarks",
+      "note": "Llama-3.1-8B / Ministral-8B class"
+    },
+    "MMLU_3B": {
+      "value": 0.57,
+      "lo": 0.54,
+      "hi": 0.6,
+      "unit": "acc",
+      "cite": "mistral2024",
+      "note": "Llama-3.2-3B / Ministral-3B class"
+    },
+    "MATH_FRONTIER": {
+      "value": 0.78,
+      "lo": 0.7,
+      "hi": 0.9,
+      "unit": "acc",
+      "cite": "ni2025benchmarks",
+      "note": "Frontier reasoning on hard math"
+    },
+    "MATH_8B": {
+      "value": 0.4,
+      "lo": 0.3,
+      "hi": 0.5,
+      "unit": "acc",
+      "cite": "ni2025benchmarks",
+      "note": "8B class on hard math"
+    },
+    "CAP_RATIO_EXTRACTION": {
+      "value": 0.95,
+      "lo": 0.9,
+      "hi": 0.98,
+      "unit": "ratio",
+      "cite": "authors_estimate",
+      "note": "Structured extraction / classification / routing"
+    },
+    "CAP_RATIO_RAG_QA": {
+      "value": 0.9,
+      "lo": 0.82,
+      "hi": 0.95,
+      "unit": "ratio",
+      "cite": "authors_estimate",
+      "note": "RAG-grounded factual QA (retrieval carries knowledge)"
+    },
+    "CAP_RATIO_SUMMARY": {
+      "value": 0.88,
+      "lo": 0.8,
+      "hi": 0.93,
+      "unit": "ratio",
+      "cite": "authors_estimate",
+      "note": "Summarisation / rewriting"
+    },
+    "CAP_RATIO_SIMPLE_CODE": {
+      "value": 0.75,
+      "lo": 0.65,
+      "hi": 0.85,
+      "unit": "ratio",
+      "cite": "authors_estimate",
+      "note": "Boilerplate / simple code"
+    },
+    "CAP_RATIO_HARD_REASON": {
+      "value": 0.51,
+      "lo": 0.4,
+      "hi": 0.62,
+      "unit": "ratio",
+      "cite": "authors_estimate",
+      "note": "Hard multi-step math/logic - SLM is NOT sufficient. The one ratio with an arithmetic basis: MATH_8B / MATH_FRONTIER = 0.513"
+    },
+    "REBOUND_FACTOR": {
+      "value": 0.2,
+      "lo": 0.15,
+      "hi": 0.25,
+      "unit": "frac",
+      "cite": "luccioni2025",
+      "note": "Indirect rebound: savings reinvested into more usage (15-25%)"
+    },
+    "EMBODIED_DC_SHARE": {
+      "value": 0.22,
+      "lo": 0.15,
+      "hi": 0.3,
+      "unit": "frac",
+      "cite": "schneider2025",
+      "note": "Embodied carbon as share of total DC emissions"
+    },
+    "EMBODIED_EDGE_KG": {
+      "value": 350.0,
+      "lo": 200.0,
+      "hi": 600.0,
+      "unit": "kgCO2e",
+      "cite": "schneider2025",
+      "note": "Cradle-to-gate embodied CO2 of a gaming PC + dGPU"
+    },
+    "EDGE_DEVICE_LIFETIME_QUERIES": {
+      "value": 5000000.0,
+      "lo": 1000000.0,
+      "hi": 20000000.0,
+      "unit": "queries",
+      "cite": "assumption",
+      "note": "Inference queries over device service life (only the MARGINAL share is attributable)"
+    },
+    "EMBODIED_ATTRIB_FRACTION": {
+      "value": 0.1,
+      "lo": 0.02,
+      "hi": 0.3,
+      "unit": "frac",
+      "cite": "assumption",
+      "note": "Share of edge device embodied carbon attributable to AI inference (rest is pre-existing general use)"
+    },
+    "WORKLOAD_SUFFICIENT_FRACTION": {
+      "value": 0.82,
+      "lo": 0.4,
+      "hi": 0.9,
+      "unit": "frac",
+      "cite": "authors_estimate",
+      "note": "f_s implied by WORKLOAD_MIX at alpha=0.70. Low end is the floor of belcak2025's measured 40-70% agentic-replaceability range; the central value is this study's own unsourced mix and sits ABOVE that range"
+    },
+    "ALPHA_SUFFICIENCY": {
+      "value": 0.7,
+      "lo": 0.6,
+      "hi": 0.8,
+      "unit": "ratio",
+      "cite": "hypothesis",
+      "note": "The '~70%-as-capable' acceptance threshold under test"
+    },
+    "AGENTIC_REPLACEABLE": {
+      "value": 0.55,
+      "lo": 0.4,
+      "hi": 0.7,
+      "unit": "frac",
+      "cite": "belcak2025",
+      "note": "Estimated replaceability in three case studies; not a measured household workload"
+    },
+    "PRICE_ELECTRICITY": {
+      "value": 0.16,
+      "lo": 0.1,
+      "hi": 0.3,
+      "unit": "$/kWh",
+      "cite": "assumption",
+      "note": "Residential electricity price"
+    },
+    "EDGE_DEVICE_COST": {
+      "value": 2000.0,
+      "lo": 1200.0,
+      "hi": 3500.0,
+      "unit": "$",
+      "cite": "assumption",
+      "note": "Gaming/workstation PC + consumer dGPU"
+    },
+    "API_PRICE_OUT_FRONTIER": {
+      "value": 15.0,
+      "lo": 10.0,
+      "hi": 40.0,
+      "unit": "$/Mtok",
+      "cite": "frontier2026",
+      "note": "Cloud output-token price, mid/heavy tier"
+    },
+    "API_PRICE_OUT_EFFICIENT": {
+      "value": 1.0,
+      "lo": 0.3,
+      "hi": 3.0,
+      "unit": "$/Mtok",
+      "cite": "frontier2026",
+      "note": "Cloud output-token price, budget tier"
+    },
+    "API_PRICE_IN": {
+      "value": 3.0,
+      "lo": 2.0,
+      "hi": 10.0,
+      "unit": "$/Mtok",
+      "cite": "frontier2026",
+      "note": "Cloud input-token price"
+    },
+    "TYPICAL_OUT_TOKENS": {
+      "value": 300.0,
+      "lo": 150.0,
+      "hi": 600.0,
+      "unit": "tok",
+      "cite": "assumption",
+      "note": "Assistant reply length"
+    },
+    "TYPICAL_IN_TOKENS": {
+      "value": 500.0,
+      "lo": 100.0,
+      "hi": 2000.0,
+      "unit": "tok",
+      "cite": "assumption",
+      "note": "Prompt length"
+    },
+    "DC_DEMAND_2030_TWH": {
+      "value": 945.0,
+      "lo": 800.0,
+      "hi": 1050.0,
+      "unit": "TWh",
+      "cite": "iea2025",
+      "note": "Global data-centre electricity demand by 2030 (~Japan)"
+    },
+    "AI_SHARE_OF_DC": {
+      "value": 0.45,
+      "lo": 0.35,
+      "hi": 0.55,
+      "unit": "frac",
+      "cite": "iea2025",
+      "note": "AI-optimised share of data-centre demand growth"
+    },
+    "INFERENCE_SHARE_OF_AI": {
+      "value": 0.65,
+      "lo": 0.5,
+      "hi": 0.9,
+      "unit": "frac",
+      "cite": "jegham2025",
+      "note": "Inference share of AI compute energy"
+    },
+    "ROUTER_CLASSIFY_OUT_TOKENS": {
+      "value": 10.0,
+      "lo": 5.0,
+      "hi": 30.0,
+      "unit": "tok",
+      "cite": "assumption",
+      "note": "Output tokens for a routing decision (a class label)"
+    },
+    "ROUTER_PAYLOAD_KB": {
+      "value": 4.0,
+      "lo": 1.0,
+      "hi": 16.0,
+      "unit": "kB",
+      "cite": "assumption",
+      "note": "Query bytes shipped to a remote router, round trip"
+    },
+    "API_PRICE_OUT_FRONTIER_2026": {
+      "value": 15.0,
+      "lo": 6.0,
+      "hi": 50.0,
+      "unit": "$/Mtok",
+      "cite": "frontier2026",
+      "note": "July-2026 frontier output list prices: Luna 6 .. Fable 5 50; the modal mid-tier price is 15 (GPT-5.6 Terra, Claude Sonnet 5, Kimi K3)"
+    },
+    "API_PRICE_IN_FRONTIER_2026": {
+      "value": 3.0,
+      "lo": 1.0,
+      "hi": 10.0,
+      "unit": "$/Mtok",
+      "cite": "frontier2026",
+      "note": "July-2026 frontier input list prices: Luna 1 .. Fable 5 10; Sonnet 5 and Kimi K3 both 3"
+    },
+    "CORPUS_PERSONA_TOKENS": {
+      "value": 2000000.0,
+      "lo": 500000.0,
+      "hi": 8000000.0,
+      "unit": "tokens",
+      "cite": "assumption",
+      "note": "One person's own conversation export, as prepared by the Fine Tuning agent for a persona adapter"
+    },
+    "CORPUS_SUPPORT_TOKENS": {
+      "value": 7200000.0,
+      "lo": 4000000.0,
+      "hi": 12000000.0,
+      "unit": "tokens",
+      "cite": "autoyou_support2026",
+      "note": "1,750 samples x 4,096 max_seq_len x 3 epochs, the shipped AutoYou Support adapter's run"
+    },
+    "CORPUS_CAPABILITY_TOKENS": {
+      "value": 14680000.0,
+      "lo": 5000000.0,
+      "hi": 40000000.0,
+      "unit": "tokens",
+      "cite": "strixhalo2026",
+      "note": "448 steps x 4 accum x 8,192 seq - the published 27B multi-day run"
+    },
+    "RETRAIN_PER_YEAR": {
+      "value": 2.0,
+      "lo": 1.0,
+      "hi": 12.0,
+      "unit": "1/yr",
+      "cite": "assumption",
+      "note": "Personal adapter rebuild cadence"
+    },
+    "QUERIES_PER_USER_PER_DAY": {
+      "value": 50.0,
+      "lo": 10.0,
+      "hi": 300.0,
+      "unit": "queries/day",
+      "cite": "assumption",
+      "note": "Per-user daily assistant queries, unmetered"
+    },
+    "ALPHA_COVERAGE_KNEE": {
+      "value": 0.8,
+      "lo": 0.75,
+      "hi": 0.85,
+      "unit": "ratio",
+      "cite": "hypothesis",
+      "note": "Acceptance threshold above which adaptation increases f_s rather than only mean quality"
+    },
+    "MEASURED_TPS_APU_4B": {
+      "value": 73.1,
+      "lo": 72.1,
+      "hi": 73.5,
+      "unit": "tok/s",
+      "cite": "measured2026",
+      "note": "Ministral-3 3.8B, measured"
+    },
+    "MEASURED_TPS_APU_9B": {
+      "value": 35.6,
+      "lo": 33.9,
+      "hi": 35.6,
+      "unit": "tok/s",
+      "cite": "measured2026",
+      "note": "Ministral-3 8.9B, measured"
+    },
+    "MEASURED_TPS_APU_27B": {
+      "value": 15.6,
+      "lo": 15.6,
+      "hi": 16.9,
+      "unit": "tok/s",
+      "cite": "measured2026",
+      "note": "Qwen3.8 27.3B, measured; the widest run-to-run spread of the three, on a machine holding a 17 GB model in a 64 GB pool"
+    },
+    "MEASURED_PREFILL_OVERHEAD": {
+      "value": 0.018,
+      "lo": 0.016,
+      "hi": 0.019,
+      "unit": "ratio",
+      "cite": "measured2026",
+      "note": "beta, the share by which prefill inflates generation time for one query. Roughly an eighth of the 0.15 this study assumed, which means the earlier passes OVERSTATED edge energy. Rises with the prompt-to-generation ratio, so a long-context retrieval workload sits higher than this."
+    },
+    "BANDWIDTH_APU": {
+      "value": 256.0,
+      "lo": 256.0,
+      "hi": 256.0,
+      "unit": "GB/s",
+      "cite": "amd_strix2025",
+      "note": "LPDDR5X-8000 on a 256-bit bus"
+    },
+    "BANDWIDTH_RTX4090": {
+      "value": 1008.0,
+      "lo": 1008.0,
+      "hi": 1008.0,
+      "unit": "GB/s",
+      "cite": "databasemart2026",
+      "note": "GDDR6X on a 384-bit bus"
+    }
+  },
+  "citations": {
+    "uptime2025": {
+      "text": "Uptime Institute Global Data Center Survey 2025 - average PUE 1.54.",
+      "url": "https://journal.uptimeinstitute.com/large-data-centers-are-mostly-more-efficient-analysis-confirms/"
+    },
+    "eu_eed2026": {
+      "text": "European Commission, Energy performance of data centres - mandatory reporting, rating work, and possible minimum performance standards.",
+      "url": "https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive/energy-performance-data-centres_en"
+    },
+    "aws_water2025": {
+      "text": "Amazon Web Services, Water Stewardship. Global data-centre WUE 0.15 L/kWh withdrawn per kWh of IT load in 2024, improving to 0.12 L/kWh in 2025; industry average withdrawal-WUE benchmark 0.84 L/kWh. An earlier version of this entry attributed the 0.12 figure to 2024, which is a year early.",
+      "url": "https://sustainability.aboutamazon.com/natural-resources/water"
+    },
+    "devriesgao2025": {
+      "text": "A. de Vries-Gao, 'The carbon and water footprints of data centers and what this could mean for artificial intelligence,' Patterns, 2025, doi:10.1016/j.patter.2025.101430. CORRECTION: an earlier version of this entry gave a different title, a different article ID, and split this single hyphenated-surname author into two people by inventing a co-author.",
+      "url": "https://www.cell.com/patterns/fulltext/S2666-3899(25)00278-8"
+    },
+    "introl2025": {
+      "text": "Introl, Water Usage Efficiency for AI Data Center Cooling, 2025.",
+      "url": "https://introl.com/blog/water-usage-efficiency-wue-ai-data-center-cooling-guide-2025"
+    },
+    "elsworth2025": {
+      "text": "C. Elsworth et al. (Google), 'Measuring the Environmental Impact of Delivering AI at Google Scale,' arXiv:2508.15734, 2025.",
+      "url": "https://arxiv.org/abs/2508.15734"
+    },
+    "ember2026": {
+      "text": "Ember, Global Electricity Review 2026; IEA Electricity 2025.",
+      "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/"
+    },
+    "jegham2025": {
+      "text": "N. Jegham, M. Abdelatti, L. Elmoubarki, A. Hendawi, 'How Hungry is AI? Benchmarking Energy, Water, and Carbon Footprint of LLM Inference,' arXiv:2505.09598, 2025.",
+      "url": "https://arxiv.org/abs/2505.09598"
+    },
+    "databasemart2026": {
+      "text": "DatabaseMart, RTX 4090 vLLM Benchmark for sub-8B LLMs, 2026.",
+      "url": "https://www.databasemart.com/blog/vllm-gpu-benchmark-rtx4090"
+    },
+    "nvidia_rtx4090": {
+      "text": "NVIDIA Corporation, GeForce RTX 4090 specifications: 450 W total graphics power, 850 W recommended system supply. REPLACES a third-party blog whose own title stated 575 W for this part - that is the RTX 5090's board power.",
+      "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/"
+    },
+    "solartech2025": {
+      "text": "SolarTech, How Much Electricity Does a Computer Use? 2025 Guide.",
+      "url": "https://solartechonline.com/blog/how-much-electricity-does-computer-use/"
+    },
+    "techtarget2025": {
+      "text": "TechTarget, Can Edge Computing Make AI More Sustainable? 2025.",
+      "url": "https://www.techtarget.com/sustainability/feature/Can-edge-computing-make-AI-more-sustainable"
+    },
+    "antmedia2026": {
+      "text": "Ant Media, WebRTC Peer-to-Peer Communication: How P2P Works in 2026 (STUN ~70-85%, TURN 10-20%).",
+      "url": "https://antmedia.io/how-to-create-webrtc-peer-to-peer-communication/"
+    },
+    "aslan2018": {
+      "text": "J. Aslan et al., 'Electricity Intensity of Internet Data Transmission: Untangling the Estimates,' J. Industrial Ecology, 2018.",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/jiec.12630"
+    },
+    "ni2025benchmarks": {
+      "text": "S. Ni, G. Chen, S. Li, X. Chen, S. Li, B. Wang, Q. Wang, X. Wang, Y. Zhang, L. Fan, C. Li, R. Xu, L. Sun, M. Yang, 'A Survey on Large Language Model Benchmarks,' arXiv:2508.15361, 2025. Surveys 283 benchmarks and documents contamination-inflated scores, which is why frontier MMLU is carried here as a range rather than a vendor point estimate. CORRECTION: an earlier version of this entry had its author field set literally to {Anonymous}.",
+      "url": "https://arxiv.org/abs/2508.15361"
+    },
+    "mistral2024": {
+      "text": "Mistral AI, 'Un Ministral, des Ministraux' (Ministral 3B/8B), Oct 2024; independent eval via Artificial Analysis.",
+      "url": "https://mistral.ai/news/ministraux"
+    },
+    "wang2024slm": {
+      "text": "F. Wang, Z. Zhang, X. Zhang, Z. Wu, T. Mo, Q. Lu, W. Wang, R. Li, J. Xu, X. Tang, Q. He, Y. Ma, M. Huang, S. Wang, 'A Comprehensive Survey of Small Language Models in the Era of Large Language Models,' arXiv:2411.03350, submitted November 2024. CORRECTION: an earlier version misattributed this to Belcak et al. and dated it 2025. This survey publishes NO per-task-class SLM-to-frontier accuracy ratio; the CAP_RATIO_* constants that once cited it are authorial estimates and now say so.",
+      "url": "https://arxiv.org/abs/2411.03350"
+    },
+    "luccioni2025": {
+      "text": "A. S. Luccioni et al., 'From Efficiency Gains to Rebound Effects: Jevons Paradox in AI,' arXiv:2501.16548 / ACM FAccT 2025.",
+      "url": "https://arxiv.org/abs/2501.16548"
+    },
+    "schneider2025": {
+      "text": "I. Schneider, H. Xu, S. Benecke, D. Patterson, K. Huang, P. Ranganathan, C. Elsworth, 'Life-Cycle Emissions of AI Hardware: A Cradle-to-Grave Approach and Generational Trends,' arXiv:2502.01671, 2025. CORRECTION: an earlier version carried this correct arXiv ID and title under an invented author list ('Faiz, Ahmad and others'). Ahmad Faiz is an author of LLMCarbon, a different paper.",
+      "url": "https://arxiv.org/abs/2502.01671"
+    },
+    "belcak2025": {
+      "text": "P. Belcak, G. Heinrich, S. Diao, Y. Fu, X. Dong, S. Muralidharan, Y. C. Lin, P. Molchanov (NVIDIA), 'Small Language Models are the Future of Agentic AI,' arXiv:2506.02153, 2025.",
+      "url": "https://arxiv.org/abs/2506.02153"
+    },
+    "iea2025": {
+      "text": "International Energy Agency, 'Energy and AI' (World Energy Outlook special report), 2025 - DC demand ~945 TWh by 2030.",
+      "url": "https://www.iea.org/reports/energy-and-ai"
+    },
+    "ucriverside2023": {
+      "text": "P. Li, J. Yang, M. A. Islam, S. Ren, 'Making AI Less Thirsty,' arXiv:2304.03271, 2023 (~519 mL per 100-word prompt).",
+      "url": "https://arxiv.org/abs/2304.03271"
+    },
+    "frontier2026": {
+      "text": "July-2026 frontier releases and public list pricing: OpenAI GPT-5.6 Sol/Terra/Luna (GA 2026-07-09); Google Gemini 3.6 Flash and 3.5 Flash-Lite (2026-07-21); Anthropic Claude Sonnet 5 (2026-06-30) and Fable 5; Moonshot AI Kimi K3 (2026-07-16); Zhipu AI GLM-5.2 (2026-06-13). Vendor announcements, OpenRouter listings, and the Kimi-K3-vs-GLM-5.2 comparison (Data Science in Your Pocket). Accessed 2026-07-24.",
+      "url": "https://openai.com/index/previewing-gpt-5-6-sol/; https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/; https://www.anthropic.com/news/claude-sonnet-5; https://medium.com/data-science-in-your-pocket/kimi-k3-vs-glm-5-2-3f82e1e39b02"
+    },
+    "caravaca2025": {
+      "text": "F. Caravaca, A. Cuevas, R. Cuevas, 'From Prompts to Power: Measuring the Energy Footprint of LLM Inference,' arXiv:2511.05597, 2025 (32,500+ GPU inference energy measurements and a predictive per-query model).",
+      "url": "https://arxiv.org/abs/2511.05597"
+    },
+    "autoyou_logs2026": {
+      "text": "Local AutoYou main-server runtime logs, April-July 2026, parsed in aggregate (provider-selection and model-configuration event counts only; no payloads or personal content). Reproducible against any local deployment's log directory.",
+      "url": ""
+    },
+    "measured2026": {
+      "text": "Primary measurement, this work. Run 2026-09-05 on an AMD Radeon 8060S (Ryzen AI MAX+ 395 'Strix Halo', 64 GB unified memory) under Ollama 0.33.2, Windows. Protocol: temperature 0, fixed seed, num_ctx 4096, 192 generated tokens, 5 repetitions, warm-up discarded, per-repetition prompt nonce to defeat KV prefix caching, median reported with full spread retained. Raw per-run records are retained in full. NOT measured: board power, which this platform exposes only through a kernel-mode helper the harness declines to install; energy figures derived from these timings therefore still carry a modelled P and say so. Not yet publicly released; available from the authors on request.",
+      "url": ""
+    },
+    "assumption": {
+      "text": "Author modelling assumption - varied across its stated range in the Monte-Carlo sensitivity analysis.",
+      "url": ""
+    },
+    "hypothesis": {
+      "text": "The hypothesis parameter under test in this paper.",
+      "url": ""
+    },
+    "authors_estimate": {
+      "text": "AUTHORIAL ESTIMATE, not a cited measurement. Informed by the benchmark spreads and surveys in this file but read off none of them; no published source states this value. Varied across its stated range in the Monte-Carlo. Distinguished from 'assumption' only to mark the quantities a reader is most likely to mistake for measured, namely the per-task-class capability ratios that set f_s.",
+      "url": ""
+    },
+    "qwen38_2026": {
+      "text": "Qwen team (Alibaba), Qwen3.8-27B model card and release, 2026-08-14: 27.78B dense parameters, text/image/video input, Apache-2.0, 262,144-token context, ~17 GB as a 4-bit build. Reported gains over Qwen3.6-27B on an identical architecture: Terminal-Bench 2.1 63.4->73.0, DeepSWE 1.1 13.3->42.2, OSWorld-Verified 63.9->84.3, SWE-MM 25.7->38.6; Artificial Analysis Intelligence Index 52. Accessed 2026-09-05.",
+      "url": "https://www.yottalabs.ai/post/qwen-3-8-27b-specs-hardware-requirements-how-to-run-2026"
+    },
+    "qwen35_2026": {
+      "text": "Qwen team (Alibaba), Qwen3.5 family, February 2026: five dense sizes 0.8B-27B plus 35B-A3B, 122B-A10B and 397B-A17B sparse-MoE variants, all Apache-2.0 and natively multimodal on an early-fusion vision-language architecture. Accessed 2026-09-05.",
+      "url": "https://insiderllm.com/guides/qwen-models-guide/"
+    },
+    "qwen25vl2025": {
+      "text": "Qwen team (Alibaba), Qwen2.5-VL model family, 2025. Apache-2.0 for all sizes except the 3B and 72B, which carry the Qwen Research License - the licensing fact that determined AutoYou's shipped support base.",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct"
+    },
+    "strixhalo2026": {
+      "text": "Home-enthusiast guide to fine-tuning 27B+ LLMs on AMD Strix Halo (gfx1151, Ryzen AI MAX+ 395): Linux 6.19 mainline, ROCm 7.1.0 with 7.13 nightly wheels, PyTorch 2.11.0+rocm7.13, transformers 5.4 / trl 0.29.1 / peft 0.18.1, bitsandbytes 0.50.0.dev0 built from source. Reported: Qwen3.5-27B LoRA r=128 alpha=256, bf16, paged_adamw_8bit, seq 8192, grad-accum 4, 448 steps at ~11 min/step, ~80 GB peak training memory of a 128 GB unified pool; measured inference 7.5 tok/s (27B dense Q8), 19 tok/s (27B MTP speculative), 50 tok/s (35B-A3B MoE Q4). Accessed 2026-09-05.",
+      "url": "https://github.com/h34v3nzc0dex/strix-halo-llm-finetune-guide"
+    },
+    "amd_strix2025": {
+      "text": "AMD, 'Ryzen AI MAX+ 395: a leap forward in generative AI performance with consumer PC' - 16 Zen 5 cores, 40 RDNA 3.5 CUs, 50+ peak AI TOPS XDNA 2 NPU, unified 128 GB LPDDR5X pool addressed by CPU, GPU and NPU.",
+      "url": "https://www.amd.com/en/developer/resources/technical-articles/2025/amd-ryzen-ai-max-395--a-leap-forward-in-generative-ai-performanc.html"
+    },
+    "hu2021lora": {
+      "text": "E. J. Hu et al., 'LoRA: Low-Rank Adaptation of Large Language Models,' arXiv:2106.09685, 2021.",
+      "url": "https://arxiv.org/abs/2106.09685"
+    },
+    "dettmers2023qlora": {
+      "text": "T. Dettmers, A. Pagnoni, A. Holtzman, L. Zettlemoyer, 'QLoRA: Efficient Finetuning of Quantized LLMs,' NeurIPS 2023 / arXiv:2305.14314. NF4, double quantization (~0.37 bits/param saved) and paged optimizers; 65B finetuning on one 48 GB GPU while preserving 16-bit task performance.",
+      "url": "https://arxiv.org/abs/2305.14314"
+    },
+    "liu2024dora": {
+      "text": "S.-Y. Liu et al., 'DoRA: Weight-Decomposed Low-Rank Adaptation,' ICML 2024 / arXiv:2402.09353. Available in HF PEFT as LoraConfig(use_dora=True), including over 4-bit bases (QDoRA) since PEFT 0.10.",
+      "url": "https://arxiv.org/abs/2402.09353"
+    },
+    "kalajdzievski2023rslora": {
+      "text": "D. Kalajdzievski, 'A Rank Stabilization Scaling Factor for Fine-Tuning with LoRA,' arXiv:2312.03732, 2023. Scaling by alpha/sqrt(r) rather than alpha/r, so higher ranks continue to help. LoraConfig(use_rslora=True).",
+      "url": "https://arxiv.org/abs/2312.03732"
+    },
+    "meng2024pissa": {
+      "text": "F. Meng, Z. Wang, M. Zhang, 'PiSSA: Principal Singular Values and Singular Vectors Adaptation of Large Language Models,' arXiv:2404.02948, 2024. init_lora_weights='pissa'.",
+      "url": "https://arxiv.org/abs/2404.02948"
+    },
+    "li2023loftq": {
+      "text": "Y. Li et al., 'LoftQ: LoRA-Fine-Tuning-Aware Quantization for Large Language Models,' arXiv:2310.08659, 2023. init_lora_weights='loftq'.",
+      "url": "https://arxiv.org/abs/2310.08659"
+    },
+    "buyukakyuz2024olora": {
+      "text": "K. Buyukakyuz, 'OLoRA: Orthonormal Low-Rank Adaptation of Large Language Models,' arXiv:2406.01775, 2024. init_lora_weights='olora'.",
+      "url": "https://arxiv.org/abs/2406.01775"
+    },
+    "paischer2024eva": {
+      "text": "F. Paischer et al., 'One Initialization to Rule them All: Fine-tuning via Explained Variance Adaptation,' arXiv:2410.07170, 2024. Data-driven rank allocation from an incremental SVD of activations on the target dataset. init_lora_weights='eva'.",
+      "url": "https://arxiv.org/abs/2410.07170"
+    },
+    "yang2024corda": {
+      "text": "Y. Yang et al., 'CorDA: Context-Oriented Decomposition Adaptation of Large Language Models,' arXiv:2406.05223, 2024. Knowledge-preserved and instruction-previewed modes. init_lora_weights='corda'.",
+      "url": "https://arxiv.org/abs/2406.05223"
+    },
+    "hayou2024loraplus": {
+      "text": "S. Hayou, N. Ghosh, B. Yu, 'LoRA+: Efficient Low Rank Adaptation of Large Models,' arXiv:2402.12354, 2024. Asymmetric learning rates for the A and B factors.",
+      "url": "https://arxiv.org/abs/2402.12354"
+    },
+    "zhang2023adalora": {
+      "text": "Q. Zhang et al., 'AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning,' ICLR 2023 / arXiv:2303.10512.",
+      "url": "https://arxiv.org/abs/2303.10512"
+    },
+    "kopiczko2023vera": {
+      "text": "D. J. Kopiczko, T. Blankevoort, Y. M. Asano, 'VeRA: Vector-based Random Matrix Adaptation,' arXiv:2310.11454, 2023. Frozen shared random projections with per-layer scaling vectors; roughly 50x fewer trainable parameters than LoRA.",
+      "url": "https://arxiv.org/abs/2310.11454"
+    },
+    "balazy2024loraxs": {
+      "text": "K. Balazy et al., 'LoRA-XS: Low-Rank Adaptation with Extremely Small Number of Parameters,' arXiv:2405.17604, 2024.",
+      "url": "https://arxiv.org/abs/2405.17604"
+    },
+    "zhao2024galore": {
+      "text": "J. Zhao et al., 'GaLore: Memory-Efficient LLM Training by Gradient Low-Rank Projection,' ICML 2024 / arXiv:2403.03507.",
+      "url": "https://arxiv.org/abs/2403.03507"
+    },
+    "jain2023neftune": {
+      "text": "N. Jain et al., 'NEFTune: Noisy Embeddings Improve Instruction Finetuning,' arXiv:2310.05914, 2023.",
+      "url": "https://arxiv.org/abs/2310.05914"
+    },
+    "biderman2024lora": {
+      "text": "D. Biderman et al., 'LoRA Learns Less and Forgets Less,' TMLR 2024 / arXiv:2405.09673. LoRA underperforms full fine-tuning in-domain but better preserves out-of-domain performance; full fine-tuning learns perturbations of 10-100x higher rank.",
+      "url": "https://arxiv.org/abs/2405.09673"
+    },
+    "qi2023finetuning": {
+      "text": "X. Qi, Y. Zeng, T. Xie, P.-Y. Chen, R. Jia, P. Mittal, P. Henderson, 'Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!,' ICLR 2024 / arXiv:2310.03693. Ten adversarial examples for under $0.20 removed GPT-3.5 Turbo's guardrails; benign datasets degraded safety more mildly.",
+      "url": "https://arxiv.org/abs/2310.03693"
+    },
+    "lorasurvey2024": {
+      "text": "Y. Mao et al., 'A Survey on LoRA of Large Language Models,' arXiv:2407.11046, 2024.",
+      "url": "https://arxiv.org/abs/2407.11046"
+    },
+    "peft_library2026": {
+      "text": "Hugging Face PEFT (v0.18, June 2026). LoraConfig exposes use_dora, use_rslora, and init_lora_weights in {gaussian, eva, olora, pissa, pissa_niter_N, corda, loftq, orthogonal}; the 0.18 line adds Sparse-LoRA and LoRA-XS.",
+      "url": "https://huggingface.co/docs/peft/developer_guides/lora"
+    },
+    "lorptts2025": {
+      "text": "'LoRP-TTS: Low-Rank Personalized Text-To-Speech,' arXiv:2502.07562, 2025. Speaker adaptation of a TTS model with low-rank updates from a small amount of unlabelled spontaneous speech.",
+      "url": "https://arxiv.org/abs/2502.07562"
+    },
+    "ttspartial2025": {
+      "text": "'Efficient Emotion and Speaker Adaptation in LLM-Based TTS via Characteristic-Specific Partial Fine-Tuning,' arXiv:2501.14273, 2025. Adapting disjoint parameter subsets for speaker identity and for emotion, rather than the whole model for both.",
+      "url": "https://arxiv.org/abs/2501.14273"
+    },
+    "peft_uplift": {
+      "text": "Bounded synthesis of reported in-distribution PEFT gains (DoRA, PiSSA, rsLoRA, LoRA+, EVA, CorDA, NEFTune) against a LoRA baseline, floored by the pessimistic reading of Biderman et al. 2024. Used only as a RANGE for sensitivity analysis; never as a point prediction for any specific task. See peft.METHODS for the per-method provenance.",
+      "url": ""
+    },
+    "autoyou_support2026": {
+      "text": "AutoYou Support adapter evaluation artifacts, read in aggregate: five runs over Qwen2.5-VL-3B and -7B bases, 12-14 screen probes and 8 code probes each, plus dataset statistics (1,750 train / 72 eval samples across 13 families). Scores only; no prompts, answers, screenshots or user content cross into the study. Not redistributable and not publicly released.",
+      "url": ""
+    }
+  }
+}

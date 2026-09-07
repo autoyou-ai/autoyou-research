@@ -1,0 +1,307 @@
+{
+  "harness": "measure/bench.py --ladder",
+  "experiment": "generation throughput vs weight size, one machine",
+  "protocol": {
+    "prompt": "You are summarising a technical document for an engineer. Explain, in plain prose and without lists, why moving a small language model from a data centre to a personal computer changes the energy arithmetic of a single query. Cover the cooling water, the idle overhead of shared infrastructure, and the fact that the personal computer was already powered on for other reasons. Be concrete and avoid slogans.",
+    "requested_tokens": 192,
+    "reps": 5,
+    "temperature": 0,
+    "seed": 20260905,
+    "num_ctx": 4096,
+    "warmup_discarded": true,
+    "statistic": "median over reps",
+    "raw_mode": true,
+    "unload_between_models": true,
+    "size_cap_gib": 20.0,
+    "models_over_cap_not_attempted": [],
+    "peak_bandwidth_gb_s": 672.0,
+    "peak_bandwidth_source": "part specification, not measured here; used only to express each result as a percentage of a ceiling"
+  },
+  "system": {
+    "measured_at": "2026-09-05T22:58:40+00:00",
+    "platform": "Windows-11-10.0.22631-SP0",
+    "machine": "AMD64",
+    "python": "3.13.3",
+    "ollama_host": "http://127.0.0.1:11434",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "ram_gb": 68.4,
+    "ollama_version": "0.33.3",
+    "nvidia_gpu": "name, driver_version, memory.total [MiB], power.limit [W]\nNVIDIA GeForce RTX 5070, 610.47, 12227 MiB, 250.00 W"
+  },
+  "power_sensor": {
+    "available": true,
+    "tool": "nvidia-smi",
+    "kind": "nvidia",
+    "gpu_index": 0,
+    "field": "power.draw.instant",
+    "probe_output": "18.24"
+  },
+  "models": [
+    {
+      "model": "ministral-3:3b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "weights_gib": 2.751,
+      "weights_gb": 2.954,
+      "reps": 5,
+      "requested_tokens": 192,
+      "median_gen_tok_s": 199.28,
+      "gen_tok_s_spread": {
+        "min": 195.21598818943272,
+        "max": 201.41388350095093,
+        "stdev": 2.253843463568995
+      },
+      "runs": [
+        {
+          "eval_tokens": 192,
+          "eval_s": 0.983526
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 0.963462
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 0.963395
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 0.963587
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 0.953261
+        }
+      ],
+      "residency": [
+        {
+          "name": "ministral-3:3b",
+          "model": "ministral-3:3b",
+          "size": 2723434986,
+          "digest": "f04aa1c738f64e13c625b82ae92504fc0260fa6723b509ed1ece0fa188179b1d",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "mistral3",
+            "families": [
+              "mistral3"
+            ],
+            "parameter_size": "3.8B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:03:55.702772-07:00",
+          "size_vram": 2723434986,
+          "context_length": 4096
+        },
+        {
+          "name": "ministral-3:8b",
+          "model": "ministral-3:8b",
+          "size": 5642995628,
+          "digest": "1922accd5827ebe6829e536369195db25eaf664528dc66206d646ea3bb386b71",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "mistral3",
+            "families": [
+              "mistral3"
+            ],
+            "parameter_size": "8.9B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:03:13.3430588-07:00",
+          "size_vram": 5642995628,
+          "context_length": 4096
+        }
+      ],
+      "effective_read_gb_s": 588.6,
+      "bandwidth_utilisation": 0.876
+    },
+    {
+      "model": "ministral-3:8b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "weights_gib": 5.609,
+      "weights_gb": 6.022,
+      "reps": 5,
+      "requested_tokens": 192,
+      "median_gen_tok_s": 103.96,
+      "gen_tok_s_spread": {
+        "min": 103.05958132045089,
+        "max": 104.5268851859272,
+        "stdev": 0.5416018344922772
+      },
+      "runs": [
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.843154
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.846885
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.863
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.836848
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.848154
+        }
+      ],
+      "residency": [
+        {
+          "name": "ministral-3:8b",
+          "model": "ministral-3:8b",
+          "size": 5642995628,
+          "digest": "1922accd5827ebe6829e536369195db25eaf664528dc66206d646ea3bb386b71",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "mistral3",
+            "families": [
+              "mistral3"
+            ],
+            "parameter_size": "8.9B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:04:05.5431977-07:00",
+          "size_vram": 5642995628,
+          "context_length": 4096
+        }
+      ],
+      "effective_read_gb_s": 626.1,
+      "bandwidth_utilisation": 0.932
+    },
+    {
+      "model": "qwen3:4b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen3",
+        "parameter_size": "4.0B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen3"
+        ],
+        "block_count": 36,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": false,
+        "capabilities": [
+          "completion",
+          "tools",
+          "thinking"
+        ]
+      },
+      "weights_gib": 2.326,
+      "weights_gb": 2.497,
+      "reps": 5,
+      "requested_tokens": 192,
+      "median_gen_tok_s": 169.92,
+      "gen_tok_s_spread": {
+        "min": 169.18699480719292,
+        "max": 173.36875353283983,
+        "stdev": 2.0356445478815006
+      },
+      "runs": [
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.129943
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.134839
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.130201
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.107823
+        },
+        {
+          "eval_tokens": 192,
+          "eval_s": 1.107466
+        }
+      ],
+      "residency": [
+        {
+          "name": "qwen3:4b",
+          "model": "qwen3:4b",
+          "size": 3178149969,
+          "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen3",
+            "families": [
+              "qwen3"
+            ],
+            "parameter_size": "4.0B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:04:14.2101919-07:00",
+          "size_vram": 3178149969,
+          "context_length": 4096
+        }
+      ],
+      "effective_read_gb_s": 424.3,
+      "bandwidth_utilisation": 0.631
+    }
+  ]
+}

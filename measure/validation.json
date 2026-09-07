@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "scope": "independent formula implementation on the same raw files; not independent hardware or peer review",
+  "files_sha256": {
+    "rtx5070-ladder.json": "895beb562ba2242ba7093531c9d0f42bac908e95874444393a2a47e9620c3514",
+    "rtx5070-replication.json": "2de6204d7ec57180a73873ad600d818b6a1cd916545149120875e3f0a43a0b50",
+    "rtx5070-study.json": "cac500fde7a652268b18897dd9368767e67219afde014c5643b60b98264e2528",
+    "rtx5070.json": "cd3db4b781ff6062b3da3d053400c0b9de0c9215ed4e97d86a1f27aa3a66468c"
+  },
+  "checks": [
+    {
+      "file": "rtx5070-ladder.json",
+      "model": "ministral-3:3b",
+      "repetitions": 5,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070-ladder.json",
+      "model": "ministral-3:8b",
+      "repetitions": 5,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070-ladder.json",
+      "model": "qwen3:4b",
+      "repetitions": 5,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070-replication.json",
+      "model": "ministral-3:3b",
+      "repetitions": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070-replication.json",
+      "model": "ministral-3:8b",
+      "repetitions": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070-study.json",
+      "model": "ministral-3:3b",
+      "repetitions": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070-study.json",
+      "model": "ministral-3:8b",
+      "repetitions": 7,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070.json",
+      "model": "ministral-3:3b",
+      "repetitions": 5,
+      "status": "PASS"
+    },
+    {
+      "file": "rtx5070.json",
+      "model": "ministral-3:8b",
+      "repetitions": 5,
+      "status": "PASS"
+    }
+  ],
+  "fleet_routing_fraction_counted_once": true,
+  "quality_and_coverage_recomputed": true,
+  "limitations": [
+    "No whole-system wattmeter",
+    "No matched cloud-quality evaluation",
+    "No new adaptation training or safety trial"
+  ]
+}

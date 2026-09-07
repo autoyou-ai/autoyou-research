@@ -1,0 +1,1094 @@
+{
+  "harness": "measure/bench.py",
+  "protocol": {
+    "prompt": "You are summarising a technical document for an engineer. Explain, in plain prose and without lists, why moving a small language model from a data centre to a personal computer changes the energy arithmetic of a single query. Cover the cooling water, the idle overhead of shared infrastructure, and the fact that the personal computer was already powered on for other reasons. Be concrete and avoid slogans.",
+    "requested_tokens": 192,
+    "prompt_fillers": 0,
+    "filler": "The following background material is provided for context and does not change the question being asked. Consumer accelerators share a single memory pool between the processor and the graphics engine, so the rate at which weights can be streamed sets an upper bound on how fast tokens can be produced in a single stream. ",
+    "energy_scope": "GPU 0 board telemetry, request window only; excludes host and post-request tail",
+    "reps": 5,
+    "temperature": 0,
+    "seed": 20260905,
+    "num_ctx": 4096,
+    "warmup_discarded": true,
+    "statistic": "median over reps",
+    "prefill_sweep": "prompt length varied over four values by repeating a neutral filler paragraph; prefill time regressed on server-reported prompt_eval_count to separate the fixed per-request cost from the marginal cost per prompt token",
+    "raw_mode": true,
+    "cache_defeat": "two traps, both closed: a unique marker per repetition defeats whole-prompt caching, and raw mode bypasses the chat template whose identical system prefix is otherwise always cached while still being counted in prompt_eval_count"
+  },
+  "system": {
+    "measured_at": "2026-09-05T22:56:58+00:00",
+    "platform": "Windows-11-10.0.22631-SP0",
+    "machine": "AMD64",
+    "python": "3.13.3",
+    "ollama_host": "http://127.0.0.1:11434",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "ram_gb": 68.4,
+    "ollama_version": "0.33.3",
+    "nvidia_gpu": "name, driver_version, memory.total [MiB], power.limit [W]\nNVIDIA GeForce RTX 5070, 610.47, 12227 MiB, 250.00 W"
+  },
+  "power_sensor": {
+    "available": true,
+    "tool": "nvidia-smi",
+    "kind": "nvidia",
+    "gpu_index": 0,
+    "field": "power.draw.instant",
+    "probe_output": "18.74"
+  },
+  "idle_power": {
+    "measured": true,
+    "samples": 28,
+    "sampled_s": 8.0,
+    "window_s": 8.000167899997905,
+    "trace_s_w": [
+      [
+        -0.03136314998846501,
+        18.74
+      ],
+      [
+        0.030587199958972633,
+        18.74
+      ],
+      [
+        0.3521533500170335,
+        18.2
+      ],
+      [
+        0.6708673000102863,
+        18.2
+      ],
+      [
+        0.9901697000022978,
+        18.89
+      ],
+      [
+        1.3180714000482112,
+        16.98
+      ],
+      [
+        1.6385413999669254,
+        16.98
+      ],
+      [
+        1.948004600009881,
+        20.8
+      ],
+      [
+        2.262985249981284,
+        18.89
+      ],
+      [
+        2.5719616500427946,
+        18.89
+      ],
+      [
+        2.8922857500147074,
+        19.46
+      ],
+      [
+        3.220981699996628,
+        17.48
+      ],
+      [
+        3.537612049956806,
+        17.48
+      ],
+      [
+        3.8473615499679,
+        19.32
+      ],
+      [
+        4.166785149951465,
+        19.32
+      ],
+      [
+        4.496586850029416,
+        17.29
+      ],
+      [
+        4.823504599975422,
+        19.31
+      ],
+      [
+        5.14907405001577,
+        19.31
+      ],
+      [
+        5.471368649974465,
+        17.08
+      ],
+      [
+        5.791007149964571,
+        19.51
+      ],
+      [
+        6.110591899952851,
+        19.51
+      ],
+      [
+        6.425353250000626,
+        17.35
+      ],
+      [
+        6.7366523499949835,
+        19.3
+      ],
+      [
+        7.050674450001679,
+        19.3
+      ],
+      [
+        7.375251699995715,
+        17.38
+      ],
+      [
+        7.691265749977902,
+        17.38
+      ],
+      [
+        8.000324699969497,
+        20.72
+      ],
+      [
+        8.05774315004237,
+        20.72
+      ]
+    ],
+    "max_sample_gap_s": 0.32980170007795095,
+    "mean_w": 18.53,
+    "peak_w": 20.8,
+    "min_w": 16.98,
+    "energy_j": 148.258,
+    "energy_wh": 0.041183
+  },
+  "models": [
+    {
+      "model": "ministral-3:3b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 5,
+      "requested_tokens": 192,
+      "prompt_fillers": 0,
+      "load_s_cold": 13.33,
+      "median_gen_tok_s": 200.37,
+      "gen_tok_s_spread": {
+        "min": 195.1939587469768,
+        "max": 201.9772733488884,
+        "stdev": 2.655781381410811
+      },
+      "median_prefill_tok_s": 5419.0,
+      "median_beta_prefill_overhead": 0.0165,
+      "median_eval_tokens": 192,
+      "median_prompt_tokens": 86,
+      "runs": [
+        {
+          "rep": 1,
+          "wall_s": 0.9841,
+          "eval_tokens": 192,
+          "eval_s": 0.954447,
+          "gen_tok_s": 201.16360573190548,
+          "prompt_tokens": 86,
+          "prefill_s": 0.01587,
+          "prefill_tok_s": 5419.02961562697,
+          "beta_prefill_overhead": 0.016627429286277813,
+          "power": {
+            "measured": true,
+            "samples": 6,
+            "sampled_s": 0.984,
+            "window_s": 0.9841039000311866,
+            "trace_s_w": [
+              [
+                -0.029478500015102327,
+                195.86
+              ],
+              [
+                0.03072795004118234,
+                195.86
+              ],
+              [
+                0.34481004998087883,
+                86.42
+              ],
+              [
+                0.6551951000001281,
+                202.86
+              ],
+              [
+                0.9637426499975845,
+                202.86
+              ],
+              [
+                1.0124852000153624,
+                202.86
+              ]
+            ],
+            "max_sample_gap_s": 0.3140820999396965,
+            "mean_w": 164.58,
+            "peak_w": 202.86,
+            "min_w": 86.42,
+            "energy_j": 161.964,
+            "energy_wh": 0.04499
+          }
+        },
+        {
+          "rep": 2,
+          "wall_s": 0.9861,
+          "eval_tokens": 192,
+          "eval_s": 0.958208,
+          "gen_tok_s": 200.3740315255143,
+          "prompt_tokens": 86,
+          "prefill_s": 0.015465,
+          "prefill_tok_s": 5560.944067248626,
+          "beta_prefill_overhead": 0.01613950207053166,
+          "power": {
+            "measured": true,
+            "samples": 6,
+            "sampled_s": 0.986,
+            "window_s": 0.9860639999969862,
+            "trace_s_w": [
+              [
+                -0.02412865002406761,
+                202.86
+              ],
+              [
+                0.0308800499769859,
+                150.44
+              ],
+              [
+                0.3455069499905221,
+                150.44
+              ],
+              [
+                0.6543580500292592,
+                197.63
+              ],
+              [
+                0.9645946999662556,
+                197.63
+              ],
+              [
+                1.0142930499860086,
+                197.88
+              ]
+            ],
+            "max_sample_gap_s": 0.3146269000135362,
+            "mean_w": 174.17,
+            "peak_w": 202.86,
+            "min_w": 150.44,
+            "energy_j": 171.74,
+            "energy_wh": 0.047705
+          }
+        },
+        {
+          "rep": 3,
+          "wall_s": 0.9879,
+          "eval_tokens": 192,
+          "eval_s": 0.95963,
+          "gen_tok_s": 200.07711305398956,
+          "prompt_tokens": 86,
+          "prefill_s": 0.015915,
+          "prefill_tok_s": 5403.707194470626,
+          "beta_prefill_overhead": 0.016584516949240853,
+          "power": {
+            "measured": true,
+            "samples": 6,
+            "sampled_s": 0.988,
+            "window_s": 0.9879150000051595,
+            "trace_s_w": [
+              [
+                -0.023744500009343028,
+                197.88
+              ],
+              [
+                0.02308284997707233,
+                197.88
+              ],
+              [
+                0.3299984500044957,
+                197.88
+              ],
+              [
+                0.6407623999984935,
+                201.86
+              ],
+              [
+                0.9529088999843225,
+                206.04
+              ],
+              [
+                1.014420900028199,
+                206.04
+              ]
+            ],
+            "max_sample_gap_s": 0.312146499985829,
+            "mean_w": 200.71,
+            "peak_w": 206.04,
+            "min_w": 197.88,
+            "energy_j": 198.287,
+            "energy_wh": 0.05508
+          }
+        },
+        {
+          "rep": 4,
+          "wall_s": 0.9793,
+          "eval_tokens": 192,
+          "eval_s": 0.950602,
+          "gen_tok_s": 201.9772733488884,
+          "prompt_tokens": 86,
+          "prefill_s": 0.015681,
+          "prefill_tok_s": 5484.344110707225,
+          "beta_prefill_overhead": 0.016495862621791244,
+          "power": {
+            "measured": true,
+            "samples": 6,
+            "sampled_s": 0.979,
+            "window_s": 0.9793378000031225,
+            "trace_s_w": [
+              [
+                -0.02413035003701225,
+                206.04
+              ],
+              [
+                0.023448899970389903,
+                206.04
+              ],
+              [
+                0.33116209995932877,
+                206.04
+              ],
+              [
+                0.6421339500229806,
+                202.8
+              ],
+              [
+                0.953929299954325,
+                207.08
+              ],
+              [
+                1.0038097000215203,
+                207.08
+              ]
+            ],
+            "max_sample_gap_s": 0.3117953499313444,
+            "mean_w": 205.2,
+            "peak_w": 207.08,
+            "min_w": 202.8,
+            "energy_j": 200.962,
+            "energy_wh": 0.055823
+          }
+        },
+        {
+          "rep": 5,
+          "wall_s": 1.0124,
+          "eval_tokens": 192,
+          "eval_s": 0.983637,
+          "gen_tok_s": 195.1939587469768,
+          "prompt_tokens": 86,
+          "prefill_s": 0.015938,
+          "prefill_tok_s": 5395.9091479482995,
+          "beta_prefill_overhead": 0.016203131846402687,
+          "power": {
+            "measured": true,
+            "samples": 6,
+            "sampled_s": 1.012,
+            "window_s": 1.0124049999867566,
+            "trace_s_w": [
+              [
+                -0.023860200017224997,
+                207.08
+              ],
+              [
+                0.03086875000735745,
+                207.08
+              ],
+              [
+                0.34475975000532344,
+                197.84
+              ],
+              [
+                0.657206200005021,
+                197.84
+              ],
+              [
+                0.9651504500652663,
+                204.81
+              ],
+              [
+                1.0414568500127643,
+                204.81
+              ]
+            ],
+            "max_sample_gap_s": 0.313890999997966,
+            "mean_w": 200.94,
+            "peak_w": 207.08,
+            "min_w": 197.84,
+            "energy_j": 203.432,
+            "energy_wh": 0.056509
+          }
+        }
+      ],
+      "residency": [
+        {
+          "name": "ministral-3:3b",
+          "model": "ministral-3:3b",
+          "size": 2723434986,
+          "digest": "f04aa1c738f64e13c625b82ae92504fc0260fa6723b509ed1ece0fa188179b1d",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "mistral3",
+            "families": [
+              "mistral3"
+            ],
+            "parameter_size": "3.8B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:02:44.0604676-07:00",
+          "size_vram": 2723434986,
+          "context_length": 4096
+        }
+      ],
+      "prefill_scaling": {
+        "available": true,
+        "points": [
+          {
+            "fillers": 0,
+            "prompt_tokens": 87,
+            "prefill_s_median": 0.01565,
+            "apparent_tok_s": 5560.2,
+            "reps": 3
+          },
+          {
+            "fillers": 4,
+            "prompt_tokens": 323,
+            "prefill_s_median": 0.04018,
+            "apparent_tok_s": 8038.8,
+            "reps": 3
+          },
+          {
+            "fillers": 12,
+            "prompt_tokens": 795,
+            "prefill_s_median": 0.09387,
+            "apparent_tok_s": 8468.9,
+            "reps": 3
+          },
+          {
+            "fillers": 24,
+            "prompt_tokens": 1503,
+            "prefill_s_median": 0.16993,
+            "apparent_tok_s": 8844.8,
+            "reps": 3
+          }
+        ],
+        "fit": {
+          "model": "prefill_s = a + b * prompt_tokens (OLS over medians)",
+          "fixed_overhead_ms": 5.83,
+          "marginal_prefill_tok_s": 9138.8,
+          "r2": 0.9998,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ]
+        },
+        "beta_at_study_typical_query": {
+          "prompt_tokens": 500.0,
+          "generated_tokens": 300.0,
+          "beta": 0.0404,
+          "note": "beta = prefill_s(500 prompt tokens) / decode_s(300 generated tokens), from the fitted line and the measured generation throughput. This is the ratio the paper's E_edge equation needs, quoted at the paper's own typical query rather than at the ladder's prompt length."
+        },
+        "template_cache_probe": {
+          "available": true,
+          "points": [
+            {
+              "fillers": 0,
+              "prompt_tokens": 639,
+              "prefill_s_median": 0.01671,
+              "apparent_tok_s": 38247.4,
+              "reps": 3
+            },
+            {
+              "fillers": 4,
+              "prompt_tokens": 875,
+              "prefill_s_median": 0.04133,
+              "apparent_tok_s": 21170.5,
+              "reps": 3
+            },
+            {
+              "fillers": 12,
+              "prompt_tokens": 1347,
+              "prefill_s_median": 0.09387,
+              "apparent_tok_s": 14349.5,
+              "reps": 3
+            },
+            {
+              "fillers": 24,
+              "prompt_tokens": 2055,
+              "prefill_s_median": 0.17354,
+              "apparent_tok_s": 11841.4,
+              "reps": 3
+            }
+          ],
+          "fit": {
+            "fixed_overhead_ms": -55.17,
+            "marginal_prefill_tok_s": 9001.5,
+            "r2": 0.9999
+          },
+          "shortest_prompt": {
+            "raw_prompt_tokens": 87,
+            "templated_prompt_tokens": 639,
+            "template_tokens_added": 552,
+            "raw_apparent_tok_s": 5560.2,
+            "templated_apparent_tok_s": 38247.4,
+            "inflation_factor": 6.88,
+            "prefill_s_raw": 0.01565,
+            "prefill_s_templated": 0.01671
+          },
+          "verdict": "CONTAMINATED",
+          "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+        }
+      },
+      "repeat_cache_probe": {
+        "available": true,
+        "reps": 3,
+        "prompt_tokens_reported": 640,
+        "apparent_prefill_tok_s": 119492.0,
+        "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+      },
+      "measured_energy": {
+        "measured": true,
+        "median_energy_wh_per_query": 0.05508,
+        "median_mean_power_w": 200.71,
+        "queries_n": 5,
+        "note": "Board power integrated over each generation. This is the accelerator rail only, not wall power: host CPU, DRAM and PSU losses are outside it, so it is a lower bound on the machine's draw and is not comparable to a hyperscaler's comprehensive per-prompt figure without adding those."
+      }
+    },
+    {
+      "model": "ministral-3:8b",
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 5,
+      "requested_tokens": 192,
+      "prompt_fillers": 0,
+      "load_s_cold": 2.61,
+      "median_gen_tok_s": 104.31,
+      "gen_tok_s_spread": {
+        "min": 101.28526784678071,
+        "max": 104.80091919139541,
+        "stdev": 1.4100017881476916
+      },
+      "median_prefill_tok_s": 2957.1,
+      "median_beta_prefill_overhead": 0.0154,
+      "median_eval_tokens": 192,
+      "median_prompt_tokens": 86,
+      "runs": [
+        {
+          "rep": 1,
+          "wall_s": 1.9,
+          "eval_tokens": 192,
+          "eval_s": 1.832045,
+          "gen_tok_s": 104.80091919139541,
+          "prompt_tokens": 86,
+          "prefill_s": 0.028123,
+          "prefill_tok_s": 3057.9952352167265,
+          "beta_prefill_overhead": 0.015350605470935485,
+          "power": {
+            "measured": true,
+            "samples": 9,
+            "sampled_s": 1.9,
+            "window_s": 1.8999574999907054,
+            "trace_s_w": [
+              [
+                -0.027356249978765845,
+                242.79
+              ],
+              [
+                0.02328780002426356,
+                242.79
+              ],
+              [
+                0.32849119999445975,
+                242.79
+              ],
+              [
+                0.6424780000234023,
+                224.9
+              ],
+              [
+                0.9519545000512153,
+                227.78
+              ],
+              [
+                1.2591572500532493,
+                227.78
+              ],
+              [
+                1.5701012499630451,
+                231.29
+              ],
+              [
+                1.8801429000450298,
+                231.29
+              ],
+              [
+                1.9296705999877304,
+                231.29
+              ]
+            ],
+            "max_sample_gap_s": 0.3139868000289425,
+            "mean_w": 232.04,
+            "peak_w": 242.79,
+            "min_w": 224.9,
+            "energy_j": 440.865,
+            "energy_wh": 0.122463
+          }
+        },
+        {
+          "rep": 2,
+          "wall_s": 1.8836,
+          "eval_tokens": 192,
+          "eval_s": 1.839069,
+          "gen_tok_s": 104.40065054655372,
+          "prompt_tokens": 86,
+          "prefill_s": 0.027474,
+          "prefill_tok_s": 3130.2322195530323,
+          "beta_prefill_overhead": 0.014939080589145922,
+          "power": {
+            "measured": true,
+            "samples": 9,
+            "sampled_s": 1.884,
+            "window_s": 1.8835889999754727,
+            "trace_s_w": [
+              [
+                -0.03127005003625527,
+                241.64
+              ],
+              [
+                0.02335309999762103,
+                241.64
+              ],
+              [
+                0.33033885003533214,
+                241.64
+              ],
+              [
+                0.6446943499613553,
+                225.87
+              ],
+              [
+                0.952581649995409,
+                226.4
+              ],
+              [
+                1.2653544000349939,
+                226.4
+              ],
+              [
+                1.5770094500039704,
+                223.31
+              ],
+              [
+                1.8887310000136495,
+                223.31
+              ],
+              [
+                1.9389533000066876,
+                227.59
+              ]
+            ],
+            "max_sample_gap_s": 0.3143554999260232,
+            "mean_w": 229.5,
+            "peak_w": 241.64,
+            "min_w": 223.31,
+            "energy_j": 432.281,
+            "energy_wh": 0.120078
+          }
+        },
+        {
+          "rep": 3,
+          "wall_s": 1.8922,
+          "eval_tokens": 192,
+          "eval_s": 1.84709,
+          "gen_tok_s": 103.94729006166457,
+          "prompt_tokens": 86,
+          "prefill_s": 0.029088,
+          "prefill_tok_s": 2956.5456545654565,
+          "beta_prefill_overhead": 0.015748014444342182,
+          "power": {
+            "measured": true,
+            "samples": 9,
+            "sampled_s": 1.892,
+            "window_s": 1.8921559000154957,
+            "trace_s_w": [
+              [
+                -0.023447099956683815,
+                227.59
+              ],
+              [
+                0.02251204999629408,
+                227.59
+              ],
+              [
+                0.33097120001912117,
+                227.59
+              ],
+              [
+                0.6384390000021085,
+                220.23
+              ],
+              [
+                0.9510350500349887,
+                221.98
+              ],
+              [
+                1.2620102500077337,
+                221.98
+              ],
+              [
+                1.5693157500354573,
+                220.13
+              ],
+              [
+                1.8833546000532806,
+                220.13
+              ],
+              [
+                1.933417750056833,
+                228.93
+              ]
+            ],
+            "max_sample_gap_s": 0.3140388500178233,
+            "mean_w": 222.67,
+            "peak_w": 228.93,
+            "min_w": 220.13,
+            "energy_j": 421.323,
+            "energy_wh": 0.117034
+          }
+        },
+        {
+          "rep": 4,
+          "wall_s": 1.9405,
+          "eval_tokens": 192,
+          "eval_s": 1.895636,
+          "gen_tok_s": 101.28526784678071,
+          "prompt_tokens": 86,
+          "prefill_s": 0.029191,
+          "prefill_tok_s": 2946.1135281422353,
+          "beta_prefill_overhead": 0.015399053404767582,
+          "power": {
+            "measured": true,
+            "samples": 9,
+            "sampled_s": 1.941,
+            "window_s": 1.9405217000166886,
+            "trace_s_w": [
+              [
+                -0.023797900008503348,
+                228.93
+              ],
+              [
+                0.023268249991815537,
+                228.93
+              ],
+              [
+                0.3326207499485463,
+                228.93
+              ],
+              [
+                0.6415070500224829,
+                221.55
+              ],
+              [
+                0.9533219499862753,
+                219.7
+              ],
+              [
+                1.2641263999976218,
+                219.7
+              ],
+              [
+                1.5737783500226215,
+                221.0
+              ],
+              [
+                1.8870862500043586,
+                221.0
+              ],
+              [
+                1.9661455500172451,
+                225.03
+              ]
+            ],
+            "max_sample_gap_s": 0.31330789998173714,
+            "mean_w": 222.7,
+            "peak_w": 228.93,
+            "min_w": 219.7,
+            "energy_j": 432.153,
+            "energy_wh": 0.120043
+          }
+        },
+        {
+          "rep": 5,
+          "wall_s": 1.8866,
+          "eval_tokens": 192,
+          "eval_s": 1.840711,
+          "gen_tok_s": 104.30752030057951,
+          "prompt_tokens": 86,
+          "prefill_s": 0.029083,
+          "prefill_tok_s": 2957.0539490423957,
+          "beta_prefill_overhead": 0.0157998729838633,
+          "power": {
+            "measured": true,
+            "samples": 9,
+            "sampled_s": 1.887,
+            "window_s": 1.8865672000101767,
+            "trace_s_w": [
+              [
+                -0.023255000007338822,
+                225.03
+              ],
+              [
+                0.02350249997107312,
+                225.03
+              ],
+              [
+                0.33213809999870136,
+                225.03
+              ],
+              [
+                0.6434121999773197,
+                224.47
+              ],
+              [
+                0.957343999936711,
+                227.76
+              ],
+              [
+                1.2694753999821842,
+                227.76
+              ],
+              [
+                1.5799839499522932,
+                223.13
+              ],
+              [
+                1.8932359499740414,
+                228.38
+              ],
+              [
+                1.943612600036431,
+                228.38
+              ]
+            ],
+            "max_sample_gap_s": 0.31393179995939136,
+            "mean_w": 225.79,
+            "peak_w": 228.38,
+            "min_w": 223.13,
+            "energy_j": 425.974,
+            "energy_wh": 0.118326
+          }
+        }
+      ],
+      "residency": [
+        {
+          "name": "ministral-3:8b",
+          "model": "ministral-3:8b",
+          "size": 5642995628,
+          "digest": "1922accd5827ebe6829e536369195db25eaf664528dc66206d646ea3bb386b71",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "mistral3",
+            "families": [
+              "mistral3"
+            ],
+            "parameter_size": "8.9B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:03:03.8119962-07:00",
+          "size_vram": 5642995628,
+          "context_length": 4096
+        },
+        {
+          "name": "ministral-3:3b",
+          "model": "ministral-3:3b",
+          "size": 2723434986,
+          "digest": "f04aa1c738f64e13c625b82ae92504fc0260fa6723b509ed1ece0fa188179b1d",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "mistral3",
+            "families": [
+              "mistral3"
+            ],
+            "parameter_size": "3.8B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-09-05T16:02:49.2044251-07:00",
+          "size_vram": 2723434986,
+          "context_length": 4096
+        }
+      ],
+      "prefill_scaling": {
+        "available": true,
+        "points": [
+          {
+            "fillers": 0,
+            "prompt_tokens": 87,
+            "prefill_s_median": 0.03134,
+            "apparent_tok_s": 2776.4,
+            "reps": 3
+          },
+          {
+            "fillers": 4,
+            "prompt_tokens": 323,
+            "prefill_s_median": 0.08404,
+            "apparent_tok_s": 3843.4,
+            "reps": 3
+          },
+          {
+            "fillers": 12,
+            "prompt_tokens": 795,
+            "prefill_s_median": 0.20292,
+            "apparent_tok_s": 3917.7,
+            "reps": 3
+          },
+          {
+            "fillers": 24,
+            "prompt_tokens": 1503,
+            "prefill_s_median": 0.37578,
+            "apparent_tok_s": 3999.7,
+            "reps": 3
+          }
+        ],
+        "fit": {
+          "model": "prefill_s = a + b * prompt_tokens (OLS over medians)",
+          "fixed_overhead_ms": 7.92,
+          "marginal_prefill_tok_s": 4088.2,
+          "r2": 0.9998,
+          "lengths_tested": [
+            87,
+            323,
+            795,
+            1503
+          ]
+        },
+        "beta_at_study_typical_query": {
+          "prompt_tokens": 500.0,
+          "generated_tokens": 300.0,
+          "beta": 0.0453,
+          "note": "beta = prefill_s(500 prompt tokens) / decode_s(300 generated tokens), from the fitted line and the measured generation throughput. This is the ratio the paper's E_edge equation needs, quoted at the paper's own typical query rather than at the ladder's prompt length."
+        },
+        "template_cache_probe": {
+          "available": true,
+          "points": [
+            {
+              "fillers": 0,
+              "prompt_tokens": 639,
+              "prefill_s_median": 0.03177,
+              "apparent_tok_s": 20113.3,
+              "reps": 3
+            },
+            {
+              "fillers": 4,
+              "prompt_tokens": 875,
+              "prefill_s_median": 0.08739,
+              "apparent_tok_s": 10012.7,
+              "reps": 3
+            },
+            {
+              "fillers": 12,
+              "prompt_tokens": 1347,
+              "prefill_s_median": 0.20633,
+              "apparent_tok_s": 6528.4,
+              "reps": 3
+            },
+            {
+              "fillers": 24,
+              "prompt_tokens": 2055,
+              "prefill_s_median": 0.38828,
+              "apparent_tok_s": 5292.6,
+              "reps": 3
+            }
+          ],
+          "fit": {
+            "fixed_overhead_ms": -131.94,
+            "marginal_prefill_tok_s": 3959.7,
+            "r2": 0.9998
+          },
+          "shortest_prompt": {
+            "raw_prompt_tokens": 87,
+            "templated_prompt_tokens": 639,
+            "template_tokens_added": 552,
+            "raw_apparent_tok_s": 2776.4,
+            "templated_apparent_tok_s": 20113.3,
+            "inflation_factor": 7.24,
+            "prefill_s_raw": 0.03134,
+            "prefill_s_templated": 0.03177
+          },
+          "verdict": "CONTAMINATED",
+          "note": "Identical content, identical sweep, template applied. The template prefix is counted in prompt_eval_count but is cached and never recomputed, so the extra tokens are nearly free and the fitted line must pass below zero to reach the shortest point. A negative fixed cost is not a physical quantity, which is what makes the length sweep a detector for this and not merely a better measurement. Note the two marginal rates agree: only the intercept and the apparent throughput are corrupted."
+        }
+      },
+      "repeat_cache_probe": {
+        "available": true,
+        "reps": 3,
+        "prompt_tokens_reported": 640,
+        "apparent_prefill_tok_s": 63891.0,
+        "note": "Identical prompt, no per-repetition marker, chat template applied. prompt_eval_count reports the full prompt; prompt_eval_duration charges only what was recomputed, which is nothing. The quotient is not a throughput."
+      },
+      "measured_energy": {
+        "measured": true,
+        "median_energy_wh_per_query": 0.120043,
+        "median_mean_power_w": 225.79,
+        "queries_n": 5,
+        "note": "Board power integrated over each generation. This is the accelerator rail only, not wall power: host CPU, DRAM and PSU losses are outside it, so it is a lower bound on the machine's draw and is not comparable to a hyperscaler's comprehensive per-prompt figure without adding those."
+      }
+    }
+  ]
+}
