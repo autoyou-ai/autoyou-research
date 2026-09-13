@@ -12,6 +12,25 @@ back against the prose.
 | Paper | [`paper/main.pdf`](paper/main.pdf) (14 pp) | [`paper/adaptation.pdf`](paper/adaptation.pdf) (8 pp) |
 | Hypotheses | H1–H6, counter-claims C1–C3 | H7–H11, counter-claims C4–C6 |
 
+## Demo assets
+
+![Public AutoYou entry screen](screenshots/test-autoyou-cloud-plans.png)
+
+![AutoYou mobile demo](screenshots/autoyou-mobile-demo-vertical-poster.png)
+
+The reference kit in [`screenshots/`](screenshots) includes the public
+`test.autoyou.me` entry capture, a portrait-first mobile walkthrough, selected
+evidence figures, short video reels, and future capture scripts. The public
+entry screen is shown without a signed-in workspace or account data.
+
+- [Reference video reel](screenshots/research-demo-reference.mp4)
+- [Live-site reference reel](screenshots/test-autoyou-reference.mp4)
+- [Portrait mobile demo](screenshots/autoyou-mobile-demo-vertical.mp4)
+- [Portrait live-site reference](screenshots/test-autoyou-vertical-reference.mp4)
+- [Capture script](screenshots/demo-script.md)
+- [Portrait demo notes](screenshots/mobile-demo-script.md)
+- [Live demo reference](https://test.autoyou.me/)
+
 ## Track A: does running it at home help?
 
 > *Can running small models on already-owned household hardware, reached over
