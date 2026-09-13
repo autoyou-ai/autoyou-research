@@ -16,22 +16,19 @@ back against the prose.
 
 ![Public AutoYou entry screen](screenshots/test-autoyou-cloud-plans.png)
 
-![AutoYou live mobile demo](screenshots/autoyou-mobile-demo-live-poster.png)
+![AutoYou mobile demo](screenshots/autoyou-mobile-demo-vertical-poster.png)
 
 The reference kit in [`screenshots/`](screenshots) includes the public
-`test.autoyou.me` entry capture, a continuous native mobile demo, selected
-evidence figures, short video reels, and capture notes. The public entry
-screen is shown without a signed-in workspace or account data.
+`test.autoyou.me` entry capture, a portrait-first mobile walkthrough, selected
+evidence figures, short video reels, and future capture scripts. The public
+entry screen is shown without a signed-in workspace or account data.
 
 - [Reference video reel](screenshots/research-demo-reference.mp4)
 - [Live-site reference reel](screenshots/test-autoyou-reference.mp4)
-- [Live native mobile demo](screenshots/autoyou-mobile-demo-live-vertical.mp4)
-- [Uncaptioned native capture](screenshots/autoyou-mobile-demo-live-native.mp4)
-- [Screenshot treatment reference](screenshots/autoyou-mobile-demo-vertical.mp4)
+- [Portrait mobile demo](screenshots/autoyou-mobile-demo-vertical.mp4)
 - [Portrait live-site reference](screenshots/test-autoyou-vertical-reference.mp4)
 - [Capture script](screenshots/demo-script.md)
 - [Portrait demo notes](screenshots/mobile-demo-script.md)
-- [Live native capture notes](screenshots/mobile-demo-live-capture.md)
 - [Live demo reference](https://test.autoyou.me/)
 
 ## Track A: does running it at home help?
