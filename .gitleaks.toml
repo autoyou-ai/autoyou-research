@@ -1,0 +1,14 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public model aliases in ModelSpec, not API credentials"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+regexes = ['''^\s*key="qwen2\.5-vl-[37]b",\s*$''']
+
+[[allowlists]]
+description = "Declared token-count parameter for the cited adaptation scenario"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+regexes = ['''^\s*CORPUS_CAPABILITY_TOKENS = Param\(1\.468e7, 5\.0e6, 4\.0e7, "tokens", "strixhalo2026",\s*$''']

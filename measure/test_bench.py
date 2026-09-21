@@ -1,7 +1,7 @@
-"""Offline checks: python -m unittest research.measure.test_bench."""
+"""Offline checks, from the research repo: python -m unittest measure.test_bench."""
 import unittest
 
-from research.measure.bench import PowerLog, client_url
+from measure.bench import PowerLog, client_url
 
 
 class BenchmarkChecks(unittest.TestCase):
