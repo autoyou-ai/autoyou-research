@@ -1,0 +1,20 @@
+{
+  "revision": "2026-09-20",
+  "status": "Working paper; not peer reviewed",
+  "files": {
+    "paper/main.tex": "6154e2c7d56a729bc4f5bf62e4e311437398c04e86d7a80d28ec50f2a7e8e5c9",
+    "paper/main.pdf": "357bb30dcf1a807662ed8fb8d054c90e1bd6ffcd7238ac2a73e165fc8e98a888",
+    "paper/review_numbers.tex": "5db8b069bdd7fe2d68bd2ffe7e01c52ef1b7d5372f1b970e0dd83a4181deacef",
+    "paper/review_references.bib": "2a5d180418de54c19723d15e66a15cefc5c0eacead804fd7ed8cc855186833e5",
+    "review/audit.py": "3048d87ebf44869da4dc9531ec40d0feb031c3e984faa9b8c45de1a0bdea3459",
+    "review/test_audit.py": "63bf3e64415e09b9dcfbed09118af6035d93665a260313408e01aca870c5678c",
+    "review/build_paper.py": "62333307173dee8fe93eada28c2175a266baf2f7bf0011e48b3676bea01d65fd",
+    "review/audit_results.json": "1f890be9caee5da7d2a974f7097150ba012fe73bf7d01920b6334fab7cfea805",
+    "measure/results/amd-8060s-strixhalo-ladder.json": "7210b754ef65727873ee52712cb8a183ccb5ca07c402f2bfa0f3a62cf1871e72",
+    "measure/results/amd-8060s-strixhalo.json": "92191823a2b9f053a500c1f0c6c1b28a485b629470e702970ef52c4acbb4d611",
+    "measure/results/rtx5070-ladder.json": "597daf662b86a307547e31f43cf3a90688a8bda1c45869941dde0ea92ccb00d0",
+    "measure/results/rtx5070-replication.json": "7c61f5d4b1473baaae3f5f2d59c0f6a5af980bbb64704c74353acacc0ee8de25",
+    "measure/results/rtx5070-study.json": "f9c1c9fe1e1170e994bd3aea43f01bdc8e09388c4c22f6619606d8973d2e412f",
+    "measure/results/rtx5070.json": "347844a25f2f7e64a58ecf42ce6209344c7480502d4643d35c70e0357ed9aa3d"
+  }
+}

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Please cite the working paper and identify the repository commit when reusing these records."
+type: dataset
+title: "Right-Sized AI at the Edge: Reproducible Measurements and Conditional Sustainability Analysis"
+authors:
+  - family-names: "Aswath Gopalan Yagya Narayanan"
+    affiliation: "AutoYou Research"
+date-released: 2026-09-20
+version: "2026-09-20"
+repository-code: "https://github.com/autoyou-ai/autoyou-research"
+url: "https://github.com/autoyou-ai/autoyou-research"
+license: MIT
+keywords:
+  - consumer inference
+  - energy measurement
+  - reproducibility
+abstract: "Working paper, not peer reviewed. Offline replay of stored consumer-inference records with explicit accounting boundaries and conditional sustainability analysis."
