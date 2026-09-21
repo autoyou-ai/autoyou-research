@@ -1,5 +1,12 @@
 # Primary measurement
 
+> Revision notice, 2026-09-17: the text below is legacy protocol documentation.
+> Use `../review/audit.py` and the revised `../paper/main.pdf` for current claims.
+> The AMD ladder retains summary statistics only; prefill ratios are fitted
+> projections; board telemetry is not whole-system or calibrated marginal energy.
+> Architecture metadata and file-size proxies do not prove runtime behavior.
+> The current offline commands are documented in the root README.
+
 Everything else in this repository is a model built on other people's measurements.
 This directory is the exception: it measures the machines the authors actually
 own, and feeds those numbers back into the study.

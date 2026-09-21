@@ -40,7 +40,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PAPER = os.path.abspath(os.path.join(HERE, "..", "paper"))
 RESULTS = os.path.join(HERE, "results.json")
 
-PAPERS = ["main.tex", "adaptation.tex"]
+PAPERS = ["archive/track-a-legacy.tex", "adaptation.tex"]
 
 # Above this many distinct sources, a match stops being evidence: the
 # number would have been accepted whatever the sentence claimed.

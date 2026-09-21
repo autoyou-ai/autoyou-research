@@ -1,0 +1,1070 @@
+{
+  "scope": "Offline replay of supplied raw records; no new hardware experiment or independent peer review",
+  "raw_sha256": {
+    "amd-8060s-strixhalo-ladder.json": "7210b754ef65727873ee52712cb8a183ccb5ca07c402f2bfa0f3a62cf1871e72",
+    "amd-8060s-strixhalo.json": "92191823a2b9f053a500c1f0c6c1b28a485b629470e702970ef52c4acbb4d611",
+    "rtx5070-ladder.json": "597daf662b86a307547e31f43cf3a90688a8bda1c45869941dde0ea92ccb00d0",
+    "rtx5070-replication.json": "7c61f5d4b1473baaae3f5f2d59c0f6a5af980bbb64704c74353acacc0ee8de25",
+    "rtx5070-study.json": "f9c1c9fe1e1170e994bd3aea43f01bdc8e09388c4c22f6619606d8973d2e412f",
+    "rtx5070.json": "347844a25f2f7e64a58ecf42ce6209344c7480502d4643d35c70e0357ed9aa3d"
+  },
+  "dataset_rows": [
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "output_tokens": 128,
+      "repetitions_per_model": 7,
+      "models": 9,
+      "raw_available": false,
+      "runtime": "0.33.2"
+    },
+    {
+      "file": "amd-8060s-strixhalo.json",
+      "output_tokens": 192,
+      "repetitions_per_model": 5,
+      "models": 3,
+      "raw_available": true,
+      "runtime": "0.33.2"
+    },
+    {
+      "file": "rtx5070-ladder.json",
+      "output_tokens": 192,
+      "repetitions_per_model": 5,
+      "models": 3,
+      "raw_available": true,
+      "runtime": "0.33.3"
+    },
+    {
+      "file": "rtx5070-replication.json",
+      "output_tokens": 300,
+      "repetitions_per_model": 7,
+      "models": 2,
+      "raw_available": true,
+      "runtime": "0.33.3"
+    },
+    {
+      "file": "rtx5070-study.json",
+      "output_tokens": 300,
+      "repetitions_per_model": 7,
+      "models": 2,
+      "raw_available": true,
+      "runtime": "0.33.3"
+    },
+    {
+      "file": "rtx5070.json",
+      "output_tokens": 192,
+      "repetitions_per_model": 5,
+      "models": 2,
+      "raw_available": true,
+      "runtime": "0.33.3"
+    }
+  ],
+  "checks": [
+    "amd-8060s-strixhalo-ladder.json: private-3.1b-q8:latest: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: private-7.6b-vlm-q8:latest: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: gemma4:26b: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: gemma4:e4b: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: ministral-3:3b: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: ministral-3:8b: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: muse-glimmer:30b: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: qwen3.6:latest: summary arithmetic only PASS",
+    "amd-8060s-strixhalo-ladder.json: qwen3.8:27b: summary arithmetic only PASS",
+    "amd-8060s-strixhalo.json: ministral-3:3b: raw replay PASS",
+    "amd-8060s-strixhalo.json: ministral-3:8b: raw replay PASS",
+    "amd-8060s-strixhalo.json: qwen3.8:27b: raw replay PASS",
+    "rtx5070-ladder.json: ministral-3:3b: raw replay PASS",
+    "rtx5070-ladder.json: ministral-3:8b: raw replay PASS",
+    "rtx5070-ladder.json: qwen3:4b: raw replay PASS",
+    "rtx5070-replication.json: ministral-3:3b: raw replay PASS",
+    "rtx5070-replication.json: ministral-3:8b: raw replay PASS",
+    "rtx5070-study.json: ministral-3:3b: raw replay PASS",
+    "rtx5070-study.json: ministral-3:8b: raw replay PASS",
+    "rtx5070.json: ministral-3:3b: raw replay PASS",
+    "rtx5070.json: ministral-3:8b: raw replay PASS"
+  ],
+  "warnings": [
+    "amd-8060s-strixhalo-ladder.json/private-3.1b-q8:latest: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/private-7.6b-vlm-q8:latest: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/gemma4:26b: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/gemma4:e4b: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/ministral-3:3b: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/ministral-3:8b: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/muse-glimmer:30b: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/qwen3.6:latest: aggregate only; raw repetitions unavailable",
+    "amd-8060s-strixhalo-ladder.json/qwen3.8:27b: aggregate only; raw repetitions unavailable"
+  ],
+  "raw_repetitions": 68,
+  "integrated_requests": 38,
+  "max_energy_rounding_difference_wh": 4.993321251478555e-07,
+  "energy_rows": [
+    {
+      "file": "rtx5070-replication.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 196.4258354972913,
+      "tok_s_min": 194.56489452637067,
+      "tok_s_max": 199.44951932665842,
+      "parameters": "3.8B",
+      "board_wh": 0.09145702135007895,
+      "board_wh_min": 0.07840186631198949,
+      "board_wh_max": 0.09406035374900247,
+      "board_cv": 0.06831166981674477,
+      "window_s": 1.6094239999656565,
+      "mean_w_median": 204.57336094609622,
+      "prompt_tokens": [
+        499
+      ],
+      "output_tokens": [
+        300
+      ],
+      "distinct_in_window_range": [
+        4,
+        4
+      ],
+      "maximum_sample_gap_s": 0.17739019996952266,
+      "overhead_ms_range": [
+        26.605200004719173,
+        52.361900002188875
+      ],
+      "host_wall_wh": {
+        "0": 0.10161891261119883,
+        "30": 0.11652098668495492,
+        "60": 0.131423060758711,
+        "100": 0.15129249285705243
+      },
+      "electricity_usd_60w": 2.1027689721393758e-05
+    },
+    {
+      "file": "rtx5070-replication.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 102.4919202202893,
+      "tok_s_min": 101.8522510875274,
+      "tok_s_max": 102.94904399801926,
+      "parameters": "8.9B",
+      "board_wh": 0.18941130895223932,
+      "board_wh_min": 0.17468284456392158,
+      "board_wh_max": 0.1962508077894481,
+      "board_cv": 0.044477082624835546,
+      "window_s": 3.088433199969586,
+      "mean_w_median": 222.2542881398171,
+      "prompt_tokens": [
+        499
+      ],
+      "output_tokens": [
+        300
+      ],
+      "distinct_in_window_range": [
+        6,
+        7
+      ],
+      "maximum_sample_gap_s": 0.16805684997234493,
+      "overhead_ms_range": [
+        33.719799993533556,
+        36.128500009879396
+      ],
+      "host_wall_wh": {
+        "0": 0.21045700994693256,
+        "30": 0.23886460716924626,
+        "60": 0.26727220439155996,
+        "100": 0.30514900068797823
+      },
+      "electricity_usd_60w": 4.2763552702649595e-05
+    },
+    {
+      "file": "rtx5070-study.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 195.55031770408283,
+      "tok_s_min": 194.39192262683102,
+      "tok_s_max": 200.07763012048676,
+      "parameters": "3.8B",
+      "board_wh": 0.09120946363284778,
+      "board_wh_min": 0.0780240398921683,
+      "board_wh_max": 0.0925734864284522,
+      "board_cv": 0.06245902173984374,
+      "window_s": 1.6177246000152081,
+      "mean_w_median": 203.39313452408925,
+      "prompt_tokens": [
+        499
+      ],
+      "output_tokens": [
+        300
+      ],
+      "distinct_in_window_range": [
+        3,
+        4
+      ],
+      "maximum_sample_gap_s": 0.18028975004563108,
+      "overhead_ms_range": [
+        26.36759998874747,
+        30.162999980505646
+      ],
+      "host_wall_wh": {
+        "0": 0.10134384848094197,
+        "30": 0.11594952070306001,
+        "60": 0.1307194288468208,
+        "100": 0.15071943625422715
+      },
+      "electricity_usd_60w": 2.091510861549133e-05
+    },
+    {
+      "file": "rtx5070-study.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 101.78334600535992,
+      "tok_s_min": 101.5213653405382,
+      "tok_s_max": 102.26172251690642,
+      "parameters": "8.9B",
+      "board_wh": 0.1938857212843632,
+      "board_wh_min": 0.18080059009169971,
+      "board_wh_max": 0.1947477878883308,
+      "board_cv": 0.02722627326596878,
+      "window_s": 3.1129030999727547,
+      "mean_w_median": 224.1260247902673,
+      "prompt_tokens": [
+        499
+      ],
+      "output_tokens": [
+        300
+      ],
+      "distinct_in_window_range": [
+        6,
+        7
+      ],
+      "maximum_sample_gap_s": 0.17658170004142448,
+      "overhead_ms_range": [
+        33.48229996636877,
+        71.56400004249817
+      ],
+      "host_wall_wh": {
+        "0": 0.215428579204848,
+        "30": 0.2442643977234393,
+        "60": 0.27310021624203057,
+        "100": 0.3114570492917186
+      },
+      "electricity_usd_60w": 4.369603459872489e-05
+    },
+    {
+      "file": "rtx5070.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 200.3740315255143,
+      "tok_s_min": 195.1939587469768,
+      "tok_s_max": 201.9772733488884,
+      "parameters": "3.8B",
+      "prefill_tok_s": 9138.9372942771,
+      "prefill_intercept_ms": 5.828865012106527,
+      "prefill_r2": 0.9998351594114879,
+      "beta_500_300": 0.04043536029159192,
+      "board_wh": 0.055079838747942506,
+      "board_wh_min": 0.04499012685823319,
+      "board_wh_max": 0.05650893299773646,
+      "board_cv": 0.10172219133836558,
+      "window_s": 0.9860639999969862,
+      "mean_w_median": 200.71303653812063,
+      "prompt_tokens": [
+        86
+      ],
+      "output_tokens": [
+        192
+      ],
+      "distinct_in_window_range": [
+        2,
+        3
+      ],
+      "maximum_sample_gap_s": 0.3146269000135362,
+      "overhead_ms_range": [
+        12.370000005159545,
+        13.786900031186596
+      ],
+      "host_wall_wh": {
+        "0": 0.061199820831047226,
+        "30": 0.07034718194220611,
+        "60": 0.079494543053365,
+        "100": 0.09169102453491018
+      },
+      "electricity_usd_60w": 1.27191268885384e-05
+    },
+    {
+      "file": "rtx5070.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 104.30752030057951,
+      "tok_s_min": 101.28526784678071,
+      "tok_s_max": 104.80091919139541,
+      "parameters": "8.9B",
+      "prefill_tok_s": 4088.164450456991,
+      "prefill_intercept_ms": 7.9200080710250536,
+      "prefill_r2": 0.9998106675338205,
+      "beta_500_300": 0.04527790775257109,
+      "board_wh": 0.12004255022898093,
+      "board_wh_min": 0.11703408408266724,
+      "board_wh_max": 0.12246254394427054,
+      "board_cv": 0.01714956404571183,
+      "window_s": 1.8921559000154957,
+      "mean_w_median": 225.79306801202677,
+      "prompt_tokens": [
+        86
+      ],
+      "output_tokens": [
+        192
+      ],
+      "distinct_in_window_range": [
+        4,
+        4
+      ],
+      "maximum_sample_gap_s": 0.3143554999260232,
+      "overhead_ms_range": [
+        15.694700016688454,
+        39.78949999070548
+      ],
+      "host_wall_wh": {
+        "0": 0.13338061136553436,
+        "30": 0.15086056801669215,
+        "60": 0.1683012069053539,
+        "100": 0.1915553920902363
+      },
+      "electricity_usd_60w": 2.6928193104856626e-05
+    }
+  ],
+  "throughput_rows": [
+    {
+      "file": "amd-8060s-strixhalo.json",
+      "model": "ministral-3:3b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 78.380687651735,
+      "tok_s_min": 78.21411112921622,
+      "tok_s_max": 78.42714363441186,
+      "parameters": "3.8B",
+      "prefill_tok_s": 2710.7000453971154,
+      "prefill_intercept_ms": 5.749017352703778,
+      "prefill_r2": 0.9999021934326445,
+      "beta_500_300": 0.04969419576428197
+    },
+    {
+      "file": "amd-8060s-strixhalo.json",
+      "model": "ministral-3:8b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 37.7937058126129,
+      "tok_s_min": 37.59282932444315,
+      "tok_s_max": 37.823367631116575,
+      "parameters": "8.9B",
+      "prefill_tok_s": 1160.6802016904337,
+      "prefill_intercept_ms": 7.411333736884629,
+      "prefill_r2": 0.9999425001173297,
+      "beta_500_300": 0.05520315143265844
+    },
+    {
+      "file": "amd-8060s-strixhalo.json",
+      "model": "qwen3.8:27b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 13.793301627896952,
+      "tok_s_min": 12.776876409074857,
+      "tok_s_max": 24.45777619708076,
+      "parameters": "27.3B",
+      "prefill_tok_s": 340.6346277612327,
+      "prefill_intercept_ms": 233.16410201149407,
+      "prefill_r2": 0.9998391507689406,
+      "beta_500_300": 0.07820859594197498
+    },
+    {
+      "file": "rtx5070-replication.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 196.4258354972913,
+      "tok_s_min": 194.56489452637067,
+      "tok_s_max": 199.44951932665842,
+      "parameters": "3.8B"
+    },
+    {
+      "file": "rtx5070-replication.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 102.4919202202893,
+      "tok_s_min": 101.8522510875274,
+      "tok_s_max": 102.94904399801926,
+      "parameters": "8.9B"
+    },
+    {
+      "file": "rtx5070-study.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 195.55031770408283,
+      "tok_s_min": 194.39192262683102,
+      "tok_s_max": 200.07763012048676,
+      "parameters": "3.8B"
+    },
+    {
+      "file": "rtx5070-study.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 7,
+      "raw_available": true,
+      "tok_s": 101.78334600535992,
+      "tok_s_min": 101.5213653405382,
+      "tok_s_max": 102.26172251690642,
+      "parameters": "8.9B"
+    },
+    {
+      "file": "rtx5070.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 200.3740315255143,
+      "tok_s_min": 195.1939587469768,
+      "tok_s_max": 201.9772733488884,
+      "parameters": "3.8B",
+      "prefill_tok_s": 9138.9372942771,
+      "prefill_intercept_ms": 5.828865012106527,
+      "prefill_r2": 0.9998351594114879,
+      "beta_500_300": 0.04043536029159192
+    },
+    {
+      "file": "rtx5070.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 104.30752030057951,
+      "tok_s_min": 101.28526784678071,
+      "tok_s_max": 104.80091919139541,
+      "parameters": "8.9B",
+      "prefill_tok_s": 4088.164450456991,
+      "prefill_intercept_ms": 7.9200080710250536,
+      "prefill_r2": 0.9998106675338205,
+      "beta_500_300": 0.04527790775257109
+    }
+  ],
+  "ladder_rows": [
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "private-3.1b-q8:latest",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 59.77,
+      "tok_s_min": 59.48723859308963,
+      "tok_s_max": 60.087210953523005,
+      "parameters": "3.1B",
+      "weights_gb": 3.285,
+      "proxy_gb_s": 196.34445000000002,
+      "proxy_percent": 76.69705078125001,
+      "metadata": {
+        "available": true,
+        "architecture": "qwen2",
+        "parameter_size": "3.1B",
+        "quantization": "Q8_0",
+        "context_length": 32768,
+        "families": [
+          "qwen2"
+        ],
+        "block_count": 36,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": false,
+        "capabilities": [
+          "tools",
+          "completion"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "private-7.6b-vlm-q8:latest",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 28.62,
+      "tok_s_min": 28.48799943024001,
+      "tok_s_max": 28.668119483346736,
+      "parameters": "7.6B",
+      "weights_gb": 9.453,
+      "proxy_gb_s": 270.54485999999997,
+      "proxy_percent": 105.68158593749999,
+      "metadata": {
+        "available": true,
+        "architecture": "qwen2vl",
+        "parameter_size": "7.6B",
+        "quantization": "Q8_0",
+        "context_length": 128000,
+        "families": [
+          "qwen2vl"
+        ],
+        "block_count": 28,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "gemma4:26b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 58.34,
+      "tok_s_min": 58.06605558191714,
+      "tok_s_max": 58.76063716729658,
+      "parameters": "25.8B",
+      "weights_gb": 17.988,
+      "proxy_gb_s": 1049.41992,
+      "proxy_percent": 409.92965625,
+      "metadata": {
+        "available": true,
+        "architecture": "gemma4",
+        "parameter_size": "25.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "gemma4"
+        ],
+        "block_count": 30,
+        "expert_count": 128,
+        "expert_used_count": 8,
+        "mixture_of_experts": true,
+        "expert_active_fraction": 0.0625,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": 0,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "gemma4:e4b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 56.42,
+      "tok_s_min": 56.37033194198436,
+      "tok_s_max": 56.74138650237671,
+      "parameters": "8.0B",
+      "weights_gb": 9.608,
+      "proxy_gb_s": 542.0833600000001,
+      "proxy_percent": 211.75131250000004,
+      "metadata": {
+        "available": true,
+        "architecture": "gemma4",
+        "parameter_size": "8.0B",
+        "quantization": "Q4_K_M",
+        "context_length": 131072,
+        "families": [
+          "gemma4"
+        ],
+        "block_count": 12,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": 256,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "audio",
+          "tools",
+          "thinking"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "ministral-3:3b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 78.62,
+      "tok_s_min": 77.8916672954796,
+      "tok_s_max": 78.89979171687796,
+      "parameters": "3.8B",
+      "weights_gb": 2.954,
+      "proxy_gb_s": 232.24348000000003,
+      "proxy_percent": 90.720109375,
+      "metadata": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "ministral-3:8b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 37.81,
+      "tok_s_min": 37.76715838720071,
+      "tok_s_max": 37.94257569025104,
+      "parameters": "8.9B",
+      "weights_gb": 6.022,
+      "proxy_gb_s": 227.69182000000004,
+      "proxy_percent": 88.94211718750002,
+      "metadata": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "muse-glimmer:30b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 12.46,
+      "tok_s_min": 12.38170633842763,
+      "tok_s_max": 12.512491719027697,
+      "parameters": "27.9B",
+      "weights_gb": 18.157,
+      "proxy_gb_s": 226.23622,
+      "proxy_percent": 88.3735234375,
+      "metadata": {
+        "available": true,
+        "architecture": "muse-glimmer",
+        "parameter_size": "27.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 131072,
+        "families": [
+          "muse-glimmer"
+        ],
+        "block_count": 52,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "qwen3.6:latest",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 62.2,
+      "tok_s_min": 62.10559312399168,
+      "tok_s_max": 62.38649800216988,
+      "parameters": "36.0B",
+      "weights_gb": 23.938,
+      "proxy_gb_s": 1488.9436,
+      "proxy_percent": 581.6185937500001,
+      "metadata": {
+        "available": true,
+        "architecture": "qwen35moe",
+        "parameter_size": "36.0B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35moe"
+        ],
+        "block_count": 40,
+        "expert_count": 256,
+        "expert_used_count": 8,
+        "mixture_of_experts": true,
+        "expert_active_fraction": 0.0312,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      }
+    },
+    {
+      "file": "amd-8060s-strixhalo-ladder.json",
+      "model": "qwen3.8:27b",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "repetitions": 7,
+      "raw_available": false,
+      "tok_s": 19.63,
+      "tok_s_min": 19.256181836125077,
+      "tok_s_max": 21.668160584769485,
+      "parameters": "27.3B",
+      "weights_gb": 17.742,
+      "proxy_gb_s": 348.27546,
+      "proxy_percent": 136.0451015625,
+      "metadata": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      }
+    },
+    {
+      "file": "rtx5070-ladder.json",
+      "model": "ministral-3:3b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 199.28134166163272,
+      "tok_s_min": 195.21598818943272,
+      "tok_s_max": 201.41388350095093,
+      "parameters": "3.8B",
+      "weights_gb": 2.954,
+      "proxy_gb_s": 588.6770832684631,
+      "proxy_percent": 87.60075643875939,
+      "metadata": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      }
+    },
+    {
+      "file": "rtx5070-ladder.json",
+      "model": "ministral-3:8b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 103.95882797250505,
+      "tok_s_min": 103.05958132045089,
+      "tok_s_max": 104.5268851859272,
+      "parameters": "8.9B",
+      "weights_gb": 6.022,
+      "proxy_gb_s": 626.0400620504254,
+      "proxy_percent": 93.16072351940855,
+      "metadata": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      }
+    },
+    {
+      "file": "rtx5070-ladder.json",
+      "model": "qwen3:4b",
+      "gpu": "NVIDIA GeForce RTX 5070",
+      "repetitions": 5,
+      "raw_available": true,
+      "tok_s": 169.92007561443367,
+      "tok_s_min": 169.18699480719292,
+      "tok_s_max": 173.36875353283983,
+      "parameters": "4.0B",
+      "weights_gb": 2.497,
+      "proxy_gb_s": 424.29042880924084,
+      "proxy_percent": 63.13845666804179,
+      "metadata": {
+        "available": true,
+        "architecture": "qwen3",
+        "parameter_size": "4.0B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen3"
+        ],
+        "block_count": 36,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": false,
+        "capabilities": [
+          "completion",
+          "tools",
+          "thinking"
+        ]
+      }
+    }
+  ],
+  "legacy_scenarios": [
+    {
+      "name": "Gemini median",
+      "cloud": {
+        "energy": 0.24,
+        "water": 0.30763636363636365,
+        "carbon": 0.10991999999999999
+      },
+      "edge": {
+        "energy": 0.29117021276595745,
+        "water": 0.3202872340425532,
+        "carbon": 0.1403559574468085
+      },
+      "original_saving": {
+        "energy": -0.17483156028368804,
+        "water": -0.03372070066898045,
+        "carbon": -0.22705135649911745
+      },
+      "implied_growth": {
+        "energy": 0.0,
+        "water": 0.0,
+        "carbon": 0.0
+      },
+      "common_carbon_calibrated_growth_saving": {
+        "energy": -0.17483156028368807,
+        "water": -0.03372070066898036,
+        "carbon": -0.22705135649911745
+      }
+    },
+    {
+      "name": "GPT-4o short",
+      "cloud": {
+        "energy": 0.421,
+        "water": 0.5396454545454545,
+        "carbon": 0.192818
+      },
+      "edge": {
+        "energy": 0.29117021276595745,
+        "water": 0.3202872340425532,
+        "carbon": 0.1403559574468085
+      },
+      "original_saving": {
+        "energy": 0.2023000960226411,
+        "water": 0.2666546923314863,
+        "carbon": 0.17848489204790852
+      },
+      "implied_growth": {
+        "energy": 0.06769286549201263,
+        "water": 0.09999326458768369,
+        "carbon": 0.05743541541122658
+      },
+      "common_carbon_calibrated_growth_saving": {
+        "energy": 0.209963692183064,
+        "water": 0.29502722878489585,
+        "carbon": 0.1784848920479083
+      }
+    },
+    {
+      "name": "GPT-4o long",
+      "cloud": {
+        "energy": 1.788,
+        "water": 2.291890909090909,
+        "carbon": 0.8189040000000001
+      },
+      "edge": {
+        "energy": 0.29117021276595745,
+        "water": 0.3202872340425532,
+        "carbon": 0.1403559574468085
+      },
+      "original_saving": {
+        "energy": 0.5491724499024228,
+        "water": 0.5643252938878947,
+        "carbon": 0.5435649550068061
+      },
+      "implied_growth": {
+        "energy": 0.43788846136621196,
+        "water": 0.4789018755533805,
+        "carbon": 0.42393968033599566
+      },
+      "common_carbon_calibrated_growth_saving": {
+        "energy": 0.5535458731182437,
+        "water": 0.5805167928943114,
+        "carbon": 0.5435649550068062
+      }
+    },
+    {
+      "name": "Claude-3.7 long",
+      "cloud": {
+        "energy": 5.518,
+        "water": 7.073072727272727,
+        "carbon": 2.5272439999999996
+      },
+      "edge": {
+        "energy": 0.29117021276595745,
+        "water": 0.3202872340425532,
+        "carbon": 0.1403559574468085
+      },
+      "original_saving": {
+        "energy": 0.6213846213166967,
+        "water": 0.6262946041086546,
+        "carbon": 0.6195676222457719
+      },
+      "implied_growth": {
+        "energy": 0.695779530180827,
+        "water": 0.7210997688297587,
+        "carbon": 0.686758806769927
+      },
+      "common_carbon_calibrated_growth_saving": {
+        "energy": 0.6233986712267405,
+        "water": 0.6337511171210203,
+        "carbon": 0.6195676222457718
+      }
+    },
+    {
+      "name": "o3 long",
+      "cloud": {
+        "energy": 39.223,
+        "water": 50.276754545454544,
+        "carbon": 17.964134
+      },
+      "edge": {
+        "energy": 0.29117021276595745,
+        "water": 0.3202872340425532,
+        "carbon": 0.1403559574468085
+      },
+      "original_saving": {
+        "energy": 0.6511302128961459,
+        "water": 0.6518209628399549,
+        "carbon": 0.650874592447089
+      },
+      "implied_growth": {
+        "energy": 0.8747647532294872,
+        "water": 0.8797748660438889,
+        "carbon": 0.872922465899921
+      },
+      "common_carbon_calibrated_growth_saving": {
+        "energy": 0.6514730390493166,
+        "water": 0.6530901904094155,
+        "carbon": 0.6508745924470889
+      }
+    }
+  ],
+  "legacy_fleet": {
+    "inference_twh": 276.4125,
+    "operational_twh": 37.94953245216336,
+    "original_carbon_mt": 17.38088586309082,
+    "embodied_adjusted_carbon_mt": 17.203412960406254
+  },
+  "missing_evidence": [
+    "matched local/cloud task-quality evaluation",
+    "whole-system wall-meter measurements",
+    "independent laboratory replication",
+    "empirically sampled workload mix",
+    "observed rebound elasticity",
+    "network path energy measurements",
+    "AMD ladder raw repetitions (nine aggregate-only records)"
+  ]
+}

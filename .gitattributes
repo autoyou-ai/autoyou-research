@@ -1,0 +1,6 @@
+# Preserve the exact archived bytes recorded in review/source-manifest.json.
+paper/* -text
+review/* -text
+measure/results/*.json -text
+*.pdf binary
+*.png binary
