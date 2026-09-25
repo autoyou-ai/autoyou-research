@@ -1,0 +1,1513 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "public-synthetic-operations-mcq-template-holdout-v1",
+  "source_benchmark_id": "public-synthetic-operations-mcq-v1",
+  "generator": {
+    "name": "models/adaptation_template_holdout.py",
+    "template_id": "unseen-operations-prompt-v1",
+    "source_split": "evaluation",
+    "note": "Public synthetic records only; IDs are new and prompts use an unseen outer template."
+  },
+  "tasks": [
+    {
+      "task_id": "template-holdout-evaluation-extraction-100",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6100; owner=Cedar; queue=bravo; priority=P2; status=open.\n\nCandidate choices:\nA. Cedar\nB. Orchid\nC. Juniper\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Cedar",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-extraction-100",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-101",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6101; owner=Quartz; queue=alpha; priority=P3; status=open.\n\nCandidate choices:\nA. Orchid\nB. Quartz\nC. Juniper\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Quartz",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-extraction-101",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-102",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6102; owner=Orchid; queue=delta; priority=P1; status=open.\n\nCandidate choices:\nA. Juniper\nB. Cobalt\nC. Orchid\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Juniper",
+        "B": "Cobalt",
+        "C": "Orchid",
+        "D": "Maple"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-extraction-102",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-103",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6103; owner=Juniper; queue=charlie; priority=P2; status=held.\n\nCandidate choices:\nA. Orchid\nB. Cobalt\nC. Maple\nD. Juniper\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Cobalt",
+        "C": "Maple",
+        "D": "Juniper"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-extraction-103",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-104",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6104; owner=Cobalt; queue=bravo; priority=P3; status=held.\n\nCandidate choices:\nA. Cobalt\nB. Orchid\nC. Juniper\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Cobalt",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Maple"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-extraction-104",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-105",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6105; owner=Maple; queue=alpha; priority=P1; status=held.\n\nCandidate choices:\nA. Orchid\nB. Maple\nC. Juniper\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Maple",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-extraction-105",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-106",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6106; owner=Cedar; queue=delta; priority=P2; status=held.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cedar\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cedar",
+        "D": "Cobalt"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-extraction-106",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-107",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6107; owner=Quartz; queue=charlie; priority=P3; status=open.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Quartz\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Quartz"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-extraction-107",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-108",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6108; owner=Orchid; queue=bravo; priority=P1; status=held.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-extraction-108",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-109",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6109; owner=Juniper; queue=alpha; priority=P2; status=open.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-extraction-109",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-110",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6110; owner=Cobalt; queue=delta; priority=P3; status=open.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-extraction-110",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-111",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6111; owner=Maple; queue=charlie; priority=P1; status=held.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-extraction-111",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-112",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6112; owner=Cedar; queue=bravo; priority=P2; status=open.\n\nCandidate choices:\nA. Cedar\nB. Orchid\nC. Juniper\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Cedar",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-extraction-112",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-113",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6113; owner=Quartz; queue=alpha; priority=P3; status=held.\n\nCandidate choices:\nA. Orchid\nB. Quartz\nC. Juniper\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Quartz",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-extraction-113",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-114",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6114; owner=Orchid; queue=delta; priority=P1; status=open.\n\nCandidate choices:\nA. Juniper\nB. Cobalt\nC. Orchid\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Juniper",
+        "B": "Cobalt",
+        "C": "Orchid",
+        "D": "Maple"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-extraction-114",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-115",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6115; owner=Juniper; queue=charlie; priority=P2; status=open.\n\nCandidate choices:\nA. Orchid\nB. Cobalt\nC. Maple\nD. Juniper\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Cobalt",
+        "C": "Maple",
+        "D": "Juniper"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-extraction-115",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-116",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6116; owner=Cobalt; queue=bravo; priority=P3; status=held.\n\nCandidate choices:\nA. Cobalt\nB. Orchid\nC. Juniper\nD. Maple\n\nResponse:",
+      "options": {
+        "A": "Cobalt",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Maple"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-extraction-116",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-117",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6117; owner=Maple; queue=alpha; priority=P1; status=open.\n\nCandidate choices:\nA. Orchid\nB. Maple\nC. Juniper\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Maple",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-extraction-117",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-118",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6118; owner=Cedar; queue=delta; priority=P2; status=held.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cedar\nD. Cobalt\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cedar",
+        "D": "Cobalt"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-extraction-118",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-extraction-119",
+      "split": "template_holdout",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFrom this ticket, identify the assigned owner:\nTicket OPS-6119; owner=Quartz; queue=charlie; priority=P3; status=open.\n\nCandidate choices:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Quartz\n\nResponse:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Quartz"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-extraction-119",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-100",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Pioneer has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nCandidate choices:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-rag_qa-100",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-101",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Mosaic has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nCandidate choices:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-rag_qa-101",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-102",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Nimbus has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nCandidate choices:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-rag_qa-102",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-103",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Harbor has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nCandidate choices:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-rag_qa-103",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-104",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Lattice has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nCandidate choices:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-rag_qa-104",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-105",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Saffron has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nCandidate choices:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-rag_qa-105",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-106",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Pioneer has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nCandidate choices:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-rag_qa-106",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-107",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Mosaic has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nCandidate choices:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-rag_qa-107",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-108",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Nimbus has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nCandidate choices:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-rag_qa-108",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-109",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Harbor has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nCandidate choices:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-rag_qa-109",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-110",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Lattice has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nCandidate choices:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-rag_qa-110",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-111",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Saffron has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nCandidate choices:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-rag_qa-111",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-112",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Pioneer has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nCandidate choices:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-rag_qa-112",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-113",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Mosaic has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nCandidate choices:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-rag_qa-113",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-114",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Nimbus has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nCandidate choices:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-rag_qa-114",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-115",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Harbor has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nCandidate choices:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-rag_qa-115",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-116",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Lattice has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nCandidate choices:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-rag_qa-116",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-117",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Saffron has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nCandidate choices:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-rag_qa-117",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-118",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Pioneer has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nCandidate choices:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-rag_qa-118",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-rag_qa-119",
+      "split": "template_holdout",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRefer only to the knowledge card below. Which retention period is specified?\nProject Mosaic has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nCandidate choices:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nResponse:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-rag_qa-119",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-100",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the gateway produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nCandidate choices:\nA. gateway: delayed jobs caused by a missing route; next action: drain the queue.\nB. gateway: stale results caused by an expired lease; next action: drain the queue.\nC. gateway: delayed jobs caused by an expired lease; next action: drain the queue.\nD. gateway: delayed jobs caused by an expired lease; next action: renew the lease.\n\nResponse:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "gateway: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "gateway: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "gateway: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-summary-100",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-101",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the scheduler produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nCandidate choices:\nA. scheduler: failed handoffs caused by a bad cache; next action: clear the cache.\nB. scheduler: slow uploads caused by a missing route; next action: clear the cache.\nC. scheduler: failed handoffs caused by a missing route; next action: restore the route.\nD. scheduler: failed handoffs caused by a missing route; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "scheduler: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "scheduler: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "scheduler: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-summary-101",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-102",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the relay produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nCandidate choices:\nA. relay: delayed jobs caused by a bad cache; next action: restore the route.\nB. relay: delayed jobs caused by a full queue; next action: restore the route.\nC. relay: stale results caused by a bad cache; next action: restore the route.\nD. relay: delayed jobs caused by a bad cache; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "relay: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "relay: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "relay: stale results caused by a bad cache; next action: restore the route.",
+        "D": "relay: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-summary-102",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-103",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the indexer produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nCandidate choices:\nA. indexer: failed handoffs caused by an expired lease; next action: renew the lease.\nB. indexer: failed handoffs caused by a full queue; next action: renew the lease.\nC. indexer: slow uploads caused by a full queue; next action: renew the lease.\nD. indexer: failed handoffs caused by a full queue; next action: drain the queue.\n\nResponse:",
+      "options": {
+        "A": "indexer: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "indexer: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "indexer: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "indexer: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-summary-103",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-104",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the router produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nCandidate choices:\nA. router: delayed jobs caused by a missing route; next action: drain the queue.\nB. router: stale results caused by an expired lease; next action: drain the queue.\nC. router: delayed jobs caused by an expired lease; next action: drain the queue.\nD. router: delayed jobs caused by an expired lease; next action: renew the lease.\n\nResponse:",
+      "options": {
+        "A": "router: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "router: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "router: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "router: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-summary-104",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-105",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the worker produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nCandidate choices:\nA. worker: failed handoffs caused by a bad cache; next action: clear the cache.\nB. worker: slow uploads caused by a missing route; next action: clear the cache.\nC. worker: failed handoffs caused by a missing route; next action: restore the route.\nD. worker: failed handoffs caused by a missing route; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "worker: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "worker: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "worker: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "worker: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-summary-105",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-106",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the gateway produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nCandidate choices:\nA. gateway: delayed jobs caused by a bad cache; next action: restore the route.\nB. gateway: delayed jobs caused by a full queue; next action: restore the route.\nC. gateway: stale results caused by a bad cache; next action: restore the route.\nD. gateway: delayed jobs caused by a bad cache; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "gateway: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "gateway: stale results caused by a bad cache; next action: restore the route.",
+        "D": "gateway: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-summary-106",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-107",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the scheduler produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nCandidate choices:\nA. scheduler: failed handoffs caused by an expired lease; next action: renew the lease.\nB. scheduler: failed handoffs caused by a full queue; next action: renew the lease.\nC. scheduler: slow uploads caused by a full queue; next action: renew the lease.\nD. scheduler: failed handoffs caused by a full queue; next action: drain the queue.\n\nResponse:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "scheduler: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "scheduler: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "scheduler: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-summary-107",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-108",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the relay produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nCandidate choices:\nA. relay: delayed jobs caused by a missing route; next action: drain the queue.\nB. relay: stale results caused by an expired lease; next action: drain the queue.\nC. relay: delayed jobs caused by an expired lease; next action: drain the queue.\nD. relay: delayed jobs caused by an expired lease; next action: renew the lease.\n\nResponse:",
+      "options": {
+        "A": "relay: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "relay: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "relay: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "relay: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-summary-108",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-109",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the indexer produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nCandidate choices:\nA. indexer: failed handoffs caused by a bad cache; next action: clear the cache.\nB. indexer: slow uploads caused by a missing route; next action: clear the cache.\nC. indexer: failed handoffs caused by a missing route; next action: restore the route.\nD. indexer: failed handoffs caused by a missing route; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "indexer: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "indexer: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "indexer: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "indexer: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-summary-109",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-110",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the router produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nCandidate choices:\nA. router: delayed jobs caused by a bad cache; next action: restore the route.\nB. router: delayed jobs caused by a full queue; next action: restore the route.\nC. router: stale results caused by a bad cache; next action: restore the route.\nD. router: delayed jobs caused by a bad cache; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "router: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "router: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "router: stale results caused by a bad cache; next action: restore the route.",
+        "D": "router: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-summary-110",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-111",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the worker produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nCandidate choices:\nA. worker: failed handoffs caused by an expired lease; next action: renew the lease.\nB. worker: failed handoffs caused by a full queue; next action: renew the lease.\nC. worker: slow uploads caused by a full queue; next action: renew the lease.\nD. worker: failed handoffs caused by a full queue; next action: drain the queue.\n\nResponse:",
+      "options": {
+        "A": "worker: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "worker: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "worker: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "worker: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-summary-111",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-112",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the gateway produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nCandidate choices:\nA. gateway: delayed jobs caused by a missing route; next action: drain the queue.\nB. gateway: stale results caused by an expired lease; next action: drain the queue.\nC. gateway: delayed jobs caused by an expired lease; next action: drain the queue.\nD. gateway: delayed jobs caused by an expired lease; next action: renew the lease.\n\nResponse:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "gateway: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "gateway: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "gateway: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-summary-112",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-113",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the scheduler produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nCandidate choices:\nA. scheduler: failed handoffs caused by a bad cache; next action: clear the cache.\nB. scheduler: slow uploads caused by a missing route; next action: clear the cache.\nC. scheduler: failed handoffs caused by a missing route; next action: restore the route.\nD. scheduler: failed handoffs caused by a missing route; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "scheduler: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "scheduler: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "scheduler: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-summary-113",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-114",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the relay produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nCandidate choices:\nA. relay: delayed jobs caused by a bad cache; next action: restore the route.\nB. relay: delayed jobs caused by a full queue; next action: restore the route.\nC. relay: stale results caused by a bad cache; next action: restore the route.\nD. relay: delayed jobs caused by a bad cache; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "relay: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "relay: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "relay: stale results caused by a bad cache; next action: restore the route.",
+        "D": "relay: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-summary-114",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-115",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the indexer produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nCandidate choices:\nA. indexer: failed handoffs caused by an expired lease; next action: renew the lease.\nB. indexer: failed handoffs caused by a full queue; next action: renew the lease.\nC. indexer: slow uploads caused by a full queue; next action: renew the lease.\nD. indexer: failed handoffs caused by a full queue; next action: drain the queue.\n\nResponse:",
+      "options": {
+        "A": "indexer: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "indexer: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "indexer: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "indexer: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-summary-115",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-116",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the router produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nCandidate choices:\nA. router: delayed jobs caused by a missing route; next action: drain the queue.\nB. router: stale results caused by an expired lease; next action: drain the queue.\nC. router: delayed jobs caused by an expired lease; next action: drain the queue.\nD. router: delayed jobs caused by an expired lease; next action: renew the lease.\n\nResponse:",
+      "options": {
+        "A": "router: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "router: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "router: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "router: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-summary-116",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-117",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the worker produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nCandidate choices:\nA. worker: failed handoffs caused by a bad cache; next action: clear the cache.\nB. worker: slow uploads caused by a missing route; next action: clear the cache.\nC. worker: failed handoffs caused by a missing route; next action: restore the route.\nD. worker: failed handoffs caused by a missing route; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "worker: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "worker: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "worker: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "worker: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-summary-117",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-118",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the gateway produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nCandidate choices:\nA. gateway: delayed jobs caused by a bad cache; next action: restore the route.\nB. gateway: delayed jobs caused by a full queue; next action: restore the route.\nC. gateway: stale results caused by a bad cache; next action: restore the route.\nD. gateway: delayed jobs caused by a bad cache; next action: clear the cache.\n\nResponse:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "gateway: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "gateway: stale results caused by a bad cache; next action: restore the route.",
+        "D": "gateway: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-summary-118",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-summary-119",
+      "split": "template_holdout",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the one-sentence digest that matches this incident report:\nIncident report: the scheduler produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nCandidate choices:\nA. scheduler: failed handoffs caused by an expired lease; next action: renew the lease.\nB. scheduler: failed handoffs caused by a full queue; next action: renew the lease.\nC. scheduler: slow uploads caused by a full queue; next action: renew the lease.\nD. scheduler: failed handoffs caused by a full queue; next action: drain the queue.\n\nResponse:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "scheduler: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "scheduler: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "scheduler: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-summary-119",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-100",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-simple_code-100",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-101",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-simple_code-101",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-102",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-simple_code-102",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-103",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-simple_code-103",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-104",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-simple_code-104",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-105",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-simple_code-105",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-106",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-simple_code-106",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-107",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-simple_code-107",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-108",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-simple_code-108",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-109",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-simple_code-109",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-110",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-simple_code-110",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-111",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-simple_code-111",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-112",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-simple_code-112",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-113",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-simple_code-113",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-114",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-simple_code-114",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-115",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-simple_code-115",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-116",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-simple_code-116",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-117",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-simple_code-117",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-118",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return a new list containing only the even integers, preserving order?\n\nCandidate choices:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-simple_code-118",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-simple_code-119",
+      "split": "template_holdout",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the implementation that will return the sum of the positive integers, ignoring zero and negatives?\n\nCandidate choices:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nResponse:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-simple_code-119",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-100",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nCandidate choices:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nResponse:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-hard_reason-100",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-101",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nCandidate choices:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nResponse:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-hard_reason-101",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-102",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nCandidate choices:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nResponse:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-hard_reason-102",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-103",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nCandidate choices:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nResponse:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-hard_reason-103",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-104",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nCandidate choices:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nResponse:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-hard_reason-104",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-105",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nCandidate choices:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nResponse:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-hard_reason-105",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-106",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nCandidate choices:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nResponse:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-hard_reason-106",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-107",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nCandidate choices:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nResponse:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-hard_reason-107",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-108",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nCandidate choices:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nResponse:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-hard_reason-108",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-109",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nCandidate choices:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nResponse:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-hard_reason-109",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-110",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nCandidate choices:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nResponse:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-hard_reason-110",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-111",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nCandidate choices:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nResponse:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-hard_reason-111",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-112",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nCandidate choices:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nResponse:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-hard_reason-112",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-113",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nCandidate choices:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nResponse:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-hard_reason-113",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-114",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nCandidate choices:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nResponse:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-hard_reason-114",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-115",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nCandidate choices:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nResponse:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-hard_reason-115",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-116",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nCandidate choices:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nResponse:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D",
+      "source_task_id": "evaluation-hard_reason-116",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-117",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nCandidate choices:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nResponse:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A",
+      "source_task_id": "evaluation-hard_reason-117",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-118",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nCandidate choices:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nResponse:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B",
+      "source_task_id": "evaluation-hard_reason-118",
+      "template_id": "unseen-operations-prompt-v1"
+    },
+    {
+      "task_id": "template-holdout-evaluation-hard_reason-119",
+      "split": "template_holdout",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nArrange the four jobs into the only order that obeys every rule.\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nCandidate choices:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nResponse:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C",
+      "source_task_id": "evaluation-hard_reason-119",
+      "template_id": "unseen-operations-prompt-v1"
+    }
+  ]
+}

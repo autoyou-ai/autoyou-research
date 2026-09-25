@@ -1,0 +1,20 @@
+Adapter weights in this directory
+=================================
+
+These LoRA adapters were trained by models/run_adaptation_experiment.py on the
+public synthetic benchmark in measure/results/adaptation_tasks.json. They derive
+from the base models below and are distributed under those models' licences,
+not under the MIT licence that covers the rest of this repository.
+
+  qwen25-0.5b/   base model Qwen/Qwen2.5-0.5B-Instruct   Apache License 2.0
+                 (LICENSE-APACHE-2.0.txt; Copyright 2024 Alibaba Cloud)
+  qwen25-3b/     base model Qwen/Qwen2.5-3B-Instruct     Qwen RESEARCH LICENSE AGREEMENT
+  qwen25-vl-3b/  base model Qwen/Qwen2.5-VL-3B-Instruct  Qwen RESEARCH LICENSE AGREEMENT
+                 (LICENSE-QWEN-RESEARCH.txt)
+
+Qwen is licensed under the Qwen RESEARCH LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved.
+
+The qwen25-3b and qwen25-vl-3b adapters may be used for non-commercial purposes
+only, which that agreement defines as research or evaluation purposes.
+
+Improved using Qwen.

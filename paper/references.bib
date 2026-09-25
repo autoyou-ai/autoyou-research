@@ -1,15 +1,17 @@
 % ===================================================================== %
 %  References for:
-%    main.tex        Right-Sized AI at the Edge
-%    adaptation.tex  Teaching at the Edge
+%    p2p-inference.tex  Quantifying Carbon, Water, Cost, and Capability in
+%                       Peer-to-Peer Inference
+%    adaptation.tex     Teaching at the Edge
 %
-%  Every entry below has been resolved against its primary source: the
-%  arXiv abstract page, the DOI landing page, the RFC, or the publishing
-%  organisation's own page. Author lists are copied from that source, not
-%  reconstructed. Every entry describing third-party work carries a resolvable
-%  URL or DOI. So does every entry describing this study's own artifacts,
-%  except autoyou_support2026: that material is genuinely not redistributable,
-%  and a citation should not promise a locator that does not resolve.
+%  Every entry has a locator or DOI and has undergone metadata and locator
+%  triage. Exact claim support is recorded in paper/CITATION_CLAIM_REVIEW.md;
+%  that semantic check still requires reading each source against each nearby
+%  sentence. Author lists are copied from the identified source where verified.
+%  Every entry describing third-party work carries a resolvable URL or DOI. So
+%  does every entry describing this study's own artifacts, except
+%  autoyou_support2026: that material is genuinely not redistributable, and a
+%  citation should not promise a locator that does not resolve.
 %
 %  Four entries in an earlier version of this file were wrong in ways a
 %  reader could not have detected, and are recorded here so the correction
@@ -30,7 +32,9 @@
 %      whose own title stated 575 W for the RTX 4090 -- that is the RTX
 %      5090's board power. Replaced with the vendor specification (450 W).
 %    * qwen38_2026 was attributed to the Qwen team but pointed at a
-%      third-party SEO article; repointed at the distribution page.
+%      third-party SEO article; repointed at the official model card. The
+%      separate qwen38_ollama2026 entry now carries the distribution-size
+%      claim so the two kinds of evidence are not conflated.
 %    * autoyou2026edge named a manuscript that does not exist.
 %
 %  Three of the four entries describing this study's own artifacts point at
@@ -54,7 +58,10 @@
   title  = {Energy and {AI}},
   institution = {IEA, Paris},
   year   = {2025},
-  note   = {Data-centre electricity demand projected to $\sim$945 TWh by 2030; accessed 2026-09-05},
+  note   = {Data-centre electricity demand projected to $\sim$945 TWh by 2030;
+            this is a modeled projection, not a current-demand measurement.
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://www.iea.org/reports/energy-and-ai}
 }
 
@@ -62,10 +69,13 @@
   author = {{Uptime Institute}},
   title  = {Uptime Institute Global Data Center Survey 2025},
   year   = {2025},
-  note   = {Weighted-average annual {PUE} of 1.54, the sixth consecutive year
+  note   = {The gated report gives a weighted-average annual {PUE} of 1.54,
+            the sixth consecutive year
             the headline figure has been effectively flat. Regional averages:
             China 1.40, Europe 1.50, North America 1.49, {APAC} ex-China 1.52,
-            Latin America 1.65, {MEA} 1.68. Accessed 2026-09-05},
+            Latin America 1.65, {MEA} 1.68. Exact table access was not available
+            during the current audit. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://intelligence.uptimeinstitute.com/resource/uptime-institute-global-data-center-survey-2025}
 }
 
@@ -73,7 +83,9 @@
   author = {{European Commission}},
   title  = {Energy performance of data centres: reporting, rating scheme, and minimum performance standards},
   year   = {2026},
-  note   = {Accessed 2026-09-05},
+  note   = {Official reporting and rating-scheme context; no universal PUE cap
+            is asserted here. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive/energy-performance-data-centres_en}
 }
 
@@ -86,7 +98,8 @@
             withdrawal-{WUE} benchmark of 0.84 L/kWh. This study models
             hyperscale on-site {WUE} at 0.20 L/kWh with a range of
             [0.12, 0.30], i.e. best-in-class at the low end rather than as the
-            central case. Accessed 2026-09-05},
+            central case. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://sustainability.aboutamazon.com/natural-resources/water}
 }
 
@@ -99,23 +112,33 @@
   note    = {Single author; the surname is hyphenated. Estimates a 2025 {AI}
             carbon footprint of 32.6--79.7 MtCO$_2$e and a water footprint of
             312.5--764.6 billion L},
+  urldate = {2026-09-14},
   url     = {https://www.cell.com/patterns/fulltext/S2666-3899(25)00278-8}
 }
 
-@misc{ucriverside2023,
+@article{ucriverside2023,
   author = {Li, Pengfei and Yang, Jianyi and Islam, Mohammad A. and Ren, Shaolei},
   title  = {Making {AI} Less Thirsty: Uncovering and Addressing the Secret Water Footprint of {AI} Models},
-  year   = {2023},
-  note   = {arXiv:2304.03271},
-  url    = {https://arxiv.org/abs/2304.03271}
+  journal = {Communications of the ACM},
+  volume = {68},
+  number = {7},
+  pages  = {54--61},
+  year   = {2025},
+  doi    = {10.1145/3724499},
+  note   = {First posted as arXiv:2304.03271},
+  urldate = {2026-09-14},
+  url    = {https://doi.org/10.1145/3724499}
 }
 
 @misc{ember2026,
   author = {{Ember}},
   title  = {Global Electricity Review 2026},
   year   = {2026},
-  note   = {Global average grid carbon intensity; regional spread from
-            $\sim$140 gCO$_2$e/kWh (EU) to $\sim$708 (India). Accessed 2026-09-05},
+  note   = {Grid-intensity inputs used by the model: global average and
+            regional values. The exact regional table should be archived from
+            the downloadable report before these numbers are treated as checked.
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://ember-energy.org/latest-insights/global-electricity-review-2026/}
 }
 
@@ -132,22 +155,30 @@
   title   = {Measuring the environmental impact of delivering {AI} at {Google} scale},
   journal = {arXiv preprint arXiv:2508.15734},
   year    = {2025},
+  doi     = {10.48550/arXiv.2508.15734},
+  version = {1},
   note    = {Median Gemini Apps text prompt: 0.24 Wh, 0.26 mL water. Reports
             that 42\% of the per-prompt footprint is non-compute
             ({CPU}/{DRAM} 24\%, idle/redundancy/overhead 18\%)},
-  url     = {https://arxiv.org/abs/2508.15734}
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2508.15734v1}
 }
 
 @article{jegham2025,
-  author  = {Jegham, Nidhal and Abdelatti, Marwan and Elmoubarki, Lassad and
-             Hendawi, Abdeltawab},
+  author  = {Jegham, Nidhal and Abdelatti, Marwan and Koh, Chan Young and
+             Elmoubarki, Lassad and Hendawi, Abdeltawab},
   title   = {How Hungry is {AI}? Benchmarking Energy, Water, and Carbon Footprint of {LLM} Inference},
   journal = {arXiv preprint arXiv:2505.09598},
   year    = {2025},
-  note    = {An inference-side estimation framework over assumed
+  doi     = {10.48550/arXiv.2505.09598},
+  version = {2},
+  note    = {Energy values in this manuscript use v2 Table 4 and Section 5.1.
+            This is an inference-side estimation framework over assumed
             {H100}/{H200} server deployments at batch 8, not a direct
-            wall-power measurement; cited as such throughout},
-  url     = {https://arxiv.org/abs/2505.09598}
+            wall-power measurement; the later v6 revision is materially
+            different and is not the version used here},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2505.09598v2}
 }
 
 @article{caravaca2025,
@@ -155,9 +186,12 @@
   title   = {From Prompts to Power: Measuring the Energy Footprint of {LLM} Inference},
   journal = {arXiv preprint arXiv:2511.05597},
   year    = {2025},
+  doi     = {10.48550/arXiv.2511.05597},
+  version = {1},
   note    = {Over 32,500 measurements across GPU configurations and 155 model
             designs under vLLM, with a predictive per-query model},
-  url     = {https://arxiv.org/abs/2511.05597}
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2511.05597v1}
 }
 
 @article{schneider2025,
@@ -167,9 +201,12 @@
   title   = {Life-Cycle Emissions of {AI} Hardware: A Cradle-to-Grave Approach and Generational Trends},
   journal = {arXiv preprint arXiv:2502.01671},
   year    = {2025},
+  doi     = {10.48550/arXiv.2502.01671},
+  version = {1},
   note    = {First comprehensive life-cycle assessment of {AI} accelerator
             greenhouse-gas emissions, over five {TPU} generations},
-  url     = {https://arxiv.org/abs/2502.01671}
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2502.01671v1}
 }
 
 @inproceedings{reddi2020mlperf,
@@ -180,6 +217,7 @@
   pages     = {446--459},
   year      = {2020},
   doi       = {10.1109/ISCA45697.2020.00045},
+  urldate = {2026-09-14},
   url       = {https://doi.org/10.1109/ISCA45697.2020.00045}
 }
 
@@ -192,6 +230,7 @@
   pages   = {65--76},
   year    = {2009},
   doi     = {10.1145/1498765.1498785},
+  urldate = {2026-09-14},
   url     = {https://doi.org/10.1145/1498765.1498785}
 }
 
@@ -207,9 +246,13 @@
   title   = {Small Language Models are the Future of Agentic {AI}},
   journal = {arXiv preprint arXiv:2506.02153},
   year    = {2025},
+  doi     = {10.48550/arXiv.2506.02153},
+  version = {2},
   note    = {NVIDIA Research. Measures 40--70\% of {LLM} calls in MetaGPT,
-            Open Operator and Cradle as {SLM}-replaceable},
-  url     = {https://arxiv.org/abs/2506.02153}
+            Open Operator and Cradle as {SLM}-replaceable. Preprint;
+            under review},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2506.02153v2}
 }
 
 @article{wang2024slm,
@@ -222,7 +265,10 @@
              Collaboration with {LLMs}, and Trustworthiness},
   journal = {arXiv preprint arXiv:2411.03350},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2411.03350}
+  doi     = {10.48550/arXiv.2411.03350},
+  version = {2},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2411.03350v2}
 }
 
 @article{ni2025benchmarks,
@@ -233,10 +279,13 @@
   title   = {A Survey on Large Language Model Benchmarks},
   journal = {arXiv preprint arXiv:2508.15361},
   year    = {2025},
+  doi     = {10.48550/arXiv.2508.15361},
+  version = {1},
   note    = {283 benchmarks surveyed; documents contamination-inflated scores,
             which is why this study carries an MMLU range for frontier models
             rather than a vendor point estimate},
-  url     = {https://arxiv.org/abs/2508.15361}
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2508.15361v1}
 }
 
 @misc{mistral2024,
@@ -246,8 +295,9 @@
   note   = {Ministral 3B and 8B. Benchmark figures quoted from this release are
             the vendor's own comparison chart and carry the vendor's evaluation
             protocol, which differs from the protocol behind commonly quoted
-            {Llama-3.1-8B} scores. Accessed 2026-09-05},
-  url    = {https://mistral.ai/news/ministraux}
+            {Llama-3.1-8B} scores. Accessed 2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://mistral.ai/news/ministraux/}
 }
 
 
@@ -260,9 +310,12 @@
   title     = {From Efficiency Gains to Rebound Effects: The Problem of {Jevons'}
                Paradox in {AI}'s Polarized Environmental Debate},
   booktitle = {Proc. ACM Conf. on Fairness, Accountability, and Transparency (FAccT)},
+  pages     = {76--88},
   year      = {2025},
-  note      = {arXiv:2501.16548},
-  url       = {https://arxiv.org/abs/2501.16548}
+  doi       = {10.1145/3715275.3732007},
+  note      = {FAccT '25; first posted as arXiv:2501.16548},
+  urldate = {2026-09-14},
+  url       = {https://doi.org/10.1145/3715275.3732007}
 }
 
 @article{aslan2018,
@@ -274,6 +327,7 @@
   pages   = {785--798},
   year    = {2018},
   doi     = {10.1111/jiec.12630},
+  urldate = {2026-09-14},
   url     = {https://onlinelibrary.wiley.com/doi/10.1111/jiec.12630}
 }
 
@@ -282,6 +336,7 @@
   title  = {{RFC} 8831: {WebRTC} Data Channels},
   year   = {2021},
   doi    = {10.17487/RFC8831},
+  urldate = {2026-09-14},
   url    = {https://www.rfc-editor.org/rfc/rfc8831}
 }
 
@@ -290,6 +345,7 @@
   title  = {{RFC} 8827: {WebRTC} Security Architecture},
   year   = {2021},
   doi    = {10.17487/RFC8827},
+  urldate = {2026-09-14},
   url    = {https://www.rfc-editor.org/rfc/rfc8827}
 }
 
@@ -300,7 +356,8 @@
   note   = {Vendor engineering note, not a measurement study. The
             STUN-direct / TURN-relay split it reports is widely repeated
             industry folklore; this study carries it with a wide range and
-            no result depends on its central value. Accessed 2026-09-05},
+            no result depends on its central value. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://antmedia.io/how-to-create-webrtc-peer-to-peer-communication/}
 }
 
@@ -310,7 +367,8 @@
   year   = {2025},
   note   = {Trade press, cited only for the directional claim that
             lower-power edge silicon shifts the per-token comparison; no
-            quantitative result in this study rests on it. Accessed 2026-09-05},
+            quantitative result in this study rests on it. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://www.techtarget.com/sustainability/feature/Can-edge-computing-make-AI-more-sustainable}
 }
 
@@ -325,7 +383,9 @@
   year   = {2026},
   note   = {Total graphics power 450 W; 850 W recommended system supply.
             Vendor specification, used in preference to third-party figures
-            for this part. Accessed 2026-09-05},
+            for this part. These are not this workload's runtime board power.
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/}
 }
 
@@ -334,19 +394,21 @@
   title  = {{GeForce RTX} 5070 Graphics Card Specifications},
   year   = {2026},
   note   = {12 GB GDDR7 on a 192-bit bus, 672 GB/s specified memory bandwidth,
-            250 W board power. Accessed 2026-09-05},
-  url    = {https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5070/}
+            250 W board power. Accessed 2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://www.nvidia.com/en-us/geforce/graphics-cards/compare/}
 }
 
 @misc{amd_strix2025,
   author = {{Advanced Micro Devices}},
-  title  = {{AMD} {Ryzen} {AI} {MAX+} 395: a leap forward in generative {AI} performance with consumer {PC}},
+  title  = {{AMD} {Ryzen} {AI} {Halo} Developer Platform with {Ryzen} {AI} {MAX+} 395 processor},
   year   = {2025},
   note   = {16 Zen 5 cores, 40 {RDNA} 3.5 compute units, 50+ peak {AI} {TOPS}
             {XDNA} 2 {NPU}, unified {LPDDR5X} pool of up to 128 GB addressed by
             {CPU}, {GPU} and {NPU}; 256 GB/s specified memory bandwidth on the
-            Radeon 8060S. Accessed 2026-09-05},
-  url    = {https://www.amd.com/en/developer/resources/technical-articles/2025/amd-ryzen-ai-max-395--a-leap-forward-in-generative-ai-performanc.html}
+            Radeon 8060S. Accessed 2026-09-15},
+  urldate = {2026-09-15},
+  url    = {https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-ai-halo/ryzen-ai-max-plus-395.html}
 }
 
 @misc{databasemart2026,
@@ -356,7 +418,9 @@
   note   = {Third-party hosting-vendor benchmark, not peer-reviewed. Supplied
             the throughput term the measurement campaign of this study
             replaces; retained so the superseded assumption remains
-            attributable. Accessed 2026-09-05},
+            attributable. Exact 141 tok/s was not independently rechecked from
+            the current page. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://www.databasemart.com/blog/vllm-gpu-benchmark-rtx4090}
 }
 
@@ -364,19 +428,25 @@
   author = {{SolarTech}},
   title  = {How Much Electricity Does a Computer Use?},
   year   = {2025},
-  note   = {Consumer-guide source for desktop idle draw, carried with a wide
-            range (30--150 W) rather than a point estimate. Accessed 2026-09-05},
-  url    = {https://solartechonline.com/blog/how-much-electricity-does-computer-use/}
+  note   = {Consumer-guide context for desktop idle draw, carried only as a
+            wide sensitivity range (30--150 W), not a load measurement. The
+            exact range was not located in the current redirected page.
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://solartechonline.com/blog/average-household-power-consumption-guide-2025/}
 }
 
 @misc{nvidiasmi2026,
   author = {{NVIDIA Corporation}},
   title  = {{NVIDIA} System Management Interface (\texttt{nvidia-smi}) documentation},
   year   = {2026},
-  note   = {Source of the \texttt{power.draw.instant} board-power field used in
-            this study. The driver refreshes this counter less often than the
-            harness polls it; see \S\ref{sec:measured}. Accessed 2026-09-05},
-  url    = {https://developer.nvidia.com/system-management-interface}
+  note   = {Defines instantaneous whole-board draw and the
+            \texttt{power.draw.instant} field used in this study. The driver
+            refreshes this counter less often than the harness polls it; see
+            \S\ref{sec:measured}. Board telemetry is not whole-system wall power.
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://docs.nvidia.com/deploy/nvidia-smi/}
 }
 
 @misc{ollamaapi2026,
@@ -384,7 +454,8 @@
   title  = {Ollama {API} documentation: \texttt{/api/generate} and raw mode},
   year   = {2026},
   note   = {\texttt{raw: true} bypasses the chat template, which is the control
-            this study uses to defeat template-prefix cache reuse. Accessed 2026-09-05},
+            this study uses to defeat template-prefix cache reuse. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://github.com/ollama/ollama/blob/main/docs/api.md}
 }
 
@@ -392,9 +463,11 @@
   author = {{Mistral AI}},
   title  = {{Ministral 3} model family},
   year   = {2026},
-  note   = {The 3B and 8B builds benchmarked in this study, served as
-            \texttt{Q4\_K\_M} through Ollama; reported parameter counts 3.8B and
-            8.9B, on-disk 2.95 GB and 6.02 GB. Accessed 2026-09-05},
+  note   = {Ollama distribution entries for the 3B and 8B family are listed at
+            roughly 3.0 GB and 6.0 GB with 256K context and edge deployment
+            positioning. The exact 2.95 GB and 6.02 GB values are local build
+            metadata for the Q4\_K\_M files benchmarked here. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://ollama.com/library/ministral-3}
 }
 
@@ -402,10 +475,12 @@
   author = {{Meta Models}},
   title  = {{Muse-Glimmer-30B}},
   year   = {2026},
-  note   = {27.9B dense build, \texttt{Q4\_K\_M}, 18.16 GB on disk; the largest
-            dense row on the AMD bandwidth ladder. Weights are publicly
-            downloadable, so the file size the ladder statistic divides by can
-            be independently checked. Accessed 2026-09-06},
+  note   = {The model card identifies an approximately 30B dense model with a
+            vision encoder and reports quantized variants under 20 GB. The exact
+            27.9B, \texttt{Q4\_K\_M}, and 18.16 GB values are local distribution
+            metadata for the largest dense row on the AMD bandwidth ladder.
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://huggingface.co/meta-models/Muse-Glimmer-30B}
 }
 
@@ -413,9 +488,11 @@
   author = {{Qwen Team, Alibaba}},
   title  = {{Qwen2.5-VL} model family},
   year   = {2025},
-  note   = {The vision-language bases behind the deployed adapter evaluation.
-            Apache-2.0 at every size except the 3B and 72B, which carry the
-            Qwen Research License. Accessed 2026-09-05},
+  note   = {The Qwen2.5-VL-7B model card used as the public model-family
+            reference for the adapter discussion. Its license and model-card
+            facts should not be generalized to every family size. Accessed
+            2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct}
 }
 
@@ -423,22 +500,35 @@
   author = {{Qwen Team, Alibaba}},
   title  = {{Qwen3.8-27B}},
   year   = {2026},
-  note   = {Released 2026-08-14. 27.78B dense parameters, Apache-2.0,
-            262,144-token context, approximately 17 GB as a 4-bit build. This
-            entry points at the distribution page for the weights actually
-            benchmarked. Accessed 2026-09-05},
-  url    = {https://ollama.com/library/qwen3.8}
+  note   = {The official model card identifies a 27B Apache-2.0 native
+            vision-language model with 262,144-token context. Distribution
+            size is recorded separately in qwen38\_ollama2026. Accessed
+            2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://huggingface.co/Qwen/Qwen3.8-27B}
+}
+
+@misc{qwen38_ollama2026,
+  author = {{Ollama}},
+  title  = {{Qwen3.8}:27b model distribution metadata},
+  year   = {2026},
+  note   = {The official distribution page lists a 27.3B Q4\_K\_M build at
+            18 GB. This is distribution metadata, not a whole-system memory,
+            throughput, energy, or quality measurement. Accessed 2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://ollama.com/library/qwen3.8:27b}
 }
 
 @misc{qwen35_2026,
   author = {{Qwen Team, Alibaba}},
   title  = {The {Qwen3.5} model family},
   year   = {2026},
-  note   = {February 2026. Dense sizes 0.8B--27B plus 35B-A3B, 122B-A10B and
-            397B-A17B sparse-MoE variants, all Apache-2.0. The 27B dense build
-            is the subject of the published {LoRA} run this study's memory
-            model is validated against. Accessed 2026-09-05},
-  url    = {https://huggingface.co/collections/Qwen/qwen35}
+  note   = {The official Qwen3.5-27B model card identifies a 27B Apache-2.0
+            vision-language model with native 262,144-token context. The public
+            training run cited alongside this entry is a separate community
+            recipe and remains a single validation anchor. Accessed 2026-09-14},
+  urldate = {2026-09-14},
+  url    = {https://huggingface.co/Qwen/Qwen3.5-27B}
 }
 
 
@@ -446,14 +536,18 @@
 %  Parameter-efficient fine-tuning
 % --------------------------------------------------------------------- %
 
-@article{hu2021lora,
+@inproceedings{hu2021lora,
   author  = {Hu, Edward J. and Shen, Yelong and Wallis, Phillip and
              Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and
              Chen, Weizhu},
   title   = {{LoRA}: Low-Rank Adaptation of Large Language Models},
-  journal = {arXiv preprint arXiv:2106.09685},
-  year    = {2021},
-  url     = {https://arxiv.org/abs/2106.09685}
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2022},
+  doi       = {10.48550/arXiv.2106.09685},
+  version   = {2},
+  note      = {ICLR 2022; arXiv v2:2106.09685},
+  urldate   = {2026-09-14},
+  url       = {https://openreview.net/pdf?id=nZeVKeeFYf9}
 }
 
 @inproceedings{dettmers2023qlora,
@@ -461,8 +555,12 @@
   title     = {{QLoRA}: Efficient Finetuning of Quantized {LLMs}},
   booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
   year      = {2023},
-  note      = {arXiv:2305.14314; {NF4}, double quantization, paged optimizers},
-  url       = {https://arxiv.org/abs/2305.14314}
+  doi       = {10.52202/075280-0441},
+  version   = {1},
+  note      = {NeurIPS 2023; arXiv v1:2305.14314; {NF4}, double quantization,
+               paged optimizers},
+  urldate   = {2026-09-14},
+  url       = {https://papers.nips.cc/paper/2023/hash/1feb87871436031bdc0f2beaa62a049b-Abstract-Conference.html}
 }
 
 @inproceedings{liu2024dora,
@@ -470,10 +568,16 @@
                Molchanov, Pavlo and Wang, Yu-Chiang Frank and Cheng, Kwang-Ting and
                Chen, Min-Hung},
   title     = {{DoRA}: Weight-Decomposed Low-Rank Adaptation},
-  booktitle = {International Conference on Machine Learning (ICML)},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  publisher = {PMLR},
+  volume    = {235},
+  pages     = {32100--32121},
   year      = {2024},
-  note      = {arXiv:2402.09353},
-  url       = {https://arxiv.org/abs/2402.09353}
+  doi       = {10.48550/arXiv.2402.09353},
+  version   = {6},
+  note      = {ICML 2024 (oral); arXiv v6:2402.09353},
+  urldate   = {2026-09-14},
+  url       = {https://proceedings.mlr.press/v235/liu24bn.html}
 }
 
 @article{kalajdzievski2023rslora,
@@ -481,7 +585,10 @@
   title   = {A Rank Stabilization Scaling Factor for Fine-Tuning with {LoRA}},
   journal = {arXiv preprint arXiv:2312.03732},
   year    = {2023},
-  url     = {https://arxiv.org/abs/2312.03732}
+  doi     = {10.48550/arXiv.2312.03732},
+  version = {1},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2312.03732v1}
 }
 
 @article{meng2024pissa,
@@ -489,7 +596,10 @@
   title   = {{PiSSA}: Principal Singular Values and Singular Vectors Adaptation of Large Language Models},
   journal = {arXiv preprint arXiv:2404.02948},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2404.02948}
+  doi     = {10.48550/arXiv.2404.02948},
+  version = {4},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2404.02948v4}
 }
 
 @article{li2023loftq,
@@ -498,7 +608,10 @@
   title   = {{LoftQ}: {LoRA}-Fine-Tuning-Aware Quantization for Large Language Models},
   journal = {arXiv preprint arXiv:2310.08659},
   year    = {2023},
-  url     = {https://arxiv.org/abs/2310.08659}
+  doi     = {10.48550/arXiv.2310.08659},
+  version = {4},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2310.08659v4}
 }
 
 @article{buyukakyuz2024olora,
@@ -506,16 +619,24 @@
   title   = {{OLoRA}: Orthonormal Low-Rank Adaptation of Large Language Models},
   journal = {arXiv preprint arXiv:2406.01775},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2406.01775}
+  doi     = {10.48550/arXiv.2406.01775},
+  version = {2},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2406.01775v2}
 }
 
 @article{paischer2024eva,
   author  = {Paischer, Fabian and Hauzenberger, Lukas and Schmied, Thomas and
              Alkin, Benedikt and Deisenroth, Marc Peter and Hochreiter, Sepp},
-  title   = {One Initialization to Rule them All: Fine-tuning via Explained Variance Adaptation},
+  title   = {Parameter Efficient Fine-tuning via Explained Variance Adaptation},
   journal = {arXiv preprint arXiv:2410.07170},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS 2025)},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2410.07170}
+  doi     = {10.48550/arXiv.2410.07170},
+  version = {5},
+  note    = {Accepted at NeurIPS 2025},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2410.07170v5}
 }
 
 @article{yang2024corda,
@@ -524,7 +645,10 @@
   title   = {{CorDA}: Context-Oriented Decomposition Adaptation of Large Language Models},
   journal = {arXiv preprint arXiv:2406.05223},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2406.05223}
+  doi     = {10.48550/arXiv.2406.05223},
+  version = {3},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2406.05223v3}
 }
 
 @article{hayou2024loraplus,
@@ -532,7 +656,10 @@
   title   = {{LoRA+}: Efficient Low Rank Adaptation of Large Models},
   journal = {arXiv preprint arXiv:2402.12354},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2402.12354}
+  doi     = {10.48550/arXiv.2402.12354},
+  version = {2},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2402.12354v2}
 }
 
 @inproceedings{zhang2023adalora,
@@ -541,8 +668,11 @@
   title     = {{AdaLoRA}: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2023},
-  note      = {arXiv:2303.10512},
-  url       = {https://arxiv.org/abs/2303.10512}
+  doi       = {10.48550/arXiv.2303.10512},
+  version   = {2},
+  note      = {ICLR 2023; arXiv v2:2303.10512},
+  urldate = {2026-09-14},
+  url       = {https://openreview.net/pdf?id=lq62uWRJjiY}
 }
 
 @article{kopiczko2023vera,
@@ -550,25 +680,41 @@
   title   = {{VeRA}: Vector-based Random Matrix Adaptation},
   journal = {arXiv preprint arXiv:2310.11454},
   year    = {2023},
-  url     = {https://arxiv.org/abs/2310.11454}
+  doi     = {10.48550/arXiv.2310.11454},
+  version = {2},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2310.11454v2}
 }
 
-@article{balazy2024loraxs,
+@incollection{balazy2024loraxs,
   author  = {Ba{\l}azy, Klaudia and Banaei, Mohammadreza and Aberer, Karl and Tabor, Jacek},
   title   = {{LoRA-XS}: Low-Rank Adaptation with Extremely Small Number of Parameters},
-  journal = {arXiv preprint arXiv:2405.17604},
-  year    = {2024},
-  url     = {https://arxiv.org/abs/2405.17604}
+  booktitle = {28th European Conference on Artificial Intelligence (ECAI 2025)},
+  publisher = {IOS Press},
+  volume    = {413},
+  pages     = {3194--3201},
+  year      = {2025},
+  doi       = {10.3233/FAIA251185},
+  version   = {3},
+  note      = {ECAI 2025; first posted as arXiv v3:2405.17604},
+  urldate = {2026-09-14},
+  url       = {https://doi.org/10.3233/FAIA251185}
 }
 
 @inproceedings{zhao2024galore,
   author    = {Zhao, Jiawei and Zhang, Zhenyu and Chen, Beidi and Wang, Zhangyang and
                Anandkumar, Anima and Tian, Yuandong},
   title     = {{GaLore}: Memory-Efficient {LLM} Training by Gradient Low-Rank Projection},
-  booktitle = {International Conference on Machine Learning (ICML)},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  publisher = {PMLR},
+  volume    = {235},
+  pages     = {61121--61143},
   year      = {2024},
-  note      = {arXiv:2403.03507},
-  url       = {https://arxiv.org/abs/2403.03507}
+  doi       = {10.48550/arXiv.2403.03507},
+  version   = {2},
+  note      = {ICML 2024 (oral); arXiv v2:2403.03507},
+  urldate   = {2026-09-14},
+  url       = {https://proceedings.mlr.press/v235/zhao24s.html}
 }
 
 @article{jain2023neftune,
@@ -579,7 +725,10 @@
   title   = {{NEFTune}: Noisy Embeddings Improve Instruction Finetuning},
   journal = {arXiv preprint arXiv:2310.05914},
   year    = {2023},
-  url     = {https://arxiv.org/abs/2310.05914}
+  doi     = {10.48550/arXiv.2310.05914},
+  version = {2},
+  urldate = {2026-09-14},
+  url     = {https://arxiv.org/abs/2310.05914v2}
 }
 
 @article{biderman2024lora,
@@ -590,8 +739,11 @@
   title   = {{LoRA} Learns Less and Forgets Less},
   journal = {Transactions on Machine Learning Research (TMLR)},
   year    = {2024},
-  note    = {arXiv:2405.09673},
-  url     = {https://arxiv.org/abs/2405.09673}
+  doi     = {10.48550/arXiv.2405.09673},
+  version = {2},
+  note    = {Published in TMLR 08/2024 (Featured Certification); arXiv v2:2405.09673},
+  urldate = {2026-09-14},
+  url     = {https://openreview.net/pdf?id=aloEru2qCG}
 }
 
 @inproceedings{qi2023finetuning,
@@ -600,17 +752,25 @@
   title     = {Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2024},
-  note      = {arXiv:2310.03693},
-  url       = {https://arxiv.org/abs/2310.03693}
+  doi       = {10.48550/arXiv.2310.03693},
+  version   = {1},
+  note      = {ICLR 2024; arXiv v1:2310.03693},
+  urldate = {2026-09-14},
+  url       = {https://openreview.net/pdf?id=hTEGyKf0dZ}
 }
 
 @article{lorasurvey2024,
   author  = {Mao, Yuren and Ge, Yuhang and Fan, Yijiang and Xu, Wenyi and Mi, Yu and
              Hu, Zhonghao and Gao, Yunjun},
   title   = {A Survey on {LoRA} of Large Language Models},
-  journal = {arXiv preprint arXiv:2407.11046},
-  year    = {2024},
-  url     = {https://arxiv.org/abs/2407.11046}
+  journal = {Frontiers of Computer Science},
+  volume  = {19},
+  pages   = {197605},
+  year    = {2025},
+  doi     = {10.1007/s11704-024-40663-9},
+  note    = {First posted as arXiv:2407.11046},
+  urldate = {2026-09-14},
+  url     = {https://doi.org/10.1007/s11704-024-40663-9}
 }
 
 @misc{peft_library2026,
@@ -620,7 +780,8 @@
   note   = {\texttt{LoraConfig} exposes \texttt{use\_dora},
             \texttt{use\_rslora} and \texttt{init\_lora\_weights} in
             \texttt{gaussian}, \texttt{eva}, \texttt{olora}, \texttt{pissa},
-            \texttt{corda} and \texttt{loftq}. Accessed 2026-09-05},
+            \texttt{corda} and \texttt{loftq}. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://huggingface.co/docs/peft/developer_guides/lora}
 }
 
@@ -634,7 +795,8 @@
             gradient accumulation 4, 448 steps at approximately 11 min/step,
             approximately 80 GB peak of a 128 GB unified pool. A single
             unrefereed anchor is a real limitation and is recorded as one in
-            the threats section. Accessed 2026-09-05},
+            the threats section. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://github.com/h34v3nzc0dex/strix-halo-llm-finetune-guide}
 }
 
@@ -647,55 +809,48 @@
             nano \$1.50/Mtok and {GPT-4o} \$25/Mtok; {OpenAI} o4-mini at \$100
             per training hour. Tuned endpoints predict at 1.5$\times$ the base
             rate on {OpenAI} {GPT-4o}/{4.1} and on {Google} from {Gemini} 3
-            onward. Accessed 2026-09-05},
+            onward. Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://pricepertoken.com/fine-tuning}
 }
 
 
 % --------------------------------------------------------------------- %
-%  The 2026 frontier roster, used for pricing and architecture only
+%  Dated provider pricing snapshots used only for economic sensitivity
 % --------------------------------------------------------------------- %
 
 @misc{frontier2026,
   author = {{OpenAI}},
-  title  = {{GPT-5.6} model family and {API} pricing},
+  title  = {{OpenAI} {API} pricing snapshot},
   year   = {2026},
-  note   = {Sol, Terra and Luna tiers; list price per million tokens. No
-            public per-query energy measurement covers any model of this
-            generation, which therefore enters the analysis through list
-            pricing and published architecture only. Accessed 2026-06-17},
+  note   = {List price per million tokens; used only as a dated economic input,
+            not as evidence for release chronology, architecture, or energy.
+            Snapshot date 2026-06-17; locator checked 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://openai.com/api/pricing/}
 }
 
 @misc{anthropic_pricing2026,
   author = {{Anthropic}},
-  title  = {{Claude} model pricing},
+  title  = {{Anthropic} {API} pricing snapshot},
   year   = {2026},
-  note   = {Claude Sonnet 5 and the Fable 5 frontier tier; list price per
-            million tokens. Accessed 2026-06-17},
+  note   = {List price per million tokens; used only as a dated economic input,
+            not as evidence for release chronology, architecture, or energy.
+            Snapshot date 2026-06-17; locator checked 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://www.anthropic.com/pricing}
 }
 
 @misc{google_pricing2026,
   author = {{Google}},
-  title  = {{Gemini} {API} pricing},
+  title  = {{Google} {Gemini} {API} pricing snapshot},
   year   = {2026},
-  note   = {Gemini 3.6 Flash and 3.5 Flash-Lite; list price per million
-            tokens. Accessed 2026-06-17},
+  note   = {List price per million tokens; used only as a dated economic input,
+            not as evidence for release chronology, architecture, or energy.
+            Snapshot date 2026-06-17; locator checked 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://ai.google.dev/pricing}
 }
-
-@misc{openweights2026,
-  author = {{Moonshot AI} and {Zhipu AI}},
-  title  = {Open-weights sparse mixture-of-experts flagships: {Kimi} {K3} and {GLM-5.2}},
-  year   = {2026},
-  note   = {Sparse expert activation decouples per-token compute from total
-            capacity, which is right-sizing applied inside the cloud model.
-            Cited for that architectural point and for list pricing.
-            Accessed 2026-06-17},
-  url    = {https://openrouter.ai/models}
-}
-
 
 % --------------------------------------------------------------------- %
 %  This study's own artifacts
@@ -719,6 +874,7 @@
             declines to install. The harness and the raw per-run records,
             including every power trace, are released with this study under an
             MIT licence. Accessed 2026-09-06},
+  urldate = {2026-09-14},
   url    = {https://github.com/autoyou-ai/autoyou-research}
 }
 
@@ -727,7 +883,8 @@
   title  = {Teaching at the Edge: On-Device Parameter-Efficient Adaptation and What It Actually Buys},
   year   = {2026},
   note   = {Companion study, September 2026. Released with this study.
-            Accessed 2026-09-06},
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://github.com/autoyou-ai/autoyou-research}
 }
 
@@ -737,7 +894,8 @@
             Capability in Peer-to-Peer Inference},
   year   = {2026},
   note   = {Companion study, September 2026. Released with this study.
-            Accessed 2026-09-06},
+            Accessed 2026-09-14},
+  urldate = {2026-09-14},
   url    = {https://github.com/autoyou-ai/autoyou-research}
 }
 

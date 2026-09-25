@@ -1,0 +1,845 @@
+{
+  "schema_version": "1.0",
+  "release": {
+    "version": "0.4.0",
+    "date": "2026-09-24",
+    "status": "public research repository release",
+    "repository": "https://github.com/autoyou-ai/autoyou-research",
+    "source_revision": "660af2d9836ba4c727682b1d59483f7b7d6749c8",
+    "source_revision_type": "git HEAD when the manifest was written; the release commit adds this manifest"
+  },
+  "build": {
+    "source_date_epoch": 1789344000,
+    "model_pipeline": "py -3 models\\run_all.py",
+    "paper_pipeline": "pdflatex -> bibtex -> pdflatex -> pdflatex in paper/",
+    "statistics": "py -3 measure\\statistics.py --resamples 20000",
+    "replication_manifest_validation": "py -3 measure\\validate_replication_manifest.py",
+    "citation_audit": "py -3 paper\\audit_citations.py --network",
+    "adaptation_benchmark": "py -3 models\\run_adaptation_experiment.py --model qwen25-0.5b=LOCAL_SNAPSHOT --model qwen25-3b=LOCAL_SNAPSHOT --model qwen25-vl-3b=LOCAL_SNAPSHOT --frontier LOCAL_FRONTIER --tasks measure/results/adaptation_tasks.json --output measure/results/adaptation-multimodel.json --adapter-root measure/results/adaptation_adapters",
+    "adaptation_evaluation": "py -3 models\\adaptation_eval.py --resamples 20000",
+    "adaptation_template_holdout": "py -3 models\\adaptation_template_holdout.py --model qwen25-0.5b=LOCAL_SNAPSHOT --model qwen25-3b=LOCAL_SNAPSHOT --model qwen25-vl-3b=LOCAL_SNAPSHOT --frontier LOCAL_FRONTIER --reuse-adapters --tasks measure/results/adaptation-template-holdout-tasks.json --output measure/results/adaptation-template-holdout.json --adapter-root measure/results/adaptation_adapters",
+    "adaptation_template_holdout_evaluation": "py -3 models\\adaptation_eval.py --input measure/results/adaptation-template-holdout.json --output models/adaptation_template_holdout_evaluation.json --resamples 20000",
+    "adaptation_semantic_holdout": "py -3 models\\adaptation_semantic_holdout.py --model qwen25-0.5b=LOCAL_SNAPSHOT --model qwen25-3b=LOCAL_SNAPSHOT --model qwen25-vl-3b=LOCAL_SNAPSHOT --frontier LOCAL_FRONTIER --reuse-adapters --tasks measure/results/adaptation-semantic-holdout-tasks.json --output measure/results/adaptation-semantic-holdout.json --adapter-root measure/results/adaptation_adapters",
+    "adaptation_semantic_holdout_evaluation": "py -3 models\\adaptation_eval.py --input measure/results/adaptation-semantic-holdout.json --output models/adaptation_semantic_holdout_evaluation.json --resamples 20000",
+    "python": "3.14.6",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.3"
+  },
+  "data_availability": {
+    "status": "partial",
+    "public": [
+      "source code and deterministic model parameters",
+      "generated figures and manuscripts",
+      "raw public measurement records in measure/results/",
+      "public synthetic adaptation task manifest, scores and adapter artifacts",
+      "supplemental prompt-surface holdout manifest, scores and evaluation",
+      "new-semantic holdout manifest, scores and evaluation",
+      "citation and reproducibility audits"
+    ],
+    "restricted": [
+      "the adapter evaluation input from one deployed assistant",
+      "prompts, answers, transcripts, and private training material"
+    ]
+  },
+  "files_exclude_self": true,
+  "files": [
+    {
+      "path": "paper/p2p-inference.tex",
+      "role": "manuscript",
+      "bytes": 79001,
+      "sha256": "95bab75c6defbaf624df0628b44ecc600f1e11dfedd6a78d60da14e63517b84e"
+    },
+    {
+      "path": "paper/adaptation.tex",
+      "role": "manuscript",
+      "bytes": 48692,
+      "sha256": "c94b08d5581c4550e5a061e51ebd0b59caeb242e1f6deb28c6ae7b7bff7dce31"
+    },
+    {
+      "path": "paper/references.bib",
+      "role": "bibliography",
+      "bytes": 39235,
+      "sha256": "54b941b89abc101cbee51b791004f1b3f9206c8529cfaa5e15e8fb7d08ac9279"
+    },
+    {
+      "path": "paper/p2p-inference.pdf",
+      "role": "compiled manuscript",
+      "bytes": 683010,
+      "sha256": "eccb899f7ea7ec9a9e290728e4ccfbbe2b8a0ee59300f2fa6a115a9b31e71bee"
+    },
+    {
+      "path": "paper/adaptation.pdf",
+      "role": "compiled manuscript",
+      "bytes": 393659,
+      "sha256": "adcb3c73d1c0978152b78cb18d59f0bd543e16afe5e3835a2386da65110718d4"
+    },
+    {
+      "path": "paper/empirical.tex",
+      "role": "generated empirical appendix",
+      "bytes": 3969,
+      "sha256": "d30603dc2d050c036b372554068f085c840b4261ef68f57cb942b386da51a16c"
+    },
+    {
+      "path": "models/run_all.py",
+      "role": "reproducibility pipeline",
+      "bytes": 23851,
+      "sha256": "6393de32e72fc920089868addf7eb76b337defc83c2aaca508e94bdd3cdd2390"
+    },
+    {
+      "path": "models/verify_paper.py",
+      "role": "paper number verifier",
+      "bytes": 19881,
+      "sha256": "f1047d8b49da208f1de30e03dba7b4e33e8632d9a689cd0309fa2aa9712c31a8"
+    },
+    {
+      "path": "models/adaptation_eval.py",
+      "role": "adaptation evaluator",
+      "bytes": 19533,
+      "sha256": "0e4afd56fa4e7d1609c7c52c1195a0c803d6abadd3325824a0607d1d9b3977da"
+    },
+    {
+      "path": "models/run_adaptation_experiment.py",
+      "role": "adaptation experiment runner",
+      "bytes": 30731,
+      "sha256": "a24aecab17d1abddc816bf9e118ba17f5d2c5892310d0fcd5752b8dfde9b8f94"
+    },
+    {
+      "path": "models/adaptation_template_holdout.py",
+      "role": "prompt-surface holdout runner",
+      "bytes": 14774,
+      "sha256": "f07efb2d4cf5cc5f8d91b12cc3f6670164dfd1ba6076b8485f18e17f259aa622"
+    },
+    {
+      "path": "models/adaptation_semantic_holdout.py",
+      "role": "new-semantic holdout runner",
+      "bytes": 15589,
+      "sha256": "13abccd16cdc305905d6a7b46236cef4b8c34fba9d81691f3ce6a364c3ab3414"
+    },
+    {
+      "path": "models/adaptation_semantic_holdout_evaluation.json",
+      "role": "new-semantic holdout evaluation",
+      "bytes": 19434,
+      "sha256": "46b9a8eae4e29f667927bccb9be89ca31672df2763924b5bd83842e694523a69"
+    },
+    {
+      "path": "measure/bench.py",
+      "role": "measurement harness",
+      "bytes": 60196,
+      "sha256": "a2b111a0656de21369070ec03a934e5ee78b81737456366c6bd0e40b813c0eef"
+    },
+    {
+      "path": "measure/statistics.py",
+      "role": "measurement statistics",
+      "bytes": 34020,
+      "sha256": "ec7e3b61f66913444bf21cde294fd6153bb03a4389327a2b795b612a016b0031"
+    },
+    {
+      "path": "measure/validate_replication_manifest.py",
+      "role": "provenance validator",
+      "bytes": 12623,
+      "sha256": "2f79b3516464426b53390ba976665b8dff5eaed4dfcb719ab3914453dbd3a933"
+    },
+    {
+      "path": "paper/audit_citations.py",
+      "role": "citation audit tool",
+      "bytes": 21545,
+      "sha256": "4f341235bb028bb527e0c009d5914f2c8492f4aaa954ab26a512d9e9e1efe026"
+    },
+    {
+      "path": "paper/citation_claim_review.py",
+      "role": "citation claim review tool",
+      "bytes": 51346,
+      "sha256": "17dae6e093c5895e3d717473ecebd73a0ed0a4591dee7763c868db985fd9b80e"
+    },
+    {
+      "path": "models/results.json",
+      "role": "generated model results",
+      "bytes": 272908,
+      "sha256": "99d652466dc771690f2051fc73b3aa00e8898fe2b101bf1a27dd2a6142925ca7"
+    },
+    {
+      "path": "measure/statistics.json",
+      "role": "generated measurement statistics",
+      "bytes": 233988,
+      "sha256": "98eb12cb0fd85d6088f4ff9a8dd38410c8775a6af45c760ee1576b86cf3aac16"
+    },
+    {
+      "path": "paper/citation_audit.json",
+      "role": "citation audit",
+      "bytes": 199118,
+      "sha256": "f0842983b2528f8016fe67cdcc7dbddd3272f1997ceccff424cd16c0099b3147"
+    },
+    {
+      "path": "paper/CITATION_AUDIT.md",
+      "role": "human-readable citation audit",
+      "bytes": 138131,
+      "sha256": "36b2313314adb34c096b43180ac445a7f606d446f6eb2029c7a2b9fdd8609e77"
+    },
+    {
+      "path": "paper/citation_claim_review.json",
+      "role": "citation claim review",
+      "bytes": 210486,
+      "sha256": "2f808570410ed5b359413b522cc52a387aae627726a5b214c1665f31b145982a"
+    },
+    {
+      "path": "paper/CITATION_CLAIM_REVIEW.md",
+      "role": "human-readable citation claim review",
+      "bytes": 46362,
+      "sha256": "1e934f8e1abaf3697acaa0107444b090a31abbd428af7c3fdaaa6e633e0bc10e"
+    },
+    {
+      "path": "paper/publication_metadata.json",
+      "role": "publication metadata",
+      "bytes": 5417,
+      "sha256": "38d05c99db5b070cfdf50103983453780442e6d0acd6415c2062f57e29b9d8ac"
+    },
+    {
+      "path": "CITATION.cff",
+      "role": "citation metadata",
+      "bytes": 1942,
+      "sha256": "5e2c3ccd8b444ab04289b30ecc78c4cac47831e3dc5f1bc0fd404bf50edb841c"
+    },
+    {
+      "path": "measure/hardware_matrix.json",
+      "role": "hardware coverage metadata",
+      "bytes": 3456,
+      "sha256": "6fd0f90fe0e4f35b11c355cbadfd6fc742f8876d9260af10db8d6a9af15cb3b3"
+    },
+    {
+      "path": "measure/replication_manifest.json",
+      "role": "measurement provenance metadata",
+      "bytes": 2764,
+      "sha256": "7fb42051e372e10751dd324e01dfe51eaf0ba7de25af84a71b02b6749703ebe2"
+    },
+    {
+      "path": "measure/replication_manifest.schema.json",
+      "role": "measurement provenance schema",
+      "bytes": 3297,
+      "sha256": "9f15b8e799609c35039623d9e88b9f5f07904dd3f5c3fe0031a1ab22b1f8cac4"
+    },
+    {
+      "path": "measure/REPLICATION_PROTOCOL.md",
+      "role": "replication protocol",
+      "bytes": 9649,
+      "sha256": "95a5c83199fa37b0fdb602b544eb193076b9c4daac9ff3abd80dd1f8137c4b4a"
+    },
+    {
+      "path": "measure/adaptation-multimodel.schema.json",
+      "role": "adaptation evaluation schema",
+      "bytes": 4685,
+      "sha256": "59c3ea49407b961b90a039d404e8b7f15bc70d4576c8b3abfbfba5c399a608a2"
+    },
+    {
+      "path": "measure/ADAPTATION_EVALUATION.md",
+      "role": "adaptation benchmark record",
+      "bytes": 7266,
+      "sha256": "89817d3f2c529efdbc3e36a4c79e9bb69640dab45ce88dee3ffe659b157bd624"
+    },
+    {
+      "path": "models/adaptation_template_holdout_evaluation.json",
+      "role": "prompt-surface holdout evaluation",
+      "bytes": 19012,
+      "sha256": "9eeaf4b70e04e44af9340ce5bb8af14f28d671e40ca79e1abdfb8dc4406954d1"
+    },
+    {
+      "path": "requirements-adaptation.txt",
+      "role": "adaptation benchmark environment",
+      "bytes": 148,
+      "sha256": "c1feed8ba5f23d5485ae9d668dcdb44ab0b96fcbc25a070083c6c27bcffdd012"
+    },
+    {
+      "path": "paper/CLAIMS_LEDGER.md",
+      "role": "claim boundary ledger",
+      "bytes": 6332,
+      "sha256": "79ee5c68a3bf5cc1cad941863bd13a05d0cde865d27a156c3e491700186cc453"
+    },
+    {
+      "path": "paper/FOLLOW_UP_STUDY.md",
+      "role": "follow-up study protocol",
+      "bytes": 5676,
+      "sha256": "0363ab152f8222c86d7e11d63148ddaeabb0361fd13fb03674c84a39b0715ce3"
+    },
+    {
+      "path": "paper/REVIEW_CRITIQUE.md",
+      "role": "critical review",
+      "bytes": 13775,
+      "sha256": "b0aa8dca8b38a12becfb0aee125b7b415354ddf3defa9a5175cb8980dbc87b97"
+    },
+    {
+      "path": "measure/results/adaptation-multimodel.json",
+      "role": "raw public measurement record",
+      "bytes": 234517,
+      "sha256": "db5879df5cc1ab1ea472218029c2c2dfbfaf5234c020f79a71b7c1ea9e3243c9"
+    },
+    {
+      "path": "measure/results/adaptation-semantic-holdout-tasks.json",
+      "role": "raw public measurement record",
+      "bytes": 97459,
+      "sha256": "cb327f57c573e9f893687082610f4616899e1aa598c6094391c6c9a78c1f1be8"
+    },
+    {
+      "path": "measure/results/adaptation-semantic-holdout.json",
+      "role": "raw public measurement record",
+      "bytes": 263858,
+      "sha256": "b9153440d083b155345b75dc41ed8b3943af1f2ef6fdba5020540ca5d6b10288"
+    },
+    {
+      "path": "measure/results/adaptation-template-holdout-tasks.json",
+      "role": "raw public measurement record",
+      "bytes": 100347,
+      "sha256": "ef5080110d36b37d8580986370f9980dbc2ec7378faf461a0154400744dc7604"
+    },
+    {
+      "path": "measure/results/adaptation-template-holdout.json",
+      "role": "raw public measurement record",
+      "bytes": 273037,
+      "sha256": "1aa4a5f2568ae11f4289b1aebd774798b4ea4fddb4b1c7c595560d96e15c33df"
+    },
+    {
+      "path": "measure/results/adaptation_tasks.json",
+      "role": "raw public measurement record",
+      "bytes": 135611,
+      "sha256": "8907ed03b4fe9503f792bbaae84f83babb10199cb88a876c6945e6790cca2d7a"
+    },
+    {
+      "path": "measure/results/amd-8060s-large-20260915-batched.json",
+      "role": "raw public measurement record",
+      "bytes": 84252,
+      "sha256": "78db829948b8d6dbda83727f51df3cb210612bc87d62d94287817108263c18b6"
+    },
+    {
+      "path": "measure/results/amd-8060s-standard-batched.json",
+      "role": "raw public measurement record",
+      "bytes": 165442,
+      "sha256": "aba93bb3ba68177b67137f0d7dcea7f7ae66d75e132c611e25c0f8df3f4a8b91"
+    },
+    {
+      "path": "measure/results/amd-8060s-strixhalo-ladder.json",
+      "role": "raw public measurement record",
+      "bytes": 12012,
+      "sha256": "7210b754ef65727873ee52712cb8a183ccb5ca07c402f2bfa0f3a62cf1871e72"
+    },
+    {
+      "path": "measure/results/amd-8060s-strixhalo.json",
+      "role": "raw public measurement record",
+      "bytes": 24558,
+      "sha256": "92191823a2b9f053a500c1f0c6c1b28a485b629470e702970ef52c4acbb4d611"
+    },
+    {
+      "path": "measure/results/local-batch-pilot-batched.json",
+      "role": "raw public measurement record",
+      "bytes": 28428,
+      "sha256": "175c71b2b2aabfbfc6bc37f318b1c45676d198a49892b9662ca94e9606edd251"
+    },
+    {
+      "path": "measure/results/rtx5070-ladder.json",
+      "role": "raw public measurement record",
+      "bytes": 8652,
+      "sha256": "597daf662b86a307547e31f43cf3a90688a8bda1c45869941dde0ea92ccb00d0"
+    },
+    {
+      "path": "measure/results/rtx5070-replication.json",
+      "role": "raw public measurement record",
+      "bytes": 42292,
+      "sha256": "7c61f5d4b1473baaae3f5f2d59c0f6a5af980bbb64704c74353acacc0ee8de25"
+    },
+    {
+      "path": "measure/results/rtx5070-study.json",
+      "role": "raw public measurement record",
+      "bytes": 42212,
+      "sha256": "f9c1c9fe1e1170e994bd3aea43f01bdc8e09388c4c22f6619606d8973d2e412f"
+    },
+    {
+      "path": "measure/results/rtx5070.json",
+      "role": "raw public measurement record",
+      "bytes": 31795,
+      "sha256": "347844a25f2f7e64a58ecf42ce6209344c7480502d4643d35c70e0357ed9aa3d"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/LICENSE-APACHE-2.0.txt",
+      "role": "public synthetic adapter artifact",
+      "bytes": 11343,
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/LICENSE-QWEN-RESEARCH.txt",
+      "role": "public synthetic adapter artifact",
+      "bytes": 7388,
+      "sha256": "ef52482bb785733093dc9a2e8edd8e764c77d12d8e9d8f10a80c9b547d32d0f9"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/NOTICE",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1030,
+      "sha256": "9d128019369fed245bd54647a29257270d2bbb9bf1a53dbc17fea01d46a75b0f"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260914/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1126,
+      "sha256": "77b682ea95f4fdfe7f32d742aace3fd0d8fb7f3f6e72ba288dca58d2767e82ff"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260914/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1093728,
+      "sha256": "a9c9492eb1dda7d642b4ca1e3cd1a4e932e56f78bed15977c5e217e563dfe742"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260914/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260915/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1126,
+      "sha256": "77b682ea95f4fdfe7f32d742aace3fd0d8fb7f3f6e72ba288dca58d2767e82ff"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260915/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1093728,
+      "sha256": "b4ccee8d337925c9a11ebf2f0f28bfde7c4b4fdc7f0db04b22c64ff50036d6a0"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260915/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260916/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1126,
+      "sha256": "77b682ea95f4fdfe7f32d742aace3fd0d8fb7f3f6e72ba288dca58d2767e82ff"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260916/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1093728,
+      "sha256": "ad7834a71dd9f499dca10e8c8d6a381f3fed7b952959f6af94974fec0ff58182"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-0.5b/seed-20260916/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260914/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1124,
+      "sha256": "2eb0fac05167abebc09b7a4413be778846f55ccd6fca03b99cbcf226f704f887"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260914/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 3705288,
+      "sha256": "a1bf65fbea84757fb9a3d599f6d8c9f7c48f5998cd09ed70bf3d082a124cf177"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260914/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260915/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1124,
+      "sha256": "2eb0fac05167abebc09b7a4413be778846f55ccd6fca03b99cbcf226f704f887"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260915/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 3705288,
+      "sha256": "3ed9790321b74f1d9a462d60cf04fc25d4ee316959243240f11931ca571d4c60"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260915/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260916/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1124,
+      "sha256": "2eb0fac05167abebc09b7a4413be778846f55ccd6fca03b99cbcf226f704f887"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260916/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 3705288,
+      "sha256": "a494c47ecd58ef1a897dbee3a47cd39453d9e243363e1a86e55439321c8d82f8"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-3b/seed-20260916/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260914/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1127,
+      "sha256": "a88bd1d0260a160a0c4598eb45cfd83f9f250d4263792755cd284172bde7dec7"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260914/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 3707448,
+      "sha256": "0f93afdcf7fb7e9a0e8157fb046fd001927fc0005d7d580fcae047aafad56ca0"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260914/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260915/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1127,
+      "sha256": "a88bd1d0260a160a0c4598eb45cfd83f9f250d4263792755cd284172bde7dec7"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260915/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 3707448,
+      "sha256": "87c5febd704632b9ddbc777b7e65970bad68bd952de85dacda7df2eb9b5c3a48"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260915/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260916/adapter_config.json",
+      "role": "public synthetic adapter artifact",
+      "bytes": 1127,
+      "sha256": "a88bd1d0260a160a0c4598eb45cfd83f9f250d4263792755cd284172bde7dec7"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260916/adapter_model.safetensors",
+      "role": "public synthetic adapter artifact",
+      "bytes": 3707448,
+      "sha256": "94bb14970f4b4c6b6271b12fc22e1ae2fc0e76a906c8d71ff7eea12e671d1bde"
+    },
+    {
+      "path": "measure/results/adaptation_adapters/qwen25-vl-3b/seed-20260916/README.md",
+      "role": "public synthetic adapter artifact",
+      "bytes": 435,
+      "sha256": "6d99bbf9a5fa2f9ae64f3f100c3637ed8be0600306b7e0a02fdfdf63eacd6007"
+    },
+    {
+      "path": "figures/fig_adaptation_breakeven.pdf",
+      "role": "generated figure",
+      "bytes": 19524,
+      "sha256": "2ec5da9b66395f23dc0941690bcb995f662f2b5d20cb7b8a825f85fdceeb4c1d"
+    },
+    {
+      "path": "figures/fig_adaptation_breakeven.png",
+      "role": "generated figure",
+      "bytes": 72107,
+      "sha256": "fedf06f4a51552e6f1ff595cc51a357b240299fdbf702c7a8c85c3cf47f40c5d"
+    },
+    {
+      "path": "figures/fig_adaptation_breakeven.svg",
+      "role": "generated figure",
+      "bytes": 14142,
+      "sha256": "ab0f0215c8c60f5be998ede342d634abd082499df9b58f1a98bd599df595b2d1"
+    },
+    {
+      "path": "figures/fig_adapter_transport.pdf",
+      "role": "generated figure",
+      "bytes": 18376,
+      "sha256": "2b380928e20df6140d64eafd975e20c4264854ee22442ccd1ca0e46649524832"
+    },
+    {
+      "path": "figures/fig_adapter_transport.png",
+      "role": "generated figure",
+      "bytes": 60818,
+      "sha256": "47a80126b6d487383c1403df3d628ca17c54718c906ed9d56043af93473b73b5"
+    },
+    {
+      "path": "figures/fig_adapter_transport.svg",
+      "role": "generated figure",
+      "bytes": 18107,
+      "sha256": "9fe1cb294e66c33d3547a40fcb72b8f4ce1ad60d8291e830300ce20fdb5f72cc"
+    },
+    {
+      "path": "figures/fig_bandwidth_roof.pdf",
+      "role": "generated figure",
+      "bytes": 40263,
+      "sha256": "3d2d7353182a8510ca87876877b9c77f0426db2d8b1a0d4ca35c8acccbc3d180"
+    },
+    {
+      "path": "figures/fig_bandwidth_roof.png",
+      "role": "generated figure",
+      "bytes": 125223,
+      "sha256": "f3ee81485b0a020f24b0a0063374213312882f2547370cbea602a4eb5b421bcb"
+    },
+    {
+      "path": "figures/fig_bandwidth_roof.svg",
+      "role": "generated figure",
+      "bytes": 40362,
+      "sha256": "8b41369ce77a676eabb8aa4ad0b48e6c11986e5412fc5d01a964ce4d25cf91fe"
+    },
+    {
+      "path": "figures/fig_capability.pdf",
+      "role": "generated figure",
+      "bytes": 23114,
+      "sha256": "6879387df13ce7f235eb7a7dbac8e94a5543db5df43e4b80ad00fc838373b64d"
+    },
+    {
+      "path": "figures/fig_capability.png",
+      "role": "generated figure",
+      "bytes": 66462,
+      "sha256": "049c937b50e92f851c5eaabd9cd2f29723e54d58bb1a6166e61fb4e3ae7ff1c2"
+    },
+    {
+      "path": "figures/fig_capability.svg",
+      "role": "generated figure",
+      "bytes": 21618,
+      "sha256": "ee4ce00467b14fd3b061b6570c400b0295cf1841d207d96f82671ab1f086a08b"
+    },
+    {
+      "path": "figures/fig_device_class.pdf",
+      "role": "generated figure",
+      "bytes": 30590,
+      "sha256": "9977cda0b5fcaceba2de78b5be8dd4a7e2214c05d93f9446c6ee1f212cd243cc"
+    },
+    {
+      "path": "figures/fig_device_class.png",
+      "role": "generated figure",
+      "bytes": 74596,
+      "sha256": "673f8bc5f20691a5a066231816fc6d473d497dc06327e64c2495f9a74a1e8356"
+    },
+    {
+      "path": "figures/fig_device_class.svg",
+      "role": "generated figure",
+      "bytes": 17334,
+      "sha256": "d030b1ccef37d84faa4b260262d7bb6cb1fa88f205cf34442c4f5b4712fdc79a"
+    },
+    {
+      "path": "figures/fig_energy_ladder.pdf",
+      "role": "generated figure",
+      "bytes": 22531,
+      "sha256": "36fa3540caa5bdd84f76e42c6039e1a67d30cff8909907d961fbfe3dd9e03a38"
+    },
+    {
+      "path": "figures/fig_energy_ladder.png",
+      "role": "generated figure",
+      "bytes": 75805,
+      "sha256": "23a74f76db9a13b0e7d2f42999b4b174905eeaaf5d421cb19aa6173c3a91cc03"
+    },
+    {
+      "path": "figures/fig_energy_ladder.svg",
+      "role": "generated figure",
+      "bytes": 21864,
+      "sha256": "e9c011ef134ee3220d4eb0e6f6874a7f46e24b9cbc439adf5072386b27097997"
+    },
+    {
+      "path": "figures/fig_fleet.pdf",
+      "role": "generated figure",
+      "bytes": 15978,
+      "sha256": "6fb3a6dfd6991cd7c9bfe72d7df61761a5ff14d8403b7cd18431e91306d3326f"
+    },
+    {
+      "path": "figures/fig_fleet.png",
+      "role": "generated figure",
+      "bytes": 61512,
+      "sha256": "37266a053782a14dbc6a7db0589ab6affbe0510ae2dc2e2278729c10950cd507"
+    },
+    {
+      "path": "figures/fig_fleet.svg",
+      "role": "generated figure",
+      "bytes": 14160,
+      "sha256": "50b31e3749a1a15288ed03101d8e6f3e6af22cbe5e69125554d723bdc4fc76a1"
+    },
+    {
+      "path": "figures/fig_footprint_breakdown.pdf",
+      "role": "generated figure",
+      "bytes": 24577,
+      "sha256": "8616dbcd6e85ecdefb7a9cc5fe8cf23a20c07411d30cbbbc4b6f29e7134d37d9"
+    },
+    {
+      "path": "figures/fig_footprint_breakdown.png",
+      "role": "generated figure",
+      "bytes": 55557,
+      "sha256": "04faf2fd78c149f8d3412df103a2d6aabb06506a1afd0e74e943e5838b89d06d"
+    },
+    {
+      "path": "figures/fig_footprint_breakdown.svg",
+      "role": "generated figure",
+      "bytes": 23479,
+      "sha256": "ae556f71e018efd72b908932c17fc03b23c5323d4a0d42968ed961bfc901901d"
+    },
+    {
+      "path": "figures/fig_grid_crossover.pdf",
+      "role": "generated figure",
+      "bytes": 20652,
+      "sha256": "b7b4927a04e8b4e5a9c12771ebcf1d54f8034959d1f767fd8ac82b277640f363"
+    },
+    {
+      "path": "figures/fig_grid_crossover.png",
+      "role": "generated figure",
+      "bytes": 75763,
+      "sha256": "63d686ae15ab12aca47713b2f5b6efb88e89f76b73fb6dbaaae2e0ef42055429"
+    },
+    {
+      "path": "figures/fig_grid_crossover.svg",
+      "role": "generated figure",
+      "bytes": 18329,
+      "sha256": "1a90ad0fc012f07ef9e411af03d93e606c7633f80a19660b16eefe4232b00bd8"
+    },
+    {
+      "path": "figures/fig_measured_adapter.pdf",
+      "role": "generated figure",
+      "bytes": 10603,
+      "sha256": "4834b1632b4af53b84d490ca88d02677122ba867d5f28da367046ddce0c53d5d"
+    },
+    {
+      "path": "figures/fig_measured_adapter.png",
+      "role": "generated figure",
+      "bytes": 16500,
+      "sha256": "ebfac035648d7c324a88d80e1744ab35c75eaab0bc0dd088dc0b7167d3e0c920"
+    },
+    {
+      "path": "figures/fig_measured_adapter.svg",
+      "role": "generated figure",
+      "bytes": 1822,
+      "sha256": "1bb94d807eb4f6d09036ebc16f6fc7f183b195f94044756c03e94b3b526c1483"
+    },
+    {
+      "path": "figures/fig_measured_energy.pdf",
+      "role": "generated figure",
+      "bytes": 15767,
+      "sha256": "eee69a7aeca8a314695b13519f8a3739375ca6c1adae55604d041a8098a61029"
+    },
+    {
+      "path": "figures/fig_measured_energy.png",
+      "role": "generated figure",
+      "bytes": 59521,
+      "sha256": "954634d24168a5bb3431ed97e5a099121bd0bf97db3bbc4ba0c2964c5e65e34c"
+    },
+    {
+      "path": "figures/fig_measured_energy.svg",
+      "role": "generated figure",
+      "bytes": 14496,
+      "sha256": "0dce4af3e23bc1831b93c708c4484a9da710ec0bf5c8a482809745f55a6075ca"
+    },
+    {
+      "path": "figures/fig_memory_wall.pdf",
+      "role": "generated figure",
+      "bytes": 33630,
+      "sha256": "51d51c6a22157262b54244a7408851929a8a5a7a09baf269e8313ec97e95ef23"
+    },
+    {
+      "path": "figures/fig_memory_wall.png",
+      "role": "generated figure",
+      "bytes": 69434,
+      "sha256": "857082183ea820285fa57ff95c2b13d96058b0352b033cf2759af7bf4cf36e46"
+    },
+    {
+      "path": "figures/fig_memory_wall.svg",
+      "role": "generated figure",
+      "bytes": 17433,
+      "sha256": "67f7fa0d181a8ec5bbc2d98644092b26df8cb57fd5d2b7548287ed7a9fdc2dcb"
+    },
+    {
+      "path": "figures/fig_method_landscape.pdf",
+      "role": "generated figure",
+      "bytes": 29891,
+      "sha256": "b0cb61e32b8593f1f399989d393df8be66e28bc9cce4348ad191c687b1420a73"
+    },
+    {
+      "path": "figures/fig_method_landscape.png",
+      "role": "generated figure",
+      "bytes": 96665,
+      "sha256": "2c5409abf8d6b25a09640c463683d06abff56aaed8ab99e5774282a32f6510e8"
+    },
+    {
+      "path": "figures/fig_method_landscape.svg",
+      "role": "generated figure",
+      "bytes": 35846,
+      "sha256": "61a93a8d6e664c9fd52a7848cb0dd8b064abd57d673e6d35cdaf9db6aabb78fd"
+    },
+    {
+      "path": "figures/fig_quality_vs_coverage.pdf",
+      "role": "generated figure",
+      "bytes": 36033,
+      "sha256": "10c899b1ea359688ddc4ed78a5f70f00e8b93fbe5a7a0ec4ce92f53b80b8aca3"
+    },
+    {
+      "path": "figures/fig_quality_vs_coverage.png",
+      "role": "generated figure",
+      "bytes": 114484,
+      "sha256": "08ca64c5d133c46bf249eeef30809be06cb2139b9382f31b0486914e1cdeaecd"
+    },
+    {
+      "path": "figures/fig_quality_vs_coverage.svg",
+      "role": "generated figure",
+      "bytes": 32912,
+      "sha256": "131cb4a4794bea5077e8ab1056e6e7673e17053801ed1a0990df1914a2b525cf"
+    },
+    {
+      "path": "figures/fig_savings_by_baseline.pdf",
+      "role": "generated figure",
+      "bytes": 17488,
+      "sha256": "5c8a2fbf6dacf4c8c053366a1a84d8be9db0c3f1595f0f94a51aa2086eca8b54"
+    },
+    {
+      "path": "figures/fig_savings_by_baseline.png",
+      "role": "generated figure",
+      "bytes": 59725,
+      "sha256": "9e42cfd8bbf5fb298211c14171a341558656e1e6c30c3949f80ed07958129151"
+    },
+    {
+      "path": "figures/fig_savings_by_baseline.svg",
+      "role": "generated figure",
+      "bytes": 14381,
+      "sha256": "e97318c27cc641a46d608f778e52ade77d00095b233b035ef0269f6d844c1022"
+    },
+    {
+      "path": "figures/fig_tco.pdf",
+      "role": "generated figure",
+      "bytes": 19942,
+      "sha256": "84678e036b1cf0757b2493c0d006ff0bc56d2cb2eb533d58e4a889b1e8a76b38"
+    },
+    {
+      "path": "figures/fig_tco.png",
+      "role": "generated figure",
+      "bytes": 56882,
+      "sha256": "61f5846a21032df9885b06cbee89e3cd8819fca3029d40a11920f11c85dc66a6"
+    },
+    {
+      "path": "figures/fig_tco.svg",
+      "role": "generated figure",
+      "bytes": 17151,
+      "sha256": "67de5b8997cbb47fd40df5f8b975f54bdbe75ae0146c2c9ceeb1da694a0cd33d"
+    },
+    {
+      "path": "figures/fig_tornado.pdf",
+      "role": "generated figure",
+      "bytes": 30594,
+      "sha256": "04bf8e41829dce6e53b8ec2b8b61f950a573f1f564427e6b0ebd54d5b5fc6ea7"
+    },
+    {
+      "path": "figures/fig_tornado.png",
+      "role": "generated figure",
+      "bytes": 81453,
+      "sha256": "885a5b97d5354f8e3034940ecd748d5f7d67031d29465f4444ff57a221754a90"
+    },
+    {
+      "path": "figures/fig_tornado.svg",
+      "role": "generated figure",
+      "bytes": 18805,
+      "sha256": "fd57c095d333e47f89333342f206b08885cc5107ce089ef25b29f45d55574aa4"
+    }
+  ]
+}

@@ -1,16 +1,54 @@
 cff-version: 1.2.0
-message: "Please cite the working paper and identify the repository commit when reusing these records."
-type: dataset
-title: "Right-Sized AI at the Edge: Reproducible Measurements and Conditional Sustainability Analysis"
+message: "Please cite the paper you use from the references below, and identify the repository commit and measurement filenames when reusing records."
+type: software
+title: "AutoYou Research: footprint and capability of AI inference and adaptation on consumer hardware"
 authors:
   - name: "AutoYou Research"
-date-released: 2026-09-20
-version: "2026-09-20"
+    email: "research@autoyou.me"
+version: "0.4.0"
+date-released: 2026-09-24
 repository-code: "https://github.com/autoyou-ai/autoyou-research"
 url: "https://github.com/autoyou-ai/autoyou-research"
 license: MIT
 keywords:
-  - consumer inference
+  - sustainable AI
+  - edge inference
+  - peer-to-peer inference
+  - small language models
   - energy measurement
+  - carbon accounting
+  - water consumption
+  - parameter-efficient fine-tuning
   - reproducibility
-abstract: "Working paper, not peer reviewed. Offline replay of stored consumer-inference records with explicit accounting boundaries and conditional sustainability analysis."
+abstract: >-
+  Papers, raw measurements, analysis code, and audits on the conditional energy,
+  water, carbon, cost, and capability footprint of running and adapting language
+  models on consumer hardware.
+references:
+  - type: article
+    status: preprint
+    title: "Quantifying Carbon, Water, Cost, and Capability in Peer-to-Peer Inference"
+    authors:
+      - name: "AutoYou Research"
+    year: 2026
+    date-published: 2026-09-21
+    publisher:
+      name: "alphaXiv"
+    url: "https://www.alphaxiv.org/abs/2609.carbon-water-cost-p2p-inference"
+  - type: article
+    status: preprint
+    title: "Right-Sized AI at the Edge: Reproducible Measurements and Conditional Sustainability Analysis"
+    authors:
+      - name: "AutoYou Research"
+    year: 2026
+    date-published: 2026-09-21
+    publisher:
+      name: "alphaXiv"
+    url: "https://www.alphaxiv.org/abs/2609.right-sized-ai-edge-sustainability"
+  - type: report
+    title: "Teaching at the Edge: On-Device Parameter-Efficient Adaptation and What It Actually Buys"
+    authors:
+      - name: "AutoYou Research"
+    year: 2026
+    notes: "Research release v0.3.0"
+    url: "https://github.com/autoyou-ai/autoyou-research"

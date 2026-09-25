@@ -25,6 +25,7 @@ import evidence as E
 import models as M
 import peft as P
 import adaptation as A
+import adaptation_eval as AE
 from hypotheses import CAP_RATIOS, Verdict
 
 
@@ -50,7 +51,7 @@ def h7_feasibility() -> Verdict:
     validation = P.validate_memory_model()
 
     # Feasible on the class of device that actually has the memory, and the
-    # memory model that says so reproduces a published run.
+    # memory model that says so reproduces a publicly documented run.
     ok = apu_27b["feasible"] and abs(validation["relative_error"]) < 0.15
 
     return Verdict(
@@ -184,18 +185,70 @@ def h9_uplift() -> Verdict:
     up = A.uplifted_f_s(CAP_RATIOS)
     q = A.quality_uplift(CAP_RATIOS)
     sweep = A.alpha_sweep(CAP_RATIOS)
+    empirical = AE.summarize_file()
 
     coverage_moved = up.adapted_f_s["mid"] > up.base_f_s + 1e-9
-    quality_moved = q["quality_gain_pp"] > 1.0
+    measured_pool = empirical.get("pooled", {}) if empirical.get("available") else {}
+    measured_uplift = (measured_pool.get("uplift_pp", {})
+                       if measured_pool else {})
+    measured_gain = measured_uplift.get("model_mean")
+    quality_moved = (float(measured_gain) > 0.0
+                     if measured_gain is not None else
+                     q["quality_gain_pp"] > 1.0)
     knee = next((float(a) for a, row in sweep.items()
                  if row["adapted_mid"] > row["base"] + 1e-9), None)
 
-    if quality_moved and not coverage_moved:
-        result = "PARTIAL (quality, not coverage)"
+    if empirical.get("available"):
+        result = ("PARTIAL (measured synthetic-task accuracy; real-workload "
+                  "coverage unvalidated)" if quality_moved else
+                  "NOT SUPPORTED IN THE MEASURED SYNTHETIC TASK SAMPLE")
+    elif quality_moved and not coverage_moved:
+        result = "PARTIAL (coverage structural; uplift not measured)"
     elif quality_moved and coverage_moved:
-        result = "VALIDATED"
+        result = "MODEL SCENARIO ONLY (uplift not measured)"
     else:
         result = "REFUTED"
+
+    if empirical.get("available"):
+        base_accuracy = measured_pool.get("base_accuracy", {})
+        adapted_accuracy = measured_pool.get("adapted_accuracy", {})
+        frontier_accuracy = measured_pool.get("frontier_accuracy", {})
+        class_uplift = {
+            name: values["uplift_pp"]["model_mean"]
+            for name, values in empirical.get("by_task_class", {}).items()
+        }
+        disproof = (
+            "The declared arithmetic keeps coverage at "
+            f"{up.base_f_s:.1%} at alpha={q['alpha']:.2f}; the supplied "
+            "public synthetic evaluation measures task accuracy, not the "
+            "declared real-workload fraction. Across three model clusters and "
+            f"five classes, accuracy changes from {base_accuracy.get('model_mean', 0.0):.1%} "
+            f"to {adapted_accuracy.get('model_mean', 0.0):.1%} "
+            f"({float(measured_gain):+.1f} pp; cluster bootstrap "
+            f"{measured_uplift.get('cluster_bootstrap_95_ci', {}).get('low', 0.0):.1f} to "
+            f"{measured_uplift.get('cluster_bootstrap_95_ci', {}).get('high', 0.0):.1f} pp; "
+            f"exact cluster sign-flip p={empirical['pooled'].get('paired_cluster_permutation_p_two_sided', 1.0):.3f}). "
+            f"The reference model scores {frontier_accuracy.get('model_mean', 0.0):.1%}. "
+            "The positive point estimate is therefore evidence for this "
+            "synthetic benchmark only. With three model clusters on one "
+            "physical host, no sampled user workload, and no human grader, it "
+            "does not validate a population effect or the declared real-workload "
+            "coverage claim. Class-level gains are recorded as "
+            f"{class_uplift}; the exploratory +2/+6/+14 scenario is retired "
+            "as the empirical input."
+        )
+    else:
+        disproof = (
+            "The public release contains no passing multi-model, multi-task "
+            "quality evaluation. Conditional on the declared class ratios "
+            f"and weights, adaptation moves coverage by {q['coverage_gain_pp']:+.1f} "
+            f"points at alpha={q['alpha']:.2f}, because every adaptable class "
+            "already clears the bar. The derived quality figures "
+            f"({q['base']['mean_ratio_served']:.1%} -> "
+            f"{q['adapted']['mean_ratio_served']:.1%}) and the +2/+6/+14 "
+            "uplift are scenario inputs, not observations. A task corpus with "
+            "classes near the threshold could change the coverage result."
+        )
 
     return Verdict(
         "H9",
@@ -210,25 +263,29 @@ def h9_uplift() -> Verdict:
                         "adapted": q["adapted"]["mean_ratio_served"],
                         "gain_pp": q["quality_gain_pp"],
                         "gap_to_frontier_closed": q["gap_to_frontier_closed"]},
+            "empirical_accuracy": ({
+                "base": measured_pool.get("base_accuracy", {}).get("model_mean"),
+                "adapted": measured_pool.get("adapted_accuracy", {}).get("model_mean"),
+                "frontier": measured_pool.get("frontier_accuracy", {}).get("model_mean"),
+                "gain_pp": measured_gain,
+                "cluster_ci_pp": measured_uplift.get("cluster_bootstrap_95_ci"),
+                "cluster_permutation_p_two_sided": empirical.get("pooled", {}).get(
+                    "paired_cluster_permutation_p_two_sided"),
+                "by_task_class_gain_pp": class_uplift,
+            } if empirical.get("available") else None),
             "alpha_sweep": sweep,
             "coverage_knee_alpha": knee,
             "f_s_range": {k: round(v, 4) for k, v in up.adapted_f_s.items()},
-            "disproof": (
-                "The hypothesis AS STATED is not what the evidence supports. At "
-                f"the study's acceptance threshold alpha={q['alpha']:.2f}, "
-                f"adaptation moves coverage by {q['coverage_gain_pp']:+.1f} "
-                "points - that is, not at all - because every adaptable class "
-                "already cleared the bar without it. What moves is quality: "
-                f"{q['base']['mean_ratio_served']:.1%} -> "
-                f"{q['adapted']['mean_ratio_served']:.1%} mean capability on "
-                "the served workload, closing "
-                f"{q['gap_to_frontier_closed']:.0%} of the remaining gap to "
-                "the frontier. Coverage only responds above "
-                f"alpha={knee}, where the unadapted model starts failing "
-                "classes the adapted one still passes. The correct claim is "
-                "therefore: adaptation buys better answers at an ordinary "
-                "quality bar, and buys more answers only at a demanding one."
-            ),
+            "modelled_scenario": {
+                "status": "exploratory, not empirical",
+                "uplift_points": {
+                    "low": A.UPLIFT_POINTS.lo,
+                    "central": A.UPLIFT_POINTS.value,
+                    "high": A.UPLIFT_POINTS.hi,
+                },
+            },
+            "empirical_evaluation": empirical,
+            "disproof": disproof,
         },
     )
 
@@ -293,8 +350,8 @@ def h11_measured() -> Verdict:
     if not available:
         return Verdict(
             "H11",
-            "A narrow LoRA adapter measurably lifts a task class the base model "
-            "fails, on this deployment's own evaluation artifacts.",
+            "A narrow LoRA adapter is reported to lift a task class the base "
+            "model fails, on one deployment's own evaluation artifacts.",
             "NO DATA",
             {"reason": "adapter evaluation artifacts are not present in a "
                        "public checkout; set ADAPTER_EVAL_ROOT to a "
@@ -305,9 +362,9 @@ def h11_measured() -> Verdict:
     ok = all(f.get("verdict", "").startswith(("VALIDATED",)) for f in available)
     return Verdict(
         "H11",
-        "A narrow LoRA adapter measurably lifts a task class the base model "
-        "fails, and does so without degrading its safety behaviour.",
-        "VALIDATED (n=1 deployment)" if ok else "PARTIAL",
+        "A narrow LoRA adapter is reported to lift a task class the base model "
+        "fails, with reported safety behavior moving in the desired direction.",
+        "REPORTED ONLY (n=1 deployment)" if ok else "PARTIAL",
         {
             "E1_capability_lift": e1,
             "E2_safety_direction": e2,
@@ -316,8 +373,8 @@ def h11_measured() -> Verdict:
             "scope_limit": (
                 "One deployment, one product's surface area, probe sets of "
                 "12-14 screens and 8 code probes scored by an automated judge. "
-                "These are existence proofs and refutations, not effect sizes, "
-                "and they are reported as such everywhere they appear."
+                "These are deployment-reported observations, not independently "
+                "reproducible existence proofs or effect sizes."
             ),
         },
     )

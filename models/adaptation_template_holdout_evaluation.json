@@ -1,0 +1,532 @@
+{
+  "available": true,
+  "status": "MEASURED",
+  "input": "measure/results/adaptation-template-holdout.json",
+  "input_sha256": "1aa4a5f2568ae11f4289b1aebd774798b4ea4fddb4b1c7c595560d96e15c33df",
+  "validation": {
+    "passed": true,
+    "checks": {
+      "minimum_models": true,
+      "all_task_classes": true,
+      "minimum_tasks_per_class": true,
+      "no_duplicate_model_task_pairs": true,
+      "no_score_errors": true,
+      "paired_scores": true,
+      "seed_repetitions": true
+    },
+    "models": [
+      "qwen25-0.5b",
+      "qwen25-3b",
+      "qwen25-vl-3b"
+    ],
+    "model_count": 3,
+    "task_count_by_class": {
+      "extraction": 20,
+      "rag_qa": 20,
+      "summary": 20,
+      "simple_code": 20,
+      "hard_reason": 20
+    },
+    "duplicate_model_task_pairs": [],
+    "input_errors": [],
+    "minimums": {
+      "models": 3,
+      "tasks_per_class": 20,
+      "seeds": 3
+    }
+  },
+  "protocol": {
+    "benchmark_id": "public-synthetic-operations-mcq-template-holdout-v1",
+    "source_benchmark_id": "public-synthetic-operations-mcq-v1",
+    "task_manifest_sha256": "ef5080110d36b37d8580986370f9980dbc2ec7378faf461a0154400744dc7604",
+    "template_id": "unseen-operations-prompt-v1",
+    "task_classes": [
+      "extraction",
+      "rag_qa",
+      "summary",
+      "simple_code",
+      "hard_reason"
+    ],
+    "tasks_per_class": 20,
+    "split": "unseen prompt template applied to held-out public records",
+    "metric": "greedy multiple-choice accuracy, scored 1 for the correct option and 0 otherwise",
+    "grader": {
+      "name": "greedy-option-accuracy-scorer",
+      "version": "1.0",
+      "blinded": true,
+      "note": "Scores see the prompt and correct option, not model or adapter labels."
+    },
+    "seeds": [
+      20260914,
+      20260915,
+      20260916
+    ],
+    "seed_kind": "adapter_training_replay",
+    "frontier_reference": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "evaluation_mode": "text-only; vision tower unused",
+    "device_id": "amd-strix-halo-cpu-transformers-local-1",
+    "operator_id": "author-operator-1",
+    "runtime": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "transformers": "5.12.1",
+      "peft": "0.20.0",
+      "threads": 16,
+      "dtype": "float32 for adapted replay"
+    },
+    "source_revision": "fa15395c009ca4a2c736e2625657ad32d7270f6a",
+    "limitations": [
+      "prompt-template robustness probe, not a new sampled workload",
+      "underlying semantic records are reused from the public evaluation split",
+      "one physical machine and CPU-only PyTorch execution",
+      "no untouched general-ability or human-grading suite"
+    ]
+  },
+  "models": [
+    {
+      "model_id": "qwen25-0.5b",
+      "adapter_id": "LoRA-r4-qv-public-synthetic-v1",
+      "device_id": "amd-strix-halo-cpu-transformers-local-1",
+      "task_count": 100,
+      "uplift_pp": {
+        "n": 100,
+        "mean": 14.999999999999998,
+        "median": 0.0,
+        "min": -66.66666666666667,
+        "max": 100.0,
+        "task_bootstrap_95_ci": {
+          "low": 7.333333333333332,
+          "high": 23.0,
+          "resamples": 20000
+        },
+        "interpretation": "Task-level repeatability interval within the supplied model records; it does not treat models as independent replicates."
+      }
+    },
+    {
+      "model_id": "qwen25-3b",
+      "adapter_id": "LoRA-r4-qv-public-synthetic-v1",
+      "device_id": "amd-strix-halo-cpu-transformers-local-1",
+      "task_count": 100,
+      "uplift_pp": {
+        "n": 100,
+        "mean": 5.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 100.0,
+        "task_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 10.0,
+          "resamples": 20000
+        },
+        "interpretation": "Task-level repeatability interval within the supplied model records; it does not treat models as independent replicates."
+      }
+    },
+    {
+      "model_id": "qwen25-vl-3b",
+      "adapter_id": "LoRA-r4-qv-public-synthetic-v1",
+      "device_id": "amd-strix-halo-cpu-transformers-local-1",
+      "task_count": 100,
+      "uplift_pp": {
+        "n": 100,
+        "mean": 10.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 100.0,
+        "task_bootstrap_95_ci": {
+          "low": 5.0,
+          "high": 16.0,
+          "resamples": 20000
+        },
+        "interpretation": "Task-level repeatability interval within the supplied model records; it does not treat models as independent replicates."
+      }
+    }
+  ],
+  "by_task_class": {
+    "extraction": {
+      "task_count": 20,
+      "observation_count": 60,
+      "base_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "adapted_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.9888888888888889,
+        "task_mean": 0.9888888888888889,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.9666666666666667,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "frontier_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "uplift_pp": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": -1.1111111111111112,
+        "task_mean": -1.1111111111111112,
+        "task_median": 0.0,
+        "cluster_bootstrap_95_ci": {
+          "low": -3.3333333333333335,
+          "high": 0.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "paired_cluster_permutation_p_two_sided": 1.0,
+      "coverage_at_alpha_070": {
+        "base": 1.0,
+        "adapted": 0.9666666666666667
+      }
+    },
+    "rag_qa": {
+      "task_count": 20,
+      "observation_count": 60,
+      "base_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "adapted_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "frontier_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "uplift_pp": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.0,
+        "task_mean": 0.0,
+        "task_median": 0.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.0,
+          "high": 0.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "paired_cluster_permutation_p_two_sided": 1.0,
+      "coverage_at_alpha_070": {
+        "base": 1.0,
+        "adapted": 1.0
+      }
+    },
+    "summary": {
+      "task_count": 20,
+      "observation_count": 60,
+      "base_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.75,
+        "task_mean": 0.75,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.25,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "adapted_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.9833333333333333,
+        "task_mean": 0.9833333333333333,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.95,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "frontier_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "uplift_pp": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 23.333333333333332,
+        "task_mean": 23.333333333333332,
+        "task_median": 0.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.0,
+          "high": 70.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "paired_cluster_permutation_p_two_sided": 1.0,
+      "coverage_at_alpha_070": {
+        "base": 0.75,
+        "adapted": 0.95
+      }
+    },
+    "simple_code": {
+      "task_count": 20,
+      "observation_count": 60,
+      "base_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.75,
+        "task_mean": 0.75,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.25,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "adapted_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.7777777777777778,
+        "task_mean": 0.7777777777777778,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.3333333333333333,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "frontier_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 1.0,
+        "task_mean": 1.0,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 1.0,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "uplift_pp": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 2.7777777777777772,
+        "task_mean": 2.7777777777777772,
+        "task_median": 0.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.0,
+          "high": 8.333333333333332,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "paired_cluster_permutation_p_two_sided": 1.0,
+      "coverage_at_alpha_070": {
+        "base": 0.75,
+        "adapted": 0.75
+      }
+    },
+    "hard_reason": {
+      "task_count": 20,
+      "observation_count": 60,
+      "base_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.5,
+        "task_mean": 0.5,
+        "task_median": 0.5,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.25,
+          "high": 0.75,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "adapted_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.75,
+        "task_mean": 0.75,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.25,
+          "high": 1.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "frontier_accuracy": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 0.75,
+        "task_mean": 0.75,
+        "task_median": 1.0,
+        "cluster_bootstrap_95_ci": {
+          "low": 0.75,
+          "high": 0.75,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "uplift_pp": {
+        "n": 60,
+        "model_clusters": 3,
+        "model_mean": 25.0,
+        "task_mean": 25.0,
+        "task_median": 0.0,
+        "cluster_bootstrap_95_ci": {
+          "low": -3.552713678800501e-15,
+          "high": 50.0,
+          "resamples": 20000
+        },
+        "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+      },
+      "paired_cluster_permutation_p_two_sided": 0.5,
+      "coverage_at_alpha_070": {
+        "base": 0.5,
+        "adapted": 0.6666666666666666
+      }
+    }
+  },
+  "secondary_multiplicity": {
+    "family": "five task-class uplift tests",
+    "hypothesis_count": 5,
+    "correction": "Bonferroni",
+    "alpha": 0.05,
+    "raw_p_values": {
+      "extraction": 1.0,
+      "rag_qa": 1.0,
+      "summary": 1.0,
+      "simple_code": 1.0,
+      "hard_reason": 0.5
+    },
+    "adjusted_p_values": {
+      "extraction": 1.0,
+      "rag_qa": 1.0,
+      "summary": 1.0,
+      "simple_code": 1.0,
+      "hard_reason": 1.0
+    },
+    "interpretation": "Task-class tests are secondary and cluster-aware; the pooled adapted-minus-base result remains the only prespecified primary effect. Three model clusters make all class-level p-values coarse."
+  },
+  "pooled": {
+    "observation_count": 300,
+    "model_count": 3,
+    "base_accuracy": {
+      "n": 300,
+      "model_clusters": 3,
+      "model_mean": 0.8,
+      "task_mean": 0.8,
+      "task_median": 1.0,
+      "cluster_bootstrap_95_ci": {
+        "low": 0.55,
+        "high": 0.95,
+        "resamples": 20000
+      },
+      "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+    },
+    "adapted_accuracy": {
+      "n": 300,
+      "model_clusters": 3,
+      "model_mean": 0.9,
+      "task_mean": 0.9,
+      "task_median": 1.0,
+      "cluster_bootstrap_95_ci": {
+        "low": 0.7,
+        "high": 1.0,
+        "resamples": 20000
+      },
+      "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+    },
+    "frontier_accuracy": {
+      "n": 300,
+      "model_clusters": 3,
+      "model_mean": 0.95,
+      "task_mean": 0.95,
+      "task_median": 1.0,
+      "cluster_bootstrap_95_ci": {
+        "low": 0.95,
+        "high": 0.95,
+        "resamples": 20000
+      },
+      "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+    },
+    "uplift_pp": {
+      "n": 300,
+      "model_clusters": 3,
+      "model_mean": 10.0,
+      "task_mean": 10.0,
+      "task_median": 0.0,
+      "cluster_bootstrap_95_ci": {
+        "low": 5.0,
+        "high": 14.999999999999998,
+        "resamples": 20000
+      },
+      "interpretation": "The point estimate for inference is the mean of model-level task means; the bootstrap resamples model clusters rather than treating tasks from one model as independent devices."
+    },
+    "paired_cluster_permutation_p_two_sided": 0.25,
+    "paired_permutation_p_two_sided": 0.25,
+    "interpretation": "The primary point estimate is the mean of model-level absolute adapted-minus-base task-accuracy changes, while the interval resamples model clusters to avoid treating tasks from one model as independent devices. The frontier is descriptive only. This is still an evaluation sample, not a universal workload mix."
+  },
+  "replacement_rule": "This measured result may replace the exploratory +2/+6/+14 uplift scenario only for the declared synthetic task-accuracy estimand. Do not use it as a real-workload or product quality headline; if the file is unavailable, report the scenario as unvalidated."
+}

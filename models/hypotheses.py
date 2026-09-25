@@ -190,7 +190,7 @@ def c1_rebound() -> Verdict:
     survives = r_lit < be["takeback_fraction"]
     return Verdict("C1",
                    "COUNTER-CLAIM: rebound (induced extra usage) cancels savings.",
-                   "REFUTED (bounded)" if survives else "SUPPORTED",
+                   "MODELLED (conditional)" if survives else "SUPPORTED",
                    {"literature_takeback_fraction": r_lit,
                     "literature_induced_usage_equivalent": g_lit,
                     "parity_takeback_fraction": be["takeback_fraction"],
@@ -201,8 +201,9 @@ def c1_rebound() -> Verdict:
                         f"{g_lit*100:.0f}% induced extra usage. Parity arrives when the "
                         f"whole gross saving is taken back (take-back 100%), which is "
                         f"{be['induced_usage_multiplier']*100:.0f}% induced usage. "
-                        "Rebound at observed rates erodes but does not erase savings; "
-                        "it becomes decisive only under very large induced demand. "
+                        "Under this assumed range rebound erodes but does not erase "
+                        "the modelled savings; real-world deployment rebound is "
+                        "not measured here and could be larger. "
                         "Earlier drafts printed 20% and 212% with no conversion "
                         "between them, which read as two incompatible models."),
                     "one_model_note": (
@@ -322,6 +323,12 @@ def monte_carlo_h5(n: int = 50000, baseline: str = "gpt4o_long", seed: int = 7):
                 "p_positive": float(np.mean(x > 0))}
 
     return {"baseline": baseline, "n": n,
+            "sampling": {
+                "distribution": "independent triangular draws over analyst-declared ranges",
+                "interpretation": (
+                    "p_positive is the share of model draws with positive savings, "
+                    "not a confidence level or posterior probability"),
+            },
             "savings_energy": summ(s_energy), "savings_water": summ(s_water),
             "savings_carbon": summ(s_carbon),
             "_samples": {"carbon": s_carbon, "energy": s_energy, "water": s_water,

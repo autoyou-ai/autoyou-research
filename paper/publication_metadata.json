@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "release": {
+    "version": "0.4.0",
+    "date": "2026-09-24",
+    "status": "public research repository release",
+    "repository": "https://github.com/autoyou-ai/autoyou-research",
+    "contents": "v0.3.0 footprint and adaptation research release, the revised Right-Sized working paper, and the archived first public draft",
+    "release_manifest": "paper/release_manifest.json"
+  },
+  "authors": [
+    {
+      "name": "AutoYou Research",
+      "email": "research@autoyou.me",
+      "affiliation": null,
+      "orcid": null
+    }
+  ],
+  "papers": [
+    {
+      "id": "track-a",
+      "title": "Quantifying Carbon, Water, Cost, and Capability in Peer-to-Peer Inference",
+      "source": "paper/p2p-inference.tex",
+      "pdf": "paper/p2p-inference.pdf",
+      "venue": "alphaXiv preprint",
+      "url": "https://www.alphaxiv.org/abs/2609.carbon-water-cost-p2p-inference",
+      "version": "v1",
+      "published": "2026-09-21",
+      "doi": null,
+      "publication_status": "preprint",
+      "peer_review_status": "not_peer_reviewed"
+    },
+    {
+      "id": "track-a-revision",
+      "title": "Right-Sized AI at the Edge: Reproducible Measurements and Conditional Sustainability Analysis",
+      "source": "paper/right-sized-edge.tex",
+      "pdf": "paper/right-sized-edge.pdf",
+      "venue": "alphaXiv preprint",
+      "url": "https://www.alphaxiv.org/abs/2609.right-sized-ai-edge-sustainability",
+      "version": "v1",
+      "published": "2026-09-21",
+      "doi": null,
+      "publication_status": "preprint",
+      "peer_review_status": "not_peer_reviewed",
+      "audit_manifest": "review/source-manifest.json"
+    },
+    {
+      "id": "track-b",
+      "title": "Teaching at the Edge: On-Device Parameter-Efficient Adaptation and What It Actually Buys",
+      "source": "paper/adaptation.tex",
+      "pdf": "paper/adaptation.pdf",
+      "venue": null,
+      "doi": null,
+      "publication_status": "not_assigned",
+      "peer_review_status": "not_confirmed"
+    }
+  ],
+  "license": "MIT, except the adapter weights under measure/results/adaptation_adapters/, which follow their base-model licences (see the NOTICE file there)",
+  "data_availability": {
+    "status": "partial",
+    "public": [
+      "source code and deterministic model parameters",
+      "generated figures and manuscripts",
+      "raw public measurement records in measure/results/",
+      "public synthetic adaptation task manifest, aggregate scores, adapter files, model revisions and runtime record",
+      "supplemental prompt-surface holdout task manifest, aggregate scores and evaluation",
+      "new-semantic holdout task manifest, aggregate scores and evaluation",
+      "citation and reproducibility audits"
+    ],
+    "restricted": [
+      "the adapter evaluation input from one deployed assistant",
+      "prompts, answers, transcripts, and private training material"
+    ],
+    "note": "The public synthetic adaptation benchmark is reproducible for its declared task-accuracy estimand. The restricted deployment adapter input remains unavailable and is not represented as independently validated."
+  },
+  "reproducibility": {
+    "model_pipeline": "python models/run_all.py",
+    "number_trace": "python models/verify_paper.py",
+    "measurement_statistics": "python measure/statistics.py --resamples 20000",
+    "citation_audit": "python paper/audit_citations.py --network",
+    "revised_paper_audit": "python review/audit.py",
+    "revised_paper_build": "python review/build_paper.py",
+    "adaptation_benchmark": "python models/run_adaptation_experiment.py --model qwen25-0.5b=LOCAL_SNAPSHOT --model qwen25-3b=LOCAL_SNAPSHOT --model qwen25-vl-3b=LOCAL_SNAPSHOT --frontier LOCAL_FRONTIER --tasks measure/results/adaptation_tasks.json --output measure/results/adaptation-multimodel.json --adapter-root measure/results/adaptation_adapters",
+    "adaptation_evaluation": "python models/adaptation_eval.py --resamples 20000",
+    "adaptation_template_holdout": "python models/adaptation_template_holdout.py --model qwen25-0.5b=LOCAL_SNAPSHOT --model qwen25-3b=LOCAL_SNAPSHOT --model qwen25-vl-3b=LOCAL_SNAPSHOT --frontier LOCAL_FRONTIER --reuse-adapters --tasks measure/results/adaptation-template-holdout-tasks.json --output measure/results/adaptation-template-holdout.json --adapter-root measure/results/adaptation_adapters",
+    "adaptation_template_holdout_evaluation": "python models/adaptation_eval.py --input measure/results/adaptation-template-holdout.json --output models/adaptation_template_holdout_evaluation.json --resamples 20000",
+    "adaptation_semantic_holdout": "python models/adaptation_semantic_holdout.py --model qwen25-0.5b=LOCAL_SNAPSHOT --model qwen25-3b=LOCAL_SNAPSHOT --model qwen25-vl-3b=LOCAL_SNAPSHOT --frontier LOCAL_FRONTIER --reuse-adapters --tasks measure/results/adaptation-semantic-holdout-tasks.json --output measure/results/adaptation-semantic-holdout.json --adapter-root measure/results/adaptation_adapters",
+    "adaptation_semantic_holdout_evaluation": "python models/adaptation_eval.py --input measure/results/adaptation-semantic-holdout.json --output models/adaptation_semantic_holdout_evaluation.json --resamples 20000",
+    "follow_up_protocol": "measure/REPLICATION_PROTOCOL.md"
+  },
+  "claim_boundary": "Two papers are public alphaXiv preprints (v1, 2026-09-21). No journal venue, DOI, acceptance record, or peer review is asserted for any paper."
+}

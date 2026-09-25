@@ -16,6 +16,7 @@ import json
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 import data as D
 import models as M
@@ -24,6 +25,7 @@ import pass2_refresh as P2
 
 # Pass 3 - the on-device adaptation track.
 import adaptation as A
+import adaptation_eval as AE
 import devices as V
 import evidence as E
 import measured as MEAS
@@ -90,6 +92,19 @@ def adaptation_numbers():
     """Headline derived numbers for the Pass-3 adaptation track."""
     q = A.quality_uplift(H.CAP_RATIOS)
     up = A.uplifted_f_s(H.CAP_RATIOS)
+    empirical = AE.summarize_file()
+    holdout = AE.summarize_file(
+        Path(HERE).resolve().parents[0]
+        / "measure" / "results" / "adaptation-template-holdout.json"
+    )
+    semantic_holdout = AE.summarize_file(
+        Path(HERE).resolve().parents[0]
+        / "measure" / "results" / "adaptation-semantic-holdout.json"
+    )
+    empirical_pool = empirical.get("pooled", {}) if empirical.get("available") else {}
+    empirical_uplift = empirical_pool.get("uplift_pp", {})
+    empirical_base = empirical_pool.get("base_accuracy", {})
+    empirical_adapted = empirical_pool.get("adapted_accuracy", {})
     be = {
         name: A.breakeven(mdl, dev, tok,
                           queries_per_day=D.QUERIES_PER_USER_PER_DAY.value).as_dict()
@@ -106,6 +121,17 @@ def adaptation_numbers():
         "alpha": q["alpha"],
         "coverage_gain_pp": q["coverage_gain_pp"],
         "quality_gain_pp": q["quality_gain_pp"],
+        "quality_gain_status": (
+            "measured public synthetic-task accuracy; not a real-workload estimate"
+            if empirical.get("available") else
+            "exploratory scenario only until empirical_evaluation passes"),
+        "measured_accuracy_base": empirical_base.get("model_mean"),
+        "measured_accuracy_adapted": empirical_adapted.get("model_mean"),
+        "measured_accuracy_gain_pp": empirical_uplift.get("model_mean"),
+        "measured_accuracy_cluster_ci_pp": empirical_uplift.get(
+            "cluster_bootstrap_95_ci"),
+        "measured_accuracy_cluster_p": empirical_pool.get(
+            "paired_cluster_permutation_p_two_sided"),
         "gap_to_frontier_closed": q["gap_to_frontier_closed"],
         "mean_quality_base": q["base"]["mean_ratio_served"],
         "mean_quality_adapted": q["adapted"]["mean_ratio_served"],
@@ -123,6 +149,9 @@ def adaptation_numbers():
             "E2_safety_direction": E.e2_safety_direction(),
             "E3_base_size_vs_data": E.e3_base_size_vs_data(),
         },
+        "empirical_evaluation": empirical,
+        "template_holdout_evaluation": holdout,
+        "semantic_holdout_evaluation": semantic_holdout,
     }
 
 
@@ -169,6 +198,18 @@ def main():
         "capability": "workload weights and capability ratios are assumptions; 82% is not measured or calibrated to a 40-70% range",
         "cloud_energy": "Jegham values are estimates from API timing and inferred hardware; Gemini is a fleet-median measurement with a different workload",
         "training": "no training experiment rerun; memory agreement uses the calibration source, not an independent validation set",
+        "adaptation_uplift": (
+            "the public synthetic multi-model, multi-task score file reports "
+            "absolute task-accuracy change; it does not validate the inherited "
+            "real-workload mix or the private deployment observation"),
+        "adaptation_template_holdout": (
+            "the supplemental prompt-surface holdout reuses public evaluation "
+            "records with changed surrounding wording; it is a robustness probe, "
+            "not an independent replication or a new workload sample"),
+        "adaptation_semantic_holdout": (
+            "the new-semantic holdout uses fresh synthetic records and formats; "
+            "its mixed model directions weaken broad transfer claims but do not "
+            "establish a sampled-workload or independent-device effect"),
         "fleet": "routing share is included once, inside the system savings fraction",
     }
     # A computed verdict is not empirical validation of its assumptions.
@@ -178,6 +219,7 @@ def main():
             "H6": "STRUCTURAL (authenticated endpoints required)",
             "H10": "STRUCTURAL (local execution required)",
             "H11": "NOT INDEPENDENTLY VALIDATED",
+            "H9": "PARTIAL (synthetic benchmark; real-workload coverage unresolved)",
             "C4": "LITERATURE-BOUNDED; deployment untested",
             "C5": "RISK SUPPORTED; mitigation unvalidated",
             "C6": "MODELLED; central-sharing comparison unresolved",
@@ -237,6 +279,52 @@ def main():
             commands[prefix + {"0": "HostZero", "30": "HostThirty",
                                "60": "HostSixty",
                                "100": "HostHundred"}[watts]] = _sigfig(energy, 2)
+    empirical = out["adaptation_numbers"]["empirical_evaluation"]
+    if empirical.get("available"):
+        pooled = empirical["pooled"]
+        commands["AdaptationBaseAccuracy"] = f"{pooled['base_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationAdaptedAccuracy"] = f"{pooled['adapted_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationFrontierAccuracy"] = f"{pooled['frontier_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationUplift"] = f"{pooled['uplift_pp']['model_mean']:.1f}"
+        commands["AdaptationUpliftLow"] = f"{pooled['uplift_pp']['cluster_bootstrap_95_ci']['low']:.1f}"
+        commands["AdaptationUpliftHigh"] = f"{pooled['uplift_pp']['cluster_bootstrap_95_ci']['high']:.1f}"
+        commands["AdaptationClusterP"] = f"{pooled['paired_cluster_permutation_p_two_sided']:.3f}"
+        commands["AdaptationObservationCount"] = str(pooled["observation_count"])
+        commands["AdaptationModelCount"] = str(pooled["model_count"])
+        class_macros = {
+            "extraction": "Extraction",
+            "rag_qa": "Rag",
+            "summary": "Summary",
+            "simple_code": "SimpleCode",
+            "hard_reason": "HardReason",
+        }
+        for task_class, macro in class_macros.items():
+            class_result = empirical["by_task_class"][task_class]
+            commands[f"Adaptation{macro}BaseAccuracy"] = f"{class_result['base_accuracy']['model_mean'] * 100:.1f}"
+            commands[f"Adaptation{macro}AdaptedAccuracy"] = f"{class_result['adapted_accuracy']['model_mean'] * 100:.1f}"
+            commands[f"Adaptation{macro}Uplift"] = f"{class_result['uplift_pp']['model_mean']:.1f}"
+            commands[f"Adaptation{macro}P"] = f"{class_result['paired_cluster_permutation_p_two_sided']:.3f}"
+            commands[f"Adaptation{macro}AdjustedP"] = f"{empirical['secondary_multiplicity']['adjusted_p_values'][task_class]:.3f}"
+    holdout = out["adaptation_numbers"]["template_holdout_evaluation"]
+    if holdout.get("available"):
+        pooled = holdout["pooled"]
+        commands["AdaptationHoldoutBaseAccuracy"] = f"{pooled['base_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationHoldoutAdaptedAccuracy"] = f"{pooled['adapted_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationHoldoutFrontierAccuracy"] = f"{pooled['frontier_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationHoldoutUplift"] = f"{pooled['uplift_pp']['model_mean']:.1f}"
+        commands["AdaptationHoldoutUpliftLow"] = f"{pooled['uplift_pp']['cluster_bootstrap_95_ci']['low']:.1f}"
+        commands["AdaptationHoldoutUpliftHigh"] = f"{pooled['uplift_pp']['cluster_bootstrap_95_ci']['high']:.1f}"
+        commands["AdaptationHoldoutClusterP"] = f"{pooled['paired_cluster_permutation_p_two_sided']:.3f}"
+    semantic_holdout = out["adaptation_numbers"]["semantic_holdout_evaluation"]
+    if semantic_holdout.get("available"):
+        pooled = semantic_holdout["pooled"]
+        commands["AdaptationSemanticBaseAccuracy"] = f"{pooled['base_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationSemanticAdaptedAccuracy"] = f"{pooled['adapted_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationSemanticFrontierAccuracy"] = f"{pooled['frontier_accuracy']['model_mean'] * 100:.1f}"
+        commands["AdaptationSemanticUplift"] = f"{pooled['uplift_pp']['model_mean']:.1f}"
+        commands["AdaptationSemanticUpliftLow"] = f"{pooled['uplift_pp']['cluster_bootstrap_95_ci']['low']:.1f}"
+        commands["AdaptationSemanticUpliftHigh"] = f"{pooled['uplift_pp']['cluster_bootstrap_95_ci']['high']:.1f}"
+        commands["AdaptationSemanticClusterP"] = f"{pooled['paired_cluster_permutation_p_two_sided']:.3f}"
     with open(os.path.join(HERE, "..", "paper", "empirical.tex"), "w", encoding="utf-8", newline="\n") as f:
         f.write("% Generated by run_all.py from named measurement records.\n")
         for name, value in commands.items():
@@ -267,8 +355,11 @@ def main():
     an = out["adaptation_numbers"]
     print(f"  adaptation: coverage gain          : {an['coverage_gain_pp']:+.1f} pp "
           f"(at alpha={an['alpha']:.2f})")
-    print(f"  adaptation: quality gain           : {an['quality_gain_pp']:+.1f} pp "
-          f"({an['gap_to_frontier_closed']*100:.0f}% of the gap to frontier)")
+    print(f"  adaptation: measured task accuracy  : "
+          f"{(an['measured_accuracy_gain_pp'] or 0.0):+.1f} pp "
+          f"({an['quality_gain_status']})")
+    print(f"  adaptation: scenario quality gain  : {an['quality_gain_pp']:+.1f} pp "
+          f"({an['gap_to_frontier_closed']*100:.0f}% of the gap to frontier; exploratory)")
     # Both accountings, because quoting only the first is the error H8 records.
     h8 = next(v for v in out["verdicts_adaptation"] if v["hid"] == "H8")
     inc = h8["evidence"]["regimes"]["incremental_accounting"]
@@ -279,7 +370,7 @@ def main():
           f"{'never' if not inc[a0]['repays'] else str(inc[a0]['days_to_repay']) + ' days'}"
           f" attributable at alpha={a0}")
     mv = an["memory_model_validation"]
-    print(f"  memory model vs published 27B run  : "
+    print(f"  memory model vs documented 27B run  : "
           f"{mv['predicted_peak_gb']:.1f} GB predicted vs "
           f"{mv['reported_peak_gb']:.0f} GB reported "
           f"({mv['relative_error']*100:+.1f}%)")

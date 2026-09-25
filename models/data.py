@@ -329,18 +329,17 @@ INFERENCE_SHARE_OF_AI = Param(0.65, 0.50, 0.90, "frac", "jegham2025",
 # --------------------------------------------------------------------------- #
 #  11. July-2026 frontier refresh (Pass 2)
 #
-#  The frontier moved between the first pass (2026-06) and this refresh
-#  (2026-07-24): OpenAI shipped the GPT-5.6 family (Sol/Terra/Luna, GA
-#  2026-07-09), Anthropic shipped Claude Sonnet 5 (2026-06-30) alongside the
-#  Fable 5 frontier tier, Google shipped Gemini 3.6 Flash (2026-07-21), and two
-#  open-weights sparse-MoE flagships arrived: Moonshot Kimi K3 (2026-07-16) and
-#  Zhipu GLM-5.2 (2026-06-13). No peer-reviewed per-query energy measurement of
-#  these specific models is public as of 2026-07-24, so the measured 2025 corpus
-#  (jegham2025, elsworth2025, caravaca2025) remains the energy evidence base;
-#  the 2026 roster below carries PRICING and ARCHITECTURE facts only.
+#  This is a historical July-2026 price-snapshot input retained for a
+#  sensitivity analysis. It is not a current model roster, release survey, or
+#  evidence that the named providers still expose those exact prices. No
+#  peer-reviewed per-query energy measurement of the snapshot models was
+#  available in the source set, so the measured 2025 corpus (jegham2025,
+#  elsworth2025, caravaca2025) remains the energy evidence base. Architecture
+#  fields in the snapshot are not exported as current findings.
 #
-#  Prices are $/Mtok list prices (input, output) from vendor pages / OpenRouter,
-#  accessed 2026-07-24.
+#  Prices are $/Mtok list-price observations (input, output) from vendor pages
+#  / OpenRouter, accessed 2026-07-24. They are used only as dated scenario
+#  inputs below.
 # --------------------------------------------------------------------------- #
 
 FRONTIER_2026 = {
@@ -378,12 +377,12 @@ ROUTER_PAYLOAD_KB = Param(4.0, 1.0, 16.0, "kB", "assumption",
 
 API_PRICE_OUT_FRONTIER_2026 = Param(
     15.0, 6.0, 50.0, "$/Mtok", "frontier2026",
-    "July-2026 frontier output list prices: Luna 6 .. Fable 5 50; the modal "
-    "mid-tier price is 15 (GPT-5.6 Terra, Claude Sonnet 5, Kimi K3)")
+    "Dated July-2026 frontier output-price observations spanning 6 .. 50; "
+    "the 15 middle scenario is not a current market median")
 API_PRICE_IN_FRONTIER_2026 = Param(
     3.0, 1.0, 10.0, "$/Mtok", "frontier2026",
-    "July-2026 frontier input list prices: Luna 1 .. Fable 5 10; Sonnet 5 and "
-    "Kimi K3 both 3")
+    "Dated July-2026 frontier input-price observations spanning 1 .. 10; "
+    "the 3 middle scenario is not a current market median")
 
 
 # --------------------------------------------------------------------------- #
@@ -391,17 +390,16 @@ API_PRICE_IN_FRONTIER_2026 = Param(
 #
 #  Pass 1 and Pass 2 treated a small model's capability as fixed by its
 #  parameter count. Pass 3 tests whether parameter-efficient fine-tuning moves
-#  it, on hardware the user already owns. Two things changed in the world
-#  between Pass 2 (2026-07-24) and Pass 3 (2026-09-05) that make the question
-#  answerable rather than speculative:
+#  it, on hardware the user already owns. Two public feasibility inputs changed
+#  the scope between Pass 2 (2026-07-24) and Pass 3 (2026-09-05), but neither is
+#  a matched quality experiment:
 #
-#    (a) A 27B-class model that is dense, natively multimodal, Apache-2.0 and
-#        ~17 GB in a 4-bit build shipped on 2026-08-14 (Qwen3.8-27B). The
-#        open-weights tier a household can actually hold is no longer 8B.
+#    (a) An official model card describes a 27B-class dense, natively
+#        multimodal, Apache-2.0 model with a roughly 17 GB 4-bit build. This
+#        establishes model identity and feasibility, not quality uplift.
 #    (b) Consumer unified-memory APUs put 128 GB in front of the accelerator,
-#        and a reproducible recipe for multi-day 27B LoRA training on one of
-#        them is public. Adaptation of a 27B model stopped being a data-centre
-#        activity.
+#        and one public community recipe documents a multi-day 27B LoRA run on
+#        one of them. This is a feasibility anchor, not independent replication.
 #
 #  Model architecture and device facts live in devices.py; PEFT method facts
 #  and cost models live in peft.py. Only the study-level parameters live here.
@@ -438,8 +436,8 @@ QUERIES_PER_USER_PER_DAY = Param(50.0, 10.0, 300.0, "queries/day", "assumption",
 OPEN_WEIGHTS_2026 = {
     # key: (vendor, release, params_B, active_B, licence, note)
     "qwen3.8-27b":     ("Alibaba", "2026-08-14", 27.78, 27.78, "Apache-2.0",
-                        "dense, natively multimodal, 262K ctx, ~17 GB at 4-bit; "
-                        "AA Intelligence Index 52"),
+                        "official model card: dense, natively multimodal, 262K "
+                        "ctx, roughly 17 GB at 4-bit"),
     "qwen3.5-27b":     ("Alibaba", "2026-02", 27.0, 27.0, "Apache-2.0",
                         "hybrid attention with GatedDeltaNet layers"),
     "qwen3.5-35b-a3b": ("Alibaba", "2026-02", 35.0, 3.0, "Apache-2.0",
@@ -450,18 +448,6 @@ OPEN_WEIGHTS_2026 = {
                         "the shipped AutoYou Support base"),
     "ministral-3-8b":  ("Mistral", "2024-10", 8.02, 8.02, "Apache-2.0",
                         "the Fine Tuning agent's default base"),
-}
-
-# Reported benchmark movement for Qwen3.8-27B over Qwen3.6-27B on an IDENTICAL
-# architecture. Carried because it is the cleanest public evidence that the
-# open-weights tier is still improving from data and post-training rather than
-# from parameter growth - the same mechanism this pass tests at household scale.
-QWEN38_GAINS = {
-    "terminal-bench-2.1":  (63.4, 73.0),
-    "deepswe-1.1":         (13.3, 42.2),
-    "osworld-verified":    (63.9, 84.3),
-    "swe-mm":              (25.7, 38.6),
-    "aa-intelligence-index": (38.0, 52.0),
 }
 
 # The acceptance threshold at which capability uplift starts buying COVERAGE
@@ -509,8 +495,8 @@ MEASURED_PREFILL_OVERHEAD = Param(
 # single-stream decode is bandwidth bound.
 BANDWIDTH_APU = Param(256.0, 256.0, 256.0, "GB/s", "amd_strix2025",
                       "LPDDR5X-8000 on a 256-bit bus")
-BANDWIDTH_RTX4090 = Param(1008.0, 1008.0, 1008.0, "GB/s", "databasemart2026",
-                          "GDDR6X on a 384-bit bus")
+BANDWIDTH_RTX4090 = Param(1008.0, 1008.0, 1008.0, "GB/s", "nvidia_rtx4090",
+                          "GDDR6X on a 384-bit bus; vendor specification")
 
 
 # --------------------------------------------------------------------------- #
@@ -518,8 +504,8 @@ BANDWIDTH_RTX4090 = Param(1008.0, 1008.0, 1008.0, "GB/s", "databasemart2026",
 # --------------------------------------------------------------------------- #
 
 CITATIONS = {
-    "uptime2025": ("Uptime Institute Global Data Center Survey 2025 - average PUE 1.54.",
-                   "https://journal.uptimeinstitute.com/large-data-centers-are-mostly-more-efficient-analysis-confirms/"),
+    "uptime2025": ("Uptime Institute Global Data Center Survey 2025 - reported average PUE 1.54; exact table requires an archived report.",
+                   "https://intelligence.uptimeinstitute.com/resource/uptime-institute-global-data-center-survey-2025"),
     "eu_eed2026": ("European Commission, Energy performance of data centres - mandatory reporting, "
                    "rating work, and possible minimum performance standards.",
                    "https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive/energy-performance-data-centres_en"),
@@ -548,8 +534,8 @@ CITATIONS = {
                        "power, 850 W recommended system supply. REPLACES a third-party blog whose own "
                        "title stated 575 W for this part - that is the RTX 5090's board power.",
                        "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/"),
-    "solartech2025": ("SolarTech, How Much Electricity Does a Computer Use? 2025 Guide.",
-                      "https://solartechonline.com/blog/how-much-electricity-does-computer-use/"),
+    "solartech2025": ("SolarTech, desktop idle-draw context only; exact range not located in the current redirected page.",
+                      "https://solartechonline.com/blog/average-household-power-consumption-guide-2025/"),
     "techtarget2025": ("TechTarget, Can Edge Computing Make AI More Sustainable? 2025.",
                        "https://www.techtarget.com/sustainability/feature/Can-edge-computing-make-AI-more-sustainable"),
     "antmedia2026": ("Ant Media, WebRTC Peer-to-Peer Communication: How P2P Works in 2026 (STUN ~70-85%, TURN 10-20%).",
@@ -563,8 +549,8 @@ CITATIONS = {
                          "a range rather than a vendor point estimate. CORRECTION: an earlier version "
                          "of this entry had its author field set literally to {Anonymous}.",
                          "https://arxiv.org/abs/2508.15361"),
-    "mistral2024": ("Mistral AI, 'Un Ministral, des Ministraux' (Ministral 3B/8B), Oct 2024; independent eval via Artificial Analysis.",
-                    "https://mistral.ai/news/ministraux"),
+    "mistral2024": ("Mistral AI, 'Un Ministral, des Ministraux' (Ministral 3B/8B), Oct 2024; vendor benchmark chart only.",
+                    "https://mistral.ai/news/ministraux/"),
     "wang2024slm": ("F. Wang, Z. Zhang, X. Zhang, Z. Wu, T. Mo, Q. Lu, W. Wang, R. Li, J. Xu, X. Tang, "
                     "Q. He, Y. Ma, M. Huang, S. Wang, 'A Comprehensive Survey of Small Language Models "
                     "in the Era of Large Language Models,' arXiv:2411.03350, submitted November 2024. "
@@ -586,14 +572,8 @@ CITATIONS = {
                 "https://www.iea.org/reports/energy-and-ai"),
     "ucriverside2023": ("P. Li, J. Yang, M. A. Islam, S. Ren, 'Making AI Less Thirsty,' arXiv:2304.03271, 2023 (~519 mL per 100-word prompt).",
                         "https://arxiv.org/abs/2304.03271"),
-    "frontier2026": ("July-2026 frontier releases and public list pricing: OpenAI GPT-5.6 Sol/Terra/Luna (GA 2026-07-09); "
-                     "Google Gemini 3.6 Flash and 3.5 Flash-Lite (2026-07-21); Anthropic Claude Sonnet 5 (2026-06-30) and Fable 5; "
-                     "Moonshot AI Kimi K3 (2026-07-16); Zhipu AI GLM-5.2 (2026-06-13). Vendor announcements, OpenRouter listings, "
-                     "and the Kimi-K3-vs-GLM-5.2 comparison (Data Science in Your Pocket). Accessed 2026-07-24.",
-                     "https://openai.com/index/previewing-gpt-5-6-sol/; "
-                     "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/; "
-                     "https://www.anthropic.com/news/claude-sonnet-5; "
-                     "https://medium.com/data-science-in-your-pocket/kimi-k3-vs-glm-5-2-3f82e1e39b02"),
+    "frontier2026": ("Dated OpenAI API price-list input only; not evidence for frontier release chronology, architecture, energy, or performance.",
+                     "https://openai.com/business/pricing/"),
     "caravaca2025": ("F. Caravaca, A. Cuevas, R. Cuevas, 'From Prompts to Power: Measuring the Energy Footprint of LLM Inference,' "
                      "arXiv:2511.05597, 2025 (32,500+ GPU inference energy measurements and a predictive per-query model).",
                      "https://arxiv.org/abs/2511.05597"),
@@ -625,19 +605,14 @@ CITATIONS = {
     # ----------------------------------------------------------------- #
     #  Pass 3 - models, hardware, and the PEFT method roster
     # ----------------------------------------------------------------- #
-    "qwen38_2026": ("Qwen team (Alibaba), Qwen3.8-27B model card and release, 2026-08-14: 27.78B dense parameters, "
-                    "text/image/video input, Apache-2.0, 262,144-token context, ~17 GB as a 4-bit build. Reported "
-                    "gains over Qwen3.6-27B on an identical architecture: Terminal-Bench 2.1 63.4->73.0, DeepSWE 1.1 "
-                    "13.3->42.2, OSWorld-Verified 63.9->84.3, SWE-MM 25.7->38.6; Artificial Analysis Intelligence "
-                    "Index 52. Accessed 2026-09-05.",
-                    "https://www.yottalabs.ai/post/qwen-3-8-27b-specs-hardware-requirements-how-to-run-2026"),
-    "qwen35_2026": ("Qwen team (Alibaba), Qwen3.5 family, February 2026: five dense sizes 0.8B-27B plus 35B-A3B, "
-                    "122B-A10B and 397B-A17B sparse-MoE variants, all Apache-2.0 and natively multimodal on an "
-                    "early-fusion vision-language architecture. Accessed 2026-09-05.",
-                    "https://insiderllm.com/guides/qwen-models-guide/"),
-    "qwen25vl2025": ("Qwen team (Alibaba), Qwen2.5-VL model family, 2025. Apache-2.0 for all sizes except the 3B and "
-                     "72B, which carry the Qwen Research License - the licensing fact that determined AutoYou's "
-                     "shipped support base.",
+    "qwen38_2026": ("Qwen team (Alibaba), official Qwen3.8-27B model card: 27B Apache-2.0 native vision-language model "
+                    "with 262,144-token context. Ollama distribution size and local runtime values are separate metadata.",
+                    "https://huggingface.co/Qwen/Qwen3.8-27B"),
+    "qwen35_2026": ("Qwen team (Alibaba), official Qwen3.5-27B model card: 27B Apache-2.0 vision-language model with "
+                    "262,144-token context. The separate community recipe remains a single validation anchor.",
+                    "https://huggingface.co/Qwen/Qwen3.5-27B"),
+    "qwen25vl2025": ("Qwen team (Alibaba), Qwen2.5-VL-7B model card, 2025. Family-size licenses and private adapter provenance "
+                     "are not inferred from the 7B card.",
                      "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct"),
     "strixhalo2026": ("Home-enthusiast guide to fine-tuning 27B+ LLMs on AMD Strix Halo (gfx1151, Ryzen AI MAX+ 395): "
                       "Linux 6.19 mainline, ROCm 7.1.0 with 7.13 nightly wheels, PyTorch 2.11.0+rocm7.13, "
@@ -647,10 +622,10 @@ CITATIONS = {
                       "inference 7.5 tok/s (27B dense Q8), 19 tok/s (27B MTP speculative), 50 tok/s (35B-A3B MoE Q4). "
                       "Accessed 2026-09-05.",
                       "https://github.com/h34v3nzc0dex/strix-halo-llm-finetune-guide"),
-    "amd_strix2025": ("AMD, 'Ryzen AI MAX+ 395: a leap forward in generative AI performance with consumer PC' - "
+    "amd_strix2025": ("AMD, Ryzen AI Halo Developer Platform with Ryzen AI MAX+ 395 - "
                       "16 Zen 5 cores, 40 RDNA 3.5 CUs, 50+ peak AI TOPS XDNA 2 NPU, unified 128 GB LPDDR5X pool "
-                      "addressed by CPU, GPU and NPU.",
-                      "https://www.amd.com/en/developer/resources/technical-articles/2025/amd-ryzen-ai-max-395--a-leap-forward-in-generative-ai-performanc.html"),
+                      "addressed by CPU, GPU and NPU, and a 256 GB/s platform specification.",
+                      "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-ai-halo/amd-ryzen-ai-max-plus-395.html"),
 
     "hu2021lora": ("E. J. Hu et al., 'LoRA: Low-Rank Adaptation of Large Language Models,' arXiv:2106.09685, 2021.",
                    "https://arxiv.org/abs/2106.09685"),

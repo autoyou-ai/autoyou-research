@@ -6,15 +6,14 @@ pass2_refresh.py - Pass 2 (July-2026 refresh) of the edge-inference study.
 
 Two analyses, both additive to the first pass and both honest about scope:
 
-  A. FRONTIER-2026 COMPARISON. Re-runs the total-cost-of-ownership comparison
-     against the July-2026 frontier roster (GPT-5.6 Sol/Terra/Luna, Claude
-     Fable 5 / Sonnet 5, Gemini 3.6 Flash, Kimi K3, GLM-5.2; see
-     data.FRONTIER_2026). No peer-reviewed per-query ENERGY measurement of
-     these specific models is public as of 2026-07-24, so the energy/water/
-     carbon results of the first pass remain pinned to the measured 2025
-     corpus; this pass tests whether the paper's ECONOMIC claim (~150x cheaper
-     per query on an owned device) survives the 2026 price sheet, and records
-     the architectural trend (sparse-MoE activation) that bears on H2.
+  A. DATED PRICE-SCENARIO COMPARISON. Re-runs the total-cost-of-ownership
+     calculation against price bins drawn from a July-2026 snapshot. The
+     snapshot is not exported as a current frontier roster. No peer-reviewed
+     per-query ENERGY measurement of the snapshot models is public in the
+     source set, so the energy/water/carbon results of the first pass remain
+     pinned to the measured 2025 corpus. This pass tests how the economic
+     ratio changes across dated low, middle, and premium price inputs; it does
+     not establish a current market median or model ranking.
 
   B. LIVE-LOG VALIDATION. Parses the local AutoYou main-server runtime logs
      (aggregate event counts only - never payloads or personal content) and
@@ -59,62 +58,67 @@ _IN_TOK = D.TYPICAL_IN_TOKENS.value
 # --------------------------------------------------------------------------- #
 
 def frontier_2026_tco():
-    """Per-query cost for each July-2026 frontier model vs the owned edge
-    device, using the same query shape as the first pass (500 in / 300 out)."""
+    """Price-bin sensitivity vs the owned edge device.
+
+    The underlying snapshot is retained in data.py for reproducibility of the
+    dated calculation, but the release artifact intentionally emits aggregate
+    price bins rather than a supposedly current model roster.
+    """
     edge_energy = M.edge_slm_query_central(marginal=True).energy_wh
     edge_usd = M.edge_cost_per_query(edge_energy, D.PRICE_ELECTRICITY.value)
 
-    rows = {}
-    for model, (vendor, released, p_in, p_out, note) in D.FRONTIER_2026.items():
-        usd = M.cloud_cost_per_query(_OUT_TOK, _IN_TOK, p_out, p_in)
-        rows[model] = {
-            "vendor": vendor,
-            "released": released,
-            "price_in_mtok": p_in,
-            "price_out_mtok": p_out,
-            "usd_per_query": usd,
-            "ratio_vs_edge_owned": usd / edge_usd if edge_usd else None,
-            "note": note,
+    tier_ids = {
+        "middle": ["gpt-5.6-terra", "claude-sonnet-5", "kimi-k3"],
+        "budget": ["gpt-5.6-luna", "gemini-3.6-flash",
+                   "gemini-3.5-flash-lite", "glm-5.2"],
+        "premium": ["gpt-5.6-sol", "claude-fable-5"],
+    }
+
+    scenarios = {}
+    for tier, model_ids in tier_ids.items():
+        prices = [D.FRONTIER_2026[key] for key in model_ids]
+        query_costs = [M.cloud_cost_per_query(_OUT_TOK, _IN_TOK,
+                                              p_out, p_in)
+                       for _, _, p_in, p_out, _ in prices]
+        ratios = [usd / edge_usd for usd in query_costs] if edge_usd else []
+        scenarios[tier] = {
+            "input_price_mtok_range": [min(p[2] for p in prices),
+                                        max(p[2] for p in prices)],
+            "output_price_mtok_range": [min(p[3] for p in prices),
+                                         max(p[3] for p in prices)],
+            "usd_per_query_range": [min(query_costs), max(query_costs)],
+            "ratio_vs_edge_owned_range": [min(ratios), max(ratios)],
+            "price_points": len(prices),
         }
 
-    ratios = {m: r["ratio_vs_edge_owned"] for m, r in rows.items()}
-    mid_tier = ["gpt-5.6-terra", "claude-sonnet-5", "kimi-k3"]
-    budget_tier = ["gpt-5.6-luna", "gemini-3.6-flash", "gemini-3.5-flash-lite",
-                   "glm-5.2"]
-    premium_tier = ["gpt-5.6-sol", "claude-fable-5"]
+    mid_tier = scenarios["middle"]["ratio_vs_edge_owned_range"]
+    budget_tier = scenarios["budget"]["ratio_vs_edge_owned_range"]
+    premium_tier = scenarios["premium"]["ratio_vs_edge_owned_range"]
     return {
+        "status": "SCENARIO_ONLY_DATED_PRICE_INPUT",
         "accessed": ACCESSED,
         "query_shape": {"tokens_in": _IN_TOK, "tokens_out": _OUT_TOK},
         "edge_owned_usd_per_query": edge_usd,
-        "models": rows,
+        "price_scenarios": scenarios,
         "summary": {
-            "mid_tier_ratio_range": [min(ratios[m] for m in mid_tier),
-                                     max(ratios[m] for m in mid_tier)],
-            "premium_tier_ratio_range": [min(ratios[m] for m in premium_tier),
-                                         max(ratios[m] for m in premium_tier)],
-            "budget_tier_ratio_range": [min(ratios[m] for m in budget_tier),
-                                        max(ratios[m] for m in budget_tier)],
-            "reading": "The first-pass ~150x claim is set by the $15/Mtok "
-                       "output price, which remains the modal mid-tier price "
-                       "in July 2026 (GPT-5.6 Terra, Claude Sonnet 5, Kimi "
-                       "K3). Premium tiers (Sol, Fable 5) widen the gap; "
-                       "budget tiers (Luna, Gemini 3.6 Flash, GLM-5.2) "
-                       "compress it, mirroring the efficient-cloud "
-                       "counter-case of H5.",
+            "mid_tier_ratio_range": mid_tier,
+            "premium_tier_ratio_range": premium_tier,
+            "budget_tier_ratio_range": budget_tier,
+            "reading": "The first-pass ~150x ratio is reproduced by the "
+                       "middle dated price input. Premium inputs widen the "
+                       "gap and budget inputs compress it, mirroring the "
+                       "efficient-cloud counter-case of H5. These are price "
+                       "scenarios, not a current market statistic.",
         },
         "energy_note": "No public per-query energy measurement exists for any "
-                       "July-2026 frontier model as of " + ACCESSED + "; "
+                       "model represented by the July-2026 snapshot as of " +
+                       ACCESSED + "; "
                        "energy/water/carbon results remain pinned to the "
                        "measured 2025 corpus (jegham2025, elsworth2025, "
                        "caravaca2025).",
-        "moe_trend_note": "Kimi K3 activates ~1.8% of 2.8T parameters per "
-                          "token; GLM-5.2 ~40B of 744B (~5%). Sparse "
-                          "activation is right-sizing applied INSIDE the "
-                          "cloud model: per-token compute is decoupled from "
-                          "total capacity. This supports H2's finding that "
-                          "the dominant lever is which size runs, and it "
-                          "strengthens the efficient-cloud caveat of H5 "
-                          "rather than weakening it.",
+        "scope_note": "No model release, architecture, activation, quality, "
+                       "energy, or current-market claim is inferred from this "
+                       "dated price-bin calculation.",
     }
 
 
@@ -354,10 +358,9 @@ if __name__ == "__main__":
     tco = out["frontier_2026_tco"]
     print("=== Pass 2: July-2026 frontier TCO (vs edge owned "
           f"${tco['edge_owned_usd_per_query']:.2e}/query) ===")
-    for model, r in sorted(tco["models"].items(),
-                           key=lambda kv: -kv[1]["ratio_vs_edge_owned"]):
-        print(f"  {model:22s} {r['vendor']:12s} ${r['usd_per_query']:.2e}"
-              f"  = {r['ratio_vs_edge_owned']:6.0f}x edge")
+    for tier, row in tco["price_scenarios"].items():
+        lo, hi = row["ratio_vs_edge_owned_range"]
+        print(f"  {tier:8s} dated price bin  = {lo:6.0f}x .. {hi:6.0f}x edge")
     s = tco["summary"]
     print(f"  mid-tier ratio    : {s['mid_tier_ratio_range'][0]:.0f}x .. "
           f"{s['mid_tier_ratio_range'][1]:.0f}x")

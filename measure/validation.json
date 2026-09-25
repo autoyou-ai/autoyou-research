@@ -2,10 +2,10 @@
   "status": "PASS",
   "scope": "independent formula implementation on the same raw files; not independent hardware or peer review",
   "files_sha256": {
-    "rtx5070-ladder.json": "895beb562ba2242ba7093531c9d0f42bac908e95874444393a2a47e9620c3514",
-    "rtx5070-replication.json": "2de6204d7ec57180a73873ad600d818b6a1cd916545149120875e3f0a43a0b50",
-    "rtx5070-study.json": "cac500fde7a652268b18897dd9368767e67219afde014c5643b60b98264e2528",
-    "rtx5070.json": "cd3db4b781ff6062b3da3d053400c0b9de0c9215ed4e97d86a1f27aa3a66468c"
+    "rtx5070-ladder.json": "597daf662b86a307547e31f43cf3a90688a8bda1c45869941dde0ea92ccb00d0",
+    "rtx5070-replication.json": "7c61f5d4b1473baaae3f5f2d59c0f6a5af980bbb64704c74353acacc0ee8de25",
+    "rtx5070-study.json": "f9c1c9fe1e1170e994bd3aea43f01bdc8e09388c4c22f6619606d8973d2e412f",
+    "rtx5070.json": "347844a25f2f7e64a58ecf42ce6209344c7480502d4643d35c70e0357ed9aa3d"
   },
   "checks": [
     {

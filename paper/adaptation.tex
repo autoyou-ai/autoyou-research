@@ -40,7 +40,8 @@ What It Actually Buys}
 
 \author{\IEEEauthorblockN{AutoYou Research}
 \IEEEauthorblockA{\textit{Decentralized Inference \& Sustainable Compute Group}\\
-\texttt{research@autoyou.me}}}
+\texttt{research@autoyou.me}}
+\thanks{Research release v0.3.0 (2026-09-14). Venue and DOI are not assigned in this version.}}
 
 \maketitle
 
@@ -53,21 +54,29 @@ That study treated the small-model-sufficient workload fraction $\fs$ as fixed b
 parameter count. This paper tests whether parameter-efficient fine-tuning (PEFT)
 moves it, on hardware the household already owns. We model sixteen 2026-era
 adaptation methods, three consumer device classes, and the memory, time, energy
-and money cost of an adaptation run; we validate the memory model against a
-published 27B-parameter training run to within $-0.6\%$ and calibrate throughput
+and money cost of an adaptation run; we check the memory model against a
+publicly documented 27B-parameter training run to within $-0.6\%$ and compare throughput
 against the same run's wall clock. We state five hypotheses and three counter-claims.
-Our central result is negative with respect to the obvious hypothesis and
-positive with respect to a better one: at the companion study's acceptance
-threshold $\alpha = 0.70$, adaptation moves coverage by
-$\mathbf{+0.0\pp}$ - not at all, because every adaptable task class already
-cleared the bar - while what improves instead is delivered quality on the work
-already served locally, modelled at $88.4\% \rightarrow 93.9\%$ of frontier. The
-coverage invariance is structural: it holds for every uplift we tested from $0$
-to $+30$ points, so it does not depend on the size of the adaptation benefit.
-The quality figure is a bounded literature estimate propagated through the
-workload, and we separate the two explicitly rather than present a derived
-number as a measured one. Coverage responds only above $\alpha \approx 0.80$,
-and that threshold does depend on the uplift assumed. A 27B adaptation run costs
+Our central result is negative with respect to the obvious coverage hypothesis:
+at the companion study's acceptance threshold $\alpha = 0.70$, the modelled
+adaptation changes coverage by $\mathbf{+0.0\pp}$ - not at all, because every
+adaptable task class already cleared the bar. This invariance is structural
+conditional on the declared class ratios and workload weights. A public-safe
+held-out evaluation across three models, five synthetic task classes, 20
+evaluation tasks per class and three adapter-training seeds measures task
+accuracy from $\AdaptationBaseAccuracy\%$ to $\AdaptationAdaptedAccuracy\%$,
+a $+\AdaptationUplift\pp$ point estimate with a model-cluster bootstrap
+interval of $\AdaptationUpliftLow$--$\AdaptationUpliftHigh\pp$. The exact
+cluster sign-flip test is $p=\AdaptationClusterP$ with only three model
+clusters, so this is evidence for the declared synthetic benchmark, not a
+strong population-level significance claim. The earlier $+2/+6/+14$ points
+and the derived $88.4\% \rightarrow 93.9\%$ figure remain exploratory
+scenario inputs for routing sensitivity, not the measured quality result. The
+measured benchmark is not a sampled user workload, a human quality study, or
+an independent device replication. Coverage responds only above
+$\alpha \approx 0.80$ in the exploratory scenario, and that threshold depends
+on the uplift assumed. A single public recipe reports a 27B adaptation run;
+applying its reported $130$\,W sustained package power to $82.1$ hours implies
 $10.7\kWh$. Against an all-cloud counterfactual that is repaid in $143$ days of
 ordinary use, but charging it only against the routing the adapter actually
 changes - the correct attribution - it is never repaid at $\alpha = 0.70$,
@@ -75,12 +84,31 @@ because it moves no query, and takes $1.8$ to $3.3$ years where it does. We
 report both bounds and record H8 as accounting-dependent rather than
 validated. Repeating adaptation per user is scale-invariant under this model,
 which answers the ``centralized training amortizes better'' objection on its own
-terms. We report
-one deployment's own five measured adapter runs, in which a rank-32 LoRA moved a
-task the base model failed from $30.8\%$ to $92.9\%$ while refusal of
-out-of-scope requests moved from $0\%$ to $100\%$ and source-code leakage from
-$25\%$ to $0\%$ - and we use that measurement to delimit, rather than dispute,
-the established finding that fine-tuning degrades safety alignment.
+terms. A private one-deployment report provides bounded, deployment-reported
+observations: five rank-32 LoRA runs are reported as moving one task from
+$30.8\%$ to $92.9\%$, while refusal of out-of-scope requests moved from $0\%$
+to $100\%$ and source-code leakage from $25\%$ to $0\%$. The underlying
+prompts, transcripts, checkpoints, and task-level labels are not redistributable
+or independently auditable here, so these observations are not a population
+estimate or a replacement for the planned experiment. They delimit, rather
+than dispute, the literature concern that fine-tuning can degrade safety
+alignment.
+As a separate prompt-surface robustness probe, changing the surrounding
+instructions while reusing the public evaluation records gives $80.0\%$ to
+$90.0\%$ accuracy, or $+10.0\pp$ with a model-cluster interval of
+$+5.0$--$+15.0\pp$ and exact $p=0.250$. This probe is not a new semantic
+workload, an independent replication, or evidence that the primary effect
+generalises beyond the released records.
+A separate new-semantic holdout uses 100 fresh synthetic records, 20 per
+class, with new record values and task formats. Across the same three model
+clusters and three adapter seeds it gives $\AdaptationSemanticBaseAccuracy\%$
+to $\AdaptationSemanticAdaptedAccuracy\%$, or only
+$+\AdaptationSemanticUplift\pp$, with a model-cluster interval from
+$\AdaptationSemanticUpliftLow\pp$ to
+$+\AdaptationSemanticUpliftHigh\pp$ and exact $p=\AdaptationSemanticClusterP$.
+The model-level directions are mixed, so this result weakens a broad
+semantic-transfer reading of the primary uplift. It remains synthetic,
+automatically graded, and measured on one physical host.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -113,27 +141,32 @@ what happens when they are not.
 Two things changed in 2026 that make the question answerable rather than
 speculative. First, the open-weights tier a household can hold moved from 8B to
 27B: Qwen3.8-27B~\cite{qwen38_2026} is dense, natively multimodal, Apache-2.0
-licensed, carries a 262K-token context and occupies roughly $14$--$17$\,GB as a
-4-bit build. Second, consumer unified-memory APUs put $128$\,GB in front of the
-accelerator, and a reproducible recipe for multi-day 27B LoRA training on
-one of them is public~\cite{strixhalo2026}. Adapting a 27B model stopped being a
-data-centre activity.
+licensed, and carries a 262K-token context. The official Ollama distribution
+lists an $18$\,GB Q4\_K\_M build~\cite{qwen38_ollama2026}; that is distribution
+metadata rather than a measurement of whole-system memory or runtime energy.
+Second, consumer unified-memory APUs put $128$\,GB in front of the
+accelerator, and a public recipe documents multi-day 27B LoRA training on one
+of them~\cite{strixhalo2026}. Adapting a 27B model has therefore been
+demonstrated outside data-centre hardware, although the recipe remains a
+single community validation point.
 
 Our contributions:
 
 \begin{enumerate}
 \item A \textbf{cost model for on-device adaptation} covering memory, wall
-      clock, energy, carbon and money, validated against a published 27B run to
+      clock, energy, carbon and money, checked against a publicly documented 27B run to
       $-0.6\%$ on peak memory (\S\ref{sec:model}).
-\item A \textbf{negative result on the obvious hypothesis}: adaptation does not
-      increase coverage at an ordinary acceptance threshold, and we identify
-      the threshold above which it does (\S\ref{sec:uplift}).
+\item A \textbf{conditional negative result on the obvious coverage hypothesis}:
+      under the declared ratios, adaptation does not increase coverage at an
+      ordinary acceptance threshold; a separate public synthetic benchmark
+      measures task-accuracy change without claiming a real-workload effect
+      (\S\ref{sec:uplift}).
 \item An \textbf{amortisation analysis} charging the full training footprint
       against the inference it displaces, under two accountings that disagree
       by more than an order of magnitude, and a correction to our own earlier
       reading of it (\S\ref{sec:amortise}).
 \item A \textbf{delimitation of the fine-tuning safety result}, supported by
-      one deployment's measured runs (\S\ref{sec:safety}).
+      one deployment's reported runs (\S\ref{sec:safety}).
 \item A \textbf{scale-invariance argument} against the
       centralized-amortisation objection (\S\ref{sec:scale}), and an explicit
       separation of which of our results are structural and which are inherited
@@ -151,6 +184,13 @@ Sixteen methods are modelled. They divide into families that behave very
 differently on a memory-bound device, and the division matters more than any
 individual method's reported gain.
 
+Unless a sentence below is a definition of the method or a library
+compatibility fact, the stated gain, speed, or forgetting property is an
+author-reported result from the cited paper's own tasks and protocol. None of
+these sixteen methods is re-run in this study. We use the reported ranges only
+to bound a design sensitivity; they are not a matched ranking of methods on the
+private deployment workload.
+
 Every method below is a variant of low-rank adaptation~\cite{hu2021lora};
 \cite{lorasurvey2024} surveys the family, and \cite{peft_library2026}
 documents which of them sit one keyword argument away in the library a
@@ -162,42 +202,48 @@ outsized effect: under the original scaling, raising the rank shrinks the
 effective update, so higher ranks stop helping - which is why so much practice
 settled on $r \in \{8,16\}$ and concluded that rank does not matter. It does;
 the scaling was hiding it. \emph{LoRA+}~\cite{hayou2024loraplus} gives the two
-factors different learning rates, which is provably correct in the infinite-width
-limit and reported to converge up to twice as fast.
+factors different learning rates; its paper reports an infinite-width result
+and faster convergence under its evaluated settings.
 \emph{NEFTune}~\cite{jain2023neftune} adds embedding noise and reports its
 largest gains on conversational quality specifically. None of the three costs
-memory or wall clock.
+additional persistent adapter memory in our accounting; their training-time
+overhead is not measured here.
 
 \textbf{Initialisation.} \emph{PiSSA}~\cite{meng2024pissa} starts the adapter in
 the principal singular subspace of $W$ rather than at noise-and-zero;
-\emph{OLoRA}~\cite{buyukakyuz2024olora} uses a cheaper orthonormal
-construction; \emph{EVA}~\cite{paischer2024eva} runs a few batches of the
+\emph{OLoRA}~\cite{buyukakyuz2024olora} uses QR-based orthonormal
+initialisation; \emph{EVA}~\cite{paischer2024eva} runs a few batches of the
 \emph{actual} dataset and allocates rank where that dataset needs it;
 \emph{CorDA}~\cite{yang2024corda} can build the update in directions the base
 model does not use for general knowledge. \emph{LoftQ}~\cite{li2023loftq}
 initialises the adapter to absorb quantization error, so training does not begin
-by repairing the damage quantization did. These cost a one-time decomposition and
-nothing thereafter.
+by repairing the damage quantization did. Their one-time initialization costs
+are outside our measured adapter transport model; no recurring cost is claimed
+here.
 
-\textbf{Quantization.} \emph{QLoRA}~\cite{dettmers2023qlora} is three separable
-ideas - NF4, double quantization of the block constants ($\approx 0.37$ bits per
-parameter), and paged optimizer states - and it is the reason a 27B model fits
-on consumer hardware at all. It costs roughly $35\%$ wall clock, because every
-forward pass dequantizes.
+\textbf{Quantization.} \emph{QLoRA}~\cite{dettmers2023qlora} combines NF4,
+double quantization of the block constants ($\approx 0.37$ bits per parameter),
+and paged optimizer states. It is one route by which a 27B model can fit on
+consumer hardware, but the fit and training-time tradeoff depend on context,
+optimizer, checkpoint, and runtime. This study does not re-measure its wall
+clock or memory profile.
 
 \textbf{Reparameterisation.} \emph{DoRA}~\cite{liu2024dora} splits the update
-into magnitude and direction, with reported gains largest at low rank - exactly
-where the edge operates. \emph{AdaLoRA}~\cite{zhang2023adalora} reallocates a fixed rank budget across
+into magnitude and direction; its paper reports larger gains at low rank in its
+evaluated settings. That is a hypothesis for the edge, not an edge measurement.
+\emph{AdaLoRA}~\cite{zhang2023adalora} reallocates a fixed rank budget across
 layers during training. \emph{VeRA}~\cite{kopiczko2023vera} and
 \emph{LoRA-XS}~\cite{balazy2024loraxs} go the other way, cutting trainable
-parameters by $50$--$350\times$ at a small quality cost; \S\ref{sec:transport}
+parameters by over $100\times$ in a reported 7B comparison, with the quality
+tradeoff depending on task and rank; \S\ref{sec:transport}
 explains why that trade is interesting for a distributed product even when it is
 uninteresting for a benchmark.
 
-\textbf{Wrong shape.} \emph{GaLore}~\cite{zhao2024galore} has a better ceiling
-than LoRA on continued pretraining, but it updates all weights and therefore
-produces a new model rather than a mergeable adapter. For a system whose
-distribution unit is a small personal delta, that is disqualifying regardless of
+\textbf{Wrong shape.} \emph{GaLore}~\cite{zhao2024galore} reports a higher
+continued-pretraining ceiling than LoRA in its evaluated settings, but it
+updates all weights and therefore produces a new model rather than a mergeable
+adapter. For a system whose distribution unit is a small personal delta, we
+treat that shape as outside the adapter-only transport design regardless of
 quality. We include it to make the criterion explicit: the artifact's
 \emph{shape} is a first-order design constraint, not an implementation detail.
 
@@ -239,7 +285,7 @@ position.
 
 \subsection{Validation}
 
-One 27B run is published in enough detail to check against:
+One 27B run is publicly documented in enough detail to check against:
 Qwen3.5-27B~\cite{qwen35_2026}, LoRA
 $r = 128$, $\alpha = 256$, bf16 weights, paged 8-bit AdamW, sequence 8192, batch
 1, gradient accumulation 4, on a 128\,GB unified-memory APU, reported at
@@ -253,7 +299,7 @@ allocator.
 Adapter training costs $\approx 6N$ FLOPs per token with checkpointing: $2N$
 forward, $2N$ backward to activations (still required to reach earlier layers
 even with frozen weights), $2N$ for the recomputed forward; the adapter's own
-gradient is $O(n_a)$ and rounds away. The same published run gives
+gradient is $O(n_a)$ and rounds away. The same publicly documented run gives
 $448$ steps $\times$ $11$ minutes at $32{,}768$ tokens per step, from which the
 achieved throughput is $\mathbf{8.04}$~TFLOP/s - a model-FLOPs utilisation of
 $0.136$ against the part's $\approx 59$~TFLOP/s bf16 peak, and $49.6$ tokens per
@@ -307,13 +353,17 @@ We therefore mark four of the five workload classes adaptable and hold
 the hard-reasoning class fixed - which means the companion study's central negative
 finding survives this paper unchanged.
 
-Uplift on adaptable classes is bounded at $+2$, $+6$ and $+14$ capability-ratio
-points (low, central, high), floored by the pessimistic reading of
-Biderman \emph{et al.}~\cite{biderman2024lora} that LoRA learns less than full
-fine-tuning, and deliberately set below what \S\ref{sec:measured} alone would
-justify. Ratios are capped at $0.99$: an adapter may close the gap to a frontier
-model on a narrow task, but claiming a rank-32 update \emph{exceeds} one is not
-a claim we are willing to make.
+The existing $+2$, $+6$ and $+14$ capability-ratio points (low, central, high)
+are exploratory sensitivity inputs, not observed effects. They are retained
+only to show how the routing arithmetic would respond to a bounded uplift, with
+the pessimistic reading of Biderman \emph{et al.}~\cite{biderman2024lora} as
+context rather than as a measured effect size. Ratios are capped at $0.99$: an
+adapter may close the gap to a frontier model on a narrow task, but no claim is
+made that a rank-32 update exceeds one. A new public multi-model, multi-task
+evaluation replaces this scenario for the narrower estimand of held-out
+synthetic task accuracy. It does not replace the real-workload sample, the
+human grading plan, or the independent-device replication still needed for a
+product-level claim.
 
 \subsection{The result}
 
@@ -321,35 +371,114 @@ At $\alpha = 0.70$, $\fs$ is unchanged: $82\% \rightarrow 82\%$, a gain of
 $+0.0\pp$. Every adaptable class already cleared the bar without adaptation, so
 there is nothing for the uplift to recruit.
 
-\textbf{H9 as stated is therefore not supported.} What moves is quality. Mean
-capability on the served workload rises from $88.4\%$ to $93.9\%$ of frontier,
-a gain of $+5.6\pp$ that closes $48\%$ of the remaining gap. Coverage
-responds only above $\alpha \approx 0.80$, where the unadapted model begins
-failing classes the adapted one still passes: at $\alpha = 0.80$ coverage goes
-$70\% \rightarrow 82\%$, and at $\alpha = 0.90$, $48\% \rightarrow 70\%$
-(Fig.~\ref{fig:quality}).
+\textbf{H9 as stated remains only partially supported.} The public benchmark
+measures held-out task accuracy, not the real-workload fraction $\fs$. Across
+the declared $\AdaptationModelCount$ models and $\AdaptationObservationCount$
+model-task observations, accuracy rises from $\AdaptationBaseAccuracy\%$ to
+$\AdaptationAdaptedAccuracy\%$, a measured change of
+$+\AdaptationUplift\pp$ (cluster bootstrap
+$\AdaptationUpliftLow$--$\AdaptationUpliftHigh\pp$). The exact cluster
+sign-flip test is $p=\AdaptationClusterP$: the direction is consistent across
+the three model clusters, but three clusters do not support a strong
+population-level significance claim. The gain is concentrated in hard-reasoning
+tasks ($+\AdaptationHardReasonUplift\pp$); extraction and retrieval questions
+are already at $\AdaptationExtractionAdaptedAccuracy\%$ and
+$\AdaptationRagAdaptedAccuracy\%$ in this benchmark. This is a measured
+synthetic-task result, not evidence
+that a deployed assistant improves by the same amount.
+The class-level effects are secondary: the hard-reasoning cluster test has
+raw $p=\AdaptationHardReasonP$, and the five-test Bonferroni-adjusted value is
+$p=\AdaptationHardReasonAdjustedP$; no task-class effect is confirmatory in
+this three-cluster study.
+
+\subsection{Prompt-surface robustness}
+
+The primary benchmark's disjoint task identifiers do not by themselves show
+that an adapter learned transferable semantics. We therefore ran a separate
+probe on the same public evaluation records after changing the outer
+instruction, class-specific wording, and labels surrounding the answer
+choices. The probe assigns new task identifiers and uses the same three model
+clusters, five classes, and three adapter-training seeds, but it deliberately
+does not claim a new workload sample.
+
+On this changed prompt surface, base accuracy is
+$\AdaptationHoldoutBaseAccuracy\%$, adapted accuracy is
+$\AdaptationHoldoutAdaptedAccuracy\%$, and the frontier reference is
+$\AdaptationHoldoutFrontierAccuracy\%$. The adapted-minus-base change is
+$+\AdaptationHoldoutUplift\pp$ with a model-cluster bootstrap interval of
+$+\AdaptationHoldoutUpliftLow$--$+\AdaptationHoldoutUpliftHigh\pp$ and exact
+two-sided cluster sign-flip $p=\AdaptationHoldoutClusterP$. The direction and
+scale are similar to the primary result, which weakens the simplest objection
+that the effect is caused only by the exact outer wording. It does not answer
+the stronger objections: the underlying semantic records and answer labels
+are reused, only one paraphrase is tested, contamination is not probed, and
+the run remains on one physical host. The holdout is therefore a robustness
+check, not an independent replication or a product-quality estimate.
+
+\subsection{New-semantic holdout}
+
+The prompt-surface probe above reuses semantic records, so we also generated
+a separate holdout with new synthetic records, new domain values, and a
+different reasoning format. It contains 20 tasks per class across extraction,
+retrieval, summary, simple code, and hard reasoning. The released task
+manifest has no primary evaluation task identifiers or source-task links, and
+the runner records that primary prompts and answers are not copied. The same
+three model clusters and three saved adapter-training seeds are scored with
+the same blinded greedy four-choice grader.
+
+On this new semantic holdout, base accuracy is
+$\AdaptationSemanticBaseAccuracy\%$, adapted accuracy is
+$\AdaptationSemanticAdaptedAccuracy\%$, and the frontier reference is
+$\AdaptationSemanticFrontierAccuracy\%$. The adapted-minus-base change is
+$+\AdaptationSemanticUplift\pp$, with a model-cluster bootstrap interval from
+$\AdaptationSemanticUpliftLow\pp$ to
+$+\AdaptationSemanticUpliftHigh\pp$ and exact two-sided cluster sign-flip
+$p=\AdaptationSemanticClusterP$. The model-level changes are $+7.7$ pp,
+$-3.3$ pp, and $0.0$ pp for the 0.5B, 3B, and VL 3B clusters respectively.
+The mixed directions and interval spanning zero are counterevidence against
+treating the primary $+11.1\pp$ as a broad semantic-transfer effect. This is
+still a synthetic accuracy check on one host; it does not test contamination,
+untouched general ability, human task success, sampled user work, or
+independent-device reproducibility.
+
+Under the central exploratory scenario, mean capability on the served workload
+would rise from $88.4\%$ to $93.9\%$ of frontier, a derived gain of $+5.6\pp$
+that closes $48\%$ of the remaining gap. Those values remain arithmetic
+consequences of the scenario, not observations. In that same scenario,
+coverage responds only above $\alpha \approx 0.80$,
+where the unadapted model begins failing classes the adapted one still passes:
+at $\alpha = 0.80$ coverage goes $70\% \rightarrow 82\%$, and at
+$\alpha = 0.90$, $48\% \rightarrow 70\%$ (Fig.~\ref{fig:quality}).
 
 \subsection{Which half of this result is evidence}
 \label{sec:whatisevidence}
 Those two numbers are not the same kind of claim, and conflating them is the
 easiest way to misread this paper.
 
-The \emph{coverage} result is structural and robust. At $\alpha = 0.70$ every
-adaptable class already sits above the threshold, so no positive uplift can
-recruit additional workload: we obtain $\fs = 82\%$ for every uplift tested from
-$0$ to $+30$ points. It does not depend on how large the uplift is, only on
-where the base ratios sit relative to the bar, and it would survive any
-plausible revision of the uplift literature.
+The \emph{coverage} result is algebraically invariant conditional on the
+declared class partition, base ratios and workload weights. At $\alpha = 0.70$
+every adaptable class already sits above the threshold, so no positive uplift
+can recruit additional workload: we obtain $\fs = 82\%$ for every uplift tested
+from $0$ to $+30$ points. It does not establish that a sampled user workload
+has those ratios or weights; a task corpus with classes near the threshold
+could change the result.
 
-The \emph{magnitude} of the quality gain is not a finding. It is the assumed
-uplift propagated through the workload weights and the $0.99$ cap: $+5.6\pp$ is
-arithmetically identical to the $+6$-point central assumption of
-\S\ref{sec:uplift}, and the derived ``$48\%$ of the gap closed'' inherits it
-directly. We report it because a bounded estimate is more useful than none, and
-we state this because a reader who took it as measured would be taking our input
-for our output.
+The \emph{measured synthetic-task} magnitude is a finding only for that
+predeclared benchmark. It uses deterministic public templates, four-choice
+greedy grading, one physical host and three model clusters. The exact
+cluster-level $p=\AdaptationClusterP$ is not persuasive evidence of a general
+effect with only three clusters, even though every model's point estimate is
+positive. It also says nothing about human preference, refusal quality,
+long-horizon task completion, or distribution shift.
 
-The knee location is intermediate. At the low end of the uplift range the
+The $+5.6\pp$ quality figure is different. It is the assumed uplift propagated
+through the workload weights and the $0.99$ cap, arithmetically identical to
+the $+6$-point central scenario in \S\ref{sec:uplift}; the derived ``$48\%$ of
+the gap closed'' inherits that input directly. The measured benchmark now
+replaces the scenario for the narrow accuracy estimand, but not for this
+workload-weighted quality figure or for the coverage claim.
+
+The knee location is also scenario-dependent. At the low end of the uplift range the
 $\alpha = 0.80$ knee disappears and coverage first moves at $\alpha = 0.90$; at
 the central and high ends it sits at $0.80$. ``Coverage responds only to a
 demanding bar'' is robust; the specific threshold is not, which is why
@@ -358,18 +487,22 @@ Fig.~\ref{fig:quality} plots the full band rather than the central line alone.
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{fig_quality_vs_coverage.pdf}
-\caption{Adaptation buys better answers at an ordinary quality bar, and more
-answers only at a demanding one. Left: coverage against the acceptance
-threshold, with and without adaptation. Right: the two metrics at the study's
-default $\alpha = 0.70$.}
+\caption{The two evidence boundaries in the adaptation analysis. Left:
+coverage against the acceptance threshold under the inherited workload-ratio
+scenario, with and without the assumed uplift. Right: measured held-out
+accuracy on the public synthetic benchmark for the base, adapted and reference
+models. The right panel is not a human study, a sampled workload, or an
+independent device replication.}
 \label{fig:quality}
 \end{figure*}
 
-The correct claim is narrower and more useful than the one we set out to test.
-Adaptation does not let a local model attempt more of your work. It lets it do
-the work it was already attempting closer to the standard you would have got
-from the cloud - which is what a user actually experiences, and which coverage
-statistics are structurally unable to express.
+The correct claim is narrower than the one we set out to test. The declared
+ratios imply that adaptation would not let a local model attempt more of this
+work at $\alpha = 0.70$. The public benchmark suggests that adaptation can
+improve correctness on these synthetic tasks, but it does not establish that
+users experience the same gain. A sampled real workload, multiple physical
+device classes, and blinded human or task-specific grading remain necessary
+before promoting this to a product-level quality claim.
 
 % ===================================================================== %
 \section{Amortisation}
@@ -456,9 +589,11 @@ roughly an order of magnitude.
 \subsection{Money, and the surcharge that compounds}
 
 The training bill is the smaller half of the comparison. Hosted fine-tuning
-charges once for training tokens, and then \emph{permanently}, because three of
-the four platforms we priced~\cite{tuning_pricing2026} bill a tuned endpoint at $1.5\times$ the base
-model's rate; only the cheapest, a dedicated LoRA service, does not. Over one
+charges once for training tokens, and then may charge a persistent endpoint
+premium. Our dated third-party price snapshot reports a $1.5\times$ tuned-endpoint
+multiplier for three of the four entries~\cite{tuning_pricing2026}; that is a
+scenario input, not a provider-wide fact, and only the cheapest entry in the
+snapshot has no such premium. Over one
 year at 50 queries per day, a locally adapted 27B costs \$1.71 of training
 electricity plus \$0.73 of inference electricity; the cheapest hosted
 equivalent costs \$7.05 of training plus \$109.50 of
@@ -478,10 +613,14 @@ and we do not dispute it.
 \subsection{Measured counter-evidence, and what it does not show}
 \label{sec:measured}
 
-One deployment's support model has been adapted five times with the scores
-retained~\cite{autoyou_support2026}, over Qwen2.5-VL bases~\cite{qwen25vl2025}. Reading only the two runs that share a base
-(so the comparison isolates data and recipe from model size), a rank-32 LoRA
-over a 1{,}750-sample corpus produced:
+One deployment's support model has been adapted five times, with aggregate
+scores retained~\cite{autoyou_support2026}, over Qwen2.5-VL bases
+\cite{qwen25vl2025}. The underlying prompts, answers, checkpoints, trainer
+logs, and task-level labels are not in the public release. The report also does
+not expose enough checkpoint lineage to independently verify the claimed base
+pairing. We therefore retain the table only as a deployment-reported
+observation, not as a reproducible experiment or a multi-model comparison. A
+rank-32 LoRA over a reported 1{,}750-sample corpus produced:
 
 \begin{center}\small
 \begin{tabular}{lrr}
@@ -495,9 +634,11 @@ Leaks source code & 25\% & \textbf{0\%} \\
 \end{tabular}
 \end{center}
 
-The capability result (E1) is an existence proof that adaptation reaches a class
-the base model \emph{fails}: the base was wrong more often than right, and the
-adapted model is right nine times in ten, at identical parameter count.
+The capability result (E1) is a reported observation that adaptation can move a
+task class on this deployment. It is not an independently verified existence
+proof: the base checkpoint, task-level outputs, grader, and exact train/eval
+separation are not public, and the reported parameter pairing cannot be audited
+from this release.
 
 The safety result (E2) runs opposite to \cite{qi2023finetuning}, and the reason
 is instructive rather than contradictory. That corpus contains 120 refusal
@@ -515,18 +656,19 @@ inherited by a user-trained adapter; it has to be a non-optional part of every
 corpus the system assembles, plus a probe that runs before an adapter is
 installed. That is a build requirement, and we record it as one.
 
-A third finding (E3) bears on model selection: the adapted 3B scored $92.9\%$
-and the adapted 7B scored $92.3\%$ on the same probes. Doubling the base bought
-$-0.6\pp$. Within a narrow, well-specified domain the corpus is the binding
-constraint - which is precisely the regime a local assistant operates in.
+A third finding (E3) was previously framed as a 3B-versus-7B model-selection
+comparison. We withdraw that interpretation from the public result: the base
+labels and checkpoint lineage are not independently auditable here. No claim
+about parameter count or data being the binding constraint is made until matched
+base and adapted manifests are released.
 
 \subsection{Scope}
 
 One deployment, one product's surface area, probe sets of 12--14 screens and 8
-code probes scored by an automated judge. These are existence proofs and
-refutations, not effect sizes, and nothing in this paper treats them otherwise.
-Aggregate scores only were read; no prompt, answer, screenshot or user content
-enters the analysis.
+code probes scored by an automated judge. These are deployment-reported
+observations, not independently reproducible existence proofs or effect sizes,
+and nothing in this paper treats them otherwise. Aggregate scores only were
+read; no prompt, answer, screenshot or user content enters the analysis.
 
 % ===================================================================== %
 \section{Forgetting and scale}
@@ -536,10 +678,10 @@ enters the analysis.
 
 The objection that narrowing a small model destroys its general ability is
 weaker than intuition suggests. Biderman \emph{et al.}~\cite{biderman2024lora}
-measure exactly this and find that LoRA learns \emph{less} in-domain than full
-fine-tuning and correspondingly \emph{forgets less} out-of-domain, outperforming
-weight decay and dropout as a regulariser: the low-rank constraint that limits
-the gain is the same constraint that limits the damage. Three structural
+report that LoRA learns \emph{less} in-domain than full fine-tuning and
+correspondingly \emph{forgets less} out-of-domain in their evaluated settings.
+We do not re-run their regularizer comparison, so the low-rank constraint is a
+plausible mechanism, not a product-level guarantee. Three structural
 defences add to it - the base weights are never modified, so a misbehaving
 adapter is unloaded rather than un-trained; CorDA's knowledge-preserved
 mode~\cite{yang2024corda} addresses the objection at initialisation; and the
@@ -594,22 +736,43 @@ leaderboard.
 \section{Threats to validity}
 
 \textbf{One validation point.} The memory model is checked against a single
-published run. It reproduces that run to $-0.6\%$, which is evidence that the
+publicly documented run. It reproduces that run to $-0.6\%$, which is evidence that the
 terms are right, not that the model generalises across architectures. MoE
 models in particular are not validated and their activation term differs.
 
-\textbf{Literature-derived uplift.} The $+2/+6/+14$ point range is a bounded
-synthesis of methods' self-reported gains on their own benchmarks. Reported
-gains do not compose additively - several methods improve the same thing by
-different means - which is why we report a discounted central estimate rather
-than a sum, and why no product claim is derived from it. Critically, the
-headline quality figure is a \emph{consequence} of this assumption rather than
-evidence for it (\S\ref{sec:whatisevidence}); the paper's load-bearing result is
-the coverage invariance, which holds for any uplift.
+\textbf{Synthetic benchmark and residual scenario.} The public multi-model
+evaluation replaces the $+2/+6/+14$ point range for the narrower estimand of
+held-out four-choice task accuracy. It uses 20 evaluation tasks in each of
+five synthetic classes, three adapter seeds and three model clusters on one
+CPU-only physical host. The $+\AdaptationUplift\pp$ estimate has an exact
+cluster sign-flip $p=\AdaptationClusterP$; this is not enough clusters for a
+strong generalisation claim. Hard reasoning supplies most of the gain, while
+extraction and retrieval are saturated at 100\% in this task set. The old
+range is retained only as a routing sensitivity scenario, not as an empirical
+effect size. The workload-weighted $88.4\% \rightarrow 93.9\%$ figure is still
+a \emph{consequence} of that scenario rather than evidence for it.
+
+The task identifiers are disjoint, but the public generator reuses a small
+set of class templates and the same four-choice response format across the
+training and evaluation splits. A supplemental prompt-surface holdout changes
+the surrounding wording and reports $\AdaptationHoldoutBaseAccuracy\%$ to
+$\AdaptationHoldoutAdaptedAccuracy\%$ ($+\AdaptationHoldoutUplift\pp$), but it
+reuses the same semantic records and tests only one paraphrase. It therefore
+weakens the exact-template explanation without distinguishing semantic transfer
+from memorisation of records, answer labels, recurring class structure, or
+contamination. A separate new-semantic holdout now uses fresh records and
+formats and reports $\AdaptationSemanticBaseAccuracy\%$ to
+$\AdaptationSemanticAdaptedAccuracy\%$ ($+\AdaptationSemanticUplift\pp$),
+with a model-cluster interval from $\AdaptationSemanticUpliftLow\pp$ to
+$+\AdaptationSemanticUpliftHigh\pp$ and exact $p=\AdaptationSemanticClusterP$.
+Its model-level directions are mixed, which weakens broad transfer claims, but
+it remains synthetic, one-host, automatically graded, and does not include a
+contamination or untouched general-ability probe. Semantic transfer and
+product-level quality therefore remain unresolved.
 
 \textbf{The workload mix is inherited, not measured.} $\fs$, the class weights,
 and the base capability ratios all come from the companion study, where they are
-themselves modelling choices calibrated against NVIDIA's measured agentic
+themselves modelling choices compared with NVIDIA's reported agentic
 replaceability range rather than against a task corpus of our own. A different
 workload composition - one weighted toward hard reasoning, or toward tasks whose
 base ratio sits just below $\alpha$ - would change both results here, and the
@@ -624,9 +787,10 @@ the 2026 frontier or the 2026 open-weights tier under identical prompts. Hosted
 pricing, open-weights architectures and adapter evaluations are current to
 September 2026; fleet cloud comparisons remain literature-derived estimates.
 
-\textbf{$n = 1$ deployment.} \S\ref{sec:measured} is one team's five runs on one
-product. It refutes a general claim and proves an existence claim; it estimates
-nothing.
+\textbf{Limited replication.} \S\ref{sec:measured} is one team's five runs on
+one product, and the public benchmark uses three model clusters on one
+physical host. Neither can estimate a population effect, independent-device
+reproducibility, human quality, or generality across products.
 
 \textbf{Already-owned hardware only.} Every result assumes the device exists for
 other reasons. The companion study establishes that embodied carbon dominates
@@ -636,9 +800,10 @@ for buying an APU.
 % ===================================================================== %
 \section{Conclusion}
 
-Parameter-efficient adaptation on already-owned consumer hardware is feasible
-for 27B-class models and is $48$--$218\times$ cheaper over one year than the
-hosted equivalent - chiefly because hosted personalisation surcharges every
+One public community recipe demonstrates parameter-efficient adaptation on
+already-owned consumer hardware for a 27B-class model. Under the declared
+cost model, it is $48$--$218\times$ cheaper over one year than the hosted
+equivalent - chiefly because hosted personalisation surcharges every
 subsequent query, permanently, while a local adapter does not.
 
 Its \emph{energy} case is weaker than it first appears, and the weakness is
@@ -649,24 +814,37 @@ changes no routing. An adapter is an instrument for quality, and treating it as
 an instrument for footprint requires a behavioural assumption that should be
 argued rather than assumed.
 
-What it buys is not what we expected. At an ordinary acceptance threshold it
-adds no coverage at all, and that invariance survives the whole range of uplift
-the literature supports. What it improves is the quality of work the local model
-was already doing - by an amount our model inherits from that literature rather
-than measures. Coverage is bought only by users who demand frontier-comparable
-quality, and hard reasoning remains unreachable at any rank.
+What the declared model buys is not what we expected. At an ordinary acceptance
+threshold it adds no coverage, conditional on the chosen ratios and workload.
+The public synthetic benchmark measures a $+\AdaptationUplift\pp$ increase in
+held-out task accuracy, but the result is limited by three model clusters, one
+physical host, deterministic synthetic tasks and automated choice grading.
+The supplemental prompt-surface probe remains positive at
+$+\AdaptationHoldoutUplift\pp$, but reuses the same records and therefore does
+not resolve semantic-transfer, contamination, or independent-replication
+counterclaims.
+The new-semantic holdout is only $+\AdaptationSemanticUplift\pp$, with a
+model-cluster interval from $\AdaptationSemanticUpliftLow\pp$ to
+$+\AdaptationSemanticUpliftHigh\pp$ and exact $p=\AdaptationSemanticClusterP$.
+Its mixed model directions mean that broad semantic transfer is not
+established by the current evidence.
+Coverage is bought only by users who demand frontier-comparable quality in the
+inherited scenario, and hard reasoning remains unreachable under the stated
+adaptation boundary.
 
 The practical consequence for a system builder is the inverse of the intuition:
 adapt to raise the standard of what you already serve locally, not to widen what
 you attempt. A router that treats an installed adapter as licence to keep more
 work on the device will, on this model, keep the wrong work.
 
-The finding we did not anticipate is the safety one. Fine-tuning is neither
-safe nor unsafe: it moves whatever the corpus specifies and lets the rest decay.
-That makes the corpus, not the recipe, the safety-critical artifact in a system
-that lets people teach their own assistant - and it makes an explicit refusal
-distribution and a pre-installation probe the two things such a system cannot
-ship without.
+The private observation we did not anticipate is the safety one. Fine-tuning is
+neither safe nor unsafe by construction: it can move what the corpus specifies
+while other behavior changes or decays. That makes the corpus, not the recipe,
+the safety-critical artifact in a system that lets people teach their own
+assistant - and it makes an explicit refusal distribution and a pre-installation
+probe the two things such a system should not ship without. This remains an
+existence observation until independent products, devices and task-specific
+graders reproduce it.
 
 \section*{Reproducibility}
 All analytical routines, simulation models, dataset parameters and
@@ -676,16 +854,37 @@ parameter rosters, Monte-Carlo sweeps and sensitivity curves without relying
 on proprietary cloud APIs. All of it is released openly under an MIT
 licence~\cite{autoyou2026measure}.
 
-One class of input is deliberately not redistributable. The adapter evaluation
+One class of input is deliberately not redistributable. The deployment adapter
 artifacts behind \S\ref{sec:measured} come from a deployed assistant whose
 training corpus and evaluation transcripts contain product and user material,
 and only aggregate scores were ever extracted from them
-\cite{autoyou_support2026}. Those aggregates are not redistributable, so the
-findings that depend on them cannot be independently reproduced, and the
-hypothesis they inform is recorded as \emph{not independently validated}
-throughout. We prefer a result the reader can see is unverifiable over one
-that looks reproducible and is not. Every other number in this paper is
-recomputed from the parameters and measurement records described above.
+\cite{autoyou_support2026}. Those aggregates are not redistributable, so that
+deployment observation cannot be independently reproduced, and H11 remains
+\emph{not independently validated}. The public synthetic benchmark is a
+separate, reproducible replacement for the narrow task-accuracy estimand: its
+task manifest, aggregate task-level scores, adapter files, model revisions and
+runtime record are released beside this manuscript. We prefer a result the
+reader can see is limited over one that looks reproducible and is not. Every
+other number in this paper is recomputed from the parameters and measurement
+records described above.
+
+The prompt-surface holdout is released separately with its task manifest,
+aggregate task-level scores, adapter references, model revisions and runtime
+record. It is a robustness probe over the same public evaluation records and
+must not be counted as an independent device or workload replication.
+
+The new-semantic holdout is released separately with its fresh task manifest,
+aggregate task-level scores, adapter references, model revisions and runtime
+record. It is a distribution-shift check over synthetic records, not an
+independent device replication or a sampled user workload.
+
+This is research release v0.3.0 dated 2026-09-14. Venue and DOI metadata are
+intentionally unassigned in this release. The public multi-model adaptation
+score file is present and reports a measured synthetic-task accuracy result;
+the $+2/+6/+14$ scenario is not promoted to an empirical effect size for that
+benchmark. Repository metadata, the citation audit, and the follow-up protocol
+for sampled workloads and independent device replication are released beside
+this manuscript.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

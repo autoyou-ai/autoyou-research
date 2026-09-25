@@ -1,7 +1,7 @@
 """Offline, independent arithmetic review of the paper's stored measurements.
 
 No benchmark, provider, live log, or original research model is imported.
-Run: python autoyou-research/review/audit.py
+Run from the repository root: python review/audit.py
 Results are a replay of supplied records, not independent physical replication.
 """
 from __future__ import annotations
@@ -14,6 +14,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
+
+# The revised paper replays exactly these six archived records. Later studies
+# store records with other schemas in measure/results/, so no directory glob.
+INPUTS = ("amd-8060s-strixhalo-ladder.json", "amd-8060s-strixhalo.json",
+          "rtx5070-ladder.json", "rtx5070-replication.json",
+          "rtx5070-study.json", "rtx5070.json")
 
 
 def integrate(trace, duration):
@@ -77,7 +83,7 @@ def replay():
     max_error = 0.0
     raw_count, request_count = 0, 0
     dataset_rows = []
-    for path in sorted((ROOT / "measure/results").glob("*.json")):
+    for path in sorted(ROOT / "measure/results" / name for name in INPUTS):
         raw = path.read_bytes()
         files[path.name] = hashlib.sha256(raw).hexdigest()
         data = json.loads(raw)
@@ -238,7 +244,7 @@ def emit_tables(report):
                       f"{r['tok_s']:.2f} & {r['proxy_percent']:.1f} & "
                       +( "Raw" if r["raw_available"] else "Summary")+r" \\")
     lines += [r"\newcommand{\ReviewLadderRows}{"+"\n"+"\n".join(ladder)+"}"]
-    (ROOT/"paper/review_numbers.tex").write_text("\n".join(lines)+"\n",encoding="ascii")
+    (ROOT/"paper/review_numbers.tex").write_text("\n".join(lines)+"\n",encoding="ascii",newline="\n")
 
 
 def plots(report):
@@ -276,7 +282,7 @@ def plots(report):
 
 def main():
     report=replay()
-    (HERE/"audit_results.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+    (HERE/"audit_results.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8",newline="\n")
     emit_tables(report)
     plots(report)
     print(json.dumps({k:report[k] for k in ("scope","raw_repetitions","integrated_requests",

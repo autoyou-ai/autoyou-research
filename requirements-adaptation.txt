@@ -1,0 +1,5 @@
+# Optional local experiment dependencies for models/run_adaptation_experiment.py
+torch==2.13.0
+transformers==5.12.1
+peft==0.20.0
+accelerate==1.15.0

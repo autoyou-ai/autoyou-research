@@ -1,0 +1,2640 @@
+{
+  "schema_version": "2.0",
+  "harness": "measure/bench.py --batch-sizes",
+  "experiment": "concurrent request serving scaling; each batch contains independent HTTP requests to the same local model",
+  "protocol": {
+    "prompt": "You are summarising a technical document for an engineer. Explain, in plain prose and without lists, why moving a small language model from a data centre to a personal computer changes the energy arithmetic of a single query. Cover the cooling water, the idle overhead of shared infrastructure, and the fact that the personal computer was already powered on for other reasons. Be concrete and avoid slogans.",
+    "prompt_fillers": 0,
+    "filler": "The following background material is provided for context and does not change the question being asked. Consumer accelerators share a single memory pool between the processor and the graphics engine, so the rate at which weights can be streamed sets an upper bound on how fast tokens can be produced in a single stream. ",
+    "requested_tokens_per_request": 128,
+    "batch_sizes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "reps": 10,
+    "temperature": 0,
+    "seed": 20260905,
+    "num_ctx": 4096,
+    "warmup_discarded": true,
+    "raw_mode": true,
+    "unique_nonce_per_request": true,
+    "concurrency": "ThreadPoolExecutor submits one HTTP request per concurrent user; Ollama num_batch is not used as a proxy for serving concurrency",
+    "power_scope": "one shared GPU board trace per batch window; host and idle power remain outside the trace",
+    "energy_allocation": "equal split across completed requests, reported as an allocation rather than a direct per-request measurement",
+    "incomplete_batch_policy": "a repetition with any failed request is retained and excluded from complete-batch summaries"
+  },
+  "system": {
+    "measured_at": "2026-09-15T09:12:14+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "python": "3.14.6",
+    "ollama_host": "http://127.0.0.1:11434",
+    "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+    "gpu": "AMD Radeon(TM) 8060S Graphics",
+    "ram_gb": 68.5,
+    "ollama_version": "0.33.3"
+  },
+  "power_sensor": {
+    "available": false,
+    "tool": null,
+    "reason": "no power sensor reachable from this interpreter: nvidia-smi, amd-smi and rocm-smi are all absent. On this platform the board/package rail is only readable through a kernel-mode helper (AMD uProf, LibreHardwareMonitor), which this harness deliberately does not install. Energy figures derived from these timings therefore carry a modelled P and say so."
+  },
+  "idle_power": {
+    "measured": false,
+    "reason": "no power sensor"
+  },
+  "batches": [
+    {
+      "model": "qwen3.8:27b",
+      "batch_size": 1,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "reps": 10,
+      "complete_reps": 10,
+      "requested_tokens_per_request": 128,
+      "requested_concurrent_requests": 1,
+      "median_aggregate_output_tok_s": 18.143159891710454,
+      "aggregate_output_tok_s_spread": {
+        "min": 17.629390463686594,
+        "max": 18.939672496983036,
+        "stdev": 0.3836766798762674
+      },
+      "median_request_wall_s": 7.049016,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 7.021183299948461,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.23054527018823,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.009989,
+              "eval_tokens": 128,
+              "eval_s": 6.431722,
+              "gen_tok_s": 19.90135767683989,
+              "prompt_tokens": 86,
+              "prefill_s": 0.478938,
+              "prefill_tok_s": 179.56395191026814
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 7.103413500008173,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.01950569255932,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.102165,
+              "eval_tokens": 128,
+              "eval_s": 6.512994,
+              "gen_tok_s": 19.653019793968795,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480327,
+              "prefill_tok_s": 179.04469246992153
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 3,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 6.758300599991344,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.939672496983036,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.757226,
+              "eval_tokens": 128,
+              "eval_s": 6.146649,
+              "gen_tok_s": 20.82435486392667,
+              "prompt_tokens": 86,
+              "prefill_s": 0.485284,
+              "prefill_tok_s": 177.2158158933738
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 4,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 6.892397899995558,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.571185508614136,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.891268,
+              "eval_tokens": 128,
+              "eval_s": 6.290427,
+              "gen_tok_s": 20.3483801656072,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486302,
+              "prefill_tok_s": 176.84484127147329
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 5,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 6.886323499958962,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.587567081442337,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.885101,
+              "eval_tokens": 128,
+              "eval_s": 6.288903,
+              "gen_tok_s": 20.353311221368813,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487965,
+              "prefill_tok_s": 176.24214851475003
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 6,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 7.089144799974747,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.055774513232677,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.088043,
+              "eval_tokens": 128,
+              "eval_s": 6.487566,
+              "gen_tok_s": 19.730049759802057,
+              "prompt_tokens": 86,
+              "prefill_s": 0.48971,
+              "prefill_tok_s": 175.6141389802128
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 7,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 7.11389139998937,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 17.992965144251606,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.112858,
+              "eval_tokens": 128,
+              "eval_s": 6.508657,
+              "gen_tok_s": 19.66611545208174,
+              "prompt_tokens": 86,
+              "prefill_s": 0.498059,
+              "prefill_tok_s": 172.67030612839042
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 8,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 7.260602700000163,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 17.629390463686594,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.259321,
+              "eval_tokens": 128,
+              "eval_s": 6.653486,
+              "gen_tok_s": 19.238035520026646,
+              "prompt_tokens": 86,
+              "prefill_s": 0.499974,
+              "prefill_tok_s": 172.0089444651122
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 9,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 6.945534500002395,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.429107219891552,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.944337,
+              "eval_tokens": 128,
+              "eval_s": 6.328374,
+              "gen_tok_s": 20.226364623835444,
+              "prompt_tokens": 86,
+              "prefill_s": 0.50244,
+              "prefill_tok_s": 171.1647161850171
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 10,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 7.10724250000203,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 18.009797752076622,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.106066,
+              "eval_tokens": 128,
+              "eval_s": 6.497981,
+              "gen_tok_s": 19.69842632657744,
+              "prompt_tokens": 86,
+              "prefill_s": 0.49853,
+              "prefill_tok_s": 172.50717108298397
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "qwen3.8:27b",
+      "batch_size": 2,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "reps": 10,
+      "complete_reps": 10,
+      "requested_tokens_per_request": 128,
+      "requested_concurrent_requests": 2,
+      "median_aggregate_output_tok_s": 18.660231120583603,
+      "aggregate_output_tok_s_spread": {
+        "min": 14.618078989123694,
+        "max": 19.25187514011987,
+        "stdev": 1.3347985067738657
+      },
+      "median_request_wall_s": 12.028213000000001,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.759104199998546,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.60586243688939,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.828664,
+              "eval_tokens": 128,
+              "eval_s": 6.458655,
+              "gen_tok_s": 19.818367756134982,
+              "prompt_tokens": 86,
+              "prefill_s": 0.180612,
+              "prefill_tok_s": 476.1588377294975
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.756762,
+              "eval_tokens": 128,
+              "eval_s": 6.314759,
+              "gen_tok_s": 20.269973881821937,
+              "prompt_tokens": 86,
+              "prefill_s": 0.505925,
+              "prefill_tok_s": 169.9856698127193
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.953306399984285,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.34690593480326,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 13.95199,
+              "eval_tokens": 128,
+              "eval_s": 6.508945,
+              "gen_tok_s": 19.66524528936717,
+              "prompt_tokens": 86,
+              "prefill_s": 0.177291,
+              "prefill_tok_s": 485.07820475940684
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 7.118917,
+              "eval_tokens": 128,
+              "eval_s": 6.531533,
+              "gen_tok_s": 19.59723697331086,
+              "prompt_tokens": 86,
+              "prefill_s": 0.489924,
+              "prefill_tok_s": 175.5374302953111
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 3,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.297406000026967,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 19.25187514011987,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.527165,
+              "eval_tokens": 128,
+              "eval_s": 6.162308,
+              "gen_tok_s": 20.771438233856536,
+              "prompt_tokens": 86,
+              "prefill_s": 0.18018,
+              "prefill_tok_s": 477.30047730047727
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.295404,
+              "eval_tokens": 128,
+              "eval_s": 6.171164,
+              "gen_tok_s": 20.74162994209844,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488423,
+              "prefill_tok_s": 176.0768841762161
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 4,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.531394099991303,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.918967115159592,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 13.530141,
+              "eval_tokens": 128,
+              "eval_s": 6.291485,
+              "gen_tok_s": 20.34495830475635,
+              "prompt_tokens": 86,
+              "prefill_s": 0.184946,
+              "prefill_tok_s": 465.00059476820263
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 6.912581,
+              "eval_tokens": 128,
+              "eval_s": 6.3203,
+              "gen_tok_s": 20.252203218201668,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483261,
+              "prefill_tok_s": 177.95766676806116
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 5,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.511927199957427,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.946224044250815,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.624877,
+              "eval_tokens": 128,
+              "eval_s": 6.2648,
+              "gen_tok_s": 20.431617928744732,
+              "prompt_tokens": 86,
+              "prefill_s": 0.172991,
+              "prefill_tok_s": 497.1356891398974
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.51021,
+              "eval_tokens": 128,
+              "eval_s": 6.294121,
+              "gen_tok_s": 20.33643776470138,
+              "prompt_tokens": 86,
+              "prefill_s": 0.489212,
+              "prefill_tok_s": 175.79290777822294
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 6,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 17.512561000010464,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 14.618078989123694,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 17.511406,
+              "eval_tokens": 128,
+              "eval_s": 6.434098,
+              "gen_tok_s": 19.89400845308853,
+              "prompt_tokens": 86,
+              "prefill_s": 0.172909,
+              "prefill_tok_s": 497.37144972210814
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 10.761022,
+              "eval_tokens": 128,
+              "eval_s": 10.162528,
+              "gen_tok_s": 12.595291250366051,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490096,
+              "prefill_tok_s": 175.4758251444615
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 7,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.69723199994769,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.689907566797267,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.806982,
+              "eval_tokens": 128,
+              "eval_s": 6.44517,
+              "gen_tok_s": 19.859833022247667,
+              "prompt_tokens": 86,
+              "prefill_s": 0.175076,
+              "prefill_tok_s": 491.21524366560806
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.69547,
+              "eval_tokens": 128,
+              "eval_s": 6.281607,
+              "gen_tok_s": 20.376951311981152,
+              "prompt_tokens": 86,
+              "prefill_s": 0.496062,
+              "prefill_tok_s": 173.36542609593155
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 8,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.894742599979509,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.42423478937836,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.94868,
+              "eval_tokens": 128,
+              "eval_s": 6.629449,
+              "gen_tok_s": 19.30778862617391,
+              "prompt_tokens": 86,
+              "prefill_s": 0.171513,
+              "prefill_tok_s": 501.4197174558197
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.892909,
+              "eval_tokens": 128,
+              "eval_s": 6.31457,
+              "gen_tok_s": 20.270580577933256,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490954,
+              "prefill_tok_s": 175.16916045087726
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 9,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.514210499997716,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.943022975707184,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 13.5131,
+              "eval_tokens": 128,
+              "eval_s": 6.308047,
+              "gen_tok_s": 20.291541898784203,
+              "prompt_tokens": 86,
+              "prefill_s": 0.171341,
+              "prefill_tok_s": 501.9230656993948
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 6.883277,
+              "eval_tokens": 128,
+              "eval_s": 6.295175,
+              "gen_tok_s": 20.333032838642293,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480837,
+              "prefill_tok_s": 178.85478862899484
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 10,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 13.740868400025647,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 18.63055467436994,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 13.739654,
+              "eval_tokens": 128,
+              "eval_s": 6.469179,
+              "gen_tok_s": 19.78612742049648,
+              "prompt_tokens": 86,
+              "prefill_s": 0.170813,
+              "prefill_tok_s": 503.4745598988368
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 6.95389,
+              "eval_tokens": 128,
+              "eval_s": 6.328517,
+              "gen_tok_s": 20.22590758624809,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488232,
+              "prefill_tok_s": 176.14576676661915
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "qwen3.8:27b",
+      "batch_size": 4,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "reps": 10,
+      "complete_reps": 10,
+      "requested_tokens_per_request": 128,
+      "requested_concurrent_requests": 4,
+      "median_aggregate_output_tok_s": 17.831204838731203,
+      "aggregate_output_tok_s_spread": {
+        "min": 15.387694773045933,
+        "max": 18.691075995042116,
+        "stdev": 1.2628352687051534
+      },
+      "median_request_wall_s": 19.1620425,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 31.27032040001359,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 16.373353181241388,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.786728,
+              "eval_tokens": 128,
+              "eval_s": 6.480896,
+              "gen_tok_s": 19.750355506399114,
+              "prompt_tokens": 86,
+              "prefill_s": 0.191293,
+              "prefill_tok_s": 449.5721223463483
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 24.253116,
+              "eval_tokens": 128,
+              "eval_s": 6.314282,
+              "gen_tok_s": 20.271505137084468,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483893,
+              "prefill_tok_s": 177.72524091069718
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 17.352726,
+              "eval_tokens": 128,
+              "eval_s": 9.964499,
+              "gen_tok_s": 12.84560317583453,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484777,
+              "prefill_tok_s": 177.40115558287624
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 31.267182,
+              "eval_tokens": 128,
+              "eval_s": 6.396524,
+              "gen_tok_s": 20.010868402901323,
+              "prompt_tokens": 86,
+              "prefill_s": 0.479823,
+              "prefill_tok_s": 179.2327587464544
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 27.791240699996706,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 18.423070978621716,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.081508,
+              "eval_tokens": 128,
+              "eval_s": 6.476144,
+              "gen_tok_s": 19.764847724201317,
+              "prompt_tokens": 86,
+              "prefill_s": 0.474548,
+              "prefill_tok_s": 181.22508155128668
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.989911,
+              "eval_tokens": 128,
+              "eval_s": 6.320885,
+              "gen_tok_s": 20.25032887008702,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483765,
+              "prefill_tok_s": 177.77226545946897
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 27.788845,
+              "eval_tokens": 128,
+              "eval_s": 6.302718,
+              "gen_tok_s": 20.308698564651,
+              "prompt_tokens": 86,
+              "prefill_s": 0.479032,
+              "prefill_tok_s": 179.52871624442625
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 20.861372,
+              "eval_tokens": 128,
+              "eval_s": 6.311616,
+              "gen_tok_s": 20.280067735426236,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483304,
+              "prefill_tok_s": 177.9418337112873
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 3,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 27.39275150001049,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 18.691075995042116,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 13.599386,
+              "eval_tokens": 128,
+              "eval_s": 6.189038,
+              "gen_tok_s": 20.68172791958944,
+              "prompt_tokens": 86,
+              "prefill_s": 0.478075,
+              "prefill_tok_s": 179.88809287245724
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 6.777792,
+              "eval_tokens": 128,
+              "eval_s": 6.146587,
+              "gen_tok_s": 20.82456491708325,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480594,
+              "prefill_tok_s": 178.94522195449798
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 27.390367,
+              "eval_tokens": 128,
+              "eval_s": 6.331522,
+              "gen_tok_s": 20.216308179928934,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486528,
+              "prefill_tok_s": 176.7626940278874
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 20.500015,
+              "eval_tokens": 128,
+              "eval_s": 6.312974,
+              "gen_tok_s": 20.27570523813341,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480616,
+              "prefill_tok_s": 178.9370308104599
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 4,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 27.602645400038455,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 18.54894676143203,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 13.708673,
+              "eval_tokens": 128,
+              "eval_s": 6.318837,
+              "gen_tok_s": 20.256892209753154,
+              "prompt_tokens": 86,
+              "prefill_s": 0.478355,
+              "prefill_tok_s": 179.78279729489606
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 6.772294,
+              "eval_tokens": 128,
+              "eval_s": 6.14291,
+              "gen_tok_s": 20.837030006951103,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480604,
+              "prefill_tok_s": 178.94149861424376
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 20.677903,
+              "eval_tokens": 128,
+              "eval_s": 6.334003,
+              "gen_tok_s": 20.208389544495006,
+              "prompt_tokens": 86,
+              "prefill_s": 0.478828,
+              "prefill_tok_s": 179.60520270326714
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 27.599555,
+              "eval_tokens": 128,
+              "eval_s": 6.322392,
+              "gen_tok_s": 20.245502018856154,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480558,
+              "prefill_tok_s": 178.95862726247404
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 5,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 27.744709800055716,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 18.45396847506301,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 27.74356,
+              "eval_tokens": 128,
+              "eval_s": 6.297075,
+              "gen_tok_s": 20.32689780572726,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484287,
+              "prefill_tok_s": 177.58064949090104
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.868846,
+              "eval_tokens": 128,
+              "eval_s": 6.361289,
+              "gen_tok_s": 20.121708037474793,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486752,
+              "prefill_tok_s": 176.68134902373282
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 6.881977,
+              "eval_tokens": 128,
+              "eval_s": 6.311115,
+              "gen_tok_s": 20.281677643332436,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488509,
+              "prefill_tok_s": 176.04588656503768
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 20.827661,
+              "eval_tokens": 128,
+              "eval_s": 6.317791,
+              "gen_tok_s": 20.260246025865687,
+              "prompt_tokens": 86,
+              "prefill_s": 0.482518,
+              "prefill_tok_s": 178.23169291093802
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 6,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 33.27334000001429,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 15.387694773045933,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.140752,
+              "eval_tokens": 128,
+              "eval_s": 6.524087,
+              "gen_tok_s": 19.61960347861701,
+              "prompt_tokens": 86,
+              "prefill_s": 0.482276,
+              "prefill_tok_s": 178.3211273212849
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 17.82407,
+              "eval_tokens": 128,
+              "eval_s": 10.049726,
+              "gen_tok_s": 12.736665656357198,
+              "prompt_tokens": 86,
+              "prefill_s": 0.48057,
+              "prefill_tok_s": 178.95415860332523
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 27.361943,
+              "eval_tokens": 128,
+              "eval_s": 8.978346,
+              "gen_tok_s": 14.256523417564884,
+              "prompt_tokens": 86,
+              "prefill_s": 0.485144,
+              "prefill_tok_s": 177.2669557904457
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 33.27031,
+              "eval_tokens": 128,
+              "eval_s": 5.269885,
+              "gen_tok_s": 24.288955072074625,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484525,
+              "prefill_tok_s": 177.49342139208503
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 7,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 27.723522100015543,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 18.468071919322004,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.138556,
+              "eval_tokens": 128,
+              "eval_s": 6.520081,
+              "gen_tok_s": 19.63165795026166,
+              "prompt_tokens": 86,
+              "prefill_s": 0.479663,
+              "prefill_tok_s": 179.29254497428403
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 27.721626,
+              "eval_tokens": 128,
+              "eval_s": 6.334458,
+              "gen_tok_s": 20.20693798901185,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487467,
+              "prefill_tok_s": 176.42219883602377
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 14.0534,
+              "eval_tokens": 128,
+              "eval_s": 6.328376,
+              "gen_tok_s": 20.226358231558937,
+              "prompt_tokens": 86,
+              "prefill_s": 0.499455,
+              "prefill_tok_s": 172.18768457618805
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 20.816751,
+              "eval_tokens": 128,
+              "eval_s": 6.154539,
+              "gen_tok_s": 20.797658443629977,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484555,
+              "prefill_tok_s": 177.48243233482268
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 8,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 30.7997452999698,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 16.623514091218865,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.118617,
+              "eval_tokens": 128,
+              "eval_s": 6.536141,
+              "gen_tok_s": 19.58342085949492,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483352,
+              "prefill_tok_s": 177.92416292887998
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 20.994724,
+              "eval_tokens": 128,
+              "eval_s": 6.349085,
+              "gen_tok_s": 20.16038531536434,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484888,
+              "prefill_tok_s": 177.36054511557307
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 30.797392,
+              "eval_tokens": 128,
+              "eval_s": 9.22442,
+              "gen_tok_s": 13.876211187261637,
+              "prompt_tokens": 86,
+              "prefill_s": 0.49026,
+              "prefill_tok_s": 175.4171256068209
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 14.071182,
+              "eval_tokens": 128,
+              "eval_s": 6.334988,
+              "gen_tok_s": 20.205247429040117,
+              "prompt_tokens": 86,
+              "prefill_s": 0.482656,
+              "prefill_tok_s": 178.1807332758735
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 9,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 32.25890670000808,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 15.871585629399886,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 6.921525,
+              "eval_tokens": 128,
+              "eval_s": 6.339142,
+              "gen_tok_s": 20.192007057106466,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486333,
+              "prefill_tok_s": 176.8335687687243
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 13.878814,
+              "eval_tokens": 128,
+              "eval_s": 6.344049,
+              "gen_tok_s": 20.176388927639113,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484547,
+              "prefill_tok_s": 177.4853626170423
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 22.645651,
+              "eval_tokens": 128,
+              "eval_s": 8.179616,
+              "gen_tok_s": 15.648656367242669,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480799,
+              "prefill_tok_s": 178.8689244361989
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 32.256006,
+              "eval_tokens": 128,
+              "eval_s": 9.019041,
+              "gen_tok_s": 14.192196265656182,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483592,
+              "prefill_tok_s": 177.83586163542822
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 10,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 29.699515099986456,
+          "aggregate_output_tokens": 512,
+          "aggregate_output_tok_s": 17.23933869884069,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.106387,
+              "eval_tokens": 128,
+              "eval_s": 6.519536,
+              "gen_tok_s": 19.633299056865397,
+              "prompt_tokens": 86,
+              "prefill_s": 0.48524,
+              "prefill_tok_s": 177.2318852526585
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 29.697711,
+              "eval_tokens": 128,
+              "eval_s": 6.268981,
+              "gen_tok_s": 20.417991376907985,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480537,
+              "prefill_tok_s": 178.96644795301924
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 22.835621,
+              "eval_tokens": 128,
+              "eval_s": 9.239912,
+              "gen_tok_s": 13.852945785630858,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483438,
+              "prefill_tok_s": 177.89251155267067
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 12.971279,
+              "eval_tokens": 128,
+              "eval_s": 5.300281,
+              "gen_tok_s": 24.14966300843295,
+              "prompt_tokens": 86,
+              "prefill_s": 0.482836,
+              "prefill_tok_s": 178.11430796378067
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "qwen3.8:27b",
+      "batch_size": 8,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "qwen35",
+        "parameter_size": "27.3B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "qwen35"
+        ],
+        "block_count": 65,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": 1,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "reps": 10,
+      "complete_reps": 10,
+      "requested_tokens_per_request": 128,
+      "requested_concurrent_requests": 8,
+      "median_aggregate_output_tok_s": 17.015192880903832,
+      "aggregate_output_tok_s_spread": {
+        "min": 14.204069500311027,
+        "max": 18.453923079774757,
+        "stdev": 1.4205408859220814
+      },
+      "median_request_wall_s": 35.3366555,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 60.73048560001189,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 16.861383370855172,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 60.728975,
+              "eval_tokens": 128,
+              "eval_s": 6.530057,
+              "gen_tok_s": 19.601666570444944,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486473,
+              "prefill_tok_s": 176.7826785864786
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 46.348657,
+              "eval_tokens": 128,
+              "eval_s": 6.514767,
+              "gen_tok_s": 19.6476712060462,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488538,
+              "prefill_tok_s": 176.03543634272054
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 10.910905,
+              "eval_tokens": 128,
+              "eval_s": 10.321525,
+              "gen_tok_s": 12.401268223445664,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483935,
+              "prefill_tok_s": 177.70981640096295
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 25.370014,
+              "eval_tokens": 128,
+              "eval_s": 6.584793,
+              "gen_tok_s": 19.438727990386333,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486559,
+              "prefill_tok_s": 176.75143199488653
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 32.307941,
+              "eval_tokens": 128,
+              "eval_s": 6.339001,
+              "gen_tok_s": 20.192456193018426,
+              "prompt_tokens": 86,
+              "prefill_s": 0.485083,
+              "prefill_tok_s": 177.28924740714476
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 53.619528,
+              "eval_tokens": 128,
+              "eval_s": 6.683316,
+              "gen_tok_s": 19.152169372209844,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487412,
+              "prefill_tok_s": 176.44210647255298
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 39.236456,
+              "eval_tokens": 128,
+              "eval_s": 6.334287,
+              "gen_tok_s": 20.207483494195955,
+              "prompt_tokens": 86,
+              "prefill_s": 0.491338,
+              "prefill_tok_s": 175.03225885235827
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 18.169232,
+              "eval_tokens": 128,
+              "eval_s": 6.677145,
+              "gen_tok_s": 19.169869757209106,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490581,
+              "prefill_tok_s": 175.30234558615194
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 56.821458199992776,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 18.02136081048568,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 14.47524,
+              "eval_tokens": 128,
+              "eval_s": 6.708758,
+              "gen_tok_s": 19.07953752393513,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490965,
+              "prefill_tok_s": 175.1652358111067
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 7.172067,
+              "eval_tokens": 128,
+              "eval_s": 6.521213,
+              "gen_tok_s": 19.628250143033206,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488559,
+              "prefill_tok_s": 176.0278697148144
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 21.613508,
+              "eval_tokens": 128,
+              "eval_s": 6.535422,
+              "gen_tok_s": 19.585575346167396,
+              "prompt_tokens": 86,
+              "prefill_s": 0.50807,
+              "prefill_tok_s": 169.2680142500049
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 28.715465,
+              "eval_tokens": 128,
+              "eval_s": 6.510218,
+              "gen_tok_s": 19.661399971552413,
+              "prompt_tokens": 86,
+              "prefill_s": 0.494133,
+              "prefill_tok_s": 174.042211307482
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 35.810982,
+              "eval_tokens": 128,
+              "eval_s": 6.501809,
+              "gen_tok_s": 19.68682869644433,
+              "prompt_tokens": 86,
+              "prefill_s": 0.497142,
+              "prefill_tok_s": 172.98880400368506
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 49.710442,
+              "eval_tokens": 128,
+              "eval_s": 6.34516,
+              "gen_tok_s": 20.172856161231554,
+              "prompt_tokens": 86,
+              "prefill_s": 0.477732,
+              "prefill_tok_s": 180.01724816424272
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 42.743868,
+              "eval_tokens": 128,
+              "eval_s": 6.332692,
+              "gen_tok_s": 20.21257310477124,
+              "prompt_tokens": 86,
+              "prefill_s": 0.499407,
+              "prefill_tok_s": 172.20423422178703
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 56.815769,
+              "eval_tokens": 128,
+              "eval_s": 6.51856,
+              "gen_tok_s": 19.63623867848114,
+              "prompt_tokens": 86,
+              "prefill_s": 0.491504,
+              "prefill_tok_s": 174.97314365702007
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 3,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 56.784916900040116,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 18.032957621520733,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.099299,
+              "eval_tokens": 128,
+              "eval_s": 6.498845,
+              "gen_tok_s": 19.695807485791704,
+              "prompt_tokens": 86,
+              "prefill_s": 0.495375,
+              "prefill_tok_s": 173.6058541508958
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 14.064986,
+              "eval_tokens": 128,
+              "eval_s": 6.373904,
+              "gen_tok_s": 20.081883881526927,
+              "prompt_tokens": 86,
+              "prefill_s": 0.49653,
+              "prefill_tok_s": 173.2020220329084
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 28.132149,
+              "eval_tokens": 128,
+              "eval_s": 6.50887,
+              "gen_tok_s": 19.66547188682521,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486128,
+              "prefill_tok_s": 176.90813942007043
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 21.022708,
+              "eval_tokens": 128,
+              "eval_s": 6.356568,
+              "gen_tok_s": 20.136652357058086,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487462,
+              "prefill_tok_s": 176.42400843552934
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 35.805539,
+              "eval_tokens": 128,
+              "eval_s": 7.054055,
+              "gen_tok_s": 18.145591436414943,
+              "prompt_tokens": 86,
+              "prefill_s": 0.495391,
+              "prefill_tok_s": 173.60024707756094
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 49.639565,
+              "eval_tokens": 128,
+              "eval_s": 6.325072,
+              "gen_tok_s": 20.23692378521541,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490076,
+              "prefill_tok_s": 175.48298631232706
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 42.729991,
+              "eval_tokens": 128,
+              "eval_s": 6.330719,
+              "gen_tok_s": 20.218872453508045,
+              "prompt_tokens": 86,
+              "prefill_s": 0.498093,
+              "prefill_tok_s": 172.6585195937305
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 56.778977,
+              "eval_tokens": 128,
+              "eval_s": 6.535234,
+              "gen_tok_s": 19.586138767181097,
+              "prompt_tokens": 86,
+              "prefill_s": 0.479997,
+              "prefill_tok_s": 179.16778646533209
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 4,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 59.64237040001899,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 17.16900239095249,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 14.180426,
+              "eval_tokens": 128,
+              "eval_s": 6.482901,
+              "gen_tok_s": 19.74424721278329,
+              "prompt_tokens": 86,
+              "prefill_s": 0.481621,
+              "prefill_tok_s": 178.56364236609284
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 21.091185,
+              "eval_tokens": 128,
+              "eval_s": 6.325921,
+              "gen_tok_s": 20.23420779361614,
+              "prompt_tokens": 86,
+              "prefill_s": 0.4861,
+              "prefill_tok_s": 176.91832956181855
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 7.092389,
+              "eval_tokens": 128,
+              "eval_s": 6.493378,
+              "gen_tok_s": 19.71239006877468,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484147,
+              "prefill_tok_s": 177.63200019828687
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 35.324779,
+              "eval_tokens": 128,
+              "eval_s": 6.524227,
+              "gen_tok_s": 19.6191824717319,
+              "prompt_tokens": 86,
+              "prefill_s": 0.516464,
+              "prefill_tok_s": 166.51693051209764
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 28.171549,
+              "eval_tokens": 128,
+              "eval_s": 6.502967,
+              "gen_tok_s": 19.683323012403417,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487446,
+              "prefill_tok_s": 176.4297994034211
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 45.417422,
+              "eval_tokens": 128,
+              "eval_s": 9.496455,
+              "gen_tok_s": 13.478713899028639,
+              "prompt_tokens": 86,
+              "prefill_s": 0.49014,
+              "prefill_tok_s": 175.46007263230914
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 59.637036,
+              "eval_tokens": 128,
+              "eval_s": 6.498995,
+              "gen_tok_s": 19.69535289687098,
+              "prompt_tokens": 86,
+              "prefill_s": 0.495041,
+              "prefill_tok_s": 173.72298456087475
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 52.538504,
+              "eval_tokens": 128,
+              "eval_s": 6.522183,
+              "gen_tok_s": 19.625330966641076,
+              "prompt_tokens": 86,
+              "prefill_s": 0.492447,
+              "prefill_tok_s": 174.63808287998503
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 5,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 62.578294200007804,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 16.363501324072082,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 14.199846,
+              "eval_tokens": 128,
+              "eval_s": 6.503074,
+              "gen_tok_s": 19.682999147787648,
+              "prompt_tokens": 86,
+              "prefill_s": 0.492088,
+              "prefill_tok_s": 174.76548909951066
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 7.10927,
+              "eval_tokens": 128,
+              "eval_s": 6.51561,
+              "gen_tok_s": 19.64512915905034,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480416,
+              "prefill_tok_s": 179.01152334643308
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 62.575569,
+              "eval_tokens": 128,
+              "eval_s": 6.483339,
+              "gen_tok_s": 19.742913335242843,
+              "prompt_tokens": 86,
+              "prefill_s": 0.500083,
+              "prefill_tok_s": 171.97145273884533
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 28.405677,
+              "eval_tokens": 128,
+              "eval_s": 6.495099,
+              "gen_tok_s": 19.70716689614739,
+              "prompt_tokens": 86,
+              "prefill_s": 0.489433,
+              "prefill_tok_s": 175.71352973747173
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 38.165469,
+              "eval_tokens": 128,
+              "eval_s": 9.173494,
+              "gen_tok_s": 13.953243987514464,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490487,
+              "prefill_tok_s": 175.33594162536417
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 48.381175,
+              "eval_tokens": 128,
+              "eval_s": 9.624219,
+              "gen_tok_s": 13.299780480888892,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487323,
+              "prefill_tok_s": 176.4743301670555
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 21.321235,
+              "eval_tokens": 128,
+              "eval_s": 6.496688,
+              "gen_tok_s": 19.702346795782713,
+              "prompt_tokens": 86,
+              "prefill_s": 0.478707,
+              "prefill_tok_s": 179.65060047168728
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 55.490115,
+              "eval_tokens": 128,
+              "eval_s": 6.491177,
+              "gen_tok_s": 19.719074060066454,
+              "prompt_tokens": 86,
+              "prefill_s": 0.520809999,
+              "prefill_tok_s": 165.1273980244761
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 6,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 68.30064999999013,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 14.992536674250509,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 28.342272,
+              "eval_tokens": 128,
+              "eval_s": 6.767527,
+              "gen_tok_s": 18.91385139652934,
+              "prompt_tokens": 86,
+              "prefill_s": 0.515504,
+              "prefill_tok_s": 166.82702753033925
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 11.123948,
+              "eval_tokens": 128,
+              "eval_s": 10.498999,
+              "gen_tok_s": 12.19163846000938,
+              "prompt_tokens": 86,
+              "prefill_s": 0.48608,
+              "prefill_tok_s": 176.92560895325872
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 20.965149,
+              "eval_tokens": 128,
+              "eval_s": 9.26247,
+              "gen_tok_s": 13.81920805141609,
+              "prompt_tokens": 86,
+              "prefill_s": 0.482767,
+              "prefill_tok_s": 178.13976514550498
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 34.329778,
+              "eval_tokens": 128,
+              "eval_s": 5.397686,
+              "gen_tok_s": 23.713865534230777,
+              "prompt_tokens": 86,
+              "prefill_s": 0.491466,
+              "prefill_tok_s": 174.98667252668545
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 40.3281,
+              "eval_tokens": 128,
+              "eval_s": 5.407018,
+              "gen_tok_s": 23.67293765251013,
+              "prompt_tokens": 86,
+              "prefill_s": 0.48667,
+              "prefill_tok_s": 176.71111841699715
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 62.334081,
+              "eval_tokens": 128,
+              "eval_s": 10.299728,
+              "gen_tok_s": 12.427512648877718,
+              "prompt_tokens": 86,
+              "prefill_s": 0.481977,
+              "prefill_tok_s": 178.43175089267746
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 51.428349,
+              "eval_tokens": 128,
+              "eval_s": 10.490006,
+              "gen_tok_s": 12.202090256192418,
+              "prompt_tokens": 86,
+              "prefill_s": 0.501324,
+              "prefill_tok_s": 171.54574686230862
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 68.29463,
+              "eval_tokens": 128,
+              "eval_s": 5.381279,
+              "gen_tok_s": 23.786166820192744,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483533,
+              "prefill_tok_s": 177.85756091104435
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 7,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 55.48955609998666,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 18.453923079774757,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.281379,
+              "eval_tokens": 128,
+              "eval_s": 6.689517,
+              "gen_tok_s": 19.13441583301156,
+              "prompt_tokens": 86,
+              "prefill_s": 0.481875,
+              "prefill_tok_s": 178.46952010376134
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 42.42765,
+              "eval_tokens": 128,
+              "eval_s": 6.476,
+              "gen_tok_s": 19.765287214329835,
+              "prompt_tokens": 86,
+              "prefill_s": 0.506142,
+              "prefill_tok_s": 169.91279127201457
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 49.519445,
+              "eval_tokens": 128,
+              "eval_s": 6.501597,
+              "gen_tok_s": 19.687470632215437,
+              "prompt_tokens": 86,
+              "prefill_s": 0.490559,
+              "prefill_tok_s": 175.31020733489754
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 21.124343,
+              "eval_tokens": 128,
+              "eval_s": 6.317529,
+              "gen_tok_s": 20.261086256984335,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488599,
+              "prefill_tok_s": 176.01345888960068
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 28.254533,
+              "eval_tokens": 128,
+              "eval_s": 6.523512,
+              "gen_tok_s": 19.621332803557348,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480696,
+              "prefill_tok_s": 178.90725115249555
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 55.484964,
+              "eval_tokens": 128,
+              "eval_s": 5.382831,
+              "gen_tok_s": 23.77930869462556,
+              "prompt_tokens": 86,
+              "prefill_s": 0.484475,
+              "prefill_tok_s": 177.51173951184273
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 14.209929,
+              "eval_tokens": 128,
+              "eval_s": 6.339746,
+              "gen_tok_s": 20.190083325104823,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483181,
+              "prefill_tok_s": 177.9871311164967
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 35.348532,
+              "eval_tokens": 128,
+              "eval_s": 6.507291,
+              "gen_tok_s": 19.670243731223945,
+              "prompt_tokens": 86,
+              "prefill_s": 0.493796,
+              "prefill_tok_s": 174.16098955844114
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 8,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 65.73623039998347,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 15.57740676289612,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 14.391032,
+              "eval_tokens": 128,
+              "eval_s": 6.68291,
+              "gen_tok_s": 19.153332904378484,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488428,
+              "prefill_tok_s": 176.07508169064837
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 7.116235,
+              "eval_tokens": 128,
+              "eval_s": 6.510677,
+              "gen_tok_s": 19.66001385109413,
+              "prompt_tokens": 86,
+              "prefill_s": 0.489618,
+              "prefill_tok_s": 175.64713715590523
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 24.496293,
+              "eval_tokens": 128,
+              "eval_s": 9.513292,
+              "gen_tok_s": 13.454858738699496,
+              "prompt_tokens": 86,
+              "prefill_s": 0.483283,
+              "prefill_tok_s": 177.94956578236767
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 31.575904,
+              "eval_tokens": 128,
+              "eval_s": 6.492453,
+              "gen_tok_s": 19.715198554383065,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487803,
+              "prefill_tok_s": 176.3006787576132
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 41.718426,
+              "eval_tokens": 128,
+              "eval_s": 9.508743,
+              "gen_tok_s": 13.461295567668618,
+              "prompt_tokens": 86,
+              "prefill_s": 0.481935,
+              "prefill_tok_s": 178.44730098457262
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 65.731568,
+              "eval_tokens": 128,
+              "eval_s": 10.496946,
+              "gen_tok_s": 12.194022909139479,
+              "prompt_tokens": 86,
+              "prefill_s": 0.503393,
+              "prefill_tok_s": 170.84067517824047
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 47.709037,
+              "eval_tokens": 128,
+              "eval_s": 5.401063,
+              "gen_tok_s": 23.699038504087067,
+              "prompt_tokens": 86,
+              "prefill_s": 0.49612,
+              "prefill_tok_s": 173.34515842941224
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 54.631221,
+              "eval_tokens": 128,
+              "eval_s": 6.337506,
+              "gen_tok_s": 20.197219537149156,
+              "prompt_tokens": 86,
+              "prefill_s": 0.487485,
+              "prefill_tok_s": 176.41568458516673
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 9,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 72.09201560000656,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 14.204069500311027,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 72.090548,
+              "eval_tokens": 128,
+              "eval_s": 6.469663,
+              "gen_tok_s": 19.784647206508286,
+              "prompt_tokens": 86,
+              "prefill_s": 0.493676,
+              "prefill_tok_s": 174.2033236373654
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 17.055172,
+              "eval_tokens": 128,
+              "eval_s": 6.506766,
+              "gen_tok_s": 19.6718308296318,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486576,
+              "prefill_tok_s": 176.74525665055407
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 65.02364,
+              "eval_tokens": 128,
+              "eval_s": 8.059424,
+              "gen_tok_s": 15.882028293833406,
+              "prompt_tokens": 86,
+              "prefill_s": 0.485153,
+              "prefill_tok_s": 177.26366733793256
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 46.557246,
+              "eval_tokens": 128,
+              "eval_s": 9.262309,
+              "gen_tok_s": 13.81944826068748,
+              "prompt_tokens": 86,
+              "prefill_s": 0.49101,
+              "prefill_tok_s": 175.14918229771288
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 9.967333,
+              "eval_tokens": 128,
+              "eval_s": 9.383227,
+              "gen_tok_s": 13.641362401229342,
+              "prompt_tokens": 86,
+              "prefill_s": 0.48254,
+              "prefill_tok_s": 178.22356695817962
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 27.145038,
+              "eval_tokens": 128,
+              "eval_s": 9.503924,
+              "gen_tok_s": 13.4681211676356,
+              "prompt_tokens": 86,
+              "prefill_s": 0.474889,
+              "prefill_tok_s": 181.09495060951085
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 36.710104,
+              "eval_tokens": 128,
+              "eval_s": 8.985799,
+              "gen_tok_s": 14.244698774143512,
+              "prompt_tokens": 86,
+              "prefill_s": 0.481351,
+              "prefill_tok_s": 178.6638025058637
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 56.381738,
+              "eval_tokens": 128,
+              "eval_s": 9.234093,
+              "gen_tok_s": 13.86167542388841,
+              "prompt_tokens": 86,
+              "prefill_s": 0.491818,
+              "prefill_tok_s": 174.86143248112108
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 10,
+          "batch_size_requested": 8,
+          "completed_requests": 8,
+          "complete": true,
+          "batch_wall_s": 58.190391700016335,
+          "aggregate_output_tokens": 1024,
+          "aggregate_output_tok_s": 17.59740689285844,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 7.283373,
+              "eval_tokens": 128,
+              "eval_s": 6.676221,
+              "gen_tok_s": 19.172522898807575,
+              "prompt_tokens": 86,
+              "prefill_s": 0.480674,
+              "prefill_tok_s": 178.91543957027008
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 24.09298,
+              "eval_tokens": 128,
+              "eval_s": 6.310414,
+              "gen_tok_s": 20.2839306581153,
+              "prompt_tokens": 86,
+              "prefill_s": 0.485111,
+              "prefill_tok_s": 177.27901449359013
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 17.197411,
+              "eval_tokens": 128,
+              "eval_s": 9.337827,
+              "gen_tok_s": 13.707685953059528,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488235,
+              "prefill_tok_s": 176.1446844245087
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 30.103544,
+              "eval_tokens": 128,
+              "eval_s": 5.416222,
+              "gen_tok_s": 23.63270929441223,
+              "prompt_tokens": 86,
+              "prefill_s": 0.498566,
+              "prefill_tok_s": 172.49471484216733
+            },
+            {
+              "request": 4,
+              "ok": true,
+              "wall_s": 40.214178,
+              "eval_tokens": 128,
+              "eval_s": 9.511815,
+              "gen_tok_s": 13.456948016756002,
+              "prompt_tokens": 86,
+              "prefill_s": 0.491144,
+              "prefill_tok_s": 175.1013959246168
+            },
+            {
+              "request": 5,
+              "ok": true,
+              "wall_s": 52.193024,
+              "eval_tokens": 128,
+              "eval_s": 5.394029,
+              "gen_tok_s": 23.729942868308644,
+              "prompt_tokens": 86,
+              "prefill_s": 0.491225,
+              "prefill_tok_s": 175.0725227746959
+            },
+            {
+              "request": 6,
+              "ok": true,
+              "wall_s": 46.208722,
+              "eval_tokens": 128,
+              "eval_s": 5.390378,
+              "gen_tok_s": 23.746015585548918,
+              "prompt_tokens": 86,
+              "prefill_s": 0.486318,
+              "prefill_tok_s": 176.8390230260858
+            },
+            {
+              "request": 7,
+              "ok": true,
+              "wall_s": 58.184082,
+              "eval_tokens": 128,
+              "eval_s": 5.402294,
+              "gen_tok_s": 23.693638295139063,
+              "prompt_tokens": 86,
+              "prefill_s": 0.488299,
+              "prefill_tok_s": 176.12159762768303
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    }
+  ]
+}

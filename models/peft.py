@@ -31,7 +31,7 @@ Honesty rules, same as models.py:
     not transfer automatically to another task. They are used to bound
     sensitivity, never to claim a specific product improvement. AutoYou's own
     measured evidence lives in evidence.py and is kept strictly separate.
-  * The memory model is validated against one published run and is reported
+  * The memory model is validated against one publicly documented run and is reported
     with its residual, not presented as exact.
   * Training energy is charged against inference savings in adaptation.py. We
     never present an adapter as free.
@@ -448,7 +448,7 @@ def training_memory(model: V.ModelSpec, r: int, *, method_key: str = "lora",
                     targets: Sequence[str] = DEFAULT_TARGETS) -> MemoryBreakdown:
     """Peak accelerator memory for one PEFT training job.
 
-    Calibrated against the published Qwen3.5-27B run on Strix Halo: bf16
+    Calibrated against the publicly documented Qwen3.5-27B run on Strix Halo: bf16
     weights, r=128, alpha=256, seq 8192, batch 1, paged_adamw_8bit, ~80 GB peak
     reserved. See ``validate_memory_model()``.
     """
@@ -494,7 +494,7 @@ def fits(model: V.ModelSpec, device: V.Device, r: int, **kw) -> Tuple[bool, floa
 
 
 def validate_memory_model() -> Dict[str, float]:
-    """Reproduce the one published 27B run and report the residual.
+    """Reproduce the one publicly documented 27B run and report the residual.
 
     The recipe reports ~80 GB peak reserved for a bf16 LoRA run on Qwen3.5-27B
     at r=128, seq 8192, batch 1, paged 8-bit AdamW, on a 128 GB Strix Halo.
@@ -518,7 +518,7 @@ def validate_memory_model() -> Dict[str, float]:
 # --------------------------------------------------------------------------- #
 
 # Achieved bf16 training throughput, FLOP/s. The APU figure is derived from the
-# published run (see calibrate_throughput); the discrete-GPU figure is a
+# publicly documented run (see calibrate_throughput); the discrete-GPU figure is a
 # modelling assumption at ~35% MFU on a 165 TFLOP/s bf16 part.
 ACHIEVED_TRAIN_FLOPS = {
     "unified_apu": 8.05e12,
@@ -594,7 +594,7 @@ def training_cost(model: V.ModelSpec, device: V.Device, tokens: float, *,
 
 
 def calibrate_throughput() -> Dict[str, float]:
-    """Recover the APU's achieved FLOP/s from the published run, and check it.
+    """Recover the APU's achieved FLOP/s from the documented run, and check it.
 
     Published: 448 steps at ~11 min/step, batch 1 x grad_accum 4 x seq 8192.
     """

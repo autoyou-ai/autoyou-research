@@ -25,9 +25,10 @@ What the evidence is FOR
 The literature gives us bounded ranges for what PEFT does to capability. It
 does not tell us what happens when a small multimodal model is narrowed onto
 one product's own surface area by one person on one machine. AutoYou has run
-that experiment five times and kept the scores, which makes it a genuine - if
-single-deployment - data point on three questions the literature answers only
-in general terms:
+that experiment five times and kept aggregate scores. They are useful
+deployment reports, but the public release does not contain enough checkpoint
+lineage or task-level output to make them independently auditable data points
+on the three questions below:
 
   E1. Does a rank-32 LoRA move a task class the base model is bad at?
   E2. Does narrowing a model damage its safety behaviour (the Qi et al.
@@ -37,7 +38,8 @@ in general terms:
 
 Scope limit, stated once and repeated in the paper: n=1 deployment, one probe
 set of 12-14 screens and 8 code probes, scored by an automated judge. These are
-existence proofs and refutations, not effect-size estimates.
+deployment-reported observations, not independently reproducible existence
+proofs or effect-size estimates.
 """
 
 from dataclasses import dataclass, field
@@ -141,9 +143,10 @@ def load_dataset_stats() -> Dict[str, object]:
 def e1_capability_lift(runs: Optional[List[Run]] = None) -> Dict[str, object]:
     """E1 - does a rank-32 adapter move a class the base model fails?
 
-    Compares the first run against the best run on the SAME base model, so the
-    comparison isolates data and recipe rather than confounding them with model
-    size. v1 and v3 are both Qwen2.5-VL-3B.
+    Compares the first run against the best run whose report carries the same
+    base-model label. The public release cannot independently verify that label
+    against checkpoint manifests, so this is a deployment report rather than a
+    verified isolation of data and recipe from model size.
     """
     runs = load_runs() if runs is None else runs
     by = {r.label: r for r in runs}
@@ -166,13 +169,15 @@ def e1_capability_lift(runs: Optional[List[Run]] = None) -> Dict[str, object]:
         "relative_gain_x": round(b / a, 2) if a > 0 else None,
         "probes": {"before": first.get("screen_probes"),
                    "after": best.get("screen_probes")},
-        "verdict": "VALIDATED" if b - a > 0.20 else "NOT VALIDATED",
+        "verdict": ("REPORTED ONLY (positive direction)"
+                    if b - a > 0.20 else "REPORTED ONLY"),
         "finding": (
-            "On an identical 3B multimodal base, a rank-32 LoRA over a "
-            "1,750-sample task corpus moved screen identification from "
-            f"{a:.1%} to {b:.1%}. The base model was not merely imprecise on "
-            "this class, it was wrong more often than right; after adaptation "
-            "it is right nine times in ten. Parameter count did not change."
+            "The deployment aggregate report labels a rank-32 LoRA over a "
+            "1,750-sample task corpus as moving screen identification from "
+            f"{a:.1%} to {b:.1%}. The public release does not expose the "
+            "checkpoint, task-level outputs, grader, or train/eval manifest, "
+            "so this is not a claim about a verified identical base or a "
+            "population effect."
         ),
     }
 
@@ -211,8 +216,8 @@ def e2_safety_direction(runs: Optional[List[Run]] = None) -> Dict[str, object]:
         "corpus_size": total,
         "refusal_share_of_corpus": (round(refusal_samples / total, 4)
                                     if total else None),
-        "verdict": ("VALIDATED (direction reversed)"
-                    if r1 > r0 and l1 < l0 else "NOT VALIDATED"),
+        "verdict": ("REPORTED ONLY (direction reversed)"
+                    if r1 > r0 and l1 < l0 else "REPORTED ONLY"),
         "finding": (
             f"Refusal on out-of-scope code questions went {r0:.0%} -> {r1:.0%} "
             f"and source-code leakage went {l0:.0%} -> {l1:.0%} across the same "
@@ -232,10 +237,10 @@ def e2_safety_direction(runs: Optional[List[Run]] = None) -> Dict[str, object]:
 def e3_base_size_vs_data(runs: Optional[List[Run]] = None) -> Dict[str, object]:
     """E3 - was the fix a bigger base model, or better data?
 
-    v3 (3B) and v5 (7B) are the best runs on each base. If doubling the base
-    model does not beat the well-fed small one, then the binding constraint on
-    a narrow local assistant is corpus quality, not parameters - which is the
-    single most consequential claim for a product that must run on a laptop.
+    v3 and v5-7b are the best runs carrying the respective report labels. The
+    public release cannot independently verify those labels against checkpoint
+    manifests, so this function must not turn the comparison into a claim that
+    data, rather than parameters, is the binding constraint.
     """
     runs = load_runs() if runs is None else runs
     by = {r.label: r for r in runs}
@@ -253,17 +258,15 @@ def e3_base_size_vs_data(runs: Optional[List[Run]] = None) -> Dict[str, object]:
         "small": {"base_model": small.base_model, "screen_accuracy": s},
         "large": {"base_model": large.base_model, "screen_accuracy": l},
         "delta_pp": round(delta, 1),
-        "verdict": ("VALIDATED (data-bound, not parameter-bound)"
-                    if delta <= 2.0 else "REFUTED (parameters helped)"),
+        "verdict": ("REPORTED ONLY (small reported difference)"
+                    if delta <= 2.0 else "REPORTED ONLY (parameters may help)"),
         "finding": (
-            f"The adapted 3B scores {s:.1%} and the adapted 7B scores {l:.1%} "
-            f"on the same probe family - a difference of {delta:+.1f} points "
-            "in favour of the SMALLER model. Roughly doubling the base bought "
-            "nothing on this task. The 7B is shipped for licensing reasons "
-            "(Qwen2.5 releases are Apache-2.0 except the 3B and 72B), not for "
-            "capability. Within a narrow, well-specified domain the corpus is "
-            "the binding constraint, which is exactly the regime a local "
-            "assistant operates in."
+            f"The deployment report labels adapted small and large runs at "
+            f"{s:.1%} and {l:.1%} on the same probe family, a reported "
+            f"difference of {delta:+.1f} points. Checkpoint lineage, model "
+            "size, and task-level outputs are not public, so the result cannot "
+            "establish that data rather than parameters was the binding "
+            "constraint."
         ),
     }
 

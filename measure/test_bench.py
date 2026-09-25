@@ -1,6 +1,8 @@
 """Offline checks, from the research repo: python -m unittest measure.test_bench."""
 import unittest
+from unittest.mock import patch
 
+import measure.bench as bench
 from measure.bench import PowerLog, client_url
 
 
@@ -29,6 +31,18 @@ class BenchmarkChecks(unittest.TestCase):
         self.assertEqual(result["trace_s_w"][0], [-1.0, 0.0])
         log.samples = [(2.0, 20.0), (4.0, 40.0)]
         self.assertFalse(log.result()["measured"])
+
+    def test_model_info_keeps_inventory_digest(self):
+        bench._MODEL_DIGESTS["synthetic-model"] = "sha256:synthetic-model-digest"
+        try:
+            with patch.object(bench, "_post", return_value={
+                "details": {"family": "synthetic"},
+                "model_info": {},
+            }):
+                info = bench.model_info("synthetic-model")
+        finally:
+            bench._MODEL_DIGESTS.pop("synthetic-model", None)
+        self.assertEqual(info["digest"], "sha256:synthetic-model-digest")
 
 
 if __name__ == "__main__":

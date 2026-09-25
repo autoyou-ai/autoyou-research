@@ -14,8 +14,9 @@ This report is an AI-assisted technical review and code-path-independent arithme
 
 The original manuscript was 14 pages. Its PDF and LaTeX source are preserved in
 [the archive](../paper/archive/README.md). The earlier bibliography and generated
-empirical macros remain in `paper/references.bib` and `paper/empirical.tex`.
-The revised manuscript is [paper/main.pdf](../paper/main.pdf).
+empirical macros are in Git commit `fa15395`; `paper/references.bib` and
+`paper/empirical.tex` now carry the footprint study's later v0.3.0 versions.
+The revised manuscript is [paper/right-sized-edge.pdf](../paper/right-sized-edge.pdf).
 
 Original PDF SHA-256:
 

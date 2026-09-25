@@ -393,12 +393,13 @@ def delivered_quality(ratios: Dict[str, float], alpha: float,
 def quality_uplift(base_ratios: Dict[str, float],
                    alpha: Optional[float] = None,
                    uplift: D.Param = UPLIFT_POINTS) -> Dict[str, object]:
-    """Base vs adapted delivered quality at a fixed acceptance threshold.
+    """Modelled base vs adapted quality at a fixed acceptance threshold.
 
-    This is the adaptation track's headline comparison. At the paper's default
-    alpha the coverage f_s is unchanged - every adaptable class already cleared
-    the bar - so the entire benefit shows up here, as answers that are better
-    rather than answers that are more numerous.
+    This is an exploratory scenario, not an empirical effect estimate. At the
+    paper's default alpha the coverage f_s is unchanged under the declared
+    ratios - every adaptable class already cleared the bar - so the scenario's
+    entire benefit shows up here as answers that are better rather than answers
+    that are more numerous.
     """
     alpha = D.ALPHA_SUFFICIENCY.value if alpha is None else alpha
     adapted = {

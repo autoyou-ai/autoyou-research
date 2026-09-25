@@ -53,11 +53,11 @@ PROTOCOL
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import math
 import os
 import platform
-import statistics
 import subprocess
 import sys
 import time
@@ -66,6 +66,17 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
+
+# When this file is run as ``python measure/bench.py``, Python puts the
+# measure directory first on sys.path.  The repository also contains a
+# measure/statistics.py analysis module, so a plain ``import statistics``
+# would otherwise load that file instead of the standard-library module.
+# Package imports (``python -m measure.bench``) do not need this adjustment.
+if not __package__ and sys.path:
+    measure_dir = os.path.dirname(os.path.abspath(__file__))
+    if os.path.abspath(sys.path[0]) == measure_dir:
+        sys.path.pop(0)
+import statistics
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
@@ -101,6 +112,7 @@ PROMPT = (
 
 DEFAULT_TOKENS = 192
 DEFAULT_REPS = 5
+DEFAULT_BATCH_SIZES = (1, 2, 4, 8)
 
 # Monotonic across the whole run so no two requests share a prefix.
 _NONCE = 1000
@@ -109,6 +121,11 @@ _NONCE = 1000
 # --------------------------------------------------------------------------- #
 #  Ollama
 # --------------------------------------------------------------------------- #
+
+# Filled once from /api/tags in main(). Keeping the digest from the same
+# server inventory that selected the model makes a future cross-device record
+# auditable without editing the raw result after collection.
+_MODEL_DIGESTS: Dict[str, Optional[str]] = {}
 
 def _post(path: str, payload: dict, timeout: float = 1800.0) -> dict:
     req = urllib.request.Request(
@@ -160,6 +177,7 @@ def model_info(model: str) -> Dict[str, object]:
     n_used = pick("expert_used_count")
     return {
         "available": True,
+        "digest": _MODEL_DIGESTS.get(model) or d.get("digest"),
         "architecture": arch,
         "parameter_size": details.get("parameter_size"),
         "quantization": details.get("quantization_level"),
@@ -927,6 +945,202 @@ def measure_ladder(models: List[str], reps: int, tokens: int,
     return rows
 
 
+# --------------------------------------------------------------------------- #
+#  Concurrent request batches - the missing serving regime
+# --------------------------------------------------------------------------- #
+
+def _timed_batch_request(model: str, tokens: int, nonce: int,
+                         prompt_fillers: int, request: int) -> Dict[str, object]:
+    """Run one request from a concurrent batch and retain server timings.
+
+    Ollama's num_batch option controls prompt evaluation inside one request;
+    it is not request-level serving concurrency. This helper submits genuinely
+    independent HTTP requests so batch_size means concurrent users. Each
+    request has a unique nonce to prevent prefix-cache reuse.
+    """
+    started = time.perf_counter()
+    try:
+        response = generate(model, tokens, nonce=nonce,
+                            prompt_fillers=prompt_fillers)
+    except Exception as exc:
+        return {
+            "request": request,
+            "ok": False,
+            "wall_s": round(time.perf_counter() - started, 6),
+            "error": f"{type(exc).__name__}: {str(exc)[:200]}",
+        }
+
+    wall_s = time.perf_counter() - started
+    eval_tokens = response.get("eval_count") or 0
+    eval_ns = response.get("eval_duration") or 0
+    prompt_tokens = response.get("prompt_eval_count") or 0
+    prompt_ns = response.get("prompt_eval_duration") or 0
+    if eval_tokens <= 0 or eval_ns <= 0:
+        return {
+            "request": request,
+            "ok": False,
+            "wall_s": round(wall_s, 6),
+            "error": "response has no usable generation timing",
+            "eval_tokens": eval_tokens,
+            "eval_duration_ns": eval_ns,
+        }
+    return {
+        "request": request,
+        "ok": True,
+        "wall_s": round(wall_s, 6),
+        "eval_tokens": eval_tokens,
+        "eval_s": eval_ns / 1e9,
+        "gen_tok_s": eval_tokens / (eval_ns / 1e9),
+        "prompt_tokens": prompt_tokens,
+        "prefill_s": prompt_ns / 1e9 if prompt_ns else None,
+        "prefill_tok_s": (prompt_tokens / (prompt_ns / 1e9)
+                          if prompt_ns else None),
+    }
+
+
+def _batch_power_allocation(power: Dict[str, object], requests: int) -> Dict[str, object]:
+    """Describe, rather than hide, the equal-split energy allocation.
+
+    A shared power trace measures a batch, not individual requests. Dividing
+    it by the number of completed requests is useful for serving comparisons,
+    but it is an allocation rule and not a per-request causal measurement.
+    """
+    if not power.get("measured") or requests <= 0:
+        return {"measured": False, "reason": "batch power was not measured"}
+    return {
+        "measured": True,
+        "allocation": "equal split across completed requests",
+        "batch_energy_wh": power["energy_wh"],
+        "energy_wh_per_completed_request": power["energy_wh"] / requests,
+    }
+
+
+def measure_batch(model: str, batch_size: int, reps: int, tokens: int,
+                  sensor: Dict[str, object], prompt_fillers: int = 0
+                  ) -> Dict[str, object]:
+    """Measure a model under concurrent request load.
+
+    The primary unit is a batch window. We report aggregate output throughput,
+    request wall-time distributions, the shared power trace, and an explicit
+    equal-split energy estimate. A failed request makes the repetition
+    incomplete and it is not silently converted into a smaller batch.
+    """
+    if batch_size < 1 or reps < 1 or tokens < 1:
+        raise ValueError("batch_size, reps and tokens must be positive")
+
+    meta = model_info(model)
+    try:
+        warm = generate(model, tokens, nonce=400000,
+                        prompt_fillers=prompt_fillers)
+    except Exception as exc:
+        return {
+            "model": model,
+            "batch_size": batch_size,
+            "ok": False,
+            "model_info": meta,
+            "error": f"warm-up failed: {type(exc).__name__}: {str(exc)[:200]}",
+        }
+
+    batches = []
+    for rep in range(reps):
+        started = time.perf_counter()
+        with PowerLog(sensor) as plog:
+            with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=batch_size,
+                    thread_name_prefix="edge-batch") as executor:
+                futures = [executor.submit(
+                    _timed_batch_request,
+                    model, tokens,
+                    410000 + rep * 1000 + request,
+                    prompt_fillers,
+                    request,
+                ) for request in range(batch_size)]
+                requests = [future.result() for future in futures]
+        batch_wall_s = time.perf_counter() - started
+        completed = [row for row in requests if row.get("ok")]
+        total_tokens = sum(row.get("eval_tokens", 0) for row in completed)
+        batch_tok_s = total_tokens / batch_wall_s if batch_wall_s > 0 else None
+        power = plog.result()
+        batches.append({
+            "rep": rep + 1,
+            "batch_size_requested": batch_size,
+            "completed_requests": len(completed),
+            "complete": len(completed) == batch_size,
+            "batch_wall_s": batch_wall_s,
+            "aggregate_output_tokens": total_tokens,
+            "aggregate_output_tok_s": batch_tok_s,
+            "requests": requests,
+            "power": power,
+            "energy": _batch_power_allocation(power, len(completed)),
+        })
+        print("." if len(completed) == batch_size else "!", end="", flush=True)
+
+    complete = [row for row in batches if row["complete"]]
+    if not complete:
+        return {
+            "model": model,
+            "batch_size": batch_size,
+            "ok": False,
+            "model_info": meta,
+            "reps": len(batches),
+            "complete_reps": 0,
+            "batches": batches,
+            "error": "no complete batch repetitions",
+        }
+
+    def median(values):
+        return statistics.median(values) if values else None
+
+    aggregate_rates = [row["aggregate_output_tok_s"] for row in complete]
+    request_walls = [request["wall_s"] for row in complete
+                     for request in row["requests"] if request.get("ok")]
+    allocated_energy = [row["energy"]["energy_wh_per_completed_request"]
+                        for row in complete
+                        if row["energy"].get("measured")]
+    return {
+        "model": model,
+        "batch_size": batch_size,
+        "ok": True,
+        "model_info": meta,
+        "reps": len(batches),
+        "complete_reps": len(complete),
+        "requested_tokens_per_request": tokens,
+        "requested_concurrent_requests": batch_size,
+        "median_aggregate_output_tok_s": median(aggregate_rates),
+        "aggregate_output_tok_s_spread": (
+            {"min": min(aggregate_rates), "max": max(aggregate_rates),
+             "stdev": statistics.stdev(aggregate_rates)}
+            if len(aggregate_rates) > 1 else None),
+        "median_request_wall_s": median(request_walls),
+        "median_equal_split_energy_wh_per_request": median(allocated_energy),
+        "energy_measurements_n": len(allocated_energy),
+        "batches": batches,
+        "interpretation": (
+            "Aggregate throughput is directly measured over the concurrent "
+            "batch window. Per-request energy is an equal allocation of the "
+            "shared batch trace, not an individually identified energy value. "
+            "Do not compare it with a single-request trace without matching "
+            "host, idle, batching and power boundaries."
+        ),
+    }
+
+
+def measure_batched(models: List[str], batch_sizes: List[int], reps: int,
+                    tokens: int, sensor: Dict[str, object],
+                    prompt_fillers: int = 0) -> List[Dict[str, object]]:
+    """Run all requested models and batch sizes, unloading between models."""
+    rows = []
+    for model in models:
+        print(f"\n{model}: concurrent batches", flush=True)
+        for batch_size in batch_sizes:
+            print(f"  batch={batch_size} ({reps} reps) ", end="", flush=True)
+            rows.append(measure_batch(model, batch_size, reps, tokens, sensor,
+                                      prompt_fillers=prompt_fillers))
+            print()
+        unload(model)
+    return rows
+
+
 def tagname(args, sysinfo) -> str:
     """Short filename-safe name for the machine under test."""
     tag = args.tag or (sysinfo.get("gpu") or "unknown").split("/")[0]
@@ -952,6 +1166,9 @@ def main() -> None:
                          "ladder inside the pool it is measuring")
     ap.add_argument("--no-sweep", action="store_true",
                     help="skip the length-controlled prefill regression")
+    ap.add_argument("--batch-sizes", nargs="+", type=int, default=None,
+                    help="run concurrent request batches of these sizes and "
+                         "write a separate *-batched.json result")
     ap.add_argument("--list", action="store_true", help="list local models")
     ap.add_argument("--tag", default=None,
                     help="short name for this machine, used in the filename")
@@ -960,6 +1177,12 @@ def main() -> None:
         ap.error("need at least two repetitions, positive tokens, nonnegative fillers")
     if args.bandwidth is not None and args.bandwidth <= 0:
         ap.error("--bandwidth must be positive")
+    if args.batch_sizes is not None:
+        if args.ladder:
+            ap.error("--batch-sizes cannot be combined with --ladder")
+        if any(size < 1 for size in args.batch_sizes):
+            ap.error("--batch-sizes values must be positive")
+        args.batch_sizes = sorted(set(args.batch_sizes))
 
     for stream in (sys.stdout, sys.stderr):
         try:
@@ -967,7 +1190,13 @@ def main() -> None:
         except (AttributeError, ValueError):
             pass
 
-    available = [m["name"] for m in list_models()]
+    available_records = list_models()
+    _MODEL_DIGESTS.update({
+        m["name"]: m.get("digest")
+        for m in available_records
+        if isinstance(m, dict) and isinstance(m.get("name"), str)
+    })
+    available = [m["name"] for m in available_records]
     if args.list:
         for m in sorted(available):
             print(" ", m)
@@ -993,6 +1222,58 @@ def main() -> None:
     print(f"power   : {'measured via ' + str(sensor['tool']) if sensor['available'] else 'NO SENSOR - timings only'}")
     print(f"protocol: {args.reps} reps x {args.tokens} tokens, temperature 0, "
           f"fixed seed, warm-up discarded\n")
+
+    if args.batch_sizes is not None:
+        print("\nconcurrent request batches: "
+              + ", ".join(str(size) for size in args.batch_sizes)
+              + " requests\n")
+        batches = measure_batched(
+            models, args.batch_sizes, args.reps, args.tokens, sensor,
+            prompt_fillers=args.prompt_fillers)
+        tag = tagname(args, sysinfo)
+        path = os.path.join(RESULTS, f"{tag}-batched.json")
+        payload = {
+            "schema_version": "2.0",
+            "harness": "measure/bench.py --batch-sizes",
+            "experiment": (
+                "concurrent request serving scaling; each batch contains "
+                "independent HTTP requests to the same local model"),
+            "protocol": {
+                "prompt": PROMPT,
+                "prompt_fillers": args.prompt_fillers,
+                "filler": FILLER,
+                "requested_tokens_per_request": args.tokens,
+                "batch_sizes": args.batch_sizes,
+                "reps": args.reps,
+                "temperature": 0,
+                "seed": 20260905,
+                "num_ctx": 4096,
+                "warmup_discarded": True,
+                "raw_mode": True,
+                "unique_nonce_per_request": True,
+                "concurrency": (
+                    "ThreadPoolExecutor submits one HTTP request per concurrent "
+                    "user; Ollama num_batch is not used as a proxy for serving "
+                    "concurrency"),
+                "power_scope": (
+                    "one shared GPU board trace per batch window; host and idle "
+                    "power remain outside the trace"),
+                "energy_allocation": (
+                    "equal split across completed requests, reported as an "
+                    "allocation rather than a direct per-request measurement"),
+                "incomplete_batch_policy": (
+                    "a repetition with any failed request is retained and "
+                    "excluded from complete-batch summaries"),
+            },
+            "system": sysinfo,
+            "power_sensor": sensor,
+            "idle_power": idle,
+            "batches": batches,
+        }
+        with open(path, "w", encoding="utf-8", newline="\n") as fh:
+            json.dump(payload, fh, indent=2)
+        print("\nwrote " + path)
+        return
 
     if args.ladder:
         if args.bandwidth is None:

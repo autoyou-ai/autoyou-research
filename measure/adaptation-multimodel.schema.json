@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/autoyou-ai/autoyou-research/blob/main/measure/adaptation-multimodel.schema.json",
+  "title": "Public-safe multi-model multi-task adaptation evaluation",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "protocol",
+    "models"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "task_manifest_sha256",
+        "task_classes",
+        "tasks_per_class",
+        "grader",
+        "seeds"
+      ],
+      "properties": {
+        "task_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "task_classes": {
+          "type": "array",
+          "const": [
+            "extraction",
+            "rag_qa",
+            "summary",
+            "simple_code",
+            "hard_reason"
+          ]
+        },
+        "tasks_per_class": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "grader": {
+          "type": "object",
+          "required": [
+            "name",
+            "version",
+            "blinded"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "blinded": {
+              "const": true
+            }
+          }
+        },
+        "seeds": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "base_model_ref",
+          "base_digest",
+          "adapter_id",
+          "adapter_digest",
+          "device_id",
+          "task_results"
+        ],
+        "properties": {
+          "model_id": {
+            "type": "string"
+          },
+          "base_model_ref": {
+            "type": "string"
+          },
+          "base_digest": {
+            "type": "string"
+          },
+          "adapter_id": {
+            "type": "string"
+          },
+          "adapter_digest": {
+            "type": "string"
+          },
+          "device_id": {
+            "type": "string"
+          },
+          "task_results": {
+            "type": "array",
+            "minItems": 100,
+            "items": {
+              "type": "object",
+              "required": [
+                "task_id",
+                "task_class",
+                "base_score",
+                "adapted_score",
+                "frontier_score"
+              ],
+              "properties": {
+                "task_id": {
+                  "type": "string"
+                },
+                "task_class": {
+                  "enum": [
+                    "extraction",
+                    "rag_qa",
+                    "summary",
+                    "simple_code",
+                    "hard_reason"
+                  ]
+                },
+                "base_score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "adapted_score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+          "frontier_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+                },
+                "seed_scores": {
+                  "type": "array",
+                  "minItems": 3,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "seed",
+                      "base_score",
+                      "adapted_score",
+                      "frontier_score"
+                    ],
+                    "properties": {
+                      "seed": {
+                        "type": "integer"
+                      },
+                      "base_score": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "adapted_score": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "frontier_score": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

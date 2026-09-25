@@ -1,6 +1,13 @@
-# Preserve the exact archived bytes recorded in review/source-manifest.json.
-paper/* -text
-review/* -text
-measure/results/*.json -text
+# Text is stored and checked out with LF on every platform, so the SHA-256
+# manifests (review/source-manifest.json, paper/release_manifest.json) verify
+# byte for byte on any operating system.
+* text=auto eol=lf
+
+# Measurement and experiment records are archived byte for byte. Several were
+# written with CRLF line endings and are referenced by SHA-256 from other records.
+measure/results/** -text
+
 *.pdf binary
 *.png binary
+*.mp4 binary
+*.safetensors binary

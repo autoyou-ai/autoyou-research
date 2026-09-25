@@ -6,8 +6,8 @@ frontier model only when the task needs it, and annotate every answer with its
 estimated energy / water / carbon footprint.
 
 It demonstrates the thesis of
-*"Decentralizing AI Inference to the Edge over Peer-to-Peer Transport"*
-(see `../paper/main.pdf`) - and it reuses the **same validated models**
+*"Quantifying Carbon, Water, Cost, and Capability in Peer-to-Peer Inference"*
+(see `../paper/p2p-inference.pdf`) - and it reuses the **same validated models**
 (`../models`) so the runtime numbers and the paper never diverge.
 
 ## What it shows

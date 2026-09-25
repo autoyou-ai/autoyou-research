@@ -2,9 +2,9 @@
 
 Checked 2026-09-17; revision packet finalized 2026-09-20.
 
-The original main.tex cited 38 distinct bibliography keys. The revised main.tex cites 14 sources: 12 retained/replaced original references and two added studies. Every revised reference was checked against a primary-source page for identity and the limited claim retained. This does not certify the cited research's correctness or peer-review status. Most research sources are preprints and are labeled accordingly.
+The original manuscript (now `paper/archive/track-a-legacy.tex`) cited 38 distinct bibliography keys. The revised manuscript (`paper/right-sized-edge.tex`) cites 14 sources: 12 retained/replaced original references and two added studies. Every revised reference was checked against a primary-source page for identity and the limited claim retained. This does not certify the cited research's correctness or peer-review status. Most research sources are preprints and are labeled accordingly.
 
-The original shared references.bib also contains companion-paper material. It has not been wholly certified and is unchanged. The revised manuscript uses review_references.bib. A reachable URL alone does not validate a quantitative claim.
+The original shared references.bib also contains companion-paper material. It has not been wholly certified and was unchanged by this revision; it has since been updated for the footprint study's v0.3.0 release, which carries its own audit in `paper/CITATION_AUDIT.md`. The revised manuscript uses review_references.bib. A reachable URL alone does not validate a quantitative claim.
 
 ## Sources used by the revision
 

@@ -1,0 +1,2100 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "public-synthetic-operations-mcq-v1",
+  "generator": {
+    "name": "models/run_adaptation_experiment.py",
+    "seed": 20260914,
+    "task_classes": [
+      "extraction",
+      "rag_qa",
+      "summary",
+      "simple_code",
+      "hard_reason"
+    ],
+    "train_tasks_per_class": 12,
+    "evaluation_tasks_per_class": 20,
+    "note": "Synthetic records only; no user, product, or private support data."
+  },
+  "tasks": [
+    {
+      "task_id": "train-extraction-000",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1000; owner=Orchid; queue=bravo; priority=P1; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-extraction-001",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1001; owner=Juniper; queue=alpha; priority=P2; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-extraction-002",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1002; owner=Cobalt; queue=delta; priority=P3; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-extraction-003",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1003; owner=Maple; queue=charlie; priority=P1; status=open.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-extraction-004",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1004; owner=Cedar; queue=bravo; priority=P2; status=held.\n\nOptions:\nA. Cedar\nB. Orchid\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Cedar",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-extraction-005",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1005; owner=Quartz; queue=alpha; priority=P3; status=held.\n\nOptions:\nA. Orchid\nB. Quartz\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Quartz",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-extraction-006",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1006; owner=Orchid; queue=delta; priority=P1; status=open.\n\nOptions:\nA. Juniper\nB. Cobalt\nC. Orchid\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Juniper",
+        "B": "Cobalt",
+        "C": "Orchid",
+        "D": "Maple"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-extraction-007",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1007; owner=Juniper; queue=charlie; priority=P2; status=held.\n\nOptions:\nA. Orchid\nB. Cobalt\nC. Maple\nD. Juniper\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Cobalt",
+        "C": "Maple",
+        "D": "Juniper"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-extraction-008",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1008; owner=Cobalt; queue=bravo; priority=P3; status=open.\n\nOptions:\nA. Cobalt\nB. Orchid\nC. Juniper\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Cobalt",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Maple"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-extraction-009",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1009; owner=Maple; queue=alpha; priority=P1; status=held.\n\nOptions:\nA. Orchid\nB. Maple\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Maple",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-extraction-010",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1010; owner=Cedar; queue=delta; priority=P2; status=open.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cedar\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cedar",
+        "D": "Cobalt"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-extraction-011",
+      "split": "train",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-1011; owner=Quartz; queue=charlie; priority=P3; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Quartz\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Quartz"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-rag_qa-000",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Nimbus has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-rag_qa-001",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Harbor has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-rag_qa-002",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Lattice has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-rag_qa-003",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Saffron has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-rag_qa-004",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Pioneer has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-rag_qa-005",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Mosaic has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-rag_qa-006",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Nimbus has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-rag_qa-007",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Harbor has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-rag_qa-008",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Lattice has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-rag_qa-009",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Saffron has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-rag_qa-010",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Pioneer has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-rag_qa-011",
+      "split": "train",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Mosaic has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-summary-000",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the relay produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. relay: delayed jobs caused by a missing route; next action: drain the queue.\nB. relay: stale results caused by an expired lease; next action: drain the queue.\nC. relay: delayed jobs caused by an expired lease; next action: drain the queue.\nD. relay: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "relay: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "relay: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "relay: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "relay: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-summary-001",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the indexer produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. indexer: failed handoffs caused by a bad cache; next action: clear the cache.\nB. indexer: slow uploads caused by a missing route; next action: clear the cache.\nC. indexer: failed handoffs caused by a missing route; next action: restore the route.\nD. indexer: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "indexer: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "indexer: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "indexer: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "indexer: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-summary-002",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the router produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. router: delayed jobs caused by a bad cache; next action: restore the route.\nB. router: delayed jobs caused by a full queue; next action: restore the route.\nC. router: stale results caused by a bad cache; next action: restore the route.\nD. router: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "router: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "router: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "router: stale results caused by a bad cache; next action: restore the route.",
+        "D": "router: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-summary-003",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the worker produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. worker: failed handoffs caused by an expired lease; next action: renew the lease.\nB. worker: failed handoffs caused by a full queue; next action: renew the lease.\nC. worker: slow uploads caused by a full queue; next action: renew the lease.\nD. worker: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "worker: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "worker: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "worker: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "worker: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-summary-004",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the gateway produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. gateway: delayed jobs caused by a missing route; next action: drain the queue.\nB. gateway: stale results caused by an expired lease; next action: drain the queue.\nC. gateway: delayed jobs caused by an expired lease; next action: drain the queue.\nD. gateway: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "gateway: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "gateway: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "gateway: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-summary-005",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the scheduler produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. scheduler: failed handoffs caused by a bad cache; next action: clear the cache.\nB. scheduler: slow uploads caused by a missing route; next action: clear the cache.\nC. scheduler: failed handoffs caused by a missing route; next action: restore the route.\nD. scheduler: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "scheduler: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "scheduler: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "scheduler: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-summary-006",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the relay produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. relay: delayed jobs caused by a bad cache; next action: restore the route.\nB. relay: delayed jobs caused by a full queue; next action: restore the route.\nC. relay: stale results caused by a bad cache; next action: restore the route.\nD. relay: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "relay: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "relay: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "relay: stale results caused by a bad cache; next action: restore the route.",
+        "D": "relay: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-summary-007",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the indexer produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. indexer: failed handoffs caused by an expired lease; next action: renew the lease.\nB. indexer: failed handoffs caused by a full queue; next action: renew the lease.\nC. indexer: slow uploads caused by a full queue; next action: renew the lease.\nD. indexer: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "indexer: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "indexer: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "indexer: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "indexer: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-summary-008",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the router produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. router: delayed jobs caused by a missing route; next action: drain the queue.\nB. router: stale results caused by an expired lease; next action: drain the queue.\nC. router: delayed jobs caused by an expired lease; next action: drain the queue.\nD. router: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "router: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "router: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "router: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "router: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-summary-009",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the worker produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. worker: failed handoffs caused by a bad cache; next action: clear the cache.\nB. worker: slow uploads caused by a missing route; next action: clear the cache.\nC. worker: failed handoffs caused by a missing route; next action: restore the route.\nD. worker: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "worker: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "worker: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "worker: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "worker: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-summary-010",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the gateway produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. gateway: delayed jobs caused by a bad cache; next action: restore the route.\nB. gateway: delayed jobs caused by a full queue; next action: restore the route.\nC. gateway: stale results caused by a bad cache; next action: restore the route.\nD. gateway: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "gateway: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "gateway: stale results caused by a bad cache; next action: restore the route.",
+        "D": "gateway: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-summary-011",
+      "split": "train",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the scheduler produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. scheduler: failed handoffs caused by an expired lease; next action: renew the lease.\nB. scheduler: failed handoffs caused by a full queue; next action: renew the lease.\nC. scheduler: slow uploads caused by a full queue; next action: renew the lease.\nD. scheduler: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "scheduler: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "scheduler: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "scheduler: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-simple_code-000",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-simple_code-001",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-simple_code-002",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-simple_code-003",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-simple_code-004",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-simple_code-005",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-simple_code-006",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-simple_code-007",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-simple_code-008",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-simple_code-009",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-simple_code-010",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-simple_code-011",
+      "split": "train",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-hard_reason-000",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-hard_reason-001",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-hard_reason-002",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-hard_reason-003",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-hard_reason-004",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-hard_reason-005",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-hard_reason-006",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-hard_reason-007",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "train-hard_reason-008",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "train-hard_reason-009",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "train-hard_reason-010",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "train-hard_reason-011",
+      "split": "train",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-extraction-100",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6100; owner=Cedar; queue=bravo; priority=P2; status=open.\n\nOptions:\nA. Cedar\nB. Orchid\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Cedar",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-extraction-101",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6101; owner=Quartz; queue=alpha; priority=P3; status=open.\n\nOptions:\nA. Orchid\nB. Quartz\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Quartz",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-extraction-102",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6102; owner=Orchid; queue=delta; priority=P1; status=open.\n\nOptions:\nA. Juniper\nB. Cobalt\nC. Orchid\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Juniper",
+        "B": "Cobalt",
+        "C": "Orchid",
+        "D": "Maple"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-extraction-103",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6103; owner=Juniper; queue=charlie; priority=P2; status=held.\n\nOptions:\nA. Orchid\nB. Cobalt\nC. Maple\nD. Juniper\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Cobalt",
+        "C": "Maple",
+        "D": "Juniper"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-extraction-104",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6104; owner=Cobalt; queue=bravo; priority=P3; status=held.\n\nOptions:\nA. Cobalt\nB. Orchid\nC. Juniper\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Cobalt",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Maple"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-extraction-105",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6105; owner=Maple; queue=alpha; priority=P1; status=held.\n\nOptions:\nA. Orchid\nB. Maple\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Maple",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-extraction-106",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6106; owner=Cedar; queue=delta; priority=P2; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cedar\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cedar",
+        "D": "Cobalt"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-extraction-107",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6107; owner=Quartz; queue=charlie; priority=P3; status=open.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Quartz\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Quartz"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-extraction-108",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6108; owner=Orchid; queue=bravo; priority=P1; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-extraction-109",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6109; owner=Juniper; queue=alpha; priority=P2; status=open.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-extraction-110",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6110; owner=Cobalt; queue=delta; priority=P3; status=open.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-extraction-111",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6111; owner=Maple; queue=charlie; priority=P1; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Maple"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-extraction-112",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6112; owner=Cedar; queue=bravo; priority=P2; status=open.\n\nOptions:\nA. Cedar\nB. Orchid\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Cedar",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-extraction-113",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6113; owner=Quartz; queue=alpha; priority=P3; status=held.\n\nOptions:\nA. Orchid\nB. Quartz\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Quartz",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-extraction-114",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6114; owner=Orchid; queue=delta; priority=P1; status=open.\n\nOptions:\nA. Juniper\nB. Cobalt\nC. Orchid\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Juniper",
+        "B": "Cobalt",
+        "C": "Orchid",
+        "D": "Maple"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-extraction-115",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6115; owner=Juniper; queue=charlie; priority=P2; status=open.\n\nOptions:\nA. Orchid\nB. Cobalt\nC. Maple\nD. Juniper\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Cobalt",
+        "C": "Maple",
+        "D": "Juniper"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-extraction-116",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6116; owner=Cobalt; queue=bravo; priority=P3; status=held.\n\nOptions:\nA. Cobalt\nB. Orchid\nC. Juniper\nD. Maple\n\nAnswer:",
+      "options": {
+        "A": "Cobalt",
+        "B": "Orchid",
+        "C": "Juniper",
+        "D": "Maple"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-extraction-117",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6117; owner=Maple; queue=alpha; priority=P1; status=open.\n\nOptions:\nA. Orchid\nB. Maple\nC. Juniper\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Maple",
+        "C": "Juniper",
+        "D": "Cobalt"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-extraction-118",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6118; owner=Cedar; queue=delta; priority=P2; status=held.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cedar\nD. Cobalt\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cedar",
+        "D": "Cobalt"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-extraction-119",
+      "split": "evaluation",
+      "task_class": "extraction",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nExtract the owner from this record:\nTicket OPS-6119; owner=Quartz; queue=charlie; priority=P3; status=open.\n\nOptions:\nA. Orchid\nB. Juniper\nC. Cobalt\nD. Quartz\n\nAnswer:",
+      "options": {
+        "A": "Orchid",
+        "B": "Juniper",
+        "C": "Cobalt",
+        "D": "Quartz"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-rag_qa-100",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Pioneer has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-rag_qa-101",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Mosaic has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-rag_qa-102",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Nimbus has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-rag_qa-103",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Harbor has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-rag_qa-104",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Lattice has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-rag_qa-105",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Saffron has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-rag_qa-106",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Pioneer has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-rag_qa-107",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Mosaic has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-rag_qa-108",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Nimbus has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-rag_qa-109",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Harbor has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-rag_qa-110",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Lattice has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-rag_qa-111",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Saffron has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-rag_qa-112",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Pioneer has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-rag_qa-113",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Mosaic has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-rag_qa-114",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Nimbus has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-rag_qa-115",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Harbor has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-rag_qa-116",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Lattice has a retention period of 7 days, runs backups at 01:00 UTC, and is hosted in the South region.\n\nOptions:\nA. 14 days\nB. 7 days\nC. 30 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "14 days",
+        "B": "7 days",
+        "C": "30 days",
+        "D": "45 days"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-rag_qa-117",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Saffron has a retention period of 14 days, runs backups at 02:30 UTC, and is hosted in the East region.\n\nOptions:\nA. 7 days\nB. 30 days\nC. 14 days\nD. 45 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "14 days",
+        "D": "45 days"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-rag_qa-118",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Pioneer has a retention period of 30 days, runs backups at 04:00 UTC, and is hosted in the West region.\n\nOptions:\nA. 7 days\nB. 14 days\nC. 45 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "7 days",
+        "B": "14 days",
+        "C": "45 days",
+        "D": "30 days"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-rag_qa-119",
+      "split": "evaluation",
+      "task_class": "rag_qa",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUsing only the knowledge card, what is the retention period?\nProject Mosaic has a retention period of 45 days, runs backups at 22:00 UTC, and is hosted in the North region.\n\nOptions:\nA. 45 days\nB. 7 days\nC. 14 days\nD. 30 days\n\nAnswer:",
+      "options": {
+        "A": "45 days",
+        "B": "7 days",
+        "C": "14 days",
+        "D": "30 days"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-summary-100",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the gateway produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. gateway: delayed jobs caused by a missing route; next action: drain the queue.\nB. gateway: stale results caused by an expired lease; next action: drain the queue.\nC. gateway: delayed jobs caused by an expired lease; next action: drain the queue.\nD. gateway: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "gateway: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "gateway: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "gateway: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-summary-101",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the scheduler produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. scheduler: failed handoffs caused by a bad cache; next action: clear the cache.\nB. scheduler: slow uploads caused by a missing route; next action: clear the cache.\nC. scheduler: failed handoffs caused by a missing route; next action: restore the route.\nD. scheduler: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "scheduler: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "scheduler: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "scheduler: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-summary-102",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the relay produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. relay: delayed jobs caused by a bad cache; next action: restore the route.\nB. relay: delayed jobs caused by a full queue; next action: restore the route.\nC. relay: stale results caused by a bad cache; next action: restore the route.\nD. relay: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "relay: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "relay: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "relay: stale results caused by a bad cache; next action: restore the route.",
+        "D": "relay: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-summary-103",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the indexer produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. indexer: failed handoffs caused by an expired lease; next action: renew the lease.\nB. indexer: failed handoffs caused by a full queue; next action: renew the lease.\nC. indexer: slow uploads caused by a full queue; next action: renew the lease.\nD. indexer: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "indexer: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "indexer: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "indexer: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "indexer: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-summary-104",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the router produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. router: delayed jobs caused by a missing route; next action: drain the queue.\nB. router: stale results caused by an expired lease; next action: drain the queue.\nC. router: delayed jobs caused by an expired lease; next action: drain the queue.\nD. router: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "router: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "router: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "router: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "router: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-summary-105",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the worker produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. worker: failed handoffs caused by a bad cache; next action: clear the cache.\nB. worker: slow uploads caused by a missing route; next action: clear the cache.\nC. worker: failed handoffs caused by a missing route; next action: restore the route.\nD. worker: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "worker: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "worker: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "worker: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "worker: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-summary-106",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the gateway produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. gateway: delayed jobs caused by a bad cache; next action: restore the route.\nB. gateway: delayed jobs caused by a full queue; next action: restore the route.\nC. gateway: stale results caused by a bad cache; next action: restore the route.\nD. gateway: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "gateway: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "gateway: stale results caused by a bad cache; next action: restore the route.",
+        "D": "gateway: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-summary-107",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the scheduler produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. scheduler: failed handoffs caused by an expired lease; next action: renew the lease.\nB. scheduler: failed handoffs caused by a full queue; next action: renew the lease.\nC. scheduler: slow uploads caused by a full queue; next action: renew the lease.\nD. scheduler: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "scheduler: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "scheduler: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "scheduler: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-summary-108",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the relay produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. relay: delayed jobs caused by a missing route; next action: drain the queue.\nB. relay: stale results caused by an expired lease; next action: drain the queue.\nC. relay: delayed jobs caused by an expired lease; next action: drain the queue.\nD. relay: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "relay: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "relay: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "relay: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "relay: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-summary-109",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the indexer produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. indexer: failed handoffs caused by a bad cache; next action: clear the cache.\nB. indexer: slow uploads caused by a missing route; next action: clear the cache.\nC. indexer: failed handoffs caused by a missing route; next action: restore the route.\nD. indexer: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "indexer: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "indexer: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "indexer: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "indexer: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-summary-110",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the router produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. router: delayed jobs caused by a bad cache; next action: restore the route.\nB. router: delayed jobs caused by a full queue; next action: restore the route.\nC. router: stale results caused by a bad cache; next action: restore the route.\nD. router: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "router: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "router: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "router: stale results caused by a bad cache; next action: restore the route.",
+        "D": "router: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-summary-111",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the worker produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. worker: failed handoffs caused by an expired lease; next action: renew the lease.\nB. worker: failed handoffs caused by a full queue; next action: renew the lease.\nC. worker: slow uploads caused by a full queue; next action: renew the lease.\nD. worker: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "worker: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "worker: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "worker: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "worker: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-summary-112",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the gateway produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. gateway: delayed jobs caused by a missing route; next action: drain the queue.\nB. gateway: stale results caused by an expired lease; next action: drain the queue.\nC. gateway: delayed jobs caused by an expired lease; next action: drain the queue.\nD. gateway: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "gateway: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "gateway: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "gateway: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-summary-113",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the scheduler produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. scheduler: failed handoffs caused by a bad cache; next action: clear the cache.\nB. scheduler: slow uploads caused by a missing route; next action: clear the cache.\nC. scheduler: failed handoffs caused by a missing route; next action: restore the route.\nD. scheduler: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "scheduler: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "scheduler: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "scheduler: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-summary-114",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the relay produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. relay: delayed jobs caused by a bad cache; next action: restore the route.\nB. relay: delayed jobs caused by a full queue; next action: restore the route.\nC. relay: stale results caused by a bad cache; next action: restore the route.\nD. relay: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "relay: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "relay: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "relay: stale results caused by a bad cache; next action: restore the route.",
+        "D": "relay: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-summary-115",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the indexer produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. indexer: failed handoffs caused by an expired lease; next action: renew the lease.\nB. indexer: failed handoffs caused by a full queue; next action: renew the lease.\nC. indexer: slow uploads caused by a full queue; next action: renew the lease.\nD. indexer: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "indexer: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "indexer: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "indexer: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "indexer: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-summary-116",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the router produced delayed jobs after an expired lease. The assigned next action is to drain the queue.\n\nOptions:\nA. router: delayed jobs caused by a missing route; next action: drain the queue.\nB. router: stale results caused by an expired lease; next action: drain the queue.\nC. router: delayed jobs caused by an expired lease; next action: drain the queue.\nD. router: delayed jobs caused by an expired lease; next action: renew the lease.\n\nAnswer:",
+      "options": {
+        "A": "router: delayed jobs caused by a missing route; next action: drain the queue.",
+        "B": "router: stale results caused by an expired lease; next action: drain the queue.",
+        "C": "router: delayed jobs caused by an expired lease; next action: drain the queue.",
+        "D": "router: delayed jobs caused by an expired lease; next action: renew the lease."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-summary-117",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the worker produced failed handoffs after a missing route. The assigned next action is to clear the cache.\n\nOptions:\nA. worker: failed handoffs caused by a bad cache; next action: clear the cache.\nB. worker: slow uploads caused by a missing route; next action: clear the cache.\nC. worker: failed handoffs caused by a missing route; next action: restore the route.\nD. worker: failed handoffs caused by a missing route; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "worker: failed handoffs caused by a bad cache; next action: clear the cache.",
+        "B": "worker: slow uploads caused by a missing route; next action: clear the cache.",
+        "C": "worker: failed handoffs caused by a missing route; next action: restore the route.",
+        "D": "worker: failed handoffs caused by a missing route; next action: clear the cache."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-summary-118",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the gateway produced delayed jobs after a bad cache. The assigned next action is to restore the route.\n\nOptions:\nA. gateway: delayed jobs caused by a bad cache; next action: restore the route.\nB. gateway: delayed jobs caused by a full queue; next action: restore the route.\nC. gateway: stale results caused by a bad cache; next action: restore the route.\nD. gateway: delayed jobs caused by a bad cache; next action: clear the cache.\n\nAnswer:",
+      "options": {
+        "A": "gateway: delayed jobs caused by a bad cache; next action: restore the route.",
+        "B": "gateway: delayed jobs caused by a full queue; next action: restore the route.",
+        "C": "gateway: stale results caused by a bad cache; next action: restore the route.",
+        "D": "gateway: delayed jobs caused by a bad cache; next action: clear the cache."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-summary-119",
+      "split": "evaluation",
+      "task_class": "summary",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the most accurate one-sentence summary of this report:\nIncident report: the scheduler produced failed handoffs after a full queue. The assigned next action is to renew the lease.\n\nOptions:\nA. scheduler: failed handoffs caused by an expired lease; next action: renew the lease.\nB. scheduler: failed handoffs caused by a full queue; next action: renew the lease.\nC. scheduler: slow uploads caused by a full queue; next action: renew the lease.\nD. scheduler: failed handoffs caused by a full queue; next action: drain the queue.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: failed handoffs caused by an expired lease; next action: renew the lease.",
+        "B": "scheduler: failed handoffs caused by a full queue; next action: renew the lease.",
+        "C": "scheduler: slow uploads caused by a full queue; next action: renew the lease.",
+        "D": "scheduler: failed handoffs caused by a full queue; next action: drain the queue."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-simple_code-100",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-simple_code-101",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-simple_code-102",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-simple_code-103",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-simple_code-104",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-simple_code-105",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-simple_code-106",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-simple_code-107",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-simple_code-108",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-simple_code-109",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-simple_code-110",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-simple_code-111",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-simple_code-112",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-simple_code-113",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-simple_code-114",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-simple_code-115",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-simple_code-116",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 == 0]\nB. def select(values):\n    return [x for x in values if x % 2 != 0]\nC. def select(values):\n    return sorted(values)\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "B": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "C": "def select(values):\n    return sorted(values)",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-simple_code-117",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return [x for x in values if x > 0]\nC. def select(values):\n    return sum(values)\nD. def select(values):\n    return sum(x for x in values if x > 0)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return [x for x in values if x > 0]",
+        "C": "def select(values):\n    return sum(values)",
+        "D": "def select(values):\n    return sum(x for x in values if x > 0)"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-simple_code-118",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return a new list containing only the even integers, preserving order?\n\nOptions:\nA. def select(values):\n    return [x for x in values if x % 2 != 0]\nB. def select(values):\n    return sorted(values)\nC. def select(values):\n    return [x for x in values if x % 2 == 0]\nD. def select(values):\n    return [x for x in values if x > 0]\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return [x for x in values if x % 2 != 0]",
+        "B": "def select(values):\n    return sorted(values)",
+        "C": "def select(values):\n    return [x for x in values if x % 2 == 0]",
+        "D": "def select(values):\n    return [x for x in values if x > 0]"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-simple_code-119",
+      "split": "evaluation",
+      "task_class": "simple_code",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich implementation will return the sum of the positive integers, ignoring zero and negatives?\n\nOptions:\nA. def select(values):\n    return sum(x for x in values if x < 0)\nB. def select(values):\n    return sum(x for x in values if x > 0)\nC. def select(values):\n    return [x for x in values if x > 0]\nD. def select(values):\n    return sum(values)\n\nAnswer:",
+      "options": {
+        "A": "def select(values):\n    return sum(x for x in values if x < 0)",
+        "B": "def select(values):\n    return sum(x for x in values if x > 0)",
+        "C": "def select(values):\n    return [x for x in values if x > 0]",
+        "D": "def select(values):\n    return sum(values)"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-hard_reason-100",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-hard_reason-101",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-hard_reason-102",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-hard_reason-103",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-hard_reason-104",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-hard_reason-105",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-hard_reason-106",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-hard_reason-107",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-hard_reason-108",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-hard_reason-109",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-hard_reason-110",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-hard_reason-111",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-hard_reason-112",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-hard_reason-113",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-hard_reason-114",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-hard_reason-115",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "evaluation-hard_reason-116",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Aster is before Birch; Birch is immediately before Cinder; Dune is before Aster.\n\nOptions:\nA. Aster, Birch, Cinder, Dune\nB. Aster, Birch, Dune, Cinder\nC. Aster, Cinder, Birch, Dune\nD. Dune, Aster, Birch, Cinder\n\nAnswer:",
+      "options": {
+        "A": "Aster, Birch, Cinder, Dune",
+        "B": "Aster, Birch, Dune, Cinder",
+        "C": "Aster, Cinder, Birch, Dune",
+        "D": "Dune, Aster, Birch, Cinder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "evaluation-hard_reason-117",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Atlas is immediately before Beryl; Crest is before Delta; Beryl is before Crest.\n\nOptions:\nA. Atlas, Beryl, Crest, Delta\nB. Atlas, Beryl, Delta, Crest\nC. Atlas, Crest, Beryl, Delta\nD. Atlas, Crest, Delta, Beryl\n\nAnswer:",
+      "options": {
+        "A": "Atlas, Beryl, Crest, Delta",
+        "B": "Atlas, Beryl, Delta, Crest",
+        "C": "Atlas, Crest, Beryl, Delta",
+        "D": "Atlas, Crest, Delta, Beryl"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "evaluation-hard_reason-118",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Beacon is before Cobalt; Cobalt is immediately before Drift; Arbor is after Drift.\n\nOptions:\nA. Arbor, Beacon, Cobalt, Drift\nB. Beacon, Cobalt, Drift, Arbor\nC. Arbor, Beacon, Drift, Cobalt\nD. Arbor, Cobalt, Beacon, Drift\n\nAnswer:",
+      "options": {
+        "A": "Arbor, Beacon, Cobalt, Drift",
+        "B": "Beacon, Cobalt, Drift, Arbor",
+        "C": "Arbor, Beacon, Drift, Cobalt",
+        "D": "Arbor, Cobalt, Beacon, Drift"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "evaluation-hard_reason-119",
+      "split": "evaluation",
+      "task_class": "hard_reason",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nFour jobs must run once. Which order satisfies all rules?\nRules: Cedar is immediately before Dawn; Dawn is before Amber; Amber is before Brine.\n\nOptions:\nA. Amber, Brine, Cedar, Dawn\nB. Amber, Brine, Dawn, Cedar\nC. Cedar, Dawn, Amber, Brine\nD. Amber, Cedar, Brine, Dawn\n\nAnswer:",
+      "options": {
+        "A": "Amber, Brine, Cedar, Dawn",
+        "B": "Amber, Brine, Dawn, Cedar",
+        "C": "Cedar, Dawn, Amber, Brine",
+        "D": "Amber, Cedar, Brine, Dawn"
+      },
+      "correct_option": "C"
+    }
+  ]
+}

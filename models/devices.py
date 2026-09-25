@@ -123,7 +123,7 @@ UNIFIED_APU = Device(
         "128 GB LPDDR5X-8000 pool addressed by all three. Roughly a quarter of "
         "the 4090's bandwidth and roughly five times its addressable memory. "
         "That trade is what makes 27B-class *adaptation* a consumer activity: "
-        "the published recipe reserves ~80 GB peak for a bf16 LoRA run on a "
+        "the publicly documented recipe reserves ~80 GB peak for a bf16 LoRA run on a "
         "27B model, which simply cannot be allocated on a 24 GB card. "
         "NOTE ON SKU: this profile is the 128 GB configuration, because "
         "that is the one the cited training recipe runs on and an 80 GB "
@@ -246,14 +246,12 @@ QWEN3_8_27B = ModelSpec(
     multimodal=True,
     cite="qwen38_2026",
     note=(
-        "Released 2026-08-14. Dense, natively multimodal (text/image/video), "
-        "262K context, 27.78B parameters, ~17 GB as a 4-bit build. Reported "
-        "gains over Qwen3.6-27B on an identical architecture: Terminal-Bench "
-        "2.1 63.4->73.0, DeepSWE 1.1 13.3->42.2, OSWorld-Verified 63.9->84.3, "
-        "SWE-MM 25.7->38.6; Artificial Analysis Intelligence Index 52 (+14). "
-        "hidden/intermediate/head counts below the parameter count are the "
-        "study's reconstruction of a 64-layer 27.78B decoder and are used only "
-        "to size adapters, never to claim benchmark results."
+        "The official model card identifies a 27B Apache-2.0 native "
+        "vision-language model with 262K context. Ollama distribution size and "
+        "local runtime values are separate metadata. hidden/intermediate/head "
+        "counts below the parameter count are the study's reconstruction of a "
+        "64-layer decoder and are used only to size adapters, never to claim "
+        "benchmark results."
     ),
 )
 
@@ -273,10 +271,10 @@ QWEN3_5_27B = ModelSpec(
     multimodal=True,
     cite="qwen35_2026",
     note=(
-        "February 2026. The dense 27B rung of the Qwen3.5 family (0.8B-27B "
-        "dense; 35B-A3B, 122B-A10B, 397B-A17B MoE). Hybrid attention with "
-        "GatedDeltaNet layers, which is why the published Strix Halo recipe "
-        "needs flash-linear-attention kernels and eager attention."
+        "The official Qwen3.5-27B model card identifies the dense 27B "
+        "vision-language model with 262K context. The separate Strix Halo recipe "
+        "uses hybrid-attention implementation details and remains a single "
+        "community validation anchor."
     ),
 )
 

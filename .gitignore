@@ -26,6 +26,10 @@ env/
 *.vrb
 *.xdv
 
+# --- Local QA scratch ---
+.tmp-pdf-qa*/
+verify_paper*.txt
+
 # --- OS / editor noise ---
 .DS_Store
 Thumbs.db

@@ -6,11 +6,28 @@ This is code-path independence, not third-party laboratory replication.
 import hashlib
 import json
 import math
+import os
 import re
+import sys
+
+# Direct execution puts measure/ first on sys.path, where this repository's
+# statistics.py would shadow the standard-library module.
+if sys.path and os.path.abspath(sys.path[0]) == os.path.dirname(
+        os.path.abspath(__file__)):
+    sys.path.pop(0)
+
 import statistics as stats
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def sigfig(value, significant=2):
+    """Match the paper generator's fixed-point significant-figure format."""
+    if value == 0:
+        return "0"
+    digits = significant - int(math.floor(math.log10(abs(value)))) - 1
+    return f"{round(value, digits):.{max(digits, 0)}f}"
 
 
 def integrate(trace, duration):
@@ -67,14 +84,21 @@ def main():
                 assert abs(median-model["measured_energy"]["median_energy_wh_per_query"]) < .00000051
                 row = exported[path.name, model["model"]]
                 assert abs(median-row["energy_wh"]) < .00000051
+                eta = float(row.get("psu_efficiency", 0.90))
                 for watts, actual in row["host_power_scenarios_wh"].items():
-                    expected = stats.median(e+float(watts)*r["power"]["window_s"]/3600
-                                            for e, r in zip(energies, runs))
-                    assert abs(expected-actual) < .00000051
+                    expected = stats.median(
+                        (e + float(watts)*r["power"]["window_s"]/3600)
+                        / (1.0 if float(watts) == 0 else eta)
+                        for e, r in zip(energies, runs))
+                    # The exported scenario starts from the raw energy value
+                    # rounded to 6 decimals, while this replay integrates the
+                    # unrounded trace. Keep a 1 micro-Wh tolerance for that
+                    # serialization difference.
+                    assert abs(expected-actual) < .0000011
                 prefix = {"rtx5070-study.json": "Rtx", "rtx5070-replication.json": "Repeat"}.get(path.name)
                 if prefix:
                     prefix += {"ministral-3:3b": "Three", "ministral-3:8b": "Eight"}[model["model"]]
-                    assert macros[prefix+"Energy"] == f"{median:.3f}"
+                    assert macros[prefix+"Energy"] == sigfig(median, 2)
                     assert macros[prefix+"Speed"] == f"{stats.median(rates):.1f}"
                 fit = model.get("prefill_scaling", {})
                 if fit.get("available"):
@@ -106,7 +130,7 @@ def main():
               "files_sha256": files, "checks": checks, "fleet_routing_fraction_counted_once": True,
               "quality_and_coverage_recomputed": True, "limitations": ["No whole-system wattmeter", "No matched cloud-quality evaluation", "No new adaptation training or safety trial"]}
     target = ROOT / "measure/validation.json"
-    target.write_text(json.dumps(report, indent=2)+"\n", encoding="utf-8")
+    target.write_text(json.dumps(report, indent=2)+"\n", encoding="utf-8", newline="\n")
     print(f"PASS: {len(checks)} model/run groups; raw power integration, timing, residency, ladder, named paper metrics, fleet and adaptation arithmetic")
     print(target)
 

@@ -41,8 +41,18 @@ plt.rcParams.update({
     "text.color": INK, "xtick.color": MUTED, "ytick.color": MUTED,
     "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.9,
     "axes.axisbelow": True, "figure.dpi": 140, "savefig.bbox": "tight",
-    "svg.fonttype": "none",
+    "svg.fonttype": "none", "svg.hashsalt": "autoyou-research-v0.3.0",
 })
+
+PDF_METADATA = {
+    "Creator": "AutoYou Research figure generator",
+    "CreationDate": None,
+    "ModDate": None,
+}
+SVG_METADATA = {
+    "Creator": "AutoYou Research figure generator",
+    "Date": None,
+}
 
 
 def _despine(ax, left=True, bottom=True):
@@ -134,7 +144,7 @@ def save(fig, name):
         t.set_text("")
     font_state = _scale_paper_fonts(fig, name)
 
-    fig.savefig(os.path.join(OUT, f"{name}.pdf"))
+    fig.savefig(os.path.join(OUT, f"{name}.pdf"), metadata=PDF_METADATA)
 
     for artist, size in font_state:
         artist.set_fontsize(size)
@@ -158,7 +168,8 @@ def save(fig, name):
 
     for ext in ("png", "svg"):
         path = os.path.join(OUT, f"{name}.{ext}")
-        fig.savefig(path)
+        metadata = SVG_METADATA if ext == "svg" else None
+        fig.savefig(path, metadata=metadata)
         if ext == "svg":
             with open(path, "r", encoding="utf-8") as f:
                 lines = f.readlines()
@@ -678,13 +689,13 @@ def fig_bandwidth_roof():
 
 
 def fig_measured_energy():
-    """Primary run beside its replication, so agreement is read at a glance."""
+    """Primary run beside its same-target repeatability run."""
     rows = [r for r in MEAS.energy_table() if r["file"] in
             ("rtx5070-study.json", "rtx5070-replication.json")]
     if not rows:
         return
-    # Order matters here: the figure exists to show that the replication
-    # reproduces the primary, which only reads as such if the two sit together.
+    # Order matters here: the figure places the same-target repeatability
+    # run beside the primary so agreement is read at a glance.
     def _is_repeat(r):
         return "replication" in r["file"]
     rows.sort(key=lambda r: (r["model"], _is_repeat(r)))
@@ -701,7 +712,7 @@ def fig_measured_energy():
                 fontsize=9, color=INK, zorder=5)
     ax.set_xticks(range(len(rows)))
     ax.set_xticklabels([r["model"].replace("ministral-3:", "") +
-                        ("\nreplication" if _is_repeat(r) else "\nprimary")
+                        ("\nrepeatability" if _is_repeat(r) else "\nprimary")
                         for r in rows])
     ax.set_ylim(0, .25)
     ax.set_ylabel("GPU board energy per request (Wh)")
@@ -710,8 +721,8 @@ def fig_measured_energy():
     ax.grid(axis="x", visible=False)
     fig.text(.5, -.04,
              "Seven repetitions per model per run; bars are medians, whiskers "
-             "are observed minima and maxima. Each model's independent "
-             "replication is shown beside its primary run. Request window only; "
+             "are observed minima and maxima. The same-target repeatability run "
+             "is shown beside its primary run. Request window only; "
              "host draw and PSU loss are excluded here and charged separately. "
              "Two significant figures: the board counter refreshes about "
              "every 0.4 s, giving 4-5 distinct readings per 3B request.",

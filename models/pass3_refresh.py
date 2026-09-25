@@ -21,10 +21,12 @@ query cost exactly what it cost before. The second term is what turns a modest
 one-time difference into a compounding one, and it is invisible if you only
 compare training prices.
 
-As in Pass 2, no peer-reviewed per-query ENERGY measurement covers the 2026
-frontier, so the energy/water/carbon corpus stays pinned to the measured 2025
-sources. Only pricing, architecture and the deployment's own adapter
-evaluations are refreshed here.
+    As in Pass 2, no peer-reviewed per-query ENERGY measurement covers the 2026
+    frontier, so the energy/water/carbon corpus stays pinned to the measured 2025
+    sources. Only dated pricing, model-card feasibility facts, and the
+    deployment's own adapter evaluations and the public synthetic benchmark
+    are refreshed here. No real-workload population quality comparison is
+    claimed.
 
 Run:  ../.venv/bin/python pass3_refresh.py
 """
@@ -37,6 +39,7 @@ import evidence as E
 import models as M
 import peft as P
 import adaptation as A
+import adaptation_eval as AE
 
 
 REFRESH_DATE = "2026-09-05"
@@ -199,22 +202,53 @@ def open_weights_refresh() -> Dict[str, object]:
             entry["fits_dgpu_training"] = P.select_method(
                 spec, V.DISCRETE_GPU, objective="capability").feasible
         rows[key] = entry
+    empirical = AE.summarize_file()
+    if empirical.get("available"):
+        pool = empirical["pooled"]
+        quality_comparison = {
+            "status": "MEASURED_SYNTHETIC_BENCHMARK",
+            "base_accuracy": pool["base_accuracy"]["model_mean"],
+            "adapted_accuracy": pool["adapted_accuracy"]["model_mean"],
+            "uplift_pp": pool["uplift_pp"]["model_mean"],
+            "cluster_bootstrap_95_ci": pool["uplift_pp"]["cluster_bootstrap_95_ci"],
+            "cluster_permutation_p_two_sided": pool[
+                "paired_cluster_permutation_p_two_sided"],
+            "limitation": (
+                "three model clusters, five synthetic classes, one physical "
+                "host; not a sampled user workload or human quality study"),
+        }
+        finding = (
+            "The public synthetic benchmark measures absolute held-out task "
+            f"accuracy change of {pool['uplift_pp']['model_mean']:+.1f} pp "
+            "across three model clusters. The result does not replace the "
+            "inherited real-workload ratios or validate independent devices."
+        )
+    else:
+        quality_comparison = {
+            "status": "NOT TESTED",
+            "reason": ("no public-safe matched multi-model, multi-task file "
+                       "with paired base, adapted, and frontier scores"),
+            "required_protocol": {
+                "models": 3,
+                "task_classes": ["extraction", "rag_qa", "summary",
+                                 "simple_code", "hard_reason"],
+                "tasks_per_class": 20,
+                "seeds": 3,
+            },
+        }
+        finding = (
+            "The public model card establishes that a 27B open-weights model "
+            "and a roughly 17 GB 4-bit distribution exist. One community "
+            "recipe supplies a single outside-data-centre feasibility anchor "
+            "for a multi-day 27B LoRA run. Neither source is a matched quality "
+            "experiment, so adaptation uplift remains NOT TESTED and the "
+            "Section VI capability ratios remain scenario inputs."
+        )
     return {
         "as_of": REFRESH_DATE,
         "models": rows,
-        "qwen38_reported_gains_vs_qwen36": D.QWEN38_GAINS,
-        "finding": (
-            "The open-weights tier a household can hold moved from 8B to 27B "
-            "between the first pass and this one, and it did so on an "
-            "unchanged architecture: Qwen3.8-27B reports Terminal-Bench 2.1 "
-            "63.4 -> 73.0 and OSWorld-Verified 63.9 -> 84.3 over Qwen3.6-27B "
-            "at the same published decoder size. That is the same mechanism "
-            "this pass tests at household scale - capability from data and "
-            "post-training rather than from parameters - operating at vendor "
-            "scale. It is the single most important input change to the study "
-            "since Pass 1, because every capability ratio in Section VI was "
-            "estimated for an 8B model."
-        ),
+        "quality_comparison": quality_comparison,
+        "finding": finding,
     }
 
 
@@ -233,7 +267,7 @@ def deployment_validation() -> Dict[str, object]:
                        "deployment's own artifacts to reproduce"),
         }
     return {
-        "status": "VALIDATED",
+        "status": "REPORTED ONLY",
         "runs_found": s["runs_found"],
         "runs_expected": s["runs_expected"],
         "dataset": s["dataset"],
@@ -241,7 +275,8 @@ def deployment_validation() -> Dict[str, object]:
         "E2_safety_direction": s["E2_safety_direction"],
         "E3_base_size_vs_data": s["E3_base_size_vs_data"],
         "scope": ("one deployment; aggregate probe scores only; no prompts, "
-                  "answers, screenshots or user content"),
+                  "answers, screenshots or user content; checkpoint lineage "
+                  "and task-level outputs are not independently auditable"),
     }
 
 
@@ -306,7 +341,7 @@ if __name__ == "__main__":
 
     dv = out["deployment_validation"]
     print(f"\ndeployment validation: {dv['status']}")
-    if dv["status"] == "VALIDATED":
+    if dv["status"] == "REPORTED ONLY":
         print(f"  {dv['runs_found']}/{dv['runs_expected']} adapter evaluations, "
               f"{dv['dataset']['train']} training samples")
         for k in ("E1_capability_lift", "E2_safety_direction",

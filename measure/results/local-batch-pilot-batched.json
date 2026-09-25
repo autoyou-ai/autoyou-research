@@ -1,0 +1,849 @@
+{
+  "schema_version": "2.0",
+  "harness": "measure/bench.py --batch-sizes",
+  "experiment": "concurrent request serving scaling; each batch contains independent HTTP requests to the same local model",
+  "protocol": {
+    "prompt": "You are summarising a technical document for an engineer. Explain, in plain prose and without lists, why moving a small language model from a data centre to a personal computer changes the energy arithmetic of a single query. Cover the cooling water, the idle overhead of shared infrastructure, and the fact that the personal computer was already powered on for other reasons. Be concrete and avoid slogans.",
+    "prompt_fillers": 0,
+    "filler": "The following background material is provided for context and does not change the question being asked. Consumer accelerators share a single memory pool between the processor and the graphics engine, so the rate at which weights can be streamed sets an upper bound on how fast tokens can be produced in a single stream. ",
+    "requested_tokens_per_request": 64,
+    "batch_sizes": [
+      1,
+      2,
+      4
+    ],
+    "reps": 2,
+    "temperature": 0,
+    "seed": 20260905,
+    "num_ctx": 4096,
+    "warmup_discarded": true,
+    "raw_mode": true,
+    "unique_nonce_per_request": true,
+    "concurrency": "ThreadPoolExecutor submits one HTTP request per concurrent user; Ollama num_batch is not used as a proxy for serving concurrency",
+    "power_scope": "one shared GPU board trace per batch window; host and idle power remain outside the trace",
+    "energy_allocation": "equal split across completed requests, reported as an allocation rather than a direct per-request measurement",
+    "incomplete_batch_policy": "a repetition with any failed request is retained and excluded from complete-batch summaries"
+  },
+  "system": {
+    "measured_at": "2026-09-14T23:12:20+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "python": "3.14.6",
+    "ollama_host": "http://127.0.0.1:11434",
+    "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+    "gpu": "AMD Radeon(TM) 8060S Graphics",
+    "ram_gb": 68.5,
+    "ollama_version": "0.33.3"
+  },
+  "power_sensor": {
+    "available": false,
+    "tool": null,
+    "reason": "no power sensor reachable from this interpreter: nvidia-smi, amd-smi and rocm-smi are all absent. On this platform the board/package rail is only readable through a kernel-mode helper (AMD uProf, LibreHardwareMonitor), which this harness deliberately does not install. Energy figures derived from these timings therefore carry a modelled P and say so."
+  },
+  "idle_power": {
+    "measured": false,
+    "reason": "no power sensor"
+  },
+  "batches": [
+    {
+      "model": "ministral-3:3b",
+      "batch_size": 1,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 2,
+      "complete_reps": 2,
+      "requested_tokens_per_request": 64,
+      "requested_concurrent_requests": 1,
+      "median_aggregate_output_tok_s": 44.38411589927171,
+      "aggregate_output_tok_s_spread": {
+        "min": 39.26250777718536,
+        "max": 49.50572402135806,
+        "stdev": 7.243047667414714
+      },
+      "median_request_wall_s": 1.4550415,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 1.6300538000068627,
+          "aggregate_output_tokens": 64,
+          "aggregate_output_tok_s": 39.26250777718536,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 1.618442,
+              "eval_tokens": 64,
+              "eval_s": 1.553719,
+              "gen_tok_s": 41.19148958080579,
+              "prompt_tokens": 88,
+              "prefill_s": 0.01679,
+              "prefill_tok_s": 5241.215008933889
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 1.292779800016433,
+          "aggregate_output_tokens": 64,
+          "aggregate_output_tok_s": 49.50572402135806,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 1.291641,
+              "eval_tokens": 64,
+              "eval_s": 1.217575,
+              "gen_tok_s": 52.56349711516744,
+              "prompt_tokens": 88,
+              "prefill_s": 0.024544,
+              "prefill_tok_s": 3585.3976531942635
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "ministral-3:3b",
+      "batch_size": 2,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 2,
+      "complete_reps": 2,
+      "requested_tokens_per_request": 64,
+      "requested_concurrent_requests": 2,
+      "median_aggregate_output_tok_s": 41.50742398182237,
+      "aggregate_output_tok_s_spread": {
+        "min": 39.479785963955116,
+        "max": 43.535061999689624,
+        "stdev": 2.8675131844511705
+      },
+      "median_request_wall_s": 2.315485,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 3.242165500007104,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 39.479785963955116,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 3.240839,
+              "eval_tokens": 64,
+              "eval_s": 1.477672,
+              "gen_tok_s": 43.3113708590269,
+              "prompt_tokens": 88,
+              "prefill_s": 0.025472,
+              "prefill_tok_s": 3454.7738693467336
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 1.693347,
+              "eval_tokens": 64,
+              "eval_s": 1.56762,
+              "gen_tok_s": 40.826220640206174,
+              "prompt_tokens": 88,
+              "prefill_s": 0.09069,
+              "prefill_tok_s": 970.3385158231337
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 2.9401588999899104,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 43.535061999689624,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 1.159937,
+              "eval_tokens": 64,
+              "eval_s": 1.086906,
+              "gen_tok_s": 58.8827368696097,
+              "prompt_tokens": 88,
+              "prefill_s": 0.023284,
+              "prefill_tok_s": 3779.4193437553686
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 2.937623,
+              "eval_tokens": 64,
+              "eval_s": 1.687038,
+              "gen_tok_s": 37.93631204513473,
+              "prompt_tokens": 88,
+              "prefill_s": 0.066342,
+              "prefill_tok_s": 1326.4598595158423
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "ministral-3:3b",
+      "batch_size": 4,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "3.8B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 26,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 2,
+      "complete_reps": 2,
+      "requested_tokens_per_request": 64,
+      "requested_concurrent_requests": 4,
+      "median_aggregate_output_tok_s": 47.09898805449399,
+      "aggregate_output_tok_s_spread": {
+        "min": 45.42363528366571,
+        "max": 48.77434082532227,
+        "stdev": 2.369306610264697
+      },
+      "median_request_wall_s": 3.4796225,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 5.24866139999358,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 48.77434082532227,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 2.645109,
+              "eval_tokens": 64,
+              "eval_s": 1.3763,
+              "gen_tok_s": 46.50148950083557,
+              "prompt_tokens": 88,
+              "prefill_s": 0.022098,
+              "prefill_tok_s": 3982.2608380848947
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 1.204684,
+              "eval_tokens": 64,
+              "eval_s": 1.137564,
+              "gen_tok_s": 56.26057083381682,
+              "prompt_tokens": 88,
+              "prefill_s": 0.020477,
+              "prefill_tok_s": 4297.504517263271
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 3.990275,
+              "eval_tokens": 64,
+              "eval_s": 1.283025,
+              "gen_tok_s": 49.882114534011414,
+              "prompt_tokens": 88,
+              "prefill_s": 0.04076,
+              "prefill_tok_s": 2158.9793915603536
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 5.24498,
+              "eval_tokens": 64,
+              "eval_s": 1.124302,
+              "gen_tok_s": 56.92420719699867,
+              "prompt_tokens": 88,
+              "prefill_s": 0.104878,
+              "prefill_tok_s": 839.0701577070502
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 5.635832500003744,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 45.42363528366571,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 2.96897,
+              "eval_tokens": 64,
+              "eval_s": 1.076916,
+              "gen_tok_s": 59.42896196175003,
+              "prompt_tokens": 88,
+              "prefill_s": 0.024841,
+              "prefill_tok_s": 3542.5304939414677
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 4.277129,
+              "eval_tokens": 64,
+              "eval_s": 1.256489,
+              "gen_tok_s": 50.93558320048962,
+              "prompt_tokens": 88,
+              "prefill_s": 0.01469,
+              "prefill_tok_s": 5990.469707283866
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 1.822822,
+              "eval_tokens": 64,
+              "eval_s": 1.727022,
+              "gen_tok_s": 37.058010841784295,
+              "prompt_tokens": 88,
+              "prefill_s": 0.060596,
+              "prefill_tok_s": 1452.241072017955
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 5.632475,
+              "eval_tokens": 64,
+              "eval_s": 1.241454,
+              "gen_tok_s": 51.55245381625094,
+              "prompt_tokens": 88,
+              "prefill_s": 0.086686,
+              "prefill_tok_s": 1015.1581570265095
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "ministral-3:8b",
+      "batch_size": 1,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 2,
+      "complete_reps": 2,
+      "requested_tokens_per_request": 64,
+      "requested_concurrent_requests": 1,
+      "median_aggregate_output_tok_s": 22.761569755908603,
+      "aggregate_output_tok_s_spread": {
+        "min": 21.679838579808628,
+        "max": 23.84330093200858,
+        "stdev": 1.529798900082386
+      },
+      "median_request_wall_s": 2.81703,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 2.6841921000159346,
+          "aggregate_output_tokens": 64,
+          "aggregate_output_tok_s": 23.84330093200858,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 2.682991,
+              "eval_tokens": 64,
+              "eval_s": 2.495188,
+              "gen_tok_s": 25.64936990719737,
+              "prompt_tokens": 88,
+              "prefill_s": 0.143397,
+              "prefill_tok_s": 613.6808998793559
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 1,
+          "completed_requests": 1,
+          "complete": true,
+          "batch_wall_s": 2.9520515000331216,
+          "aggregate_output_tokens": 64,
+          "aggregate_output_tok_s": 21.679838579808628,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 2.951069,
+              "eval_tokens": 64,
+              "eval_s": 2.795205,
+              "gen_tok_s": 22.896352861418034,
+              "prompt_tokens": 88,
+              "prefill_s": 0.115961,
+              "prefill_tok_s": 758.8758289424893
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "ministral-3:8b",
+      "batch_size": 2,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 2,
+      "complete_reps": 2,
+      "requested_tokens_per_request": 64,
+      "requested_concurrent_requests": 2,
+      "median_aggregate_output_tok_s": 24.49974827894666,
+      "aggregate_output_tok_s_spread": {
+        "min": 24.07158302029974,
+        "max": 24.927913537593582,
+        "stdev": 0.6055171157154593
+      },
+      "median_request_wall_s": 4.016811,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 5.134805999987293,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 24.927913537593582,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 2.887681,
+              "eval_tokens": 64,
+              "eval_s": 2.798202,
+              "gen_tok_s": 22.871829839303953,
+              "prompt_tokens": 88,
+              "prefill_s": 0.033277,
+              "prefill_tok_s": 2644.4691528683475
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 5.132833,
+              "eval_tokens": 64,
+              "eval_s": 2.098451,
+              "gen_tok_s": 30.498686888566855,
+              "prompt_tokens": 88,
+              "prefill_s": 0.116288,
+              "prefill_tok_s": 756.7418822234453
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 2,
+          "completed_requests": 2,
+          "complete": true,
+          "batch_wall_s": 5.31747330003418,
+          "aggregate_output_tokens": 128,
+          "aggregate_output_tok_s": 24.07158302029974,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 5.316317,
+              "eval_tokens": 64,
+              "eval_s": 2.329959,
+              "gen_tok_s": 27.468294506469856,
+              "prompt_tokens": 88,
+              "prefill_s": 0.032414,
+              "prefill_tok_s": 2714.8762880236936
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 2.900789,
+              "eval_tokens": 64,
+              "eval_s": 2.776035,
+              "gen_tok_s": 23.054464370946334,
+              "prompt_tokens": 88,
+              "prefill_s": 0.0874,
+              "prefill_tok_s": 1006.8649885583524
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    },
+    {
+      "model": "ministral-3:8b",
+      "batch_size": 4,
+      "ok": true,
+      "model_info": {
+        "available": true,
+        "architecture": "mistral3",
+        "parameter_size": "8.9B",
+        "quantization": "Q4_K_M",
+        "context_length": 262144,
+        "families": [
+          "mistral3"
+        ],
+        "block_count": 34,
+        "expert_count": null,
+        "expert_used_count": null,
+        "mixture_of_experts": false,
+        "expert_active_fraction": null,
+        "nextn_predict_layers": null,
+        "per_layer_embedding_input": null,
+        "multimodal_tower": true,
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools"
+        ]
+      },
+      "reps": 2,
+      "complete_reps": 2,
+      "requested_tokens_per_request": 64,
+      "requested_concurrent_requests": 4,
+      "median_aggregate_output_tok_s": 23.86299489819691,
+      "aggregate_output_tok_s_spread": {
+        "min": 23.505357013228057,
+        "max": 24.220632783165765,
+        "stdev": 0.5057763473413824
+      },
+      "median_request_wall_s": 6.710324,
+      "median_equal_split_energy_wh_per_request": null,
+      "energy_measurements_n": 0,
+      "batches": [
+        {
+          "rep": 1,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 10.56950089999009,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 24.220632783165765,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 2.19816,
+              "eval_tokens": 64,
+              "eval_s": 2.093114,
+              "gen_tok_s": 30.576452118709256,
+              "prompt_tokens": 88,
+              "prefill_s": 0.032976999,
+              "prefill_tok_s": 2668.5266297275866
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 5.099566,
+              "eval_tokens": 64,
+              "eval_s": 2.819244,
+              "gen_tok_s": 22.701121293509892,
+              "prompt_tokens": 88,
+              "prefill_s": 0.034136,
+              "prefill_tok_s": 2577.923599718772
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 10.566436,
+              "eval_tokens": 64,
+              "eval_s": 2.637989,
+              "gen_tok_s": 24.260904802863088,
+              "prompt_tokens": 88,
+              "prefill_s": 0.132247999,
+              "prefill_tok_s": 665.4164952620569
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 7.76516,
+              "eval_tokens": 64,
+              "eval_s": 2.522407,
+              "gen_tok_s": 25.37259054545916,
+              "prompt_tokens": 88,
+              "prefill_s": 0.110418,
+              "prefill_tok_s": 796.9715082685793
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        },
+        {
+          "rep": 2,
+          "batch_size_requested": 4,
+          "completed_requests": 4,
+          "complete": true,
+          "batch_wall_s": 10.891134299978148,
+          "aggregate_output_tokens": 256,
+          "aggregate_output_tok_s": 23.505357013228057,
+          "requests": [
+            {
+              "request": 0,
+              "ok": true,
+              "wall_s": 8.199159,
+              "eval_tokens": 64,
+              "eval_s": 2.458574,
+              "gen_tok_s": 26.03134988005242,
+              "prompt_tokens": 88,
+              "prefill_s": 0.034425,
+              "prefill_tok_s": 2556.2817719680465
+            },
+            {
+              "request": 1,
+              "ok": true,
+              "wall_s": 5.655488,
+              "eval_tokens": 64,
+              "eval_s": 2.828283,
+              "gen_tok_s": 22.628570054693963,
+              "prompt_tokens": 88,
+              "prefill_s": 0.036572,
+              "prefill_tok_s": 2406.212402931204
+            },
+            {
+              "request": 2,
+              "ok": true,
+              "wall_s": 2.743812,
+              "eval_tokens": 64,
+              "eval_s": 2.486183,
+              "gen_tok_s": 25.74227239105086,
+              "prompt_tokens": 88,
+              "prefill_s": 0.214245,
+              "prefill_tok_s": 410.7447081612173
+            },
+            {
+              "request": 3,
+              "ok": true,
+              "wall_s": 10.887921,
+              "eval_tokens": 64,
+              "eval_s": 2.488969,
+              "gen_tok_s": 25.71345806235433,
+              "prompt_tokens": 88,
+              "prefill_s": 0.171963,
+              "prefill_tok_s": 511.7379901490437
+            }
+          ],
+          "power": {
+            "measured": false,
+            "reason": "fewer than two power samples"
+          },
+          "energy": {
+            "measured": false,
+            "reason": "batch power was not measured"
+          }
+        }
+      ],
+      "interpretation": "Aggregate throughput is directly measured over the concurrent batch window. Per-request energy is an equal allocation of the shared batch trace, not an individually identified energy value. Do not compare it with a single-request trace without matching host, idle, batching and power boundaries."
+    }
+  ]
+}

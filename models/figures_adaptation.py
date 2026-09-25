@@ -24,6 +24,7 @@ import evidence as E
 import models as M
 import peft as P
 import adaptation as A
+import adaptation_eval as AE
 from hypotheses import CAP_RATIOS
 from figures import (
     save, _despine, INK, MUTED, GRID, EDGE, EDGE_D, CLOUD, HEAVY, ACCENT,
@@ -75,7 +76,7 @@ def fig_memory_wall():
     ax.legend(frameon=False, loc="upper left", fontsize=9)
     _despine(ax); ax.grid(axis="x", visible=False)
     fig.text(0.5, -0.04,
-             "Model predicts 79.5 GB for the one published 27B run reported at ~80 GB "
+             "Model predicts 79.5 GB for the one publicly documented 27B run reported at ~80 GB "
              "(-0.6%). Quantization moves the 27B jobs under a 24 GB ceiling; only the "
              "unified-memory class clears them in bf16.",
              ha="center", fontsize=8, color=MUTED)
@@ -127,7 +128,7 @@ def fig_adaptation_breakeven():
 
 # --------------------------------------------------------------------------- #
 def fig_quality_vs_coverage():
-    """The Pass-3 headline: adaptation buys quality, not coverage, at alpha=0.70."""
+    """Pair the inherited coverage scenario with the measured task result."""
     sweep = A.alpha_sweep(CAP_RATIOS)
     alphas = np.array([float(a) for a in sweep])
     base = np.array([sweep[a]["base"] for a in sweep])
@@ -151,49 +152,87 @@ def fig_quality_vs_coverage():
     knee = D.ALPHA_COVERAGE_KNEE.value
     ax.axvspan(knee, alphas.max(), color=ACCENT, alpha=0.07, zorder=1)
     ax.text((knee + alphas.max()) / 2, 0.30,
-            "adaptation buys\nCOVERAGE here", ha="center", fontsize=8.4,
+            "scenario buys\nCOVERAGE here", ha="center", fontsize=8.4,
             color=ACCENT, fontweight="bold")
     ax.set_xlabel("Acceptance threshold alpha  (SLM quality / frontier)")
     ax.set_ylabel("f$_s$  -  workload served locally")
     ax.set_ylim(0.25, 1.0)
-    ax.set_title("Coverage responds only to a demanding bar")
+    ax.set_title("Scenario coverage responds only to a demanding bar")
     ax.legend(frameon=False, fontsize=8.6, loc="lower left")
     _despine(ax)
 
     q = A.quality_uplift(CAP_RATIOS)
-    bars = [("Coverage\n(f$_s$)", q["base"]["served_fraction"],
-             q["adapted"]["served_fraction"]),
-            ("Mean quality\non served work", q["base"]["mean_ratio_served"],
-             q["adapted"]["mean_ratio_served"])]
+    empirical = AE.summarize_file()
+    if empirical.get("available"):
+        pooled = empirical["pooled"]
+        bars = [
+            ("Base\naccuracy", pooled["base_accuracy"]["model_mean"],
+             CLOUD),
+            ("Adapted\naccuracy", pooled["adapted_accuracy"]["model_mean"],
+             EDGE_D),
+            ("Reference\naccuracy", pooled["frontier_accuracy"]["model_mean"],
+             ACCENT),
+        ]
+    else:
+        bars = [("Coverage\n(f$_s$)", q["base"]["served_fraction"],
+                 q["adapted"]["served_fraction"]),
+                ("Mean quality\non served work", q["base"]["mean_ratio_served"],
+                 q["adapted"]["mean_ratio_served"])]
     x = np.arange(len(bars)); w = 0.35
-    ax2.bar(x - w / 2, [b[1] for b in bars], w, color=CLOUD, zorder=3,
-            label="unadapted")
-    ax2.bar(x + w / 2, [b[2] for b in bars], w, color=EDGE_D, zorder=3,
-            label="adapted")
-    for xi, b in enumerate(bars):
-        ax2.text(xi - w / 2, b[1] + 0.02, f"{b[1]:.0%}", ha="center",
-                 fontsize=8.6, color=INK)
-        ax2.text(xi + w / 2, b[2] + 0.02, f"{b[2]:.0%}", ha="center",
-                 fontsize=8.6, color=INK)
-        delta = (b[2] - b[1]) * 100
-        ax2.text(xi, 0.10, f"{delta:+.1f} pp", ha="center", fontsize=10,
-                 fontweight="bold", color="white",
-                 bbox=dict(boxstyle="round,pad=0.28", lw=0,
-                           fc=(EDGE_D if delta > 0.5 else MUTED)))
+    if empirical.get("available"):
+        ax2.bar(x, [b[1] for b in bars], w, color=[b[2] for b in bars],
+                zorder=3)
+        for xi, b in enumerate(bars):
+            ax2.text(xi, b[1] + 0.035, f"{b[1]:.1%}", ha="center",
+                     fontsize=8.6, color=INK)
+        gain = empirical["pooled"]["uplift_pp"]["model_mean"]
+        ci = empirical["pooled"]["uplift_pp"]["cluster_bootstrap_95_ci"]
+        ax2.text(1, 0.08, f"adapted - base: {gain:+.1f} pp\n"
+                 f"cluster bootstrap: {ci['low']:.1f} to {ci['high']:.1f} pp",
+                 ha="center", va="bottom", fontsize=8.2, color="white",
+                 bbox=dict(boxstyle="round,pad=0.28", lw=0, fc=EDGE_D))
+    else:
+        ax2.bar(x - w / 2, [b[1] for b in bars], w, color=CLOUD, zorder=3,
+                label="unadapted")
+        ax2.bar(x + w / 2, [b[2] for b in bars], w, color=EDGE_D, zorder=3,
+                label="adapted")
+        for xi, b in enumerate(bars):
+            ax2.text(xi - w / 2, b[1] + 0.02, f"{b[1]:.0%}", ha="center",
+                     fontsize=8.6, color=INK)
+            ax2.text(xi + w / 2, b[2] + 0.02, f"{b[2]:.0%}", ha="center",
+                     fontsize=8.6, color=INK)
+            delta = (b[2] - b[1]) * 100
+            ax2.text(xi, 0.10, f"{delta:+.1f} pp", ha="center", fontsize=10,
+                     fontweight="bold", color="white",
+                     bbox=dict(boxstyle="round,pad=0.28", lw=0,
+                               fc=(EDGE_D if delta > 0.5 else MUTED)))
     ax2.set_xticks(x); ax2.set_xticklabels([b[0] for b in bars], fontsize=9)
-    ax2.set_ylim(0, 1.30)
+    ax2.set_ylim(0, 1.30 if not empirical.get("available") else 1.16)
     ax2.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
-    ax2.set_title(f"At alpha = {a0:.2f}", pad=26)
-    ax2.legend(frameon=False, fontsize=8.6, loc="upper center", ncol=2,
-               bbox_to_anchor=(0.5, 1.06))
+    ax2.set_ylabel("Held-out task accuracy" if empirical.get("available") else "")
+    ax2.set_title("Measured synthetic benchmark" if empirical.get("available")
+                  else f"Scenario at alpha = {a0:.2f}", pad=26)
+    if not empirical.get("available"):
+        ax2.legend(frameon=False, fontsize=8.6, loc="upper center", ncol=2,
+                   bbox_to_anchor=(0.5, 1.06))
     _despine(ax2); ax2.grid(axis="x", visible=False)
 
-    fig.text(0.5, -0.03,
-             f"Illustrative capability model, not measured quality: coverage moves "
-             f"{q['coverage_gain_pp']:+.1f} pp. What moves is quality, "
-             f"{q['quality_gain_pp']:+.1f} pp, closing "
-             f"{q['gap_to_frontier_closed']:.0%} of the remaining gap to the frontier.",
-             ha="center", fontsize=8, color=MUTED)
+    if empirical.get("available"):
+        p = empirical["pooled"]
+        fig.text(0.5, -0.03,
+                 f"Left: inherited workload-ratio scenario, not a sampled workload. "
+                 f"Right: measured accuracy on 300 model-task observations from "
+                 f"three models and five synthetic classes; exact cluster sign-flip "
+                 f"p={p['paired_cluster_permutation_p_two_sided']:.3f}. Neither panel "
+                 f"is a human quality study or an independent device replication.",
+                 ha="center", fontsize=8, color=MUTED)
+    else:
+        fig.text(0.5, -0.03,
+                 f"Exploratory capability scenario, not measured quality: coverage moves "
+                 f"{q['coverage_gain_pp']:+.1f} pp. The scenario quality change is "
+                 f"{q['quality_gain_pp']:+.1f} pp, closing "
+                 f"{q['gap_to_frontier_closed']:.0%} of the remaining gap to the frontier.",
+                 ha="center", fontsize=8, color=MUTED)
     fig.tight_layout()
     save(fig, "fig_quality_vs_coverage")
 

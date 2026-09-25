@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "description": "Public-safe provenance for raw measurement files. Identifiers are study labels, not personal identifiers.",
+  "independence_rule": {
+    "independent_replication_requires": [
+      "different physical target_id",
+      "different operator_id",
+      "different environment_id"
+    ],
+    "same_target_replay_classification": "repeatability",
+    "missing_identity_classification": "unresolved"
+  },
+  "files": {
+    "amd-8060s-strixhalo.json": {
+      "target_id": "amd-8060s-strixhalo-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-1",
+      "collection_role": "reference_single_request"
+    },
+    "amd-8060s-strixhalo-ladder.json": {
+      "target_id": "amd-8060s-strixhalo-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-1",
+      "collection_role": "reference_ladder"
+    },
+    "amd-8060s-standard-batched.json": {
+      "target_id": "amd-8060s-strixhalo-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-1",
+      "collection_role": "standard_concurrent_batch"
+    },
+    "amd-8060s-large-20260915-batched.json": {
+      "target_id": "amd-8060s-strixhalo-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-1",
+      "collection_role": "standard_concurrent_batch"
+    },
+    "local-batch-pilot-batched.json": {
+      "target_id": "amd-8060s-strixhalo-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-1",
+      "collection_role": "pilot_concurrent_batch"
+    },
+    "rtx5070.json": {
+      "target_id": "nvidia-rtx5070-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-2",
+      "collection_role": "reference_single_request"
+    },
+    "rtx5070-study.json": {
+      "target_id": "nvidia-rtx5070-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-2",
+      "collection_role": "primary_single_request"
+    },
+    "rtx5070-replication.json": {
+      "target_id": "nvidia-rtx5070-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-2",
+      "collection_role": "same_target_repeatability"
+    },
+    "rtx5070-ladder.json": {
+      "target_id": "nvidia-rtx5070-local-1",
+      "operator_id": "author-operator-1",
+      "environment_id": "win11-ollama-local-2",
+      "collection_role": "reference_ladder"
+    }
+  },
+  "contributor_template": {
+    "target_id": "<stable-physical-target-label>",
+    "operator_id": "<anonymous-operator-label>",
+    "environment_id": "<runtime-and-os-label>",
+    "collection_role": "independent_replication"
+  }
+}

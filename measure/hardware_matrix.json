@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "edge-inference-v2",
+  "status": "planning",
+  "minimum_independent_physical_targets": 3,
+  "provenance_manifest": "measure/replication_manifest.json",
+  "observed_physical_targets": 2,
+  "observed_independent_targets": 0,
+  "observed_device_classes": [
+    "AMD unified-memory APU",
+    "NVIDIA consumer discrete GPU"
+  ],
+  "pending_device_classes": [
+    "NVIDIA higher-memory discrete GPU",
+    "Apple unified-memory device",
+    "ARM or other unified-memory device"
+  ],
+  "measurement_boundary": {
+    "preferred": "whole-system wall power over the complete batch window",
+    "accepted_secondary": "accelerator board telemetry with host and PSU exclusions stated",
+    "never_silent": true
+  },
+  "targets": [
+    {
+      "id": "amd-8060s-strixhalo",
+      "status": "measured_reference_timing_only",
+      "raw_records": [
+        "measure/results/amd-8060s-strixhalo.json",
+        "measure/results/amd-8060s-strixhalo-ladder.json",
+        "measure/results/local-batch-pilot-batched.json",
+        "measure/results/amd-8060s-standard-batched.json",
+        "measure/results/amd-8060s-large-20260915-batched.json"
+      ],
+      "independent_operator": false,
+      "batch_result": {
+        "path": "measure/results/amd-8060s-standard-batched.json",
+        "status": "timing_only_standard_matrix",
+        "repetitions_per_model_and_batch": 10,
+        "models": ["ministral-3:3b", "ministral-3:8b"],
+        "batch_sizes": [1, 2, 4, 8],
+        "power_measured": false
+      },
+      "additional_batch_result": {
+        "path": "measure/results/amd-8060s-large-20260915-batched.json",
+        "status": "timing_only_large_model_matrix",
+        "repetitions_per_model_and_batch": 10,
+        "models": [
+          "qwen3.8:27b"
+        ],
+        "batch_sizes": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "power_measured": false
+      },
+      "required_follow_up": "add whole-system wall-meter capture; repeat only if a protocol deviation is found"
+    },
+    {
+      "id": "nvidia-rtx5070",
+      "status": "measured_reference",
+      "raw_records": [
+        "measure/results/rtx5070-study.json",
+        "measure/results/rtx5070-replication.json",
+        "measure/results/rtx5070-ladder.json"
+      ],
+      "independent_operator": false,
+      "batch_result": null,
+      "required_follow_up": "concurrent batch run and independent physical target"
+    },
+    {
+      "id": "nvidia-higher-memory-gpu",
+      "status": "target_pending",
+      "raw_records": [],
+      "independent_operator": null,
+      "batch_result": null,
+      "required_follow_up": "record exact GPU, VRAM, driver, runtime, model digest and wall power"
+    },
+    {
+      "id": "apple-unified-memory",
+      "status": "target_pending",
+      "raw_records": [],
+      "independent_operator": null,
+      "batch_result": null,
+      "required_follow_up": "record exact device, memory, backend, runtime and wall power"
+    },
+    {
+      "id": "arm-or-other-unified-memory",
+      "status": "target_pending",
+      "raw_records": [],
+      "independent_operator": null,
+      "batch_result": null,
+      "required_follow_up": "record exact device, backend, runtime and wall power"
+    }
+  ],
+  "do_not_claim_until_complete": [
+    "consumer hardware population performance",
+    "batched edge energy advantage",
+    "independent laboratory replication",
+    "cross-vendor device ranking"
+  ]
+}

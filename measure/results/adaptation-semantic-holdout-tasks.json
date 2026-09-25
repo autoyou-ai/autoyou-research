@@ -1,0 +1,1419 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "public-synthetic-operations-mcq-semantic-holdout-v1",
+  "generator": {
+    "name": "models/adaptation_semantic_holdout.py",
+    "seed": 20260915,
+    "task_classes": [
+      "extraction",
+      "rag_qa",
+      "summary",
+      "simple_code",
+      "hard_reason"
+    ],
+    "tasks_per_class": 20,
+    "note": "New synthetic records and task formats; no primary evaluation records, prompts, or answers are copied."
+  },
+  "tasks": [
+    {
+      "task_id": "semantic-holdout-extraction-000",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7000 | steward: Alder | zone: south-1 | impact: duplicate alert | state: review.\n\nOptions:\nA. Basil\nB. Alder\nC. Coral\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Basil",
+        "B": "Alder",
+        "C": "Coral",
+        "D": "Dahlia"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-001",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7001 | steward: Basil | zone: east-4 | impact: stale index | state: review.\n\nOptions:\nA. Alder\nB. Coral\nC. Basil\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Coral",
+        "C": "Basil",
+        "D": "Dahlia"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-002",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7002 | steward: Coral | zone: north-2 | impact: late receipt | state: review.\n\nOptions:\nA. Alder\nB. Basil\nC. Dahlia\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Basil",
+        "C": "Dahlia",
+        "D": "Coral"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-003",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7003 | steward: Dahlia | zone: west-3 | impact: delayed export | state: review.\n\nOptions:\nA. Dahlia\nB. Alder\nC. Basil\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Dahlia",
+        "B": "Alder",
+        "C": "Basil",
+        "D": "Coral"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-004",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7004 | steward: Ember | zone: south-1 | impact: duplicate alert | state: review.\n\nOptions:\nA. Alder\nB. Ember\nC. Basil\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Ember",
+        "C": "Basil",
+        "D": "Coral"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-005",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7005 | steward: Fennel | zone: east-4 | impact: stale index | state: review.\n\nOptions:\nA. Alder\nB. Basil\nC. Fennel\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Basil",
+        "C": "Fennel",
+        "D": "Coral"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-006",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7006 | steward: Alder | zone: north-2 | impact: late receipt | state: review.\n\nOptions:\nA. Basil\nB. Coral\nC. Dahlia\nD. Alder\n\nAnswer:",
+      "options": {
+        "A": "Basil",
+        "B": "Coral",
+        "C": "Dahlia",
+        "D": "Alder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-007",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7007 | steward: Basil | zone: west-3 | impact: delayed export | state: review.\n\nOptions:\nA. Basil\nB. Alder\nC. Coral\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Basil",
+        "B": "Alder",
+        "C": "Coral",
+        "D": "Dahlia"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-008",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7008 | steward: Coral | zone: south-1 | impact: duplicate alert | state: review.\n\nOptions:\nA. Alder\nB. Coral\nC. Basil\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Coral",
+        "C": "Basil",
+        "D": "Dahlia"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-009",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7009 | steward: Dahlia | zone: east-4 | impact: stale index | state: review.\n\nOptions:\nA. Alder\nB. Basil\nC. Dahlia\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Basil",
+        "C": "Dahlia",
+        "D": "Coral"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-010",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7010 | steward: Ember | zone: north-2 | impact: late receipt | state: review.\n\nOptions:\nA. Alder\nB. Basil\nC. Coral\nD. Ember\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Basil",
+        "C": "Coral",
+        "D": "Ember"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-011",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7011 | steward: Fennel | zone: west-3 | impact: delayed export | state: review.\n\nOptions:\nA. Fennel\nB. Alder\nC. Basil\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Fennel",
+        "B": "Alder",
+        "C": "Basil",
+        "D": "Coral"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-012",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7012 | steward: Alder | zone: south-1 | impact: duplicate alert | state: review.\n\nOptions:\nA. Basil\nB. Alder\nC. Coral\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Basil",
+        "B": "Alder",
+        "C": "Coral",
+        "D": "Dahlia"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-013",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7013 | steward: Basil | zone: east-4 | impact: stale index | state: review.\n\nOptions:\nA. Alder\nB. Coral\nC. Basil\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Coral",
+        "C": "Basil",
+        "D": "Dahlia"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-014",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7014 | steward: Coral | zone: north-2 | impact: late receipt | state: review.\n\nOptions:\nA. Alder\nB. Basil\nC. Dahlia\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Basil",
+        "C": "Dahlia",
+        "D": "Coral"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-015",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7015 | steward: Dahlia | zone: west-3 | impact: delayed export | state: review.\n\nOptions:\nA. Dahlia\nB. Alder\nC. Basil\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Dahlia",
+        "B": "Alder",
+        "C": "Basil",
+        "D": "Coral"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-016",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7016 | steward: Ember | zone: south-1 | impact: duplicate alert | state: review.\n\nOptions:\nA. Alder\nB. Ember\nC. Basil\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Ember",
+        "C": "Basil",
+        "D": "Coral"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-017",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7017 | steward: Fennel | zone: east-4 | impact: stale index | state: review.\n\nOptions:\nA. Alder\nB. Basil\nC. Fennel\nD. Coral\n\nAnswer:",
+      "options": {
+        "A": "Alder",
+        "B": "Basil",
+        "C": "Fennel",
+        "D": "Coral"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-018",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7018 | steward: Alder | zone: north-2 | impact: late receipt | state: review.\n\nOptions:\nA. Basil\nB. Coral\nC. Dahlia\nD. Alder\n\nAnswer:",
+      "options": {
+        "A": "Basil",
+        "B": "Coral",
+        "C": "Dahlia",
+        "D": "Alder"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-extraction-019",
+      "split": "semantic_holdout",
+      "task_class": "extraction",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nRead the incident card and identify the assigned steward.\nCase CASE-7019 | steward: Basil | zone: west-3 | impact: delayed export | state: review.\n\nOptions:\nA. Basil\nB. Alder\nC. Coral\nD. Dahlia\n\nAnswer:",
+      "options": {
+        "A": "Basil",
+        "B": "Alder",
+        "C": "Coral",
+        "D": "Dahlia"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-000",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R2: the archive service sends escalation to channel blue-room; it rotates keys every 14 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-001",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R3: the billing service sends escalation to channel amber-call; it rotates keys every 15 days.\n\nOptions:\nA. blue-room\nB. green-pager\nC. amber-call\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "blue-room",
+        "B": "green-pager",
+        "C": "amber-call",
+        "D": "violet-mail"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-002",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R4: the catalog service sends escalation to channel violet-mail; it rotates keys every 16 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-003",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R5: the dispatch service sends escalation to channel green-pager; it rotates keys every 17 days.\n\nOptions:\nA. green-pager\nB. amber-call\nC. blue-room\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "green-pager",
+        "B": "amber-call",
+        "C": "blue-room",
+        "D": "violet-mail"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-004",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R6: the identity service sends escalation to channel blue-room; it rotates keys every 14 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-005",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R7: the archive service sends escalation to channel amber-call; it rotates keys every 15 days.\n\nOptions:\nA. blue-room\nB. green-pager\nC. amber-call\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "blue-room",
+        "B": "green-pager",
+        "C": "amber-call",
+        "D": "violet-mail"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-006",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R8: the billing service sends escalation to channel violet-mail; it rotates keys every 16 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-007",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R2: the catalog service sends escalation to channel green-pager; it rotates keys every 17 days.\n\nOptions:\nA. green-pager\nB. amber-call\nC. blue-room\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "green-pager",
+        "B": "amber-call",
+        "C": "blue-room",
+        "D": "violet-mail"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-008",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R3: the dispatch service sends escalation to channel blue-room; it rotates keys every 14 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-009",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R4: the identity service sends escalation to channel amber-call; it rotates keys every 15 days.\n\nOptions:\nA. blue-room\nB. green-pager\nC. amber-call\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "blue-room",
+        "B": "green-pager",
+        "C": "amber-call",
+        "D": "violet-mail"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-010",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R5: the archive service sends escalation to channel violet-mail; it rotates keys every 16 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-011",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R6: the billing service sends escalation to channel green-pager; it rotates keys every 17 days.\n\nOptions:\nA. green-pager\nB. amber-call\nC. blue-room\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "green-pager",
+        "B": "amber-call",
+        "C": "blue-room",
+        "D": "violet-mail"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-012",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R7: the catalog service sends escalation to channel blue-room; it rotates keys every 14 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-013",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R8: the dispatch service sends escalation to channel amber-call; it rotates keys every 15 days.\n\nOptions:\nA. blue-room\nB. green-pager\nC. amber-call\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "blue-room",
+        "B": "green-pager",
+        "C": "amber-call",
+        "D": "violet-mail"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-014",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R2: the identity service sends escalation to channel violet-mail; it rotates keys every 16 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-015",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R3: the archive service sends escalation to channel green-pager; it rotates keys every 17 days.\n\nOptions:\nA. green-pager\nB. amber-call\nC. blue-room\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "green-pager",
+        "B": "amber-call",
+        "C": "blue-room",
+        "D": "violet-mail"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-016",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R4: the billing service sends escalation to channel blue-room; it rotates keys every 14 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-017",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R5: the catalog service sends escalation to channel amber-call; it rotates keys every 15 days.\n\nOptions:\nA. blue-room\nB. green-pager\nC. amber-call\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "blue-room",
+        "B": "green-pager",
+        "C": "amber-call",
+        "D": "violet-mail"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-018",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R6: the dispatch service sends escalation to channel violet-mail; it rotates keys every 16 days.\n\nOptions:\nA. amber-call\nB. blue-room\nC. green-pager\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "amber-call",
+        "B": "blue-room",
+        "C": "green-pager",
+        "D": "violet-mail"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-rag_qa-019",
+      "split": "semantic_holdout",
+      "task_class": "rag_qa",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nUse only the policy note. Which escalation channel is registered?\nPolicy note R7: the identity service sends escalation to channel green-pager; it rotates keys every 17 days.\n\nOptions:\nA. green-pager\nB. amber-call\nC. blue-room\nD. violet-mail\n\nAnswer:",
+      "options": {
+        "A": "green-pager",
+        "B": "amber-call",
+        "C": "blue-room",
+        "D": "violet-mail"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-summary-000",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: ingest showed missing notices after an expired token. The approved response is to reopen the lease.\n\nOptions:\nA. ingest: missing notices; trigger a closed lease; response reopen the lease.\nB. ingest: missing notices; trigger an expired token; response reopen the lease.\nC. ingest: stale entries; trigger an expired token; response reopen the lease.\nD. ingest: missing notices; trigger an expired token; response: no action.\n\nAnswer:",
+      "options": {
+        "A": "ingest: missing notices; trigger a closed lease; response reopen the lease.",
+        "B": "ingest: missing notices; trigger an expired token; response reopen the lease.",
+        "C": "ingest: stale entries; trigger an expired token; response reopen the lease.",
+        "D": "ingest: missing notices; trigger an expired token; response: no action."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-summary-001",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: notifier showed skipped jobs after a full buffer. The approved response is to resume the cursor.\n\nOptions:\nA. notifier: skipped jobs; trigger an expired token; response resume the cursor.\nB. notifier: late receipts; trigger a full buffer; response resume the cursor.\nC. notifier: skipped jobs; trigger a full buffer; response resume the cursor.\nD. notifier: skipped jobs; trigger a full buffer; response renew the token.\n\nAnswer:",
+      "options": {
+        "A": "notifier: skipped jobs; trigger an expired token; response resume the cursor.",
+        "B": "notifier: late receipts; trigger a full buffer; response resume the cursor.",
+        "C": "notifier: skipped jobs; trigger a full buffer; response resume the cursor.",
+        "D": "notifier: skipped jobs; trigger a full buffer; response renew the token."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-summary-002",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: catalog showed missing notices after a stalled cursor. The approved response is to drain the buffer.\n\nOptions:\nA. catalog: missing notices; trigger a full buffer; response drain the buffer.\nB. catalog: stale entries; trigger a stalled cursor; response drain the buffer.\nC. catalog: missing notices; trigger a stalled cursor; response: no action.\nD. catalog: missing notices; trigger a stalled cursor; response drain the buffer.\n\nAnswer:",
+      "options": {
+        "A": "catalog: missing notices; trigger a full buffer; response drain the buffer.",
+        "B": "catalog: stale entries; trigger a stalled cursor; response drain the buffer.",
+        "C": "catalog: missing notices; trigger a stalled cursor; response: no action.",
+        "D": "catalog: missing notices; trigger a stalled cursor; response drain the buffer."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-summary-003",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: scheduler showed skipped jobs after a closed lease. The approved response is to renew the token.\n\nOptions:\nA. scheduler: skipped jobs; trigger a closed lease; response renew the token.\nB. scheduler: skipped jobs; trigger a stalled cursor; response renew the token.\nC. scheduler: late receipts; trigger a closed lease; response renew the token.\nD. scheduler: skipped jobs; trigger a closed lease; response resume the cursor.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: skipped jobs; trigger a closed lease; response renew the token.",
+        "B": "scheduler: skipped jobs; trigger a stalled cursor; response renew the token.",
+        "C": "scheduler: late receipts; trigger a closed lease; response renew the token.",
+        "D": "scheduler: skipped jobs; trigger a closed lease; response resume the cursor."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-summary-004",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: exporter showed missing notices after an expired token. The approved response is to reopen the lease.\n\nOptions:\nA. exporter: missing notices; trigger a closed lease; response reopen the lease.\nB. exporter: missing notices; trigger an expired token; response reopen the lease.\nC. exporter: stale entries; trigger an expired token; response reopen the lease.\nD. exporter: missing notices; trigger an expired token; response: no action.\n\nAnswer:",
+      "options": {
+        "A": "exporter: missing notices; trigger a closed lease; response reopen the lease.",
+        "B": "exporter: missing notices; trigger an expired token; response reopen the lease.",
+        "C": "exporter: stale entries; trigger an expired token; response reopen the lease.",
+        "D": "exporter: missing notices; trigger an expired token; response: no action."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-summary-005",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: ingest showed skipped jobs after a full buffer. The approved response is to resume the cursor.\n\nOptions:\nA. ingest: skipped jobs; trigger an expired token; response resume the cursor.\nB. ingest: late receipts; trigger a full buffer; response resume the cursor.\nC. ingest: skipped jobs; trigger a full buffer; response resume the cursor.\nD. ingest: skipped jobs; trigger a full buffer; response renew the token.\n\nAnswer:",
+      "options": {
+        "A": "ingest: skipped jobs; trigger an expired token; response resume the cursor.",
+        "B": "ingest: late receipts; trigger a full buffer; response resume the cursor.",
+        "C": "ingest: skipped jobs; trigger a full buffer; response resume the cursor.",
+        "D": "ingest: skipped jobs; trigger a full buffer; response renew the token."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-summary-006",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: notifier showed missing notices after a stalled cursor. The approved response is to drain the buffer.\n\nOptions:\nA. notifier: missing notices; trigger a full buffer; response drain the buffer.\nB. notifier: stale entries; trigger a stalled cursor; response drain the buffer.\nC. notifier: missing notices; trigger a stalled cursor; response: no action.\nD. notifier: missing notices; trigger a stalled cursor; response drain the buffer.\n\nAnswer:",
+      "options": {
+        "A": "notifier: missing notices; trigger a full buffer; response drain the buffer.",
+        "B": "notifier: stale entries; trigger a stalled cursor; response drain the buffer.",
+        "C": "notifier: missing notices; trigger a stalled cursor; response: no action.",
+        "D": "notifier: missing notices; trigger a stalled cursor; response drain the buffer."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-summary-007",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: catalog showed skipped jobs after a closed lease. The approved response is to renew the token.\n\nOptions:\nA. catalog: skipped jobs; trigger a closed lease; response renew the token.\nB. catalog: skipped jobs; trigger a stalled cursor; response renew the token.\nC. catalog: late receipts; trigger a closed lease; response renew the token.\nD. catalog: skipped jobs; trigger a closed lease; response resume the cursor.\n\nAnswer:",
+      "options": {
+        "A": "catalog: skipped jobs; trigger a closed lease; response renew the token.",
+        "B": "catalog: skipped jobs; trigger a stalled cursor; response renew the token.",
+        "C": "catalog: late receipts; trigger a closed lease; response renew the token.",
+        "D": "catalog: skipped jobs; trigger a closed lease; response resume the cursor."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-summary-008",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: scheduler showed missing notices after an expired token. The approved response is to reopen the lease.\n\nOptions:\nA. scheduler: missing notices; trigger a closed lease; response reopen the lease.\nB. scheduler: missing notices; trigger an expired token; response reopen the lease.\nC. scheduler: stale entries; trigger an expired token; response reopen the lease.\nD. scheduler: missing notices; trigger an expired token; response: no action.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: missing notices; trigger a closed lease; response reopen the lease.",
+        "B": "scheduler: missing notices; trigger an expired token; response reopen the lease.",
+        "C": "scheduler: stale entries; trigger an expired token; response reopen the lease.",
+        "D": "scheduler: missing notices; trigger an expired token; response: no action."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-summary-009",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: exporter showed skipped jobs after a full buffer. The approved response is to resume the cursor.\n\nOptions:\nA. exporter: skipped jobs; trigger an expired token; response resume the cursor.\nB. exporter: late receipts; trigger a full buffer; response resume the cursor.\nC. exporter: skipped jobs; trigger a full buffer; response resume the cursor.\nD. exporter: skipped jobs; trigger a full buffer; response renew the token.\n\nAnswer:",
+      "options": {
+        "A": "exporter: skipped jobs; trigger an expired token; response resume the cursor.",
+        "B": "exporter: late receipts; trigger a full buffer; response resume the cursor.",
+        "C": "exporter: skipped jobs; trigger a full buffer; response resume the cursor.",
+        "D": "exporter: skipped jobs; trigger a full buffer; response renew the token."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-summary-010",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: ingest showed missing notices after a stalled cursor. The approved response is to drain the buffer.\n\nOptions:\nA. ingest: missing notices; trigger a full buffer; response drain the buffer.\nB. ingest: stale entries; trigger a stalled cursor; response drain the buffer.\nC. ingest: missing notices; trigger a stalled cursor; response: no action.\nD. ingest: missing notices; trigger a stalled cursor; response drain the buffer.\n\nAnswer:",
+      "options": {
+        "A": "ingest: missing notices; trigger a full buffer; response drain the buffer.",
+        "B": "ingest: stale entries; trigger a stalled cursor; response drain the buffer.",
+        "C": "ingest: missing notices; trigger a stalled cursor; response: no action.",
+        "D": "ingest: missing notices; trigger a stalled cursor; response drain the buffer."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-summary-011",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: notifier showed skipped jobs after a closed lease. The approved response is to renew the token.\n\nOptions:\nA. notifier: skipped jobs; trigger a closed lease; response renew the token.\nB. notifier: skipped jobs; trigger a stalled cursor; response renew the token.\nC. notifier: late receipts; trigger a closed lease; response renew the token.\nD. notifier: skipped jobs; trigger a closed lease; response resume the cursor.\n\nAnswer:",
+      "options": {
+        "A": "notifier: skipped jobs; trigger a closed lease; response renew the token.",
+        "B": "notifier: skipped jobs; trigger a stalled cursor; response renew the token.",
+        "C": "notifier: late receipts; trigger a closed lease; response renew the token.",
+        "D": "notifier: skipped jobs; trigger a closed lease; response resume the cursor."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-summary-012",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: catalog showed missing notices after an expired token. The approved response is to reopen the lease.\n\nOptions:\nA. catalog: missing notices; trigger a closed lease; response reopen the lease.\nB. catalog: missing notices; trigger an expired token; response reopen the lease.\nC. catalog: stale entries; trigger an expired token; response reopen the lease.\nD. catalog: missing notices; trigger an expired token; response: no action.\n\nAnswer:",
+      "options": {
+        "A": "catalog: missing notices; trigger a closed lease; response reopen the lease.",
+        "B": "catalog: missing notices; trigger an expired token; response reopen the lease.",
+        "C": "catalog: stale entries; trigger an expired token; response reopen the lease.",
+        "D": "catalog: missing notices; trigger an expired token; response: no action."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-summary-013",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: scheduler showed skipped jobs after a full buffer. The approved response is to resume the cursor.\n\nOptions:\nA. scheduler: skipped jobs; trigger an expired token; response resume the cursor.\nB. scheduler: late receipts; trigger a full buffer; response resume the cursor.\nC. scheduler: skipped jobs; trigger a full buffer; response resume the cursor.\nD. scheduler: skipped jobs; trigger a full buffer; response renew the token.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: skipped jobs; trigger an expired token; response resume the cursor.",
+        "B": "scheduler: late receipts; trigger a full buffer; response resume the cursor.",
+        "C": "scheduler: skipped jobs; trigger a full buffer; response resume the cursor.",
+        "D": "scheduler: skipped jobs; trigger a full buffer; response renew the token."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-summary-014",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: exporter showed missing notices after a stalled cursor. The approved response is to drain the buffer.\n\nOptions:\nA. exporter: missing notices; trigger a full buffer; response drain the buffer.\nB. exporter: stale entries; trigger a stalled cursor; response drain the buffer.\nC. exporter: missing notices; trigger a stalled cursor; response: no action.\nD. exporter: missing notices; trigger a stalled cursor; response drain the buffer.\n\nAnswer:",
+      "options": {
+        "A": "exporter: missing notices; trigger a full buffer; response drain the buffer.",
+        "B": "exporter: stale entries; trigger a stalled cursor; response drain the buffer.",
+        "C": "exporter: missing notices; trigger a stalled cursor; response: no action.",
+        "D": "exporter: missing notices; trigger a stalled cursor; response drain the buffer."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-summary-015",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: ingest showed skipped jobs after a closed lease. The approved response is to renew the token.\n\nOptions:\nA. ingest: skipped jobs; trigger a closed lease; response renew the token.\nB. ingest: skipped jobs; trigger a stalled cursor; response renew the token.\nC. ingest: late receipts; trigger a closed lease; response renew the token.\nD. ingest: skipped jobs; trigger a closed lease; response resume the cursor.\n\nAnswer:",
+      "options": {
+        "A": "ingest: skipped jobs; trigger a closed lease; response renew the token.",
+        "B": "ingest: skipped jobs; trigger a stalled cursor; response renew the token.",
+        "C": "ingest: late receipts; trigger a closed lease; response renew the token.",
+        "D": "ingest: skipped jobs; trigger a closed lease; response resume the cursor."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-summary-016",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: notifier showed missing notices after an expired token. The approved response is to reopen the lease.\n\nOptions:\nA. notifier: missing notices; trigger a closed lease; response reopen the lease.\nB. notifier: missing notices; trigger an expired token; response reopen the lease.\nC. notifier: stale entries; trigger an expired token; response reopen the lease.\nD. notifier: missing notices; trigger an expired token; response: no action.\n\nAnswer:",
+      "options": {
+        "A": "notifier: missing notices; trigger a closed lease; response reopen the lease.",
+        "B": "notifier: missing notices; trigger an expired token; response reopen the lease.",
+        "C": "notifier: stale entries; trigger an expired token; response reopen the lease.",
+        "D": "notifier: missing notices; trigger an expired token; response: no action."
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-summary-017",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: catalog showed skipped jobs after a full buffer. The approved response is to resume the cursor.\n\nOptions:\nA. catalog: skipped jobs; trigger an expired token; response resume the cursor.\nB. catalog: late receipts; trigger a full buffer; response resume the cursor.\nC. catalog: skipped jobs; trigger a full buffer; response resume the cursor.\nD. catalog: skipped jobs; trigger a full buffer; response renew the token.\n\nAnswer:",
+      "options": {
+        "A": "catalog: skipped jobs; trigger an expired token; response resume the cursor.",
+        "B": "catalog: late receipts; trigger a full buffer; response resume the cursor.",
+        "C": "catalog: skipped jobs; trigger a full buffer; response resume the cursor.",
+        "D": "catalog: skipped jobs; trigger a full buffer; response renew the token."
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-summary-018",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: scheduler showed missing notices after a stalled cursor. The approved response is to drain the buffer.\n\nOptions:\nA. scheduler: missing notices; trigger a full buffer; response drain the buffer.\nB. scheduler: stale entries; trigger a stalled cursor; response drain the buffer.\nC. scheduler: missing notices; trigger a stalled cursor; response: no action.\nD. scheduler: missing notices; trigger a stalled cursor; response drain the buffer.\n\nAnswer:",
+      "options": {
+        "A": "scheduler: missing notices; trigger a full buffer; response drain the buffer.",
+        "B": "scheduler: stale entries; trigger a stalled cursor; response drain the buffer.",
+        "C": "scheduler: missing notices; trigger a stalled cursor; response: no action.",
+        "D": "scheduler: missing notices; trigger a stalled cursor; response drain the buffer."
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-summary-019",
+      "split": "semantic_holdout",
+      "task_class": "summary",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nSelect the sentence that preserves the cause and approved response.\nChange note: exporter showed skipped jobs after a closed lease. The approved response is to renew the token.\n\nOptions:\nA. exporter: skipped jobs; trigger a closed lease; response renew the token.\nB. exporter: skipped jobs; trigger a stalled cursor; response renew the token.\nC. exporter: late receipts; trigger a closed lease; response renew the token.\nD. exporter: skipped jobs; trigger a closed lease; response resume the cursor.\n\nAnswer:",
+      "options": {
+        "A": "exporter: skipped jobs; trigger a closed lease; response renew the token.",
+        "B": "exporter: skipped jobs; trigger a stalled cursor; response renew the token.",
+        "C": "exporter: late receipts; trigger a closed lease; response renew the token.",
+        "D": "exporter: skipped jobs; trigger a closed lease; response resume the cursor."
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-000",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new list of lowercase strings, preserving duplicates.\n\nOptions:\nA. def normalize(items):\n    return sorted(set(items))\nB. def normalize(items):\n    return [item.lower() for item in items]\nC. def normalize(items):\n    return [item.upper() for item in items]\nD. def normalize(items):\n    return [item.lower() for item in set(items)]\n\nAnswer:",
+      "options": {
+        "A": "def normalize(items):\n    return sorted(set(items))",
+        "B": "def normalize(items):\n    return [item.lower() for item in items]",
+        "C": "def normalize(items):\n    return [item.upper() for item in items]",
+        "D": "def normalize(items):\n    return [item.lower() for item in set(items)]"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-001",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return the first item whose status is 'ready', or None if absent.\n\nOptions:\nA. def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']\nB. def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)\nC. def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)\nD. def find_ready(rows):\n    return rows[0] if rows else None\n\nAnswer:",
+      "options": {
+        "A": "def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']",
+        "B": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)",
+        "C": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)",
+        "D": "def find_ready(rows):\n    return rows[0] if rows else None"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-002",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a dictionary counting each non-empty label.\n\nOptions:\nA. def count_labels(labels):\n    return {label: 1 for label in labels if label}\nB. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}\nC. def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}\nD. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}\n\nAnswer:",
+      "options": {
+        "A": "def count_labels(labels):\n    return {label: 1 for label in labels if label}",
+        "B": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}",
+        "C": "def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}",
+        "D": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-003",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new dictionary with values clamped to the inclusive range 0 through 100.\n\nOptions:\nA. def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}\nB. def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}\nC. def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}\nD. def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}\n\nAnswer:",
+      "options": {
+        "A": "def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}",
+        "B": "def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}",
+        "C": "def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}",
+        "D": "def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-004",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new list of lowercase strings, preserving duplicates.\n\nOptions:\nA. def normalize(items):\n    return sorted(set(items))\nB. def normalize(items):\n    return [item.lower() for item in items]\nC. def normalize(items):\n    return [item.upper() for item in items]\nD. def normalize(items):\n    return [item.lower() for item in set(items)]\n\nAnswer:",
+      "options": {
+        "A": "def normalize(items):\n    return sorted(set(items))",
+        "B": "def normalize(items):\n    return [item.lower() for item in items]",
+        "C": "def normalize(items):\n    return [item.upper() for item in items]",
+        "D": "def normalize(items):\n    return [item.lower() for item in set(items)]"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-005",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return the first item whose status is 'ready', or None if absent.\n\nOptions:\nA. def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']\nB. def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)\nC. def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)\nD. def find_ready(rows):\n    return rows[0] if rows else None\n\nAnswer:",
+      "options": {
+        "A": "def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']",
+        "B": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)",
+        "C": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)",
+        "D": "def find_ready(rows):\n    return rows[0] if rows else None"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-006",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a dictionary counting each non-empty label.\n\nOptions:\nA. def count_labels(labels):\n    return {label: 1 for label in labels if label}\nB. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}\nC. def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}\nD. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}\n\nAnswer:",
+      "options": {
+        "A": "def count_labels(labels):\n    return {label: 1 for label in labels if label}",
+        "B": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}",
+        "C": "def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}",
+        "D": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-007",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new dictionary with values clamped to the inclusive range 0 through 100.\n\nOptions:\nA. def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}\nB. def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}\nC. def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}\nD. def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}\n\nAnswer:",
+      "options": {
+        "A": "def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}",
+        "B": "def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}",
+        "C": "def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}",
+        "D": "def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-008",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new list of lowercase strings, preserving duplicates.\n\nOptions:\nA. def normalize(items):\n    return sorted(set(items))\nB. def normalize(items):\n    return [item.lower() for item in items]\nC. def normalize(items):\n    return [item.upper() for item in items]\nD. def normalize(items):\n    return [item.lower() for item in set(items)]\n\nAnswer:",
+      "options": {
+        "A": "def normalize(items):\n    return sorted(set(items))",
+        "B": "def normalize(items):\n    return [item.lower() for item in items]",
+        "C": "def normalize(items):\n    return [item.upper() for item in items]",
+        "D": "def normalize(items):\n    return [item.lower() for item in set(items)]"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-009",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return the first item whose status is 'ready', or None if absent.\n\nOptions:\nA. def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']\nB. def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)\nC. def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)\nD. def find_ready(rows):\n    return rows[0] if rows else None\n\nAnswer:",
+      "options": {
+        "A": "def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']",
+        "B": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)",
+        "C": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)",
+        "D": "def find_ready(rows):\n    return rows[0] if rows else None"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-010",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a dictionary counting each non-empty label.\n\nOptions:\nA. def count_labels(labels):\n    return {label: 1 for label in labels if label}\nB. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}\nC. def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}\nD. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}\n\nAnswer:",
+      "options": {
+        "A": "def count_labels(labels):\n    return {label: 1 for label in labels if label}",
+        "B": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}",
+        "C": "def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}",
+        "D": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-011",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new dictionary with values clamped to the inclusive range 0 through 100.\n\nOptions:\nA. def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}\nB. def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}\nC. def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}\nD. def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}\n\nAnswer:",
+      "options": {
+        "A": "def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}",
+        "B": "def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}",
+        "C": "def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}",
+        "D": "def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-012",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new list of lowercase strings, preserving duplicates.\n\nOptions:\nA. def normalize(items):\n    return sorted(set(items))\nB. def normalize(items):\n    return [item.lower() for item in items]\nC. def normalize(items):\n    return [item.upper() for item in items]\nD. def normalize(items):\n    return [item.lower() for item in set(items)]\n\nAnswer:",
+      "options": {
+        "A": "def normalize(items):\n    return sorted(set(items))",
+        "B": "def normalize(items):\n    return [item.lower() for item in items]",
+        "C": "def normalize(items):\n    return [item.upper() for item in items]",
+        "D": "def normalize(items):\n    return [item.lower() for item in set(items)]"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-013",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return the first item whose status is 'ready', or None if absent.\n\nOptions:\nA. def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']\nB. def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)\nC. def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)\nD. def find_ready(rows):\n    return rows[0] if rows else None\n\nAnswer:",
+      "options": {
+        "A": "def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']",
+        "B": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)",
+        "C": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)",
+        "D": "def find_ready(rows):\n    return rows[0] if rows else None"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-014",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a dictionary counting each non-empty label.\n\nOptions:\nA. def count_labels(labels):\n    return {label: 1 for label in labels if label}\nB. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}\nC. def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}\nD. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}\n\nAnswer:",
+      "options": {
+        "A": "def count_labels(labels):\n    return {label: 1 for label in labels if label}",
+        "B": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}",
+        "C": "def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}",
+        "D": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-015",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new dictionary with values clamped to the inclusive range 0 through 100.\n\nOptions:\nA. def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}\nB. def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}\nC. def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}\nD. def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}\n\nAnswer:",
+      "options": {
+        "A": "def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}",
+        "B": "def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}",
+        "C": "def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}",
+        "D": "def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-016",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new list of lowercase strings, preserving duplicates.\n\nOptions:\nA. def normalize(items):\n    return sorted(set(items))\nB. def normalize(items):\n    return [item.lower() for item in items]\nC. def normalize(items):\n    return [item.upper() for item in items]\nD. def normalize(items):\n    return [item.lower() for item in set(items)]\n\nAnswer:",
+      "options": {
+        "A": "def normalize(items):\n    return sorted(set(items))",
+        "B": "def normalize(items):\n    return [item.lower() for item in items]",
+        "C": "def normalize(items):\n    return [item.upper() for item in items]",
+        "D": "def normalize(items):\n    return [item.lower() for item in set(items)]"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-017",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return the first item whose status is 'ready', or None if absent.\n\nOptions:\nA. def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']\nB. def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)\nC. def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)\nD. def find_ready(rows):\n    return rows[0] if rows else None\n\nAnswer:",
+      "options": {
+        "A": "def find_ready(rows):\n    return [row for row in rows if row.get('status') == 'ready']",
+        "B": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') != 'ready'), None)",
+        "C": "def find_ready(rows):\n    return next((row for row in rows if row.get('status') == 'ready'), None)",
+        "D": "def find_ready(rows):\n    return rows[0] if rows else None"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-018",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a dictionary counting each non-empty label.\n\nOptions:\nA. def count_labels(labels):\n    return {label: 1 for label in labels if label}\nB. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}\nC. def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}\nD. def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}\n\nAnswer:",
+      "options": {
+        "A": "def count_labels(labels):\n    return {label: 1 for label in labels if label}",
+        "B": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels)}",
+        "C": "def count_labels(labels):\n    return {label: labels.index(label) for label in set(labels) if label}",
+        "D": "def count_labels(labels):\n    return {label: labels.count(label) for label in set(labels) if label}"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-simple_code-019",
+      "split": "semantic_holdout",
+      "task_class": "simple_code",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nChoose the implementation that will return a new dictionary with values clamped to the inclusive range 0 through 100.\n\nOptions:\nA. def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}\nB. def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}\nC. def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}\nD. def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}\n\nAnswer:",
+      "options": {
+        "A": "def clamp(values):\n    return {key: min(100, max(0, value)) for key, value in values.items()}",
+        "B": "def clamp(values):\n    return {key: max(0, value) for key, value in values.items()}",
+        "C": "def clamp(values):\n    return {key: min(100, value) for key, value in values.items()}",
+        "D": "def clamp(values):\n    return {key: value for key, value in values.items() if 0 <= value <= 100}"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-000",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Iris and Jasper must be selected. Exactly one of Kestrel and Lyra must be selected. Iris is selected if and only if Kestrel is selected. Jasper cannot be selected with Lyra.\n\nOptions:\nA. Iris and Lyra\nB. Iris and Kestrel\nC. Jasper and Kestrel\nD. Jasper and Lyra\n\nAnswer:",
+      "options": {
+        "A": "Iris and Lyra",
+        "B": "Iris and Kestrel",
+        "C": "Jasper and Kestrel",
+        "D": "Jasper and Lyra"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-001",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Mica and Nova must be selected. Exactly one of Orion and Pollen must be selected. Mica is selected if and only if Pollen is selected. Nova cannot be selected with Orion.\n\nOptions:\nA. Mica and Orion\nB. Nova and Orion\nC. Mica and Pollen\nD. Nova and Pollen\n\nAnswer:",
+      "options": {
+        "A": "Mica and Orion",
+        "B": "Nova and Orion",
+        "C": "Mica and Pollen",
+        "D": "Nova and Pollen"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-002",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Quill and Rook must be selected. Exactly one of Sable and Tern must be selected. Rook is selected if and only if Sable is selected. Quill cannot be selected with Tern.\n\nOptions:\nA. Quill and Sable\nB. Quill and Tern\nC. Rook and Tern\nD. Rook and Sable\n\nAnswer:",
+      "options": {
+        "A": "Quill and Sable",
+        "B": "Quill and Tern",
+        "C": "Rook and Tern",
+        "D": "Rook and Sable"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-003",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Umber and Vale must be selected. Exactly one of Wren and Yarrow must be selected. Vale is selected if and only if Yarrow is selected. Umber cannot be selected with Wren.\n\nOptions:\nA. Vale and Yarrow\nB. Umber and Wren\nC. Umber and Yarrow\nD. Vale and Wren\n\nAnswer:",
+      "options": {
+        "A": "Vale and Yarrow",
+        "B": "Umber and Wren",
+        "C": "Umber and Yarrow",
+        "D": "Vale and Wren"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-004",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Iris and Jasper must be selected. Exactly one of Kestrel and Lyra must be selected. Iris is selected if and only if Kestrel is selected. Jasper cannot be selected with Lyra.\n\nOptions:\nA. Iris and Lyra\nB. Iris and Kestrel\nC. Jasper and Kestrel\nD. Jasper and Lyra\n\nAnswer:",
+      "options": {
+        "A": "Iris and Lyra",
+        "B": "Iris and Kestrel",
+        "C": "Jasper and Kestrel",
+        "D": "Jasper and Lyra"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-005",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Mica and Nova must be selected. Exactly one of Orion and Pollen must be selected. Mica is selected if and only if Pollen is selected. Nova cannot be selected with Orion.\n\nOptions:\nA. Mica and Orion\nB. Nova and Orion\nC. Mica and Pollen\nD. Nova and Pollen\n\nAnswer:",
+      "options": {
+        "A": "Mica and Orion",
+        "B": "Nova and Orion",
+        "C": "Mica and Pollen",
+        "D": "Nova and Pollen"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-006",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Quill and Rook must be selected. Exactly one of Sable and Tern must be selected. Rook is selected if and only if Sable is selected. Quill cannot be selected with Tern.\n\nOptions:\nA. Quill and Sable\nB. Quill and Tern\nC. Rook and Tern\nD. Rook and Sable\n\nAnswer:",
+      "options": {
+        "A": "Quill and Sable",
+        "B": "Quill and Tern",
+        "C": "Rook and Tern",
+        "D": "Rook and Sable"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-007",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Umber and Vale must be selected. Exactly one of Wren and Yarrow must be selected. Vale is selected if and only if Yarrow is selected. Umber cannot be selected with Wren.\n\nOptions:\nA. Vale and Yarrow\nB. Umber and Wren\nC. Umber and Yarrow\nD. Vale and Wren\n\nAnswer:",
+      "options": {
+        "A": "Vale and Yarrow",
+        "B": "Umber and Wren",
+        "C": "Umber and Yarrow",
+        "D": "Vale and Wren"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-008",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Iris and Jasper must be selected. Exactly one of Kestrel and Lyra must be selected. Iris is selected if and only if Kestrel is selected. Jasper cannot be selected with Lyra.\n\nOptions:\nA. Iris and Lyra\nB. Iris and Kestrel\nC. Jasper and Kestrel\nD. Jasper and Lyra\n\nAnswer:",
+      "options": {
+        "A": "Iris and Lyra",
+        "B": "Iris and Kestrel",
+        "C": "Jasper and Kestrel",
+        "D": "Jasper and Lyra"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-009",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Mica and Nova must be selected. Exactly one of Orion and Pollen must be selected. Mica is selected if and only if Pollen is selected. Nova cannot be selected with Orion.\n\nOptions:\nA. Mica and Orion\nB. Nova and Orion\nC. Mica and Pollen\nD. Nova and Pollen\n\nAnswer:",
+      "options": {
+        "A": "Mica and Orion",
+        "B": "Nova and Orion",
+        "C": "Mica and Pollen",
+        "D": "Nova and Pollen"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-010",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Quill and Rook must be selected. Exactly one of Sable and Tern must be selected. Rook is selected if and only if Sable is selected. Quill cannot be selected with Tern.\n\nOptions:\nA. Quill and Sable\nB. Quill and Tern\nC. Rook and Tern\nD. Rook and Sable\n\nAnswer:",
+      "options": {
+        "A": "Quill and Sable",
+        "B": "Quill and Tern",
+        "C": "Rook and Tern",
+        "D": "Rook and Sable"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-011",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Umber and Vale must be selected. Exactly one of Wren and Yarrow must be selected. Vale is selected if and only if Yarrow is selected. Umber cannot be selected with Wren.\n\nOptions:\nA. Vale and Yarrow\nB. Umber and Wren\nC. Umber and Yarrow\nD. Vale and Wren\n\nAnswer:",
+      "options": {
+        "A": "Vale and Yarrow",
+        "B": "Umber and Wren",
+        "C": "Umber and Yarrow",
+        "D": "Vale and Wren"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-012",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Iris and Jasper must be selected. Exactly one of Kestrel and Lyra must be selected. Iris is selected if and only if Kestrel is selected. Jasper cannot be selected with Lyra.\n\nOptions:\nA. Iris and Lyra\nB. Iris and Kestrel\nC. Jasper and Kestrel\nD. Jasper and Lyra\n\nAnswer:",
+      "options": {
+        "A": "Iris and Lyra",
+        "B": "Iris and Kestrel",
+        "C": "Jasper and Kestrel",
+        "D": "Jasper and Lyra"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-013",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Mica and Nova must be selected. Exactly one of Orion and Pollen must be selected. Mica is selected if and only if Pollen is selected. Nova cannot be selected with Orion.\n\nOptions:\nA. Mica and Orion\nB. Nova and Orion\nC. Mica and Pollen\nD. Nova and Pollen\n\nAnswer:",
+      "options": {
+        "A": "Mica and Orion",
+        "B": "Nova and Orion",
+        "C": "Mica and Pollen",
+        "D": "Nova and Pollen"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-014",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Quill and Rook must be selected. Exactly one of Sable and Tern must be selected. Rook is selected if and only if Sable is selected. Quill cannot be selected with Tern.\n\nOptions:\nA. Quill and Sable\nB. Quill and Tern\nC. Rook and Tern\nD. Rook and Sable\n\nAnswer:",
+      "options": {
+        "A": "Quill and Sable",
+        "B": "Quill and Tern",
+        "C": "Rook and Tern",
+        "D": "Rook and Sable"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-015",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Umber and Vale must be selected. Exactly one of Wren and Yarrow must be selected. Vale is selected if and only if Yarrow is selected. Umber cannot be selected with Wren.\n\nOptions:\nA. Vale and Yarrow\nB. Umber and Wren\nC. Umber and Yarrow\nD. Vale and Wren\n\nAnswer:",
+      "options": {
+        "A": "Vale and Yarrow",
+        "B": "Umber and Wren",
+        "C": "Umber and Yarrow",
+        "D": "Vale and Wren"
+      },
+      "correct_option": "A"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-016",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Iris and Jasper must be selected. Exactly one of Kestrel and Lyra must be selected. Iris is selected if and only if Kestrel is selected. Jasper cannot be selected with Lyra.\n\nOptions:\nA. Iris and Lyra\nB. Iris and Kestrel\nC. Jasper and Kestrel\nD. Jasper and Lyra\n\nAnswer:",
+      "options": {
+        "A": "Iris and Lyra",
+        "B": "Iris and Kestrel",
+        "C": "Jasper and Kestrel",
+        "D": "Jasper and Lyra"
+      },
+      "correct_option": "B"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-017",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Mica and Nova must be selected. Exactly one of Orion and Pollen must be selected. Mica is selected if and only if Pollen is selected. Nova cannot be selected with Orion.\n\nOptions:\nA. Mica and Orion\nB. Nova and Orion\nC. Mica and Pollen\nD. Nova and Pollen\n\nAnswer:",
+      "options": {
+        "A": "Mica and Orion",
+        "B": "Nova and Orion",
+        "C": "Mica and Pollen",
+        "D": "Nova and Pollen"
+      },
+      "correct_option": "C"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-018",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Quill and Rook must be selected. Exactly one of Sable and Tern must be selected. Rook is selected if and only if Sable is selected. Quill cannot be selected with Tern.\n\nOptions:\nA. Quill and Sable\nB. Quill and Tern\nC. Rook and Tern\nD. Rook and Sable\n\nAnswer:",
+      "options": {
+        "A": "Quill and Sable",
+        "B": "Quill and Tern",
+        "C": "Rook and Tern",
+        "D": "Rook and Sable"
+      },
+      "correct_option": "D"
+    },
+    {
+      "task_id": "semantic-holdout-hard_reason-019",
+      "split": "semantic_holdout",
+      "task_class": "hard_reason",
+      "template_id": "unseen-semantic-operations-v1",
+      "prompt": "You are evaluating a synthetic operations record. Choose the one correct option. Output only its letter.\n\nWhich pair of services satisfies every constraint?\nRules: Select exactly two services. Exactly one of Umber and Vale must be selected. Exactly one of Wren and Yarrow must be selected. Vale is selected if and only if Yarrow is selected. Umber cannot be selected with Wren.\n\nOptions:\nA. Vale and Yarrow\nB. Umber and Wren\nC. Umber and Yarrow\nD. Vale and Wren\n\nAnswer:",
+      "options": {
+        "A": "Vale and Yarrow",
+        "B": "Umber and Wren",
+        "C": "Umber and Yarrow",
+        "D": "Vale and Wren"
+      },
+      "correct_option": "A"
+    }
+  ]
+}

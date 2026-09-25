@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/autoyou-ai/autoyou-research/blob/main/measure/replication_manifest.schema.json",
+  "title": "AutoYou public measurement provenance manifest",
+  "description": "Public-safe provenance for raw measurement files. Identifiers are study labels, not personal identifiers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "description",
+    "independence_rule",
+    "files",
+    "contributor_template"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "independence_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independent_replication_requires",
+        "same_target_replay_classification",
+        "missing_identity_classification"
+      ],
+      "properties": {
+        "independent_replication_requires": {
+          "type": "array",
+          "const": [
+            "different physical target_id",
+            "different operator_id",
+            "different environment_id"
+          ]
+        },
+        "same_target_replay_classification": {
+          "const": "repeatability"
+        },
+        "missing_identity_classification": {
+          "const": "unresolved"
+        }
+      }
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 1,
+      "patternProperties": {
+        "^[A-Za-z0-9._-]+\\.json$": {
+          "$ref": "#/$defs/file_provenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "contributor_template": {
+      "$ref": "#/$defs/contributor_template"
+    }
+  },
+  "$defs": {
+    "public_label": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "file_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_id",
+        "operator_id",
+        "environment_id",
+        "collection_role"
+      ],
+      "properties": {
+        "target_id": {
+          "$ref": "#/$defs/public_label"
+        },
+        "operator_id": {
+          "$ref": "#/$defs/public_label"
+        },
+        "environment_id": {
+          "$ref": "#/$defs/public_label"
+        },
+        "collection_role": {
+          "enum": [
+            "reference_single_request",
+            "reference_ladder",
+            "standard_concurrent_batch",
+            "pilot_concurrent_batch",
+            "primary_single_request",
+            "same_target_repeatability",
+            "independent_replication"
+          ]
+        }
+      }
+    },
+    "contributor_template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_id",
+        "operator_id",
+        "environment_id",
+        "collection_role"
+      ],
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operator_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "collection_role": {
+          "const": "independent_replication"
+        }
+      }
+    }
+  }
+}
